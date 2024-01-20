@@ -70,3 +70,25 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+Packages/com.unity.render-pipelines.high-definition-config/.npmignore
+Packages/com.unity.render-pipelines.high-definition-config/CHANGELOG.md
+Packages/com.unity.render-pipelines.high-definition-config/CHANGELOG.md.meta
+Packages/com.unity.render-pipelines.high-definition-config/Documentation~/index.md
+Packages/com.unity.render-pipelines.high-definition-config/LICENSE.md
+Packages/com.unity.render-pipelines.high-definition-config/LICENSE.md.meta
+Packages/com.unity.render-pipelines.high-definition-config/package.json
+Packages/com.unity.render-pipelines.high-definition-config/package.json.meta
+Packages/com.unity.render-pipelines.high-definition-config/Runtime.meta
+Packages/com.unity.render-pipelines.high-definition-config/Runtime/ShaderConfig.cs
+Packages/com.unity.render-pipelines.high-definition-config/Runtime/ShaderConfig.cs.hlsl
+Packages/com.unity.render-pipelines.high-definition-config/Runtime/ShaderConfig.cs.hlsl.meta
+Packages/com.unity.render-pipelines.high-definition-config/Runtime/ShaderConfig.cs.meta
+Packages/com.unity.render-pipelines.high-definition-config/Runtime/Unity.RenderPipelines.HighDefinition.Config.Runtime.asmdef
+Packages/com.unity.render-pipelines.high-definition-config/Runtime/Unity.RenderPipelines.HighDefinition.Config.Runtime.asmdef.meta
+Packages/com.unity.render-pipelines.high-definition-config/Tests.meta
+Packages/com.unity.render-pipelines.high-definition-config/Tests/.tests.json
+Packages/com.unity.render-pipelines.high-definition-config/Tests/Editor.meta
+Packages/com.unity.render-pipelines.high-definition-config/Tests/Editor/ConfigurationTest.cs
+Packages/com.unity.render-pipelines.high-definition-config/Tests/Editor/ConfigurationTest.cs.meta
+Packages/com.unity.render-pipelines.high-definition-config/Tests/Editor/Unity.RenderPipelines.HighDefinitionConfig.Editor.Tests.asmdef
+Packages/com.unity.render-pipelines.high-definition-config/Tests/Editor/Unity.RenderPipelines.HighDefinitionConfig.Editor.Tests.asmdef.meta
