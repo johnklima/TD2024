@@ -1,62 +1,44 @@
 using System;
+using System.Collections.Generic;
+using Scenes.Leif.Scripts;
 using UnityEngine;
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
 
-namespace Scenes.Leif.Scripts
+[ExecuteAlways]
+public class Voxel : MonoBehaviour
 {
-    public enum GizmoType
+    public Action<Int3> voxelStateChange, voxelStateDestroy;
+    public Int3 coordinates;
+    public bool isSolid;
+    public bool isVisible;
+    public float noise;
+    public List<Voxel> neighbours = new();
+
+    private void OnEnable()
     {
-        Cube,
-        WireCube,
-        Sphere,
-        WireSphere
+        voxelStateChange?.Invoke(coordinates);
     }
 
-    public class Voxel
+    private void OnDisable()
     {
-        public Int3 coordinates;
-        public GizmoType gizmoType;
-        public float noise;
-        public float scale;
-        public Vector3 worldPos;
+        RemoveFromNeighbours();
+        voxelStateDestroy?.Invoke(coordinates);
+    }
 
-        public Voxel(Vector3 worldPos, float scale, float noise, Int3 coordinates, GizmoType gizmoType)
-        {
-            this.worldPos = worldPos;
-            this.scale = scale;
-            this.noise = noise;
-            this.coordinates = coordinates;
-            this.gizmoType = gizmoType;
-        }
+    private void OnDestroy()
+    {
+        RemoveFromNeighbours();
+        voxelStateDestroy?.Invoke(coordinates);
+    }
 
-        public Vector3 size => Vector3.one * scale;
+    private void RemoveFromNeighbours()
+    {
+        if (neighbours == null) return;
+        foreach (var neighbour in neighbours) neighbour.neighbours.Remove(this);
+    }
 
-        public void DrawGizmos(GizmoSettings gizmoSettings)
-        {
-            if (noise / 10f < MapGenerator.SolidThreshold) return;
-            Gizmos.color = Color.Lerp(Color.black, Color.white, noise / 10);
-
-            switch (gizmoSettings.gizmoType)
-            {
-                case GizmoType.Cube:
-                    Gizmos.DrawCube(worldPos, size * gizmoSettings.gizmoScale);
-                    break;
-                case GizmoType.WireCube:
-                    Gizmos.DrawWireCube(worldPos, size * gizmoSettings.gizmoScale);
-                    break;
-                case GizmoType.Sphere:
-                    Gizmos.DrawSphere(worldPos, scale * gizmoSettings.gizmoScale);
-                    break;
-                case GizmoType.WireSphere:
-                    Gizmos.DrawWireSphere(worldPos, scale * gizmoSettings.gizmoScale);
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-
-            if (gizmoSettings.drawHandles) Handles.Label(worldPos, noise + "");
-        }
+    public void RegisterEvents(Action<Int3> voxelStateChangeAction, Action<Int3> voxelStateDestroyAction)
+    {
+        voxelStateChange = voxelStateChangeAction;
+        voxelStateDestroy = voxelStateDestroyAction;
     }
 }

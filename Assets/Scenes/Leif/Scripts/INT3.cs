@@ -39,6 +39,11 @@ namespace Scenes.Leif.Scripts
             this.z = z;
         }
 
+        public override string ToString()
+        {
+            return $"x:{x}, y:{y}, z:{z}";
+        }
+
         public void Deconstruct(out int x, out int y, out int z)
         {
             x = this.x;
