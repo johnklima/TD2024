@@ -17,6 +17,7 @@ namespace Scenes.Leif.Scripts
         private readonly Transform parent;
         private BoxCollider boxCollider;
         public Int3 coordinates;
+        public LayerMask interactableLayerMask;
         public bool isSolid;
         public bool isVisible;
         public Material material;
@@ -35,7 +36,8 @@ namespace Scenes.Leif.Scripts
             Int3 coordinates,
             bool isSolid,
             Transform parent,
-            Material material
+            Material material,
+            LayerMask interactableLayerMask
         )
         {
             this.worldPos = worldPos;
@@ -44,6 +46,7 @@ namespace Scenes.Leif.Scripts
             this.coordinates = coordinates;
             this.material = material;
             this.parent = parent;
+            this.interactableLayerMask = interactableLayerMask;
             name = $"Voxel (x:{coordinates.x},y:{coordinates.y},z:{coordinates.z}) (#{parent.childCount})";
             GenerateMeshObject();
             isVisible = this.isSolid = isSolid;
@@ -79,7 +82,7 @@ namespace Scenes.Leif.Scripts
             meshObject.transform.parent = parent;
             meshObject.transform.position = worldPos;
             meshObject.transform.localScale = Vector3.one * scale;
-
+            meshObject.layer = interactableLayerMask;
             //? Renderer/Mesh/Collider
             meshRenderer = meshObject.GetComponent<MeshRenderer>();
             meshRenderer.material = material;

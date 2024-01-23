@@ -28,10 +28,12 @@ namespace Scenes.Leif.Scripts
     public class MapGenerator : MonoBehaviour
     {
         public static float SolidThreshold = 0.1f;
+        public static MapGenerator Instance;
         public bool autoUpdate;
         [SerializeField] private MapData mapData = new();
         public GizmoSettings gizmoSettings;
         [Range(0, 1)] public float solidThreshold;
+        public LayerMask interactableLayerMask;
 
         public Material material;
 
@@ -138,7 +140,6 @@ namespace Scenes.Leif.Scripts
 
         private void SetVoxelVisibility()
         {
-            // 26 // 17 // 11 // 7
             var (xSize, ySize, zSize) = mapData.mapSize;
             for (var z = 0; z < zSize; z++)
             for (var y = 0; y < ySize; y++)
@@ -155,7 +156,7 @@ namespace Scenes.Leif.Scripts
                         surroundedBy++;
                 }
 
-                Debug.Log(neighbours.Length + "//" + surroundedBy);
+                // 26 // 17 // 11 // 7
                 if (neighbours.Length == 26 && surroundedBy == 26)
                     grid[x, y, z].SetVisible(false);
                 else
@@ -226,7 +227,7 @@ namespace Scenes.Leif.Scripts
                 var height = noiseMap[x, z] * mapData.heightMultiplier - y;
                 var isSolid = height / 10f > SolidThreshold;
                 var newFactory = new VoxelFactory(worldPos, voxelScale, height, new Int3(x, y, z), isSolid, transform,
-                    material);
+                    material, interactableLayerMask);
                 voxelArray[x, y, z] = newFactory;
                 newFactory.voxel.RegisterEvents(OnVoxelStateChange, OnVoxelStateDestroy);
             }

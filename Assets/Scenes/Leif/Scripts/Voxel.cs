@@ -20,15 +20,25 @@ public class Voxel : MonoBehaviour
 
     private void OnDisable()
     {
-        RemoveFromNeighbours();
-        voxelStateDestroy?.Invoke(coordinates);
+        DestroyThisBlock();
     }
 
     private void OnDestroy()
     {
+        DestroyThisBlock();
+    }
+
+    private void DestroyThisBlock()
+    {
         RemoveFromNeighbours();
         voxelStateDestroy?.Invoke(coordinates);
     }
+
+    public void Interact()
+    {
+        Destroy(gameObject);
+    }
+
 
     private void RemoveFromNeighbours()
     {
