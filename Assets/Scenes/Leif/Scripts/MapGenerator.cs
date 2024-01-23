@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Scenes.Leif.Scripts
 {
@@ -12,15 +13,23 @@ namespace Scenes.Leif.Scripts
         public NoiseData noiseData = new();
     }
 
+    [Serializable]
+    public class GizmoSettings
+    {
+        public bool drawGiz, drawHandles;
+        public GizmoType gizmoType;
+        [Range(0, 1)] public float gizmoScale = 1;
+    }
 
     public class MapGenerator : MonoBehaviour
     {
         public static float SolidThreshold = 0.1f;
         [SerializeField] private MapData mapData = new();
-        public bool drawGiz, drawHandles;
-
+        [FormerlySerializedAs("gizSettings")] public GizmoSettings gizmoSettings;
         [Range(0, 1)] public float solidThreshold;
         private float[,] _noiseMap;
+
+        private Voxel[,,] grid;
 
 
         private void Start()
@@ -34,8 +43,8 @@ namespace Scenes.Leif.Scripts
 
         private void OnDrawGizmos()
         {
-            if (!drawGiz) return;
-            var grid = Generate3dGrid(mapData.mapSize, mapData.gridScale);
+            if (!gizmoSettings.drawGiz) return;
+            if (grid == null) grid = Generate3dGrid(mapData.mapSize, mapData.gridScale);
             var xSize = grid.GetLength(0);
             var ySize = grid.GetLength(1);
             var zSize = grid.GetLength(2);
@@ -45,12 +54,13 @@ namespace Scenes.Leif.Scripts
             for (var y = 0; y < ySize; y++)
             for (var z = 0; z < zSize; z++)
             for (var x = 0; x < xSize; x++)
-                grid[x, y, z].DrawGizmos(drawHandles);
+                grid[x, y, z].DrawGizmos(gizmoSettings);
         }
 
 
         private void OnValidate()
         {
+            grid = null;
             if (_noiseMap == null) _noiseMap = Noise.GenerateNoiseMap(mapData);
             SolidThreshold = solidThreshold;
         }
@@ -82,8 +92,9 @@ namespace Scenes.Leif.Scripts
 
                 var height = noiseMap[x, z] * mapData.heightMultiplier - y;
 
+
                 voxelArray[x, y, z] =
-                    new Voxel(worldPos, voxelScale, height);
+                    new Voxel(worldPos, voxelScale, height, new Int3(x, y, z), gizmoSettings.gizmoType);
             }
 
             return voxelArray;
