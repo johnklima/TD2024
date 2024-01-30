@@ -3,7 +3,32 @@ guid: 5dcc472829e0ded4e8a906bb5413ab84
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Hedge.Brown
+    second: {fileID: 2100000, guid: d21b4a31ee2847a459b09b84a3ec9337, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Hedge.Green
+    second: {fileID: 2100000, guid: c475020a2e6a2334a99e74fbceb88675, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: House.BlackIsh
+    second: {fileID: 2100000, guid: bd003e19b1abc014e806a6ccac7413cc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: House.GreyIsh
+    second: {fileID: 2100000, guid: 242eef376316749488d33d36d3e697a0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: House.WhiteIsh
+    second: {fileID: 2100000, guid: 534b4cd2a423ec747a013a941126d93c, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
