@@ -22,7 +22,7 @@ public class GOL : MonoBehaviour
     {
         timer = Time.realtimeSinceStartup;
 
-        Random.seed = 1325152;
+        Random.InitState(123456);
 
         //redimension our array
         cells = new int[MAX_ROWS, MAX_COLUMNS];
