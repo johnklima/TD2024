@@ -34,11 +34,6 @@ public class LeifPlayerController : CameraController
         mRigidbody.AddForce(moveDirection.normalized * (playerSpeed * movementMultiplier), ForceMode.Acceleration);
     }
 
-    public LeifPlayerController GetPlayerController()
-    {
-        return this;
-    }
-
     private void DoRay()
     {
         if (!playerHasControl) return;
