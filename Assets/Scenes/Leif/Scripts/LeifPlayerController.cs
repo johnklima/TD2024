@@ -5,6 +5,8 @@ using UnityEngine;
 public class LeifPlayerController : CameraController
 {
     [SerializeField] private float playerSpeed = 10, movementMultiplier = 0.1f;
+    [SerializeField] private float jumpForce;
+
     private RaycastHit hit;
 
     private Rigidbody mRigidbody;
@@ -31,12 +33,10 @@ public class LeifPlayerController : CameraController
         var verticalMovement = Input.GetAxisRaw("Vertical");
         var transforms = transform;
         var moveDirection = transforms.forward * verticalMovement + transforms.right * horizontalMovement;
-        mRigidbody.AddForce(moveDirection.normalized * (playerSpeed * movementMultiplier), ForceMode.Acceleration);
-    }
 
-    public LeifPlayerController GetPlayerController()
-    {
-        return this;
+        if (Input.GetKeyDown(KeyCode.Space)) moveDirection += Vector3.up * jumpForce;
+
+        mRigidbody.AddForce(moveDirection.normalized * (playerSpeed * movementMultiplier), ForceMode.Acceleration);
     }
 
     private void DoRay()

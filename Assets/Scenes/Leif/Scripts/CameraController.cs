@@ -4,6 +4,7 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     public GameObject playerToControl;
+    public bool useCameraParentAsPivot;
     public Camera cameraToControl;
     public bool playerHasControl = true;
     [SerializeField] private float interactDistanceThreshold = 1f;
@@ -72,7 +73,9 @@ public class CameraController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape)) ToggleCursorLockMode();
         if (playerToControl)
         {
-            cameraToControl.transform.localRotation = Quaternion.Euler(xRot, 0, 0);
+            var t = cameraToControl.transform;
+            if (useCameraParentAsPivot) t = t.parent;
+            t.localRotation = Quaternion.Euler(xRot, 0, 0);
             playerToControl.transform.rotation = Quaternion.Euler(0, yRot, 0);
             return;
         }
