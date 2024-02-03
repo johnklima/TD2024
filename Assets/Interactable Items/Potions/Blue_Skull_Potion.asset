@@ -16,7 +16,7 @@ MonoBehaviour:
   itemType: 1
   Ingredients:
     ingredient1: 2
-    ingredient2: 0
+    ingredient2: 3
   objectSettings:
     prefab: {fileID: 0}
     material: {fileID: 0}
