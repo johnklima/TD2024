@@ -6,11 +6,11 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 {
     public BaseItem preMadeItem;
     [HideInInspector] public Image image;
-
     [HideInInspector] public Transform parentAfterDrag;
 
     private void Start()
     {
+        if (image == null) image = GetComponent<Image>();
         image.sprite = preMadeItem.objectSettings.uiSprite;
     }
 
