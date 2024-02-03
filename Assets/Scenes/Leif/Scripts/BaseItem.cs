@@ -1,15 +1,10 @@
-using System;
 using UnityEngine;
 
-public enum IngredientColor
+public enum Ingredient
 {
     Red,
     Yellow,
-    Blue
-}
-
-public enum IngredientSymbol
-{
+    Blue,
     Skull,
     Sun,
     Whirlpool
@@ -21,26 +16,11 @@ public enum ItemType
     Potion
 }
 
-[Serializable]
-public class ItemSettings
-{
-    public ItemType itemType;
-    public IngredientColor ingredientColor;
-    public IngredientSymbol ingredientSymbol;
-}
-
-[Serializable]
-public class ObjectSettings
-{
-    public Sprite uiSprite;
-    public GameObject prefab;
-    public Material material;
-}
 
 public abstract class BaseItem : ScriptableObject
 {
-    public ItemSettings itemSettings;
-    public ObjectSettings objectSettings;
+    public Sprite uiSprite;
+    public ItemType itemType;
 
     public abstract void Interact();
 }

@@ -11,7 +11,7 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     private void Start()
     {
         if (image == null) image = GetComponent<Image>();
-        image.sprite = preMadeItem.objectSettings.uiSprite;
+        image.sprite = preMadeItem.uiSprite;
     }
 
     public void OnBeginDrag(PointerEventData eventData)
