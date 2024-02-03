@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class openCrafting : MonoBehaviour
 {
-
     public GameObject caldron;
     public GameObject craftingGrid;
     public GameObject mix;
@@ -11,8 +10,10 @@ public class openCrafting : MonoBehaviour
     public GameObject Slot2;
     private MouseCamLook mouseCamLook;
 
-    void Start()
+    private void Start()
     {
+        // start mix button as disabled
+        // un-disable mix button only when 2nd material is slotted
         caldron.SetActive(false);
         craftingGrid.SetActive(false);
         mix.SetActive(false);
@@ -22,7 +23,7 @@ public class openCrafting : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
 
     {
         if (Input.GetKeyDown(KeyCode.E))
@@ -43,15 +44,6 @@ public class openCrafting : MonoBehaviour
                 Cursor.lockState = CursorLockMode.Locked;
                 mouseCamLook.enabled = true;
             }
-
-
-
         }
     }
-
-
-
-
-
-
 }
