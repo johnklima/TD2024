@@ -50,7 +50,7 @@ public class LeifPlayerController : CameraController
         if (hit.transform.gameObject.TryGetComponent(out I_Interactable interactable))
         {
             interactable.Interact();
-            Debug.Log("triggerbox");
+            Debug.Log("Player Hit interactable");
         }
 
 

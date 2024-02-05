@@ -17,8 +17,14 @@ public class TestInteractable : MonoBehaviour
         Debug.Log("TestOnRay");
     }
 
-    public void TestOnKey()
+
+    public void TestAimingOn()
     {
-        Debug.Log("TestOnKey");
+        Debug.Log("TestAimingOn");
+    }
+
+    public void TestAimingOff()
+    {
+        Debug.Log("TestAimingOff");
     }
 }
