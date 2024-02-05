@@ -4,7 +4,7 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     public GameObject playerToControl;
-    public bool useCameraParentAsPivot;
+    public bool useCameraParentAsPivot, showCameraDirGiz;
     public Camera cameraToControl;
     public bool playerHasControl = true;
     [SerializeField] private float interactDistanceThreshold = 1f;
@@ -38,6 +38,7 @@ public class CameraController : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+        if (!showCameraDirGiz) return;
         var tr = cameraToControl.transform;
         Gizmos.color = Color.blue;
         Gizmos.DrawRay(tr.position, tr.forward * 10);

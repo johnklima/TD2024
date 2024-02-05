@@ -46,6 +46,14 @@ public class LeifPlayerController : CameraController
             new Vector3(Screen.width / 2f, Screen.height / 2f, 100));
         if (!Physics.Raycast(ray, out hit, interactableLayerMask)) return;
         if (!Input.GetMouseButtonDown(0)) return;
+
+        if (hit.transform.gameObject.TryGetComponent(out I_Interactable interactable))
+        {
+            interactable.Interact();
+            Debug.Log("triggerbox");
+        }
+
+
         if (hit.transform.gameObject.TryGetComponent(out Voxel voxel))
         {
             Debug.Log("hit block, interacted");
