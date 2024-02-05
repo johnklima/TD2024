@@ -11,7 +11,7 @@ public class TriggerBoxData
 
 
 [RequireComponent(typeof(BoxCollider))]
-public class TriggerBox : MonoBehaviour, I_Interactable
+public class TriggerBox : MonoBehaviour, IInteractable
 {
     private readonly UnityEvent _onKeyPress = new();
     private BoxCollider _boxCollider;
@@ -35,7 +35,7 @@ public class TriggerBox : MonoBehaviour, I_Interactable
 
     private void OnTriggerEnter(Collider other)
     {
-        //todo check for player
+        //todo check for player correctly
         if (!other.TryGetComponent(out LeifPlayerController lPC)) return;
         _inTrigger = true;
         _onEnter?.Invoke(other);
@@ -44,7 +44,7 @@ public class TriggerBox : MonoBehaviour, I_Interactable
 
     private void OnTriggerExit(Collider other)
     {
-        //todo check for player
+        //todo check for player correctly
         if (!other.TryGetComponent(out LeifPlayerController lPC)) return;
         _inTrigger = false;
         _onExit?.Invoke(other);
@@ -64,18 +64,17 @@ public class TriggerBox : MonoBehaviour, I_Interactable
     public void UpdateTriggerBox(Interactable interactable)
     {
         _interactable = interactable;
-        interactionEvents = interactable.interactionEvents;
-        _boxCollider.size = interactable.triggerBoxData.size;
-        transform.localPosition = interactable.triggerBoxData.localPos;
         ValidateComponents();
     }
 
     private void ValidateComponents()
     {
         _boxCollider ??= GetComponent<BoxCollider>();
-        _boxCollider.isTrigger = true;
-
         _interactable ??= GetComponentInParent<Interactable>();
+
+        _boxCollider.isTrigger = true;
+        transform.localPosition = _interactable.triggerBoxData.localPos;
+        _boxCollider.size = _interactable.triggerBoxData.size;
         interactionEvents = _interactable.interactionEvents;
 
         _onEnter = interactionEvents.onEnter;

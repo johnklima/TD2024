@@ -25,7 +25,7 @@ public class TestInteractable : MonoBehaviour
         interactionEvents.onExit.AddListener(TestOnExit);
         interactionEvents.onRayInteract.AddListener(TestOnRay);
 
-        var interactableCamera = _interactable.InteractableCamera;
+        var interactableCamera = _interactable.interactableCamera;
         interactableCamera.onAimingOn.RemoveListener(TestAimingOn);
         interactableCamera.onAimingOff.RemoveListener(TestAimingOff);
 
@@ -36,31 +36,31 @@ public class TestInteractable : MonoBehaviour
     public void TestOnEnter(Collider other)
     {
         testOnEnter?.Invoke(other);
-        Debug.Log("TestOnEnter: " + other.gameObject.name);
+        Debug.Log("Test: OnEnter: " + other.gameObject.name);
     }
 
     public void TestOnExit(Collider other)
     {
         testOnExit?.Invoke(other);
-        Debug.Log("TestOnExit: " + other.gameObject.name);
+        Debug.Log("Test: OnExit: " + other.gameObject.name);
     }
 
     public void TestOnRay()
     {
         testOnRayInteract?.Invoke();
-        Debug.Log("TestOnRay");
+        Debug.Log("Test: OnRayInteract");
     }
 
 
     public void TestAimingOn()
     {
         testOnAimingOn?.Invoke();
-        Debug.Log("TestAimingOn");
+        Debug.Log("Test: AimingOn");
     }
 
     public void TestAimingOff()
     {
         testOnAimingOff?.Invoke();
-        Debug.Log("TestAimingOff");
+        Debug.Log("Test: AimingOff");
     }
 }

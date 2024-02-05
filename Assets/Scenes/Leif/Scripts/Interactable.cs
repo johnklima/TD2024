@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.Events;
 
-public interface I_Interactable
+public interface IInteractable
 {
     void Interact();
     // void Interact(LeifPlayerController lPC);
@@ -11,32 +11,52 @@ public interface I_Interactable
 [Serializable]
 public struct InteractionEvents
 {
+    [Tooltip("Triggered when the player enters the triggerBox")]
     public UnityEvent<Collider> onEnter;
+
+    [Tooltip("Triggered when the player exit the triggerBox")]
     public UnityEvent<Collider> onExit;
+
+    [Tooltip("Triggered when the player is in pickUpRadius, is aimingOn triggerBox and presses <key>")]
     public UnityEvent onRayInteract;
+
+    [Tooltip("Triggered the first frame 'Aiming On' an interactable item")]
     public UnityEvent onAimingOn;
+
+    [Tooltip("Triggered the first frame 'Aiming Off' an interactable item")]
     public UnityEvent onAimingOff;
 }
 
 public class Interactable : MonoBehaviour
 {
-    public InteractionEvents interactionEvents;
-
-
+    [Tooltip("Enable to test events added to the TESTER gameObject")]
     public bool useTester = true;
-    public LayerMask interactableLayerMask;
-    public KeyCode key = KeyCode.E;
-    public float pickUpRadius = 5f;
-    public Camera playerCamera;
-    public UnityEvent onAimingOn = new();
-    public UnityEvent onAimingOff = new();
-    public TriggerBoxData triggerBoxData = new();
-    private TriggerBox _triggerBox;
-    private RaycastHit hit;
-    private Transform playerCameraTransform;
-    private bool playerInRange;
 
-    public InteractableCamera InteractableCamera { get; private set; }
+    [Tooltip("The layer to interact with")]
+    public LayerMask interactableLayerMask;
+
+    [Tooltip("What key to press to trigger interaction")]
+    public KeyCode key = KeyCode.E;
+
+    [Tooltip("How far can away is item pickUpAble")]
+    public float pickUpRadius = 5f;
+
+    [Tooltip("Player controller camera, defaults to: Camera.main")]
+    public Camera playerCamera;
+
+    [Tooltip("Size and position of the triggerBox")]
+    public TriggerBoxData triggerBoxData = new();
+
+    [Tooltip("Events")] public InteractionEvents interactionEvents;
+
+    private RaycastHit _hit;
+    private Transform _playerCameraTransform;
+    private bool _playerInRange;
+
+
+    private TriggerBox _triggerBox;
+
+    public InteractableCamera interactableCamera { get; private set; }
 
     private void Awake()
     {
@@ -72,11 +92,11 @@ public class Interactable : MonoBehaviour
         //* then:
         //* Interact() with interactable (TriggerBox)
 
-        if (!playerInRange) return;
-        if (playerCameraTransform) // if player is in range, draw debugRay
-            Debug.DrawRay(playerCameraTransform.position, playerCameraTransform.forward);
+        if (!_playerInRange) return;
+        if (_playerCameraTransform) // if player is in range, draw debugRay
+            Debug.DrawRay(_playerCameraTransform.position, _playerCameraTransform.forward);
         if (!Input.GetKeyDown(key)) return;
-        if (!InteractableCamera.TryDoRay(out var interactable)) return;
+        if (!interactableCamera.TryDoRay(out var interactable)) return;
         interactable.Interact();
     }
 
@@ -91,16 +111,16 @@ public class Interactable : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        //todo check for player
+        //todo check for player correctly
         if (!other.TryGetComponent(out LeifPlayerController lPC)) return;
-        playerInRange = true;
+        _playerInRange = true;
     }
 
     private void OnTriggerExit(Collider other)
     {
-        //todo check for player
+        //todo check for player correctly
         if (!other.TryGetComponent(out LeifPlayerController lPC)) return;
-        playerInRange = false;
+        _playerInRange = false;
     }
 
 
@@ -108,7 +128,8 @@ public class Interactable : MonoBehaviour
     {
         _triggerBox ??= GetComponentInChildren<TriggerBox>();
         triggerBoxData ??= new TriggerBoxData();
-        _triggerBox.UpdateTriggerBox(this);
+        if (triggerBoxData != null)
+            _triggerBox.UpdateTriggerBox(this);
     }
 
     private void ValidatePlayerCamera()
@@ -121,9 +142,9 @@ public class Interactable : MonoBehaviour
             if (playerCamera != null)
             {
                 //* if we get camera, set transform
-                playerCameraTransform = playerCamera.transform;
+                _playerCameraTransform = playerCamera.transform;
                 Debug.LogWarning($"playerCamera not set on: {gameObject.name}" +
-                                 $" - using default: Camera.main: {playerCameraTransform.name}");
+                                 $" - using default: Camera.main: {_playerCameraTransform.name}");
             }
             else
             {
@@ -153,20 +174,20 @@ public class Interactable : MonoBehaviour
         if (cam == null) throw new Exception("Did not find <playerCamera>");
 
         //* try to get InteractableCamera
-        InteractableCamera = FindObjectOfType<InteractableCamera>();
-        if (InteractableCamera == null)
+        interactableCamera = FindObjectOfType<InteractableCamera>();
+        if (interactableCamera == null)
         {
             //* if we cant find it, log error and try to get it off main camera
             Debug.LogError("Did not find <InteractableCamera>, trying to get from Camera.main!");
-            InteractableCamera = cam.gameObject.GetComponent<InteractableCamera>();
+            interactableCamera = cam.gameObject.GetComponent<InteractableCamera>();
 
-            if (InteractableCamera == null)
+            if (interactableCamera == null)
             {
                 //* if we cant get it of main camera, add it to main camera.
                 Debug.LogError("Did not find <InteractableCamera> on Camera.Main, adding component as new!");
-                InteractableCamera = cam.gameObject.AddComponent<InteractableCamera>();
+                interactableCamera = cam.gameObject.AddComponent<InteractableCamera>();
 
-                if (InteractableCamera == null)
+                if (interactableCamera == null)
                     //! if we for whatever reason STILL do not have a reference, something is wrong!
                     throw new Exception(
                         "No camera found with <InteractableCamera> script attached\n" +
@@ -175,9 +196,9 @@ public class Interactable : MonoBehaviour
         }
 
         // set interactableLayerMask on the interactable camera
-        InteractableCamera.interactableLayerMask = interactableLayerMask;
+        interactableCamera.interactableLayerMask = interactableLayerMask;
 
-        InteractableCamera.onAimingOn = onAimingOn;
-        InteractableCamera.onAimingOff = onAimingOff;
+        interactableCamera.onAimingOn = interactionEvents.onAimingOn;
+        interactableCamera.onAimingOff = interactionEvents.onAimingOff;
     }
 }

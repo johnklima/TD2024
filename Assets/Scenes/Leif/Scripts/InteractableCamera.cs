@@ -30,7 +30,7 @@ public class InteractableCamera : MonoBehaviour
             return;
         }
 
-        if (_hit.transform.gameObject.TryGetComponent(out I_Interactable iInteractable))
+        if (_hit.transform.gameObject.TryGetComponent(out IInteractable iInteractable))
         {
             //* trigger the event if:
             //* we are aiming at I_Interactable, and
@@ -40,12 +40,14 @@ public class InteractableCamera : MonoBehaviour
         }
     }
 
-    public bool TryDoRay(out I_Interactable interactable)
+    public bool TryDoRay(out IInteractable interactable)
     {
+        //* do a single ray, once,
+        //* returns bool, outputs IInteractable via out keyword
         interactable = null;
         var ray = new Ray(transform.position, transform.forward);
         if (!Physics.Raycast(ray, out _hit, 1000, interactableLayerMask)) return false;
-        if (!_hit.transform.gameObject.TryGetComponent(out I_Interactable iInteractable)) return false;
+        if (!_hit.transform.gameObject.TryGetComponent(out IInteractable iInteractable)) return false;
         interactable = iInteractable;
         return true;
     }
