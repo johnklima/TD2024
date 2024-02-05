@@ -7,30 +7,25 @@ public class TriggerBoxData
 {
     public Vector3 size = Vector3.one;
     public Vector3 localPos = Vector3.zero;
-    public UnityEvent<Collider> onEnter;
-    public UnityEvent<Collider> onExit;
-    public UnityEvent onRayInteract;
 }
 
 
 [RequireComponent(typeof(BoxCollider))]
 public class TriggerBox : MonoBehaviour, I_Interactable
 {
+    private readonly UnityEvent _onKeyPress = new();
     private BoxCollider _boxCollider;
-    private bool _doRun = true;
     private Interactable _interactable;
     private bool _inTrigger;
     private KeyCode _key;
-    private UnityEvent<Collider> _onEnter;
-    private UnityEvent<Collider> _onExit;
-    private UnityEvent _onKeyPress;
-    private UnityEvent _onRayInteract;
-    private TriggerBoxData _triggerBoxData;
+    private UnityEvent<Collider> _onEnter = new();
+    private UnityEvent<Collider> _onExit = new();
+    private UnityEvent _onRayInteract = new();
+    private InteractionEvents interactionEvents;
 
     private void Awake()
     {
         ValidateComponents();
-        _doRun = _interactable.useTriggerBox;
     }
 
     private void Update()
@@ -40,7 +35,8 @@ public class TriggerBox : MonoBehaviour, I_Interactable
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!_doRun) return;
+        //todo check for player
+        if (!other.TryGetComponent(out LeifPlayerController lPC)) return;
         _inTrigger = true;
         _onEnter?.Invoke(other);
     }
@@ -48,14 +44,14 @@ public class TriggerBox : MonoBehaviour, I_Interactable
 
     private void OnTriggerExit(Collider other)
     {
-        if (!_doRun) return;
+        //todo check for player
+        if (!other.TryGetComponent(out LeifPlayerController lPC)) return;
         _inTrigger = false;
         _onExit?.Invoke(other);
     }
 
     private void OnValidate()
     {
-        if (!_doRun) return;
         _boxCollider ??= GetComponent<BoxCollider>();
         _boxCollider.isTrigger = true;
     }
@@ -65,11 +61,13 @@ public class TriggerBox : MonoBehaviour, I_Interactable
         _onRayInteract?.Invoke();
     }
 
-    public void UpdateTriggerBox(TriggerBoxData triggerBoxData)
+    public void UpdateTriggerBox(Interactable interactable)
     {
-        _triggerBoxData = triggerBoxData;
-        _boxCollider.size = _triggerBoxData.size;
-        transform.localPosition = _triggerBoxData.localPos;
+        _interactable = interactable;
+        interactionEvents = interactable.interactionEvents;
+        _boxCollider.size = interactable.triggerBoxData.size;
+        transform.localPosition = interactable.triggerBoxData.localPos;
+        ValidateComponents();
     }
 
     private void ValidateComponents()
@@ -78,10 +76,10 @@ public class TriggerBox : MonoBehaviour, I_Interactable
         _boxCollider.isTrigger = true;
 
         _interactable ??= GetComponentInParent<Interactable>();
-        _triggerBoxData = _interactable.triggerBoxData;
+        interactionEvents = _interactable.interactionEvents;
 
-        _onEnter = _triggerBoxData.onEnter;
-        _onExit = _triggerBoxData.onExit;
-        _onRayInteract = _triggerBoxData.onRayInteract;
+        _onEnter = interactionEvents.onEnter;
+        _onExit = interactionEvents.onExit;
+        _onRayInteract = interactionEvents.onRayInteract;
     }
 }

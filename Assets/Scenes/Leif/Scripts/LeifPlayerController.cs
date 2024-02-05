@@ -47,13 +47,6 @@ public class LeifPlayerController : CameraController
         if (!Physics.Raycast(ray, out hit, interactableLayerMask)) return;
         if (!Input.GetMouseButtonDown(0)) return;
 
-        if (hit.transform.gameObject.TryGetComponent(out I_Interactable interactable))
-        {
-            interactable.Interact();
-            Debug.Log("Player Hit interactable");
-        }
-
-
         if (hit.transform.gameObject.TryGetComponent(out Voxel voxel))
         {
             Debug.Log("hit block, interacted");
