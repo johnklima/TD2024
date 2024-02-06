@@ -22,7 +22,7 @@ public class GOL : MonoBehaviour
     {
         timer = Time.realtimeSinceStartup;
 
-        Random.InitState(123456);
+        Random.InitState(987654321);
 
         //redimension our array
         cells = new int[MAX_ROWS, MAX_COLUMNS];
@@ -47,20 +47,20 @@ public class GOL : MonoBehaviour
                 RaycastHit hit;
                 
                 // Does the ray intersect any surface in the layer mask
-                if (Physics.Raycast(pos, -Vector3.up, out hit, 10000, layerMask))
+                if (Physics.Raycast(pos, Vector3.down, out hit, 10000, layerMask))
                 {
                                    
-                    float x = objs[row, col].transform.position.x;
+                    float x = objs[row, col].transform.localPosition.x;
                     float y = hit.point.y;
-                    float z = objs[row, col].transform.position.z;
+                    float z = objs[row, col].transform.localPosition.z;
 
-                    objs[row, col].transform.position.Set(x, y, z);             //this does absolutely nothing!!!!
-                    objs[row, col].transform.position = new Vector3(x, y, z);   //this does
+                    objs[row, col].transform.localPosition.Set(x, y, z);             //this does absolutely nothing!!!!
+                    objs[row, col].transform.localPosition = new Vector3(x, y, z);   //this does
 
                 }
 
                 //init cells
-                int state =  Random.Range(0, 3);   // here I init more cells live than dead. 
+                int state =  Random.Range(0, 2);   // here I init more cells live than dead. 
                 if (state >= 1)
                 {
                     objs[row, col].SetActive(true);
