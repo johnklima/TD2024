@@ -6,24 +6,25 @@ public class Boids : MonoBehaviour
 {
     
     [SerializeField] Transform flock;
-    [SerializeField] float cohesionFactor = 0.2f;
-    [SerializeField] float separationFactor = 6.0f;
-    [SerializeField] float allignFactor = 1.0f;
-    [SerializeField] float constrainFactor = 2.0f;
-    [SerializeField] float avoidFactor = 20.0f;
-    [SerializeField] float collisionDistance = 6.0f;
-    [SerializeField] float speed = 6.0f;
-    [SerializeField] Vector3 constrainPoint;
+    public float cohesionFactor = 0.2f;
+    public float separationFactor = 6.0f;
+    public float allignFactor = 1.0f;
+    public float constrainFactor = 2.0f;
+    public float avoidFactor = 20.0f;
+    public float collisionDistance = 6.0f;
+    public float speed = 6.0f;
+    public Vector3 constrainPoint;
     
-    [SerializeField] Vector3 avoidObst;
-    [SerializeField] float integrationRate = 3.0f;
+    public Vector3 avoidObst;
+    public float integrationRate = 3.0f;
     
     //final velocity
     public Vector3 velocity;
+    
     //states
     public bool isFlocking = true;
     public Transform target;
-    public GameObject batGeom = null;
+    
    
     float avoidCount;
 

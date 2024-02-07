@@ -20,7 +20,7 @@ public class BallGravity : MonoBehaviour
 
     public Vector3 impulse = new Vector3(0, 0, 0);
 
-    public float timeScalar = 3.0f;
+    public float timeScalar = 1.0f;
 
     // Start is called before the first frame update
     void Start()
