@@ -12,7 +12,7 @@ public class _Segment3d : MonoBehaviour
     
     public _Segment3d parent = null;
     public _Segment3d child = null;
-    public Transform joint;
+    
 
     void Start()
     {
@@ -60,7 +60,6 @@ public class _Segment3d : MonoBehaviour
         Vector3 rot = new Vector3(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, 0);
         transform.rotation = Quaternion.Euler(rot);
 
-        joint.position = transform.position;
        
     }
 
