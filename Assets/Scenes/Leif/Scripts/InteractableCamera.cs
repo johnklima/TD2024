@@ -1,14 +1,18 @@
-﻿using Unity.VisualScripting;
+﻿using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class InteractableCamera : MonoBehaviour
 {
     [DoNotSerialize] public LayerMask interactableLayerMask;
-    public UnityEvent onAimingOn = new();
-    public UnityEvent onAimingOff = new();
+    public List<UnityEvent> onAimingOn = new();
+    public List<UnityEvent> onAimingOff = new();
+
     private RaycastHit _hit;
     private bool _wasAimingAtLastFrame;
+
+    private Dictionary<Interactable, Dictionary<string, UnityEvent>> asd;
 
     private void Update()
     {
@@ -23,7 +27,7 @@ public class InteractableCamera : MonoBehaviour
             if (_wasAimingAtLastFrame)
             {
                 //* not hitting I_Interactable this frame == aiming off
-                onAimingOff?.Invoke();
+                foreach (var e in onAimingOff) e?.Invoke();
                 _wasAimingAtLastFrame = false;
             }
 
@@ -35,7 +39,9 @@ public class InteractableCamera : MonoBehaviour
             //* trigger the event if:
             //* we are aiming at I_Interactable, and
             //* we were not aiming at a interactable last frame
-            if (!_wasAimingAtLastFrame) onAimingOn?.Invoke();
+            if (!_wasAimingAtLastFrame)
+                foreach (var e in onAimingOn)
+                    e?.Invoke();
             _wasAimingAtLastFrame = true;
         }
     }

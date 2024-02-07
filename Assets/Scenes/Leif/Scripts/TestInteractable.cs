@@ -8,6 +8,8 @@ public class TestInteractable : MonoBehaviour
     public UnityEvent testOnRayInteract;
     public UnityEvent testOnAimingOn;
     public UnityEvent testOnAimingOff;
+    public UnityEvent testAimingOff;
+    public UnityEvent testAimingOn;
     private Interactable _interactable;
 
 
@@ -26,11 +28,8 @@ public class TestInteractable : MonoBehaviour
         interactionEvents.onRayInteract.AddListener(TestOnRay);
 
         var interactableCamera = _interactable.interactableCamera;
-        interactableCamera.onAimingOn.RemoveListener(TestAimingOn);
-        interactableCamera.onAimingOff.RemoveListener(TestAimingOff);
-
-        interactableCamera.onAimingOn.AddListener(TestAimingOn);
-        interactableCamera.onAimingOff.AddListener(TestAimingOff);
+        interactableCamera.onAimingOn.Add(testAimingOn);
+        interactableCamera.onAimingOff.Add(testAimingOff);
     }
 
     public void TestOnEnter(Collider other)

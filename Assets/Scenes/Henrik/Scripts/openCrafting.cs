@@ -5,7 +5,7 @@ public class openCrafting : MonoBehaviour
     public GameObject caldron;
     public GameObject craftingGrid;
     public GameObject mix;
-    public GameObject camera;
+    public GameObject cameraGameObject;
     public GameObject Slot1;
     public GameObject Slot2;
     private MouseCamLook mouseCamLook;
@@ -19,7 +19,7 @@ public class openCrafting : MonoBehaviour
         mix.SetActive(false);
         Slot1.SetActive(false);
         Slot2.SetActive(false);
-        mouseCamLook = camera.GetComponent<MouseCamLook>();
+        mouseCamLook = cameraGameObject.GetComponent<MouseCamLook>();
     }
 
     // Update is called once per frame

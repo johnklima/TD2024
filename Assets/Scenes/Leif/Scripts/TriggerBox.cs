@@ -1,14 +1,5 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
-
-[Serializable]
-public class TriggerBoxData
-{
-    public Vector3 size = Vector3.one;
-    public Vector3 localPos = Vector3.zero;
-}
-
 
 [RequireComponent(typeof(BoxCollider))]
 public class TriggerBox : MonoBehaviour, IInteractable

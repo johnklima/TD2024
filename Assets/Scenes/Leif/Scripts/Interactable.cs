@@ -1,34 +1,31 @@
 using System;
+using System.Collections;
 using UnityEngine;
-using UnityEngine.Events;
 
-public interface IInteractable
+[Serializable]
+public struct Meshes
 {
-    void Interact();
-    // void Interact(LeifPlayerController lPC);
+    [Header("Do not touch unless already broken")] [Tooltip("Prefab for the potion - do not touch")]
+    public GameObject potion;
+
+    [Tooltip("Prefab for the ingredient - do not touch")]
+    public GameObject ingredient;
 }
 
 [Serializable]
-public struct InteractionEvents
+public struct GizmoSettings
 {
-    [Tooltip("Triggered when the player enters the triggerBox")]
-    public UnityEvent<Collider> onEnter;
-
-    [Tooltip("Triggered when the player exit the triggerBox")]
-    public UnityEvent<Collider> onExit;
-
-    [Tooltip("Triggered when the player is in pickUpRadius, is aimingOn triggerBox and presses <key>")]
-    public UnityEvent onRayInteract;
-
-    [Tooltip("Triggered the first frame 'Aiming On' an interactable item")]
-    public UnityEvent onAimingOn;
-
-    [Tooltip("Triggered the first frame 'Aiming Off' an interactable item")]
-    public UnityEvent onAimingOff;
+    public bool on, onlyWhenSelected;
 }
+
 
 public class Interactable : MonoBehaviour
 {
+    [Tooltip("Settings for gizmos")] public GizmoSettings gizmoSettings;
+
+    [Tooltip("Pre-made object from 'Interactable Items' folder")]
+    public BaseItem preMadeItem;
+
     [Tooltip("Enable to test events added to the TESTER gameObject")]
     public bool useTester = true;
 
@@ -49,21 +46,31 @@ public class Interactable : MonoBehaviour
 
     [Tooltip("Events")] public InteractionEvents interactionEvents;
 
+    [Tooltip("Do not alter unless already broken")] [SerializeField]
+    public Meshes prefabData;
+
+    public InteractableCamera interactableCamera;
+
     private RaycastHit _hit;
-    private Transform _playerCameraTransform;
+
+    // private Transform _playerCameraTransform;
     private bool _playerInRange;
+
+    private GameObject _potion, _ingredient;
 
 
     private TriggerBox _triggerBox;
 
-    public InteractableCamera interactableCamera { get; private set; }
-
     private void Awake()
     {
-        ValidatePlayerCamera();
-        ValidateInteractableCamera();
+        interactableCamera = InteractableManager.instance.Register(this);
+
+        // ValidatePlayerCamera();
+        // ValidateInteractableCamera();
         ValidateLayers();
+        ValidateScriptableObject();
     }
+
 
     private void Start()
     {
@@ -93,8 +100,7 @@ public class Interactable : MonoBehaviour
         //* Interact() with interactable (TriggerBox)
 
         if (!_playerInRange) return;
-        if (_playerCameraTransform) // if player is in range, draw debugRay
-            Debug.DrawRay(_playerCameraTransform.position, _playerCameraTransform.forward);
+
         if (!Input.GetKeyDown(key)) return;
         if (!interactableCamera.TryDoRay(out var interactable)) return;
         interactable.Interact();
@@ -102,11 +108,17 @@ public class Interactable : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        var position = transform.position;
-        Gizmos.DrawWireSphere(position, pickUpRadius);
-        var pos = position + triggerBoxData.localPos;
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireCube(pos, triggerBoxData.size);
+        if (!gizmoSettings.on) return;
+        if (gizmoSettings.onlyWhenSelected) return;
+
+        DrawGizmos();
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        if (!gizmoSettings.on) return;
+        if (!gizmoSettings.onlyWhenSelected) return;
+        DrawGizmos();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -130,30 +142,37 @@ public class Interactable : MonoBehaviour
         triggerBoxData ??= new TriggerBoxData();
         if (triggerBoxData != null)
             _triggerBox.UpdateTriggerBox(this);
+        ValidateScriptableObject();
     }
 
-    private void ValidatePlayerCamera()
+    private void DrawGizmos()
     {
-        //* if playerCamera is not set in inspector manually,
-        if (playerCamera == null)
-        {
-            //* try to get it via Camera.main
-            playerCamera = Camera.main;
-            if (playerCamera != null)
-            {
-                //* if we get camera, set transform
-                _playerCameraTransform = playerCamera.transform;
-                Debug.LogWarning($"playerCamera not set on: {gameObject.name}" +
-                                 $" - using default: Camera.main: {_playerCameraTransform.name}");
-            }
-            else
-            {
-                //* did not get any camera, throw error!
-                throw new Exception("Could not find Camera.main, make sure to either:\n" +
-                                    "Set a camera's tag as Main, or\n" +
-                                    "Assign a camera to <PlayerCamera> on: " + gameObject.name);
-            }
-        }
+        var position = transform.position;
+        Gizmos.DrawWireSphere(position, pickUpRadius);
+        var pos = position + triggerBoxData.localPos;
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireCube(pos, triggerBoxData.size);
+    }
+
+
+    private void ValidateScriptableObject()
+    {
+        if (!isActiveAndEnabled) return;
+        if (preMadeItem == null) return;
+        var i = prefabData.ingredient;
+        var p = prefabData.potion;
+        if (i == null || p == null)
+            throw new Exception($"BROKEN: potion: {p} or ingredient: {i} - are not set correctly!");
+        StartCoroutine(DoAtEndOfFrame(i, p));
+        gameObject.name = preMadeItem.name;
+    }
+
+    private IEnumerator DoAtEndOfFrame(GameObject ingredient, GameObject potion)
+    {
+        var iType = preMadeItem.itemType;
+        yield return new WaitForEndOfFrame();
+        ingredient.SetActive(iType == ItemType.Ingredient);
+        potion.SetActive(iType == ItemType.Potion);
     }
 
     private void ValidateLayers()
@@ -164,41 +183,5 @@ public class Interactable : MonoBehaviour
             tr.gameObject.layer = 2;
         //* set triggerBox to interactable
         _triggerBox.gameObject.layer = LayerMask.NameToLayer("Interactable");
-    }
-
-    private void ValidateInteractableCamera()
-    {
-        //* try to get main camera
-        var cam = playerCamera;
-        //* if there is none, throw error
-        if (cam == null) throw new Exception("Did not find <playerCamera>");
-
-        //* try to get InteractableCamera
-        interactableCamera = FindObjectOfType<InteractableCamera>();
-        if (interactableCamera == null)
-        {
-            //* if we cant find it, log error and try to get it off main camera
-            Debug.LogError("Did not find <InteractableCamera>, trying to get from Camera.main!");
-            interactableCamera = cam.gameObject.GetComponent<InteractableCamera>();
-
-            if (interactableCamera == null)
-            {
-                //* if we cant get it of main camera, add it to main camera.
-                Debug.LogError("Did not find <InteractableCamera> on Camera.Main, adding component as new!");
-                interactableCamera = cam.gameObject.AddComponent<InteractableCamera>();
-
-                if (interactableCamera == null)
-                    //! if we for whatever reason STILL do not have a reference, something is wrong!
-                    throw new Exception(
-                        "No camera found with <InteractableCamera> script attached\n" +
-                        "make sure that there is at least one camera with it!");
-            }
-        }
-
-        //* set interactableLayerMask on the interactable camera
-        interactableCamera.interactableLayerMask = interactableLayerMask;
-        //* set the events on the camera so it can trigger the events
-        interactableCamera.onAimingOn = interactionEvents.onAimingOn;
-        interactableCamera.onAimingOff = interactionEvents.onAimingOff;
     }
 }
