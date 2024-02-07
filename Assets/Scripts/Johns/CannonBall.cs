@@ -15,7 +15,7 @@ public class CannonBall : MonoBehaviour
     public bool inAir;
     public float launchAngle = 45;
 
- 
+    public BallGravity grav;
     private void Awake()
     {
 
@@ -24,16 +24,28 @@ public class CannonBall : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        grav = GetComponent<BallGravity>();
     }
 
     // Update is called once per frame
     void Update()
     {
-      
-        
-    }
+        if (Input.GetKeyDown(KeyCode.Mouse1) && !inAir)
+        {
+            
+            //lift up and forward
+            transform.position = start.position;
+            transform.position += Vector3.up + transform.forward * 2;
 
+            transform.LookAt(end);
+            grav.enabled = true;
+            grav.impulse = fire(transform.position, end.position, launchAngle);
+
+            inAir = true;       //set to false when it hits something (on collision enter)
+            
+            
+        }
+    }
 
     public Vector3 fire(Vector3 startPos, Vector3 targPos, float angle)
     {
