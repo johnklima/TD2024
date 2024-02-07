@@ -195,9 +195,9 @@ public class Interactable : MonoBehaviour
             }
         }
 
-        // set interactableLayerMask on the interactable camera
+        //* set interactableLayerMask on the interactable camera
         interactableCamera.interactableLayerMask = interactableLayerMask;
-
+        //* set the events on the camera so it can trigger the events
         interactableCamera.onAimingOn = interactionEvents.onAimingOn;
         interactableCamera.onAimingOff = interactionEvents.onAimingOff;
     }
