@@ -20,4 +20,5 @@ public class PotionItem : BaseItem
 {
     public Ingredients Ingredients;
     public ObjectSettings objectSettings;
+    
 }
