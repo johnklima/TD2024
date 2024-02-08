@@ -6,10 +6,4 @@ using UnityEngine;
 public class IngredientItem : BaseItem
 {
     public Ingredient ingredient;
-
-
-    public override void Interact()
-    {
-        throw new NotImplementedException();
-    }
 }

@@ -20,10 +20,4 @@ public class PotionItem : BaseItem
 {
     public Ingredients Ingredients;
     public ObjectSettings objectSettings;
-
-
-    public override void Interact()
-    {
-        throw new NotImplementedException();
-    }
 }

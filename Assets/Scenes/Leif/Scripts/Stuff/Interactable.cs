@@ -53,7 +53,6 @@ public class Interactable : MonoBehaviour
 
     private RaycastHit _hit;
 
-    // private Transform _playerCameraTransform;
     private bool _playerInRange;
 
     private GameObject _potion, _ingredient;
@@ -65,8 +64,6 @@ public class Interactable : MonoBehaviour
     {
         interactableCamera = InteractableManager.instance.Register(this);
 
-        // ValidatePlayerCamera();
-        // ValidateInteractableCamera();
         ValidateLayers();
         ValidateScriptableObject();
     }
