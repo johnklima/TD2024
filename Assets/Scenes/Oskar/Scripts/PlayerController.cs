@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     // State changes for animations (walking/running/whatever)
     // Jumping/Crouching movements
     // Collission/Gravity Handles
-    
+    private CharacterController ctrl;
 
     
     public float movementSpeed = 5f;
@@ -26,7 +26,12 @@ public class PlayerController : MonoBehaviour
     private IInteractable _targetedItem;
 
     public InventoryController inventory;
-    
+
+    private void Awake()
+    {
+        ctrl = GetComponent<CharacterController>();
+    }
+
     public void Move(Vector2 movementDir)
     {
         Vector3 cameraForward = playerCamera.forward;
@@ -40,8 +45,11 @@ public class PlayerController : MonoBehaviour
         Vector3 moveDirection = (cameraForward * movementDir.y + cameraRight * movementDir.x).normalized;
 
         // Move the player in the calculated direction
-        transform.position += moveDirection * movementSpeed * Time.deltaTime;
-
+        if (ctrl != null)
+        {
+            ctrl.Move(moveDirection * movementSpeed * Time.deltaTime);
+            ctrl.Move(Physics.gravity * Time.deltaTime);
+        }
         // Rotate the player to face the direction of movement
         if (moveDirection != Vector3.zero)
         {

@@ -20,20 +20,27 @@ public class InventoryController : MonoBehaviour
     public void AddItem(BaseItem interactableItem)
     {
         bool itemAdded = false;
-        
+        bool shouldAdd = true;
             foreach (var item in _inventoryItems)
             {
-                if (item.IsSameItemType(new InventoryItem(interactableItem)) && item.quantity < stackSize)
+                if (item.IsSameItemType(new InventoryItem(interactableItem)))
                 {
-                    Debug.Log("added another item to stack");
+                    if (item.quantity < stackSize)
+                    {
+                        Debug.Log("added another item to stack");
 
-                    item.quantity++;
-                    itemAdded = true;
+                        item.quantity++;
+                        itemAdded = true;
+                        break;
+                    }
+                    Debug.Log("too big stack");
+                    shouldAdd = false;
                     break;
                 }
                 
+                
             }
-            if (!itemAdded && _inventoryItems.Count < inventorySlots)
+            if (!itemAdded && _inventoryItems.Count < inventorySlots && shouldAdd)
             {
                 Debug.Log("added new thing");
 
