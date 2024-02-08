@@ -47,6 +47,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemData: {fileID: 0}
+  itemManager: {fileID: 8783803660975953918, guid: b54fe1cd169ebb4478d74a6bf7e2d6cf,
+    type: 3}
 --- !u!1001 &634340343610268335
 PrefabInstance:
   m_ObjectHideFlags: 0
