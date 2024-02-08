@@ -14,7 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiSprite: {fileID: 21300000, guid: b1f215018ef70cb49ba667550708670b, type: 3}
   itemType: 0
-  onInteract:
-    m_PersistentCalls:
-      m_Calls: []
-  ingredient: 0
+  ingredient: 3

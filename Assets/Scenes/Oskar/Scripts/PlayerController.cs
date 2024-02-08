@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
     public LayerMask interactLayerMask;
     private bool _isHittingInteractable = false;
 
-    private I_Interactable _targetedItem;
+    private IInteractable _targetedItem;
 
     public InventoryController inventory;
     
@@ -54,7 +54,7 @@ public class PlayerController : MonoBehaviour
     {
         if (_isHittingInteractable && _targetedItem != null)
         {
-            _targetedItem.Interact(this);
+            _targetedItem.Interact();
         }
         
     }
@@ -65,13 +65,19 @@ public class PlayerController : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(playerCamera.position, playerCamera.forward, out hit, interactableDistance, interactLayerMask))
         {
+            Debug.DrawRay(playerCamera.position, (playerCamera.forward.normalized * interactableDistance), Color.red);
+            
             if (hit.collider.gameObject.layer != LayerMask.NameToLayer("Interactable"))
             {
                 _isHittingInteractable = false;
                 _targetedItem = null;
             }
-            _targetedItem = hit.collider.GetComponent<I_Interactable>();
-            _isHittingInteractable = true;
+            else
+            {
+                _targetedItem = hit.collider.GetComponent<IInteractable>();
+                _isHittingInteractable = true;
+            }
+            
             
         }
     }

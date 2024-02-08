@@ -52,7 +52,7 @@ public class PlayerInput : MonoBehaviour
 
     private void HandleInteract(InputAction.CallbackContext context)
     {
-        Debug.Log("trying to interact");
+        Debug.Log("pressed button");
         _playerController.Interact();
     }
 }
