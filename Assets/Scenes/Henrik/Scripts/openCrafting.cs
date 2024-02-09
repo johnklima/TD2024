@@ -2,12 +2,9 @@ using UnityEngine;
 
 public class openCrafting : MonoBehaviour
 {
-    public GameObject caldron;
-    public GameObject craftingGrid;
+
     public GameObject mix;
     public GameObject cameraGameObject;
-    public GameObject Slot1;
-    public GameObject Slot2;
     private MouseCamLook mouseCamLook;
 
     private void Start()
