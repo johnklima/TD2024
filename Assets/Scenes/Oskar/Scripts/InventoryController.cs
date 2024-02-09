@@ -1,9 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
+[Serializable]
 public class InventoryChangeEvent: UnityEvent<List<InventoryItem>, bool> {}
 
 
@@ -13,10 +15,9 @@ public class InventoryController : MonoBehaviour
     [SerializeField] private int inventorySlots = 9;
     private List<InventoryItem> _inventoryItems = new List<InventoryItem>();
     [SerializeField] private int stackSize = 10;
-
+    
     public InventoryChangeEvent onInventoryChanged = new InventoryChangeEvent();
-
-
+    
     public void AddItem(BaseItem interactableItem)
     {
         bool itemAdded = false;
@@ -38,7 +39,6 @@ public class InventoryController : MonoBehaviour
                     break;
                 }
                 
-                
             }
             if (!itemAdded && _inventoryItems.Count < inventorySlots && shouldAdd)
             {
@@ -58,7 +58,6 @@ public class InventoryController : MonoBehaviour
     }
    
 }
-
 public class InventoryItem
 {
     public BaseItem baseItem;

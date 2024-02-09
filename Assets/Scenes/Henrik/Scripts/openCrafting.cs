@@ -22,9 +22,9 @@ public class openCrafting : MonoBehaviour
 
     // Update is called once per frame
     private void Update()
-
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        //remember to remove this
+        if (Input.GetKeyDown(KeyCode.Q))
         {
             var state = !mix.activeSelf;
             mix.SetActive(state);

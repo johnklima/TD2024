@@ -17,7 +17,6 @@ public class Item : MonoBehaviour, IInteractable
 
     private void OnDisable()
     {
-        Debug.Log("VAR");
         Register();
     }
 
