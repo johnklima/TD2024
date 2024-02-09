@@ -94,3 +94,17 @@ Packages/com.unity.render-pipelines.high-definition-config/Tests/Editor/Unity.Re
 Packages/com.unity.render-pipelines.high-definition-config/Tests/Editor/Unity.RenderPipelines.HighDefinitionConfig.Editor.Tests.asmdef.meta
 
 .idea/*
+Assets/TutorialInfo.meta
+Assets/TutorialInfo/Icons.meta
+Assets/TutorialInfo/Icons/HDRP.png
+Assets/TutorialInfo/Icons/HDRP.png.meta
+Assets/TutorialInfo/Icons/Help_Icon.png
+Assets/TutorialInfo/Icons/Help_Icon.png.meta
+Assets/TutorialInfo/Layout.wlt
+Assets/TutorialInfo/Layout.wlt.meta
+Assets/TutorialInfo/Scripts.meta
+Assets/TutorialInfo/Scripts/Editor.meta
+Assets/TutorialInfo/Scripts/Editor/ReadmeEditor.cs
+Assets/TutorialInfo/Scripts/Editor/ReadmeEditor.cs.meta
+Assets/TutorialInfo/Scripts/Readme.cs
+Assets/TutorialInfo/Scripts/Readme.cs.meta
