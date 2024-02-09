@@ -8,8 +8,6 @@ public class InteractableManager : MonoBehaviour
     public LayerMask interactableLayerMask;
     public List<InteractionEvents> interactionEvents = new();
     public Camera playerCamera;
-    public List<Interactable> interactableList = new();
-    public List<GameObject> interactableObjList = new();
     private Transform _playerCameraTransform;
 
     public static InteractableManager instance

@@ -1,5 +1,5 @@
 ﻿public interface IInteractable
 {
     void Interact();
-    // void Interact(LeifPlayerController lPC);
+    void Interact(LeifPlayerController lPC);
 }

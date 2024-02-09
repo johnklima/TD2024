@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.Events;
 
 [RequireComponent(typeof(BoxCollider))]
@@ -50,6 +51,11 @@ public class TriggerBox : MonoBehaviour, IInteractable
     public void Interact()
     {
         _onRayInteract?.Invoke();
+    }
+
+    public void Interact(LeifPlayerController lPC)
+    {
+        throw new NotImplementedException();
     }
 
     public void UpdateTriggerBox(Interactable interactable)

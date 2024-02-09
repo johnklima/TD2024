@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &1265582596465733940
+--- !u!1001 &6514113428301947662
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -8,68 +8,63 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 23172169376264396, guid: a383028b4e275de468a74e7830cb08d0,
+    - target: {fileID: -4982118243700742051, guid: 1b3edf62bf7e4974680c4fede5f1bbec,
+        type: 3}
+      propertyPath: itemData
+      value: 
+      objectReference: {fileID: 11400000, guid: c737b8266ad50094fbd633baccaef17e,
+        type: 2}
+    - target: {fileID: 964482177778046108, guid: 1b3edf62bf7e4974680c4fede5f1bbec,
         type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 23172169376264396, guid: a383028b4e275de468a74e7830cb08d0,
+    - target: {fileID: 964482177778046108, guid: 1b3edf62bf7e4974680c4fede5f1bbec,
         type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 23172169376264396, guid: a383028b4e275de468a74e7830cb08d0,
+    - target: {fileID: 964482177778046108, guid: 1b3edf62bf7e4974680c4fede5f1bbec,
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 23172169376264396, guid: a383028b4e275de468a74e7830cb08d0,
+    - target: {fileID: 964482177778046108, guid: 1b3edf62bf7e4974680c4fede5f1bbec,
         type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 23172169376264396, guid: a383028b4e275de468a74e7830cb08d0,
+    - target: {fileID: 964482177778046108, guid: 1b3edf62bf7e4974680c4fede5f1bbec,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 23172169376264396, guid: a383028b4e275de468a74e7830cb08d0,
+    - target: {fileID: 964482177778046108, guid: 1b3edf62bf7e4974680c4fede5f1bbec,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 23172169376264396, guid: a383028b4e275de468a74e7830cb08d0,
+    - target: {fileID: 964482177778046108, guid: 1b3edf62bf7e4974680c4fede5f1bbec,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 23172169376264396, guid: a383028b4e275de468a74e7830cb08d0,
+    - target: {fileID: 964482177778046108, guid: 1b3edf62bf7e4974680c4fede5f1bbec,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 23172169376264396, guid: a383028b4e275de468a74e7830cb08d0,
+    - target: {fileID: 964482177778046108, guid: 1b3edf62bf7e4974680c4fede5f1bbec,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 23172169376264396, guid: a383028b4e275de468a74e7830cb08d0,
+    - target: {fileID: 964482177778046108, guid: 1b3edf62bf7e4974680c4fede5f1bbec,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4551812077967920358, guid: a383028b4e275de468a74e7830cb08d0,
-        type: 3}
-      propertyPath: preMadeItem
-      value: 
-      objectReference: {fileID: 11400000, guid: c737b8266ad50094fbd633baccaef17e,
-        type: 2}
-    - target: {fileID: 4971489216177823404, guid: a383028b4e275de468a74e7830cb08d0,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8271480133786512536, guid: a383028b4e275de468a74e7830cb08d0,
+    - target: {fileID: 4985043095849150158, guid: 1b3edf62bf7e4974680c4fede5f1bbec,
         type: 3}
       propertyPath: m_Name
       value: Red_Sun_Potion
@@ -78,4 +73,4 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: a383028b4e275de468a74e7830cb08d0, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: 1b3edf62bf7e4974680c4fede5f1bbec, type: 3}
