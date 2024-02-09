@@ -14,11 +14,9 @@ public class openCrafting : MonoBehaviour
     {
         // start mix button as disabled
         // un-disable mix button only when 2nd material is slotted
-        caldron.SetActive(false);
-        craftingGrid.SetActive(false);
+
         mix.SetActive(false);
-        Slot1.SetActive(false);
-        Slot2.SetActive(false);
+
         mouseCamLook = cameraGameObject.GetComponent<MouseCamLook>();
     }
 
@@ -29,11 +27,8 @@ public class openCrafting : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E))
         {
             var state = !mix.activeSelf;
-            caldron.SetActive(state);
-            craftingGrid.SetActive(state);
             mix.SetActive(state);
-            Slot1.SetActive(state);
-            Slot2.SetActive(state);
+
             if (state)
             {
                 Cursor.lockState = CursorLockMode.None;
