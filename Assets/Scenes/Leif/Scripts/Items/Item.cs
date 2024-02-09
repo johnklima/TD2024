@@ -2,6 +2,7 @@
 using Unity.Collections;
 using UnityEngine;
 
+[RequireComponent(typeof(SphereCollider))]
 public class Item : MonoBehaviour, IInteractable
 {
     public BaseItem itemData;
@@ -17,7 +18,6 @@ public class Item : MonoBehaviour, IInteractable
 
     private void OnDisable()
     {
-        Debug.Log("VAR");
         Register();
     }
 
