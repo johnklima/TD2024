@@ -1,10 +1,10 @@
+using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
-[Serializable]
-public class InventoryChangeEvent: UnityEvent<List<InventoryItem>, bool> {}
+[Serializable] public class InventoryChangeEvent: UnityEvent<List<InventoryItem>, bool> {}
 
 
 public class InventoryController : MonoBehaviour
@@ -18,7 +18,6 @@ public class InventoryController : MonoBehaviour
 
     private Dictionary<BaseItem, int> _inv = new();
 
-    public InventoryChangeEvent onInventoryChanged = new();
 
 
     public void AddItem(BaseItem interactableItem)
@@ -53,14 +52,14 @@ public class InventoryController : MonoBehaviour
                 }
                 
             }
-            if (!itemAdded && _inventoryItems.Count < inventorySlots && shouldAdd)
-            {
-                Debug.Log("added new thing");
+        if (!itemAdded && _inventoryItems.Count < inventorySlots && shouldAdd)
+        {
+            Debug.Log("added new thing");
 
-                Debug.Log("too big stack");
-                shouldAdd = false;
-                break;
-            }
+            Debug.Log("too big stack");
+            shouldAdd = false;
+                
+        }
 
         if (!itemAdded && _inventoryItems.Count < inventorySlots && shouldAdd)
         {
