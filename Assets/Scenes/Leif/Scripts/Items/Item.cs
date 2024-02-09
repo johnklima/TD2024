@@ -2,6 +2,7 @@
 using Unity.Collections;
 using UnityEngine;
 
+[RequireComponent(typeof(SphereCollider))]
 public class Item : MonoBehaviour, IInteractable
 {
     public BaseItem itemData;

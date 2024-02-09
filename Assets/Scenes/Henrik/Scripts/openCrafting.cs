@@ -14,13 +14,11 @@ public class openCrafting : MonoBehaviour
     {
         // start mix button as disabled
         // un-disable mix button only when 2nd material is slotted
-
         mix.SetActive(false);
-
         mouseCamLook = cameraGameObject.GetComponent<MouseCamLook>();
+        //TODO replace with connection to CameraController to disable camera movement
     }
 
-    // Update is called once per frame
     private void Update()
     {
         //remember to remove this
