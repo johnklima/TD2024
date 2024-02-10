@@ -35,19 +35,19 @@ public class IKSegment : MonoBehaviour
 
     private void CalculatePosB()
     {
-        posB = posA + transform.forward * length;
+        posB = posA + transform.up * length;
     }
 
     private void UpdateSegment()
     {
-        if (parent)
+        if (parent == null)
         {
-            posA = parent.posB;
-            transform.position = posA;
+            posA = transform.localPosition;
         }
         else
         {
-            posA = transform.position;
+            posA = parent.posB;
+            transform.localPosition = posA;
         }
 
         CalculatePosB();
@@ -55,15 +55,20 @@ public class IKSegment : MonoBehaviour
 
     public void PointAt(Transform target)
     {
-        var rotation = transform.rotation.eulerAngles;
-        transform.LookAt(target);
-        transform.rotation = Quaternion.Euler(new Vector3(rotation.x, rotation.y, 0));
+        var pos = target.localPosition;
+        Debug.LogWarning("THIS IS WRONG, LOOK-AT USES FORWARD, WE NEED TO USE UP");
+        //TODO THIS IS WRONG, LOOK-AT USES FORWARD, WE NEED TO USE UP
+        transform.LookAt(pos);
+
+
+        var rotation = transform.localRotation.eulerAngles;
+        transform.localRotation = Quaternion.Euler(new Vector3(rotation.x - 90, rotation.y, 0));
     }
 
     public void Drag(Transform target)
     {
         PointAt(target);
-        transform.position = target.position - transform.forward * length;
+        transform.localPosition = target.localPosition + transform.up * length;
         if (parent) parent.Drag(transform);
     }
 
