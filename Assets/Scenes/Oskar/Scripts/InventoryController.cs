@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 [Serializable]
-public class InventoryChangeEvent : UnityEvent<List<InventoryItem>, bool>
+public class InventoryChangeEvent : UnityEvent<List<BaseItem>, bool>
 {
 }
 
