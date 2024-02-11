@@ -1,28 +1,25 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class _IKSystem3d : MonoBehaviour
 {
     public _Segment3d[] segments;
-    public int childcount = 0;
-    public Transform target = null;
+    public int childcount;
+    public Transform target;
 
-    public bool isReaching = false;
-    public bool isDragging = false;
-   
-    private _Segment3d lastSegment = null;
-    private _Segment3d firstSegment = null;
+    public bool isReaching;
+    public bool isDragging;
+    private _Segment3d firstSegment;
 
-    
+    private _Segment3d lastSegment;
+
+
     // Use this for initialization
-    void Awake()
+    private void Awake()
     {
-
         //lets buffer our segements in an array
         childcount = transform.childCount;
         segments = new _Segment3d[childcount];
-        int i = 0;
+        var i = 0;
         foreach (Transform child in transform)
         {
             segments[i] = child.GetComponent<_Segment3d>();
@@ -35,15 +32,11 @@ public class _IKSystem3d : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-
-
         if (isDragging)
         {
-
             lastSegment.drag(target.position);
-            
         }
         else if (isReaching)
         {
@@ -55,10 +48,6 @@ public class _IKSystem3d : MonoBehaviour
             //which is the position of the IK system itself
             firstSegment.transform.position = transform.position;
             firstSegment.updateSegmentAndChildren();
-            
         }
-        
     }
-    
 }
-
