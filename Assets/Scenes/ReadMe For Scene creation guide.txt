@@ -1,6 +1,6 @@
 This is a small guide on how to create a scene for private testing and development.
 
-1. First open "JohnsScene"
+1. First open "EmptyScene"
 2. Press File in the upper left corner of the screen
 3. Select "Save as" (Shortkey is Ctrl + Shift + S)
 4. Navigate to inside Scenes (possibly inside a new folder with your name)
