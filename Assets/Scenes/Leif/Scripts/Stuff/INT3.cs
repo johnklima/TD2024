@@ -4,6 +4,25 @@ using UnityEngine;
 namespace Scenes.Leif.Scripts
 {
     [Serializable]
+    public struct INT2
+    {
+        [Range(1, 100)] public int x;
+        [Range(1, 100)] public int y;
+
+        public INT2(int x, int y)
+        {
+            this.x = x;
+            this.y = y;
+        }
+
+        public void Deconstruct(out int x, out int y)
+        {
+            x = this.x;
+            y = this.y;
+        }
+    }
+
+    [Serializable]
     public struct INT3
     {
         [Range(1, 100)] public int x;
