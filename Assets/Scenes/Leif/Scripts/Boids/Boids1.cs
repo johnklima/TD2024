@@ -1,29 +1,7 @@
-using System;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Serialization;
-using Random = UnityEngine.Random;
 
-[Serializable]
-public class BoidsSettings
-{
-    public Transform flock;
-    public float cohesionFactor = 0.2f;
-    public float separationFactor = 6.0f;
-    public float alignFactor = 1.0f;
-    public float constrainFactor = 2.0f;
-    public float avoidFactor = 20.0f;
-    public float collisionDistance = 6.0f;
-    public float speed = 6.0f;
-    public Vector3 constrainPoint;
-    public float integrationRate = 3.0f;
-
-
-    //states
-    [FormerlySerializedAs("isFlocking")] public bool seekTarget = true;
-    public Transform target;
-}
-
+[RequireComponent(typeof(SphereCollider))]
 public class Boids1 : MonoBehaviour
 {
     public BoidsSettings boidsSettings;
@@ -36,10 +14,7 @@ public class Boids1 : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        boidsSettings.flock = transform.parent;
-
-
-        var pos = new Vector3(Random.Range(0f, 80), Random.Range(0f, 20f), Random.Range(0f, 80));
+        var pos = new Vector3(Random.Range(-5f, 5), Random.Range(-5f, 5f), Random.Range(-5f, 5));
         var look = new Vector3(Random.Range(-1000f, 1000f), Random.Range(-1000f, 1000f), Random.Range(-1000f, 1000f));
         var speed = Random.Range(0f, 3f);
 
@@ -53,9 +28,25 @@ public class Boids1 : MonoBehaviour
     private void Update()
     {
         var target = boidsSettings.target;
-        if (!boidsSettings.seekTarget)
+        if (boidsSettings.seekTarget && target != null)
         {
-            boidsSettings.constrainPoint = boidsSettings.flock.position; //flock follows player
+            Debug.Log("Attacking");
+            //if not flocking, its going for a target, usually attacking
+            var newVelocity = target.position - transform.position;
+            var slerpVel = Vector3.Slerp(newVelocity, velocity, Time.deltaTime * boidsSettings.integrationRate);
+            velocity = slerpVel.normalized;
+            transform.position += velocity * (Time.deltaTime * boidsSettings.speed);
+            transform.LookAt(transform.position + velocity);
+            if (Vector3.Distance(transform.position, target.position) < 0.3f)
+            {
+                //Attack successful, do damage, fly away
+                Debug.Log("Hit Target");
+                boidsSettings.seekTarget = true;
+            }
+        }
+        else
+        {
+            boidsSettings.constrainPoint = transform.parent.position; //flock follows player
             var newVelocity = new Vector3(0, 0, 0);
             // rule 1 all boids steer towards center of mass - cohesion
             newVelocity += cohesion() * boidsSettings.cohesionFactor;
@@ -69,23 +60,6 @@ public class Boids1 : MonoBehaviour
             velocity = slerpVel.normalized;
             transform.position += velocity * (Time.deltaTime * boidsSettings.speed);
             transform.LookAt(transform.position + velocity);
-        }
-        else if (target)
-        {
-            Debug.Log("Attacking");
-
-            //if not flocking, its going for a target, usually attacking
-            var newVelocity = target.position - transform.position;
-            var slerpVel = Vector3.Slerp(newVelocity, velocity, Time.deltaTime * boidsSettings.integrationRate);
-            velocity = slerpVel.normalized;
-            transform.position += velocity * (Time.deltaTime * boidsSettings.speed);
-            transform.LookAt(transform.position + velocity);
-            if (Vector3.Distance(transform.position, target.position) < 0.3f)
-            {
-                //Attack successful, do damage, fly away
-                Debug.Log("Hit Target");
-                boidsSettings.seekTarget = true;
-            }
         }
     }
 
@@ -118,7 +92,7 @@ public class Boids1 : MonoBehaviour
 
         var sibs = 0; //count the boids, it might change
 
-        foreach (Transform boid in boidsSettings.flock)
+        foreach (Transform boid in transform.parent)
             if (boid != transform)
             {
                 steer += boid.transform.position;
@@ -142,7 +116,7 @@ public class Boids1 : MonoBehaviour
         var sibs = 0;
 
 
-        foreach (Transform boid in boidsSettings.flock)
+        foreach (Transform boid in transform.parent)
             // if boid is not itself
             if (boid != transform)
                 // if this boids position is within the collision distance of a neighbouring boid
@@ -163,10 +137,10 @@ public class Boids1 : MonoBehaviour
         var steer = new Vector3(0, 0, 0);
         var sibs = 0;
 
-        foreach (Transform boid in boidsSettings.flock)
+        foreach (Transform boid in transform.parent)
             if (boid != transform)
             {
-                steer += boid.GetComponent<Boids>().velocity;
+                steer += boid.GetComponent<Boids1>().velocity;
                 sibs++;
             }
 

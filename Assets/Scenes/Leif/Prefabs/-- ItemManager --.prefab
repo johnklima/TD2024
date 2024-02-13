@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 606b88e789b542241b0884f2d0826d15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  items: []
   onItemInteract:
     m_PersistentCalls:
       m_Calls: []
-  itemCount: 0

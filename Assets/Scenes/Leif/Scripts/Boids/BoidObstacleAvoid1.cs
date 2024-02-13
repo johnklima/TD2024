@@ -1,18 +1,22 @@
 ﻿using UnityEngine;
 
+[RequireComponent(typeof(SphereCollider))]
 public class BoidObstacleAvoid1 : MonoBehaviour
 {
     private Transform boid;
 
-    private Boids boids;
+    private Boids1 boids;
 
     private Vector3[] obstacleCheckDirections;
 
     private void Start()
     {
+        var col = GetComponent<SphereCollider>();
+        col.radius = 1.5f;
+        col.isTrigger = true;
         boid = transform.parent;
-        boids = boid.GetComponent<Boids>();
-        Vector3[] obstacleCheckDirections =
+        boids = boid.GetComponent<Boids1>();
+        obstacleCheckDirections = new[]
         {
             boid.forward,
             -boid.up,

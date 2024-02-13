@@ -23,6 +23,7 @@ public class ItemManager : MonoBehaviour
 
     private void RegisterItems()
     {
+        if (!isActiveAndEnabled) return;
         items = FindObjectsByType<Item>(FindObjectsSortMode.None);
         for (var i = 0; i < items.Length; i++) items[i].id = i;
     }

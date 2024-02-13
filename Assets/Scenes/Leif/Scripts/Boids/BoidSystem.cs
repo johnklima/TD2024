@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class BoidSystem : MonoBehaviour
@@ -19,8 +20,14 @@ public class BoidSystem : MonoBehaviour
     {
     }
 
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireCube(transform.position, Vector3.one * 3);
+    }
+
     private GameObject CreateBoid()
     {
+        //TODO instantiate prefab
         var parent = transform;
         var boidGo = new GameObject($"Boid_{parent.childCount}")
         {
@@ -46,4 +53,23 @@ public class BoidSystem : MonoBehaviour
         };
         return boidGo;
     }
+}
+
+[Serializable]
+public class BoidsSettings
+{
+    public float cohesionFactor = 0.2f;
+    public float separationFactor = 6.0f;
+    public float alignFactor = 1.0f;
+    public float constrainFactor = 2.0f;
+    public float avoidFactor = 20.0f;
+    public float collisionDistance = 6.0f;
+    public float speed = 6.0f;
+    public Vector3 constrainPoint;
+    public float integrationRate = 3.0f;
+
+
+    //states
+    public bool seekTarget = true;
+    public Transform target;
 }
