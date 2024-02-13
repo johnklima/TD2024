@@ -14,6 +14,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: a7026e0ef2dc68848ae29b98ae73a758,
         type: 2}
+    - target: {fileID: -4982118243700742051, guid: 1b3edf62bf7e4974680c4fede5f1bbec,
+        type: 3}
+      propertyPath: itemManagerPrefab
+      value: 
+      objectReference: {fileID: 8783803660975953918, guid: b54fe1cd169ebb4478d74a6bf7e2d6cf,
+        type: 3}
     - target: {fileID: 964482177778046108, guid: 1b3edf62bf7e4974680c4fede5f1bbec,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -67,7 +73,7 @@ PrefabInstance:
     - target: {fileID: 4985043095849150158, guid: 1b3edf62bf7e4974680c4fede5f1bbec,
         type: 3}
       propertyPath: m_Name
-      value: Red_Whirlpool_Potion
+      value: Red_Whirlpool_Potion Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
