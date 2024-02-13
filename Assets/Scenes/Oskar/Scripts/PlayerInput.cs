@@ -4,13 +4,13 @@ using UnityEngine.InputSystem;
 
 public class PlayerInput : MonoBehaviour
 {
+    public UnityEvent CancelCauldron;
+
     //public TBD_CameraController cameraController;
     private PlayerController _playerController;
     private InputActions _playerInput;
 
-    public UnityEvent CancelCauldron;
-    
-    
+
     private void Awake()
     {
         _playerInput = new InputActions();
@@ -18,7 +18,6 @@ public class PlayerInput : MonoBehaviour
 
         _playerInput.Player.Interact.performed += HandleInteract;
         _playerInput.UI.Cancel.performed += HandleCancelUI;
-
     }
 
     private void Update()
@@ -26,6 +25,16 @@ public class PlayerInput : MonoBehaviour
         //Read these values at every frame rather than reading it at button press.
         //HandleCameraMovement();
         HandleMovement();
+    }
+
+    private void OnEnable()
+    {
+        _playerInput.Player.Enable();
+    }
+
+    private void OnDisable()
+    {
+        _playerInput.Player.Disable();
     }
 
     public void EnablePlayerControls()
@@ -42,21 +51,11 @@ public class PlayerInput : MonoBehaviour
         Debug.Log("UI controls enabled.");
     }
 
-    private void OnEnable()
-    {
-        _playerInput.Player.Enable();
-    }
-
-    private void OnDisable()
-    {
-        _playerInput.Player.Disable();
-    }
-
     private void HandleCancelUI(InputAction.CallbackContext context)
     {
         CancelCauldron.Invoke();
     }
-    
+
 
     private void HandleMovement()
     {
@@ -68,7 +67,6 @@ public class PlayerInput : MonoBehaviour
 
     private void HandleInteract(InputAction.CallbackContext context)
     {
-        Debug.Log("input");
         _playerController.Interact();
     }
 }

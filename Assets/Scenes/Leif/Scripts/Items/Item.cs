@@ -6,7 +6,7 @@ using UnityEngine;
 public class Item : MonoBehaviour, IInteractable
 {
     public BaseItem itemData;
-    public GameObject itemManager;
+    public GameObject itemManagerPrefab;
     [ReadOnly] public int id;
     private ItemManager _itemManager;
 
@@ -50,7 +50,7 @@ public class Item : MonoBehaviour, IInteractable
             _itemManager = FindObjectOfType<ItemManager>();
             if (_itemManager == null)
             {
-                var newManager = Instantiate(itemManager);
+                var newManager = Instantiate(itemManagerPrefab);
                 _itemManager = newManager.GetComponent<ItemManager>();
                 if (_itemManager == null) throw new Exception("No item manager found: Contact Leif");
             }
