@@ -2,7 +2,7 @@
     "name": "InputActions",
     "maps": [
         {
-            "name": "Movement",
+            "name": "Player",
             "id": "49fc1206-417c-45a6-a9e0-e72c0887dd99",
             "actions": [
                 {
@@ -22,6 +22,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Interact",
+                    "type": "Button",
+                    "id": "da61e567-c0ab-4ec0-9876-7322101f6b7b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -90,15 +99,26 @@
                     "action": "LookPos",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "327bbbfe-dade-40c4-8bbd-296ebd3e81fd",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
         {
-            "name": "Interactions",
+            "name": "UI",
             "id": "ad0411fa-bc7b-4453-8a77-5294d94c11e4",
             "actions": [
                 {
-                    "name": "Interact",
+                    "name": "Cancel",
                     "type": "Button",
                     "id": "67afdbdd-feec-45bf-be24-208cf887e27e",
                     "expectedControlType": "Button",
@@ -111,11 +131,11 @@
                 {
                     "name": "",
                     "id": "c8e19bed-fc74-44c1-9849-5fe08c2eea8b",
-                    "path": "<Keyboard>/e",
+                    "path": "<Keyboard>/escape",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Interact",
+                    "action": "Cancel",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

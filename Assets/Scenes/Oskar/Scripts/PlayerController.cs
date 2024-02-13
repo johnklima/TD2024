@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerController : MonoBehaviour
 {
@@ -9,29 +10,40 @@ public class PlayerController : MonoBehaviour
     // Health interactions
     // State changes for animations (walking/running/whatever)
     // Jumping/Crouching movements
-    // Collission/Gravity Handles
+    
     private CharacterController ctrl;
-
     
     public float movementSpeed = 5f;
 
     public Transform playerCamera;
 
+    private bool _shouldRayCast = true;
+  
+    
+    [Header("Interactable controls")]
+
     public float interactableDistance = 10f;
-
-
+    
     public LayerMask interactLayerMask;
-    private bool _isHittingInteractable = false;
-
+    
+    public UnityEvent hittingInteractable;
+    
+    private bool _isCurrentlyHittingInteractable = false;
+    
     private IInteractable _targetedItem;
-
-    public InventoryController inventory;
-
+    
+    
     private void Awake()
     {
         ctrl = GetComponent<CharacterController>();
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
+    public void ToggleRayCasting()
+    {
+        _shouldRayCast = !_shouldRayCast; // Toggle the value
+
+    }
     public void Move(Vector2 movementDir)
     {
         Vector3 cameraForward = playerCamera.forward;
@@ -60,33 +72,57 @@ public class PlayerController : MonoBehaviour
 
     public void Interact()
     {
-        if (_isHittingInteractable && _targetedItem != null)
+        if (_isCurrentlyHittingInteractable && _targetedItem != null)
         {
+            Debug.Log("pc interact");
+            Debug.Log(_targetedItem);
+
             _targetedItem.Interact();
         }
         
     }
-
+    
     void Update()
     {
-        
         RaycastHit hit;
-        if (Physics.Raycast(playerCamera.position, playerCamera.forward, out hit, interactableDistance, interactLayerMask))
+        bool currentlyHittingInteractable = false;
+        if (_shouldRayCast)
         {
-            Debug.DrawRay(playerCamera.position, (playerCamera.forward.normalized * interactableDistance), Color.red);
-            
-            if (hit.collider.gameObject.layer != LayerMask.NameToLayer("Interactable"))
+            if (Physics.Raycast(playerCamera.position, playerCamera.forward, out hit, interactableDistance, interactLayerMask))
             {
-                _isHittingInteractable = false;
-                _targetedItem = null;
+                Debug.DrawRay(playerCamera.position, (playerCamera.forward.normalized * interactableDistance), Color.red);
+
+                // Check if hit is interactable
+                if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Interactable"))
+                {
+                    currentlyHittingInteractable = true;
+                    
+                    IInteractable interactable = hit.collider.GetComponent<IInteractable>();
+
+                    // Update the targeted item if hitting a new interactable
+                    if (_targetedItem != interactable)
+                    {
+                        _targetedItem = interactable;
+                    }
+                }
+                else
+                {
+                    _targetedItem = null;
+                }
             }
             else
             {
-                _targetedItem = hit.collider.GetComponent<IInteractable>();
-                _isHittingInteractable = true;
+                // Not hitting anything, clearing the variable so you cant interact
+                _targetedItem = null;
             }
-            
-            
+
+            // Check if there's been a change in interaction state
+            if (currentlyHittingInteractable != _isCurrentlyHittingInteractable)
+            {
+                _isCurrentlyHittingInteractable = currentlyHittingInteractable;
+                // Invoke the event to toggle the crosshair state
+                hittingInteractable.Invoke();
+            }
         }
     }
 }
