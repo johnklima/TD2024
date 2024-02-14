@@ -45,15 +45,12 @@ public class Item : MonoBehaviour, IInteractable
 
     private void ValidateItemManager()
     {
+        _itemManager = FindObjectOfType<ItemManager>();
         if (_itemManager == null)
         {
-            _itemManager = FindObjectOfType<ItemManager>();
-            if (_itemManager == null)
-            {
-                var newManager = Instantiate(itemManagerPrefab);
-                _itemManager = newManager.GetComponent<ItemManager>();
-                if (_itemManager == null) throw new Exception("No item manager found: Contact Leif");
-            }
+            var newManager = Instantiate(itemManagerPrefab);
+            _itemManager = newManager.GetComponent<ItemManager>();
+            if (_itemManager == null) throw new Exception("No item manager found: Contact Leif");
         }
     }
 }
