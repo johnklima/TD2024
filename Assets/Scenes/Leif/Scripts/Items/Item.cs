@@ -6,13 +6,11 @@ using UnityEngine;
 public class Item : MonoBehaviour, IInteractable
 {
     public BaseItem itemData;
-    public GameObject itemManagerPrefab;
     [ReadOnly] public int id;
-    private ItemManager _itemManager;
+    [SerializeField] private ItemManager _itemManager;
 
     private void Awake()
     {
-        ValidateItemManager();
         Register();
     }
 
@@ -24,7 +22,6 @@ public class Item : MonoBehaviour, IInteractable
 
     private void OnValidate()
     {
-        ValidateItemManager();
         Register();
     }
 
@@ -40,17 +37,29 @@ public class Item : MonoBehaviour, IInteractable
 
     private void Register()
     {
-        _itemManager.Register(this);
+        if (!isActiveAndEnabled) return;
+        ValidateItemManager();
+        _itemManager.Register();
     }
 
     private void ValidateItemManager()
     {
-        _itemManager = FindObjectOfType<ItemManager>();
         if (_itemManager == null)
         {
-            var newManager = Instantiate(itemManagerPrefab);
-            _itemManager = newManager.GetComponent<ItemManager>();
-            if (_itemManager == null) throw new Exception("No item manager found: Contact Leif");
+            var asd = FindObjectOfType<ItemManager>();
+            Debug.Log(asd);
+            if (asd.isActiveAndEnabled)
+            {
+                Debug.Log(asd);
+                _itemManager = asd;
+            }
+            else
+
+            {
+                var newManager = new GameObject("-- ItemManager --");
+                _itemManager = newManager.AddComponent<ItemManager>();
+                if (_itemManager == null) throw new Exception("No item manager found: Contact Leif");
+            }
         }
     }
 }
