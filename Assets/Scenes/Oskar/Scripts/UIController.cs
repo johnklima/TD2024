@@ -1,4 +1,4 @@
-/*
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -14,9 +14,10 @@ public class UIController : MonoBehaviour
     public GameObject interactiveCrossHair;
     
     private bool isShowingInteractiveCrosshair = false;
-
+    
+    
     //inventory logic
-    public void UpdateSlot(BaseItem item, int quantity)
+    /*public void UpdateSlot(BaseItem item, int quantity)
     {
         Debug.Log("Going in here");
         if (itemToSlotMap.TryGetValue(item, out InventorySlot slot))
@@ -52,7 +53,7 @@ public class UIController : MonoBehaviour
         }
 
         return null;
-    }
+    }*/
     //crosshair logic
     public void ToggleCrosshair()
     { 
@@ -65,5 +66,5 @@ public class UIController : MonoBehaviour
 
     }
     
-} */
+} 
 
