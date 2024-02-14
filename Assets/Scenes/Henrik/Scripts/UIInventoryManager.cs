@@ -6,8 +6,26 @@ public class UIInventoryManager : MonoBehaviour
     public InventorySlot[] inventorySlots;
     public GameObject inventoryItemPrefab;
 
-    public void AddItem(ItemUI item)
+    public bool AddItem(ItemUI item)
     {
+        for (int i = 0; i < inventorySlots.Length; i++)
+        {
+            InventorySlot slot = inventorySlots[i];
+            DraggableItem itemInSlot = slot.GetComponentInChildren<DraggableItem>();
+            if (itemInSlot != null &&
+                itemInSlot.item == item &&
+                itemInSlot.count < 10)
+            {
+                itemInSlot.count++;
+                itemInSlot.RefreshCount();
+                return true;
+            }
+        }
+
+
+
+
+
         for (int i = 0; i < inventorySlots.Length; i++)
         {
             InventorySlot slot = inventorySlots[i];
@@ -15,10 +33,10 @@ public class UIInventoryManager : MonoBehaviour
             if (itemInSlot == null)
             {
                 SpawnNewItem(item, slot);
-                return;
+                return true;
             }
         }
-
+        return false;
     }
     void SpawnNewItem(ItemUI item, InventorySlot slot)
     {

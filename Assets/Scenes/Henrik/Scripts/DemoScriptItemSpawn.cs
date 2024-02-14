@@ -7,11 +7,18 @@ public class DemoScriptItemSpawn : MonoBehaviour
 
     public void PickupItem(int id)
     {
-        UIInventoryManager.AddItem(itemsToPickUp[id]);
-
+        bool result = UIInventoryManager.AddItem(itemsToPickUp[id]);
+        if (result == true)
+        {
+            Debug.Log("ItemAdded");
+        }
+        else
+        {
+            Debug.Log("ItemNOTAdded");
+        }
     }
-
-
-
-
 }
+
+
+
+
