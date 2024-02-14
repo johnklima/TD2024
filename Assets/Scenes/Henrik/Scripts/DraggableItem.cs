@@ -4,15 +4,11 @@ using UnityEngine.UI;
 
 public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-    public BaseItem preMadeItem;
-    [HideInInspector] public Image image;
+
+    public Image image;
     [HideInInspector] public Transform parentAfterDrag;
 
-    private void Start()
-    {
-        if (image == null) image = GetComponent<Image>();
-        image.sprite = preMadeItem.uiSprite;
-    }
+
 
     public void OnBeginDrag(PointerEventData eventData)
     {
