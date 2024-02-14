@@ -16,6 +16,8 @@ public class IK2Settings
     public int segmentsPrChain = 3; //segment.numberOfJoints
     public bool isReaching;
     public bool isDragging;
+    [Range(0, 1)] public float wobbleSize = 1;
+    [Range(0, 1)] public float sineForce = 1;
 }
 
 public class IK2System : MonoBehaviour
@@ -70,7 +72,6 @@ public class IK2System : MonoBehaviour
 
         for (var i = 0; i < iK2Settings.numberOfChains; i++)
         {
-            Debug.Log("made snek");
             GameObject newGo;
             if (snek != null)
             {
@@ -80,11 +81,9 @@ public class IK2System : MonoBehaviour
                 newGo.transform.parent = transform;
                 // get snek armature
                 newGo = newGo.transform.GetChild(0).gameObject;
-                Debug.Log("made snek2");
             }
             else
             {
-                Debug.Log("made snek3");
                 newGo = GenerateNewGo("IKChain_" + i, transform);
             }
 

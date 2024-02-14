@@ -65,11 +65,11 @@ public class BoidsSettings
     public float avoidFactor = 20.0f;
     public float collisionDistance = 6.0f;
     public float speed = 6.0f;
-    public Vector3 constrainPoint;
     public float integrationRate = 3.0f;
     public LayerMask obstacleLayerMask;
 
     //states
     public bool seekTarget = true;
     public Transform target;
+    public Transform constrainPoint;
 }

@@ -1,12 +1,16 @@
-﻿using UnityEngine;
+﻿using Unity.VisualScripting;
+using UnityEngine;
+using UnityEngine.Serialization;
 
 public class IK2Chain : MonoBehaviour
 {
     public int numberOfJoints = 3;
     public IK2Segment[] segments;
     public Transform target;
-    private IK2System _iK2System;
-    private IK2Settings iK2Settings;
+
+    [FormerlySerializedAs("_iK2System")] [DoNotSerialize]
+    public IK2System iK2System;
+
     private float totalLength;
 
     private void Start()
@@ -17,6 +21,7 @@ public class IK2Chain : MonoBehaviour
     public void UpdateChain(IK2System iK2System)
     {
         if (segments == null) return;
+        this.iK2System = iK2System;
         var fS = segments[0];
         var lS = segments[^1];
         if (iK2System.iK2Settings.isDragging)
@@ -33,7 +38,7 @@ public class IK2Chain : MonoBehaviour
 
     private void InitializeChain(IK2System iK2System)
     {
-        _iK2System = iK2System;
+        this.iK2System = iK2System;
         numberOfJoints = iK2System.iK2Settings.segmentsPrChain;
         totalLength = iK2System.iK2Settings.chainLength;
     }

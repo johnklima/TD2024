@@ -5,7 +5,10 @@ public class IK2Segment : MonoBehaviour
     public float length;
     public IK2Segment parent, child;
 
-    private IK2Chain _ikThread;
+    private IK2Chain ikChain;
+    private float sineForce = 1;
+
+    private float wobbleSize = 1;
 
     public Vector3 pos
     {
@@ -23,6 +26,14 @@ public class IK2Segment : MonoBehaviour
 
     public int index { get; set; }
 
+    private void Update()
+    {
+        if (!ikChain)
+            return;
+        wobbleSize = ikChain.iK2System.iK2Settings.wobbleSize;
+        sineForce = ikChain.iK2System.iK2Settings.sineForce;
+    }
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.blue;
@@ -32,14 +43,16 @@ public class IK2Segment : MonoBehaviour
         Gizmos.DrawWireSphere(end, .25f);
     }
 
-    public void Wake(IK2Chain ikThread, Vector3 position, float length, IK2Segment parent)
+    public void Wake(IK2Chain ikChain, Vector3 position, float length, IK2Segment parent)
     {
         this.parent = parent;
         if (parent != null)
             this.parent.child = this;
-        _ikThread = ikThread;
+        this.ikChain = ikChain;
         pos = position;
         this.length = length;
+        wobbleSize = this.ikChain.iK2System.iK2Settings.wobbleSize;
+        sineForce = this.ikChain.iK2System.iK2Settings.sineForce;
     }
 
     public void UpdateSegmentAndChildren()
@@ -67,7 +80,10 @@ public class IK2Segment : MonoBehaviour
     {
         PointAt(target);
         pos = target - transform.forward * length;
-        transform.localScale = Vector3.one * (Mathf.Sin(Time.time * index) + 1);
+        var wobSize = Vector3.one * wobbleSize;
+        var sineInducedSize = Vector3.Lerp(Vector3.one, (Mathf.Sin(Time.time * index) + 1) * wobSize,
+            sineForce);
+        transform.localScale = sineInducedSize;
 
         if (parent)
             parent.Drag(transform.position);
