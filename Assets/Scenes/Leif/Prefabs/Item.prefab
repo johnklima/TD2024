@@ -48,9 +48,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemData: {fileID: 11400000, guid: c27057f2ca560544fb94b9c70243d6ba, type: 2}
-  itemManagerPrefab: {fileID: 8783803660975953918, guid: b54fe1cd169ebb4478d74a6bf7e2d6cf,
-    type: 3}
   id: 0
+  _itemManager: {fileID: 0}
 --- !u!135 &3865386337837896963
 SphereCollider:
   m_ObjectHideFlags: 0

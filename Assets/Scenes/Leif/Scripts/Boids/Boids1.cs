@@ -41,7 +41,7 @@ public class Boids1 : MonoBehaviour
             {
                 //Attack successful, do damage, fly away
                 Debug.Log("Hit Target");
-                boidsSettings.seekTarget = true;
+                boidsSettings.seekTarget = false;
             }
         }
         else

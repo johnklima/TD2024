@@ -6,6 +6,7 @@ public class ItemManager : MonoBehaviour
     public Item[] items;
     public UnityEvent<BaseItem> onItemInteract;
 
+
     private void Awake()
     {
         RegisterItems();
@@ -15,6 +16,7 @@ public class ItemManager : MonoBehaviour
     {
         RegisterItems();
     }
+
 
     public void TestItemInteract(BaseItem baseItem)
     {
@@ -29,7 +31,7 @@ public class ItemManager : MonoBehaviour
     }
 
 
-    public void Register(Item item)
+    public void Register()
     {
         RegisterItems();
     }

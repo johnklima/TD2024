@@ -6,14 +6,13 @@ public class BoidSystem : MonoBehaviour
     public int numberOfBoids;
     public GameObject prefab;
     public BoidsSettings boidsSettings;
-
     public GameObject[] boids;
 
     private void Start()
     {
         boids = new GameObject[numberOfBoids];
         for (var i = 0; i < numberOfBoids; i++)
-            boids[i] = CreateBoid();
+            boids[i] = CreateBoid(prefab);
     }
 
     private void Update()
@@ -25,19 +24,20 @@ public class BoidSystem : MonoBehaviour
         Gizmos.DrawWireCube(transform.position, Vector3.one * 3);
     }
 
-    private GameObject CreateBoid()
+    private GameObject CreateBoid(GameObject prefab = null)
     {
         //TODO instantiate prefab
         var parent = transform;
-        var boidGo = new GameObject($"Boid_{parent.childCount}")
-        {
-            hideFlags = HideFlags.None,
-            transform =
-            {
-                localPosition = Vector3.zero,
-                parent = parent
-            }
-        };
+        GameObject boidGo;
+        if (prefab) boidGo = Instantiate(prefab);
+        else boidGo = new GameObject();
+
+        var prefabIndicator = prefab == null ? "" : $"_prefab({prefab.name})";
+        boidGo.name = $"Boid_{parent.childCount}{prefabIndicator}";
+        boidGo.transform.localPosition = Vector3.zero;
+        boidGo.transform.parent = parent;
+
+
         var boid = boidGo.AddComponent<Boids1>();
         boid.boidsSettings = boidsSettings;
 
@@ -67,7 +67,7 @@ public class BoidsSettings
     public float speed = 6.0f;
     public Vector3 constrainPoint;
     public float integrationRate = 3.0f;
-
+    public LayerMask obstacleLayerMask;
 
     //states
     public bool seekTarget = true;
