@@ -12,7 +12,10 @@ public class ItemUI : ScriptableObject
     public bool stackable = true;
     public Sprite image;
 
-
+    public enum ItemType
+    {
+        IngredientUI, PotionUI
+    }
 
 }
 
