@@ -30,7 +30,11 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         ctrl = GetComponent<CharacterController>();
-        //Cursor.lockState = CursorLockMode.Locked;
+
+        // Cursor.lockState = CursorLockMode.Locked;
+
+
+
         CursorLockHandler.HideAndLockCursor();
     }
 

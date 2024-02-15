@@ -9,12 +9,12 @@ public class CraftinUI : MonoBehaviour
     }
     private void OnDisable()
     {
-        CursorLockHandler.LockCursor();
+        CursorLockHandler.HideAndLockCursor();
     }
 
     private void OnEnable()
     {
-        CursorLockHandler.UnLockCursor();
+        CursorLockHandler.ShowAndUnlockCursor();
     }
     // Update is called once per frame
     void Update()
