@@ -8,11 +8,20 @@ public class ItemManager : MonoBehaviour
     // public UnityEvent<BaseItem> onItemInteract;
     public UnityEvent<Item> onItemInteract;
 
+    public bool showItemGizmos;
 
     private void Awake()
     {
         RegisterItems();
     }
+
+#if UNITY_EDITOR
+    private void OnDrawGizmos()
+    {
+        if (!showItemGizmos) return;
+        for (var i = 0; i < items.Length; i++) items[i].ShowGizmos();
+    }
+#endif
 
     private void OnValidate()
     {

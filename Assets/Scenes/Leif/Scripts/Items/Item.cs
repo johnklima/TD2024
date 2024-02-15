@@ -24,7 +24,7 @@ public class Item : MonoBehaviour, IInteractable
     }
 
 #if UNITY_EDITOR
-    private void OnDrawGizmos()
+    private void OnDrawGizmosSelected()
     {
         Handles.Label(transform.position + transform.up * 0.25f, $"{itemData.name}\n{itemData.itemType}");
     }
@@ -70,4 +70,12 @@ public class Item : MonoBehaviour, IInteractable
             if (_itemManager == null) throw new Exception("No item manager found: Contact Leif");
         }
     }
+
+
+#if UNITY_EDITOR
+    public void ShowGizmos()
+    {
+        Handles.Label(transform.position + transform.up * 0.25f, $"{itemData.name}\n{itemData.itemType}");
+    }
+#endif
 }

@@ -11,18 +11,18 @@ public class CannonBall1 : MonoBehaviour
     public bool inAir;
     public float launchAngle = 45;
 
-    public BallGravity grav;
+    public BallGravity1 grav;
 
     // Start is called before the first frame update
     private void Start()
     {
-        grav = GetComponent<BallGravity>();
+        grav = GetComponent<BallGravity1>();
     }
 
     // Update is called once per frame
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse1) && !inAir)
+        if (Input.GetKeyDown(KeyCode.Mouse0) && !inAir)
         {
             //lift up and forward
             transform.position = start.position;
@@ -46,7 +46,7 @@ public class CannonBall1 : MonoBehaviour
             {
                 var endPos = end.position;
                 Gizmos.DrawWireCube(endPos, Vector3.one * .5f);
-                Gizmos.DrawRay(startPos, endPos);
+                Gizmos.DrawRay(startPos, endPos - startPos);
             }
         }
     }
