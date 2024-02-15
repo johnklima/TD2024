@@ -114,7 +114,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d142007658ab54b4ca358a83a9c13aaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isCraftSlot: 0
+  image: {fileID: 691141974505502578}
+  selectedColor: {r: 0.4716981, g: 0.4716981, b: 0.4716981, a: 1}
+  notSelectedColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &2629202628943931345
 PrefabInstance:
   m_ObjectHideFlags: 0
