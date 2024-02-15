@@ -33,9 +33,9 @@ public class Boids1 : MonoBehaviour
     private void Update()
     {
         var pos = transform.position;
-        var target = boidsSettings.target;
-        if (boidsSettings.seekTarget && target != null)
+        if (boidsSettings.target != null && boidsSettings.seekTarget)
         {
+            var target = boidsSettings.target;
             Debug.Log("Attacking");
             //if not flocking, its going for a target, usually attacking
             var newVelocity = target.position - pos;
@@ -74,6 +74,10 @@ public class Boids1 : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(transform.position, .5f);
+        if (boidsSettings.target != null && boidsSettings.seekTarget)
+        {
+            var target = boidsSettings.target;
+        }
     }
 
     private Vector3 avoid()
