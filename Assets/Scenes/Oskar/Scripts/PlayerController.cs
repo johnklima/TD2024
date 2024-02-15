@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour
     {
         ctrl = GetComponent<CharacterController>();
         // Cursor.lockState = CursorLockMode.Locked;
+        CursorLockHandler.HideAndLockCursor();
     }
 
     private void Update()
