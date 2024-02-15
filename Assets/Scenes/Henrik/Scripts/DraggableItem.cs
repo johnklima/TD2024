@@ -7,7 +7,7 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
 
     [Header("UI")]
-    public Image image;
+    private Image image;
     public Text countText;
     [HideInInspector] public ItemUI item;
     [HideInInspector] public int count = 1;
@@ -15,7 +15,7 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
     public void Start()
     {
-        image = (Image)GetComponent(typeof(Image));
+        image = GetComponent<Image>();
         InitialiseItem(item);
 
     }

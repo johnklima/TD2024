@@ -14,17 +14,14 @@ public class UIInventoryManager : MonoBehaviour
             DraggableItem itemInSlot = slot.GetComponentInChildren<DraggableItem>();
             if (itemInSlot != null &&
                 itemInSlot.item == item &&
-                itemInSlot.count < 10)
+                itemInSlot.count < 10 &&
+                itemInSlot.item.stackable == true)
             {
                 itemInSlot.count++;
                 itemInSlot.RefreshCount();
                 return true;
             }
         }
-
-
-
-
 
         for (int i = 0; i < inventorySlots.Length; i++)
         {
