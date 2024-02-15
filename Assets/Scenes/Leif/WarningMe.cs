@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class WarningMe : MonoBehaviour
@@ -10,12 +11,18 @@ public class WarningMe : MonoBehaviour
     {
     }
 
+    private void OnDisable()
+    {
+        throw new NotImplementedException();
+    }
+
     private void OnValidate()
     {
         string msg(string x, int y = 20)
         {
             return $"<size={y}><color=red>" + x + "</color></size>";
         }
+
 
         Debug.Log(msg("<b>Please</b> do not change anything in this scene!"));
         Debug.Log(msg("If you want to modify this scene in any way:"));
