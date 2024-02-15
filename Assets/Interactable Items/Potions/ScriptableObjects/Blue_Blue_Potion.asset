@@ -12,11 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ca073cdd68f4f7cbf1ec94b1253b7d5, type: 3}
   m_Name: Blue_Blue_Potion
   m_EditorClassIdentifier: 
-  uiSprite: {fileID: 21300000, guid: fd389ea66b4bd424598428e7435b4c12, type: 3}
+  uiSprite: {fileID: 21300000, guid: 2d70824fb060f4649833d9a2ad224a58, type: 3}
   itemType: 1
-  Ingredients:
-    ingredient1: 2
-    ingredient2: 2
-  objectSettings:
-    prefab: {fileID: 0}
-    material: {fileID: 0}
+  stackable: 0
+  ingredient1: 2
+  ingredient2: 2
+  prefab: {fileID: 0}
+  material: {fileID: 0}

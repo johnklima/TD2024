@@ -12,11 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ca073cdd68f4f7cbf1ec94b1253b7d5, type: 3}
   m_Name: Yellow_Yellow_Potion
   m_EditorClassIdentifier: 
-  uiSprite: {fileID: 21300000, guid: fd389ea66b4bd424598428e7435b4c12, type: 3}
+  uiSprite: {fileID: 21300000, guid: 15fef38ac01978c458ba90d5a26798db, type: 3}
   itemType: 1
-  Ingredients:
-    ingredient1: 0
-    ingredient2: 0
-  objectSettings:
-    prefab: {fileID: 0}
-    material: {fileID: 0}
+  stackable: 0
+  ingredient1: 1
+  ingredient2: 1
+  prefab: {fileID: 0}
+  material: {fileID: 0}
