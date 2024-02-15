@@ -14,7 +14,7 @@ PlayerSettings:
   accelerometerFrequency: 60
   companyName: DefaultCompany
   productName: TD2024
-  defaultCursor: {fileID: 2800000, guid: 43189059f5e6f0841939dbb64dc65b83, type: 3}
+  defaultCursor: {fileID: 2800000, guid: 9476a5568ef706b48a60188d854eefb9, type: 3}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
   m_ShowUnitySplashScreen: 1
@@ -284,7 +284,7 @@ PlayerSettings:
   - m_BuildTarget: Standalone
     m_Icons:
     - serializedVersion: 2
-      m_Icon: {fileID: 2800000, guid: 43189059f5e6f0841939dbb64dc65b83, type: 3}
+      m_Icon: {fileID: 2800000, guid: 9476a5568ef706b48a60188d854eefb9, type: 3}
       m_Width: 1024
       m_Height: 1024
       m_Kind: 0

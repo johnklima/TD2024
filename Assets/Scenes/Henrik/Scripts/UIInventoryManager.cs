@@ -1,12 +1,55 @@
 using System;
 using System.Collections.Generic;
+
 using UnityEngine;
 
 public class UIInventoryManager : MonoBehaviour
 {
     public InventorySlot[] inventorySlots;
     public GameObject inventoryItemPrefab;
+    [HideInInspector] public Item selectedItem;
+    int selectedSlot = -1;
 
+    public void Start()
+    {
+        ChangeSelectedSlot(0);
+    }
+    public void Update()
+    {
+        if (Input.GetAxis("Mouse ScrollWheel") > 0f) // forward
+        {
+            var newSlot = selectedSlot + 1;
+            if (newSlot > inventorySlots.Length - 1)
+            { newSlot = 0; }
+            ChangeSelectedSlot(newSlot);
+
+        }
+        else if (Input.GetAxis("Mouse ScrollWheel") < 0f) // backwards
+        {
+            var newSlot = selectedSlot - 1;
+            if (newSlot < 0)
+            { newSlot = 8; }
+            ChangeSelectedSlot(newSlot);
+        }
+    }
+    void ChangeSelectedSlot(int newValue)
+    {
+        if (selectedSlot >= 0)
+        {
+            inventorySlots[selectedSlot].Deselect();
+        }
+        inventorySlots[newValue].Select();
+        selectedSlot = newValue;
+        var slotTransform = inventorySlots[newValue].transform;
+        if (slotTransform.childCount > 0)
+        {
+            var draggable = slotTransform.GetComponentInChildren<DraggableItem>();
+            selectedItem = draggable.item;
+
+        }
+
+        Debug.Log("NewValue" + newValue);
+    }
     private void OnValidate()
     {
         inventorySlots = GetComponentsInChildren<InventorySlot>();
@@ -16,8 +59,8 @@ public class UIInventoryManager : MonoBehaviour
 
     public bool TryUpdateItemInSlot(DraggableItem slot, KeyValuePair<Item, int> item)
     {
-        if (!slot.item.stackable || slot.count >= 10) return false;
-        if (slot.item != item.Key.itemData) return false;
+        if (!slot.item.itemData.stackable || slot.count >= 10) return false;
+        if (slot.item.itemData != item.Key.itemData) return false;
         slot.count = item.Value;
         slot.RefreshCount();
         return true;
@@ -29,7 +72,7 @@ public class UIInventoryManager : MonoBehaviour
         {
             if (slot.transform.childCount == 0) continue;
             var itemInSlot = slot.GetComponentInChildren<DraggableItem>();
-            if (itemInSlot.item == item.Key.itemData) return itemInSlot;
+            if (itemInSlot.item.itemData == item.Key.itemData) return itemInSlot;
         }
 
         return null;
@@ -68,14 +111,14 @@ public class UIInventoryManager : MonoBehaviour
             if (slot.transform.childCount != 0) continue;
             // find empty slot
             // make child
-            SpawnNewItem(item.Key.itemData, slot);
+            SpawnNewItem(item.Key, slot);
             return true;
         }
 
         return false;
     }
 
-    private void SpawnNewItem(BaseItem item, InventorySlot slot)
+    private void SpawnNewItem(Item item, InventorySlot slot)
     {
         var newItemGo = Instantiate(inventoryItemPrefab, slot.transform);
         var inventoryItem = newItemGo.GetComponent<DraggableItem>();

@@ -7,7 +7,7 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 {
     public Text countText;
 
-    [HideInInspector] public BaseItem item;
+    [HideInInspector] public Item item;
 
     // [HideInInspector] public ItemUI item;
     [HideInInspector] public int count = 1;
@@ -39,13 +39,13 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         transform.SetParent(parentAfterDrag);
     }
 
-    public void InitialiseItem(BaseItem newItem)
+    public void InitialiseItem(Item newItem)
     {
         item = newItem;
         if (image == null) image = GetComponent<Image>();
         if (image == null) throw new Exception("GameObject must have Image component!");
         // image.sprite = newItem.image;2
-        image.sprite = newItem.uiSprite;
+        image.sprite = newItem.itemData.uiSprite;
         RefreshCount();
     }
 
