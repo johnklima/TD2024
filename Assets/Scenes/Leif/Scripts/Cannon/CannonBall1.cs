@@ -1,5 +1,9 @@
 using UnityEngine;
 
+//TODO  fire button M0
+// onMouseDown to aim
+// onMouseUp to fire
+// M1 cancel
 public class CannonBall1 : MonoBehaviour
 {
     public float G = 9.8f;
@@ -13,13 +17,11 @@ public class CannonBall1 : MonoBehaviour
 
     public BallGravity1 grav;
 
-    // Start is called before the first frame update
     private void Start()
     {
         grav = GetComponent<BallGravity1>();
     }
 
-    // Update is called once per frame
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Mouse0) && !inAir)
