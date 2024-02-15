@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e19b28aaa164c5995dd0d661d30c10e, type: 3}
   m_Name: Yellow_Ingredient
   m_EditorClassIdentifier: 
-  uiSprite: {fileID: 21300000, guid: b1f215018ef70cb49ba667550708670b, type: 3}
+  uiSprite: {fileID: 21300000, guid: bcc7ede0e1c1c6344aa80283c5ad8047, type: 3}
   itemType: 0
-  ingredient: 1
+  stackable: 1
+  ingredient: 0

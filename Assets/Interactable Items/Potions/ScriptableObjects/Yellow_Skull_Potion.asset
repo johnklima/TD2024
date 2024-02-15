@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ca073cdd68f4f7cbf1ec94b1253b7d5, type: 3}
   m_Name: Yellow_Skull_Potion
   m_EditorClassIdentifier: 
-  uiSprite: {fileID: 21300000, guid: fd389ea66b4bd424598428e7435b4c12, type: 3}
+  uiSprite: {fileID: 21300000, guid: e162f6c90866fac42960f9dc8c185c78, type: 3}
   itemType: 1
+  stackable: 0
   ingredient1: 1
   ingredient2: 3
   prefab: {fileID: 0}
