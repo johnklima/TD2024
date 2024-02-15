@@ -4,53 +4,52 @@ using UnityEngine;
 // onMouseDown to aim
 // onMouseUp to fire
 // M1 cancel
+[RequireComponent(typeof(BallGravity1))]
 public class CannonBall1 : MonoBehaviour
 {
     public float G = 9.8f;
     public Vector3 direction;
-
-    public Transform start;
-    public Transform end;
+    public bool launch;
+    public Vector3 _start;
 
     public bool inAir;
     public float launchAngle = 45;
 
     public BallGravity1 grav;
+    private Vector3 _end;
 
-    private void Start()
+    private void Awake()
     {
         grav = GetComponent<BallGravity1>();
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Mouse0) && !inAir)
-        {
-            //lift up and forward
-            transform.position = start.position;
-            transform.position += Vector3.up + transform.forward * 2;
-
-            transform.LookAt(end);
-            grav.enabled = true;
-            grav.impulse = fire(transform.position, end.position, launchAngle);
-
-            inAir = true; //set to false when it hits something (on collision enter)
-        }
-    }
-
     private void OnDrawGizmos()
     {
-        if (start != null)
+        if (_start != Vector3.zero)
         {
-            var startPos = start.position;
+            var startPos = _start;
             Gizmos.DrawWireCube(startPos, Vector3.one * .5f);
-            if (end != null)
+            if (_end != Vector3.zero)
             {
-                var endPos = end.position;
+                var endPos = _end;
                 Gizmos.DrawWireCube(endPos, Vector3.one * .5f);
                 Gizmos.DrawRay(startPos, endPos - startPos);
             }
         }
+    }
+
+    public void Launch(Vector3 end)
+    {
+        _end = end;
+        if (grav == null)
+            grav = GetComponent<BallGravity1>();
+
+
+        transform.LookAt(_end);
+        grav.enabled = true;
+        grav.impulse = fire(transform.position, _end, launchAngle);
+        inAir = true; //set to false when it hits something (on collision enter)
+        launch = false;
     }
 
     public Vector3 fire(Vector3 startPos, Vector3 targPos, float angle)
@@ -152,8 +151,8 @@ public class CannonBall1 : MonoBehaviour
 
                 if (sqrtcheck > 0)
                     Vo = Mathf.Sqrt(sqrtcheck);
-                else
-                    Debug.Log("sqrtcheck < 0 initial force");
+                // else
+                //     Debug.Log("sqrtcheck < 0 initial force");
 
                 //find the vector of it in our trajectory planar space
                 var Vy = Vo * Mathf.Sin(angle);
@@ -180,10 +179,10 @@ public class CannonBall1 : MonoBehaviour
                         var dnt = Mathf.Sqrt(sqrtcheck); // time from max height to impact
                         rng = Vx * (upt + dnt);
                     }
-                    else
-                    {
-                        Debug.Log("sqrtcheck < 0 H / Gravity");
-                    }
+                    // else
+                    // {
+                    //     Debug.Log("sqrtcheck < 0 H / Gravity");
+                    // }
                 }
 
                 if (rng > flatdistance)
@@ -217,7 +216,7 @@ public class CannonBall1 : MonoBehaviour
         //multiply by calculated "powder charge"
         angV *= Vo;
 
-        Debug.Log(Vo.ToString());
+        // Debug.Log(Vo.ToString());
 
         return angV;
     }

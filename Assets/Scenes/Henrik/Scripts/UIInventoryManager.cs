@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-
 using UnityEngine;
 
 public class UIInventoryManager : MonoBehaviour
@@ -8,36 +7,37 @@ public class UIInventoryManager : MonoBehaviour
     public InventorySlot[] inventorySlots;
     public GameObject inventoryItemPrefab;
     [HideInInspector] public Item selectedItem;
-    int selectedSlot = -1;
+    private int selectedSlot = -1;
 
     public void Start()
     {
         ChangeSelectedSlot(0);
     }
+
     public void Update()
     {
         if (Input.GetAxis("Mouse ScrollWheel") > 0f) // forward
         {
             var newSlot = selectedSlot + 1;
-            if (newSlot > inventorySlots.Length - 1)
-            { newSlot = 0; }
+            if (newSlot > inventorySlots.Length - 1) newSlot = 0;
             ChangeSelectedSlot(newSlot);
-
         }
         else if (Input.GetAxis("Mouse ScrollWheel") < 0f) // backwards
         {
             var newSlot = selectedSlot - 1;
-            if (newSlot < 0)
-            { newSlot = 8; }
+            if (newSlot < 0) newSlot = 8;
             ChangeSelectedSlot(newSlot);
         }
     }
-    void ChangeSelectedSlot(int newValue)
+
+    private void OnValidate()
     {
-        if (selectedSlot >= 0)
-        {
-            inventorySlots[selectedSlot].Deselect();
-        }
+        inventorySlots = GetComponentsInChildren<InventorySlot>();
+    }
+
+    private void ChangeSelectedSlot(int newValue)
+    {
+        if (selectedSlot >= 0) inventorySlots[selectedSlot].Deselect();
         inventorySlots[newValue].Select();
         selectedSlot = newValue;
         var slotTransform = inventorySlots[newValue].transform;
@@ -45,14 +45,13 @@ public class UIInventoryManager : MonoBehaviour
         {
             var draggable = slotTransform.GetComponentInChildren<DraggableItem>();
             selectedItem = draggable.item;
-
+        }
+        else
+        {
+            selectedItem = null;
         }
 
-        Debug.Log("NewValue" + newValue);
-    }
-    private void OnValidate()
-    {
-        inventorySlots = GetComponentsInChildren<InventorySlot>();
+        Debug.Log("selectedItem: " + selectedItem);
     }
 
     //TODO listen to OnInventoryChanged @ InventoryController

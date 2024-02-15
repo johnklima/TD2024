@@ -70,6 +70,31 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1652765025522631997, guid: 1b3edf62bf7e4974680c4fede5f1bbec,
+        type: 3}
+      propertyPath: m_Layer
+      value: 27
+      objectReference: {fileID: 0}
+    - target: {fileID: 1904419106358138081, guid: 1b3edf62bf7e4974680c4fede5f1bbec,
+        type: 3}
+      propertyPath: m_Layer
+      value: 27
+      objectReference: {fileID: 0}
+    - target: {fileID: 3077676232859382220, guid: 1b3edf62bf7e4974680c4fede5f1bbec,
+        type: 3}
+      propertyPath: m_Layer
+      value: 27
+      objectReference: {fileID: 0}
+    - target: {fileID: 3270485545757535910, guid: 1b3edf62bf7e4974680c4fede5f1bbec,
+        type: 3}
+      propertyPath: m_Layer
+      value: 27
+      objectReference: {fileID: 0}
+    - target: {fileID: 3608339669378257941, guid: 1b3edf62bf7e4974680c4fede5f1bbec,
+        type: 3}
+      propertyPath: m_Layer
+      value: 27
+      objectReference: {fileID: 0}
     - target: {fileID: 3865386337837896963, guid: 1b3edf62bf7e4974680c4fede5f1bbec,
         type: 3}
       propertyPath: m_Radius
@@ -84,6 +109,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Red_Skull_Potion Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 4985043095849150158, guid: 1b3edf62bf7e4974680c4fede5f1bbec,
+        type: 3}
+      propertyPath: m_Layer
+      value: 27
+      objectReference: {fileID: 0}
+    - target: {fileID: 6465979479161926779, guid: 1b3edf62bf7e4974680c4fede5f1bbec,
+        type: 3}
+      propertyPath: m_Layer
+      value: 27
+      objectReference: {fileID: 0}
+    - target: {fileID: 6977478743316216340, guid: 1b3edf62bf7e4974680c4fede5f1bbec,
+        type: 3}
+      propertyPath: m_Layer
+      value: 27
+      objectReference: {fileID: 0}
+    - target: {fileID: 7583817909465113785, guid: 1b3edf62bf7e4974680c4fede5f1bbec,
+        type: 3}
+      propertyPath: m_Layer
+      value: 27
+      objectReference: {fileID: 0}
+    - target: {fileID: 8718097044881926307, guid: 1b3edf62bf7e4974680c4fede5f1bbec,
+        type: 3}
+      propertyPath: m_Layer
+      value: 27
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
