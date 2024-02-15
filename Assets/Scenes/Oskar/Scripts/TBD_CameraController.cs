@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TBD_CameraController : MonoBehaviour
@@ -8,21 +5,22 @@ public class TBD_CameraController : MonoBehaviour
     public Transform playerObject;
     public float sensitivityX = 2f;
     public float sensitivityY = 2f;
+    private float _rotationX;
 
-    private float _rotationY = 0f;
-    private float _rotationX = 0f;
+    private float _rotationY;
 
-    void Start()
+    private void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
+        // Cursor.lockState = CursorLockMode.Locked; already done in playerController.Awake()
+        // CursorLockHandler.HideAndLockCursor(); already done in playerController.Awake()
     }
 
-    void LateUpdate()
+    private void LateUpdate()
     {
         FollowPlayer();
     }
 
-    void FollowPlayer()
+    private void FollowPlayer()
     {
         transform.position = playerObject.position;
     }

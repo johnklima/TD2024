@@ -4,7 +4,9 @@ using UnityEngine.Events;
 public class ItemManager : MonoBehaviour
 {
     public Item[] items;
-    public UnityEvent<BaseItem> onItemInteract;
+
+    // public UnityEvent<BaseItem> onItemInteract;
+    public UnityEvent<Item> onItemInteract;
 
 
     private void Awake()

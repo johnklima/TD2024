@@ -7,13 +7,13 @@ public class InventoryController : MonoBehaviour
     [SerializeField] private int inventorySlots = 9;
     [SerializeField] private int stackSize = 10;
 
-    public UnityEvent<Dictionary<BaseItem, int>> onInventoryChanged = new();
+    public UnityEvent<Dictionary<Item, int>> onInventoryChanged = new();
 
 
-    private readonly Dictionary<BaseItem, int> _inventory = new();
+    private readonly Dictionary<Item, int> _inventory = new();
 
     // listens to OnItemInteract @ ItemManager
-    public void AddItem(BaseItem interactableItem)
+    public void AddItem(Item interactableItem)
     {
         var itemAdded = false;
         Debug.Log("interactableItem: " + interactableItem);
