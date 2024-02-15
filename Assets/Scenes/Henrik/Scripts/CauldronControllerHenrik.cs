@@ -17,7 +17,7 @@ public class CauldronControllerHenrik : MonoBehaviour, IInteractable
         {
             cauldronCamera.Priority = 20;
             cauldronUI.SetActive(true);
-            Cursor.lockState = CursorLockMode.None;
+
             onCauldronEnter.Invoke();
         }
     }
@@ -31,7 +31,7 @@ public class CauldronControllerHenrik : MonoBehaviour, IInteractable
     {
         cauldronCamera.Priority = 5;
         cauldronUI.SetActive(false);
-        Cursor.lockState = CursorLockMode.Locked;
+
         onCauldronExit.Invoke();
 
     }
