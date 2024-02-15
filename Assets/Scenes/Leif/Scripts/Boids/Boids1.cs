@@ -16,7 +16,8 @@ public class Boids1 : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        if (boidsSettings.constrainPoint == null) boidsSettings.constrainPoint = transform;
+        if (boidsSettings.useConstrainPoint && boidsSettings.constrainPoint == null)
+            boidsSettings.constrainPoint = transform;
 
         var pos = new Vector3(Random.Range(-5f, 5), Random.Range(-5f, 5f), Random.Range(-5f, 5));
         var look = new Vector3(Random.Range(-1000f, 1000f), Random.Range(-1000f, 1000f), Random.Range(-1000f, 1000f));
@@ -51,7 +52,9 @@ public class Boids1 : MonoBehaviour
         }
         else
         {
-            _constrainPoint = boidsSettings.constrainPoint.position; //flock follows player
+            _constrainPoint = boidsSettings.useConstrainPoint && boidsSettings.constrainPoint != null
+                ? boidsSettings.constrainPoint.position
+                : transform.parent.position; //flock follows player
             var newVelocity = new Vector3(0, 0, 0);
             // rule 1 all boids steer towards center of mass - cohesion
             newVelocity += cohesion() * boidsSettings.cohesionFactor;

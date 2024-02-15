@@ -11,7 +11,7 @@ public class Item : MonoBehaviour, IInteractable
     public BaseItem itemData;
     [ReadOnly] public int id;
     [SerializeField] private ItemManager _itemManager;
-    public bool deactivateOnInteract;
+    public bool isOneShot;
 
     private void Awake()
     {
@@ -23,10 +23,12 @@ public class Item : MonoBehaviour, IInteractable
         Register();
     }
 
+#if UNITY_EDITOR
     private void OnDrawGizmos()
     {
         Handles.Label(transform.position + transform.up * 0.25f, $"{itemData.name}\n{itemData.itemType}");
     }
+#endif
 
 
     private void OnValidate()
@@ -37,13 +39,13 @@ public class Item : MonoBehaviour, IInteractable
     public void Interact()
     {
         _itemManager.onItemInteract?.Invoke(itemData);
-        gameObject.SetActive(deactivateOnInteract);
+        gameObject.SetActive(!isOneShot);
     }
 
     public void Interact(LeifPlayerController lPC)
     {
         _itemManager.onItemInteract?.Invoke(itemData);
-        gameObject.SetActive(deactivateOnInteract);
+        gameObject.SetActive(!isOneShot);
     }
 
     private void Register()
