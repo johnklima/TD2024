@@ -46,12 +46,12 @@ public class Item : MonoBehaviour, IInteractable
     {
         if (_itemManager == null)
         {
-            var asd = FindObjectOfType<ItemManager>();
-            Debug.Log(asd);
-            if (asd.isActiveAndEnabled)
+            var existingManager = FindObjectOfType<ItemManager>();
+            Debug.Log(existingManager);
+            if (existingManager != null && existingManager.isActiveAndEnabled)
             {
-                Debug.Log(asd);
-                _itemManager = asd;
+                Debug.Log(existingManager);
+                _itemManager = existingManager;
             }
             else
 

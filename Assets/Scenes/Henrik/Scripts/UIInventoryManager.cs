@@ -2,44 +2,39 @@ using UnityEngine;
 
 public class UIInventoryManager : MonoBehaviour
 {
-
     public InventorySlot[] inventorySlots;
     public GameObject inventoryItemPrefab;
 
-    public bool AddItem(ItemUI item)
+    public bool AddItem(BaseItem baseItem)
     {
-        for (int i = 0; i < inventorySlots.Length; i++)
+        foreach (var slot in inventorySlots)
         {
-            InventorySlot slot = inventorySlots[i];
-            DraggableItem itemInSlot = slot.GetComponentInChildren<DraggableItem>();
-            if (itemInSlot != null &&
-                itemInSlot.item == item &&
-                itemInSlot.count < 10 &&
-                itemInSlot.item.stackable == true)
-            {
-                itemInSlot.count++;
-                itemInSlot.RefreshCount();
-                return true;
-            }
+            var itemInSlot = slot.GetComponentInChildren<DraggableItem>();
+            if (itemInSlot == null ||
+                itemInSlot.item != baseItem ||
+                itemInSlot.count >= 10 ||
+                itemInSlot.item.stackable != true) continue;
+
+            itemInSlot.count++;
+            itemInSlot.RefreshCount();
+            return true;
         }
 
-        for (int i = 0; i < inventorySlots.Length; i++)
+        foreach (var slot in inventorySlots)
         {
-            InventorySlot slot = inventorySlots[i];
-            DraggableItem itemInSlot = slot.GetComponentInChildren<DraggableItem>();
-            if (itemInSlot == null)
-            {
-                SpawnNewItem(item, slot);
-                return true;
-            }
+            var itemInSlot = slot.GetComponentInChildren<DraggableItem>();
+            if (itemInSlot != null) continue;
+            SpawnNewItem(baseItem, slot);
+            return true;
         }
+
         return false;
     }
-    void SpawnNewItem(ItemUI item, InventorySlot slot)
+
+    private void SpawnNewItem(BaseItem item, InventorySlot slot)
     {
-        GameObject newItemGo = Instantiate(inventoryItemPrefab, slot.transform);
-        DraggableItem inventoryItem = newItemGo.GetComponent<DraggableItem>();
+        var newItemGo = Instantiate(inventoryItemPrefab, slot.transform);
+        var inventoryItem = newItemGo.GetComponent<DraggableItem>();
         inventoryItem.InitialiseItem(item);
     }
-
 }

@@ -14,9 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiSprite: {fileID: 21300000, guid: fd389ea66b4bd424598428e7435b4c12, type: 3}
   itemType: 1
-  Ingredients:
-    ingredient1: 0
-    ingredient2: 0
-  objectSettings:
-    prefab: {fileID: 0}
-    material: {fileID: 0}
+  ingredient1: 2
+  ingredient2: 5
+  prefab: {fileID: 0}
+  material: {fileID: 0}

@@ -20,4 +20,5 @@ public abstract class BaseItem : ScriptableObject
 {
     public Sprite uiSprite;
     public ItemType itemType;
+    public bool stackable;
 }
