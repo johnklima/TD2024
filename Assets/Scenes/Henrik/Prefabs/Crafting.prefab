@@ -534,7 +534,6 @@ GameObject:
   - component: {fileID: 4495426668859241382}
   - component: {fileID: 8928772656532404672}
   - component: {fileID: 120310145807081440}
-  - component: {fileID: 2168456029594535678}
   m_Layer: 0
   m_Name: Crafting
   m_TagString: Untagged
@@ -665,20 +664,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &2168456029594535678
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4303049439730214980}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6577b48e32906364eab49b09d7542cca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mix: {fileID: 4725234793062724623}
-  cameraGameObject: {fileID: 0}
 --- !u!1 &4617274400688343062
 GameObject:
   m_ObjectHideFlags: 0

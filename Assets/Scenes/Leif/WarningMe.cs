@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class WarningMe : MonoBehaviour
@@ -13,8 +12,8 @@ public class WarningMe : MonoBehaviour
 
     private void OnDisable()
     {
-        throw new NotImplementedException();
     }
+
 
     private void OnValidate()
     {

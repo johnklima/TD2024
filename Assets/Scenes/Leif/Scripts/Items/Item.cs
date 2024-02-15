@@ -38,13 +38,13 @@ public class Item : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        _itemManager.onItemInteract?.Invoke(itemData);
+        _itemManager.onItemInteract?.Invoke(this);
         gameObject.SetActive(!isOneShot);
     }
 
     public void Interact(LeifPlayerController lPC)
     {
-        _itemManager.onItemInteract?.Invoke(itemData);
+        _itemManager.onItemInteract?.Invoke(this);
         gameObject.SetActive(!isOneShot);
     }
 
