@@ -15,13 +15,27 @@ public class Health : MonoBehaviour
 
     private void Update()
     {
-for (int i = 0; i < hearts.Length; i++)
+        if(playerhealth > numberOfHearts)
+        {
+            playerhealth = numberOfHearts;
+            for (int i = 0; i < hearts.Length; i++)
         {
             if(i < numberOfHearts)
             {
+                hearts[i].sprite = fullheart;
+        }else
+        {
+                hearts[i].sprite = nullheart;
+            }
+
+            if (i < numberOfHearts)
+            {
+                hearts[i].enabled = true;
+            }else
+            {
                 hearts[i].enabled = false;
-          
             }
         }
     }
+}
 }
