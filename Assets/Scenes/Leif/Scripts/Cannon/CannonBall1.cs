@@ -13,7 +13,7 @@ public class CannonBall1 : MonoBehaviour
     public Vector3 _start;
 
     public bool inAir;
-    public float launchAngle = 45;
+    public float launchAngle = 15;
 
     public BallGravity1 grav;
     private Vector3 _end;
@@ -38,7 +38,7 @@ public class CannonBall1 : MonoBehaviour
         }
     }
 
-    public void Launch(Vector3 end)
+    public void Launch(Vector3 end, float angle)
     {
         _end = end;
         if (grav == null)
@@ -47,7 +47,7 @@ public class CannonBall1 : MonoBehaviour
 
         transform.LookAt(_end);
         grav.enabled = true;
-        grav.impulse = fire(transform.position, _end, launchAngle);
+        grav.impulse = fire(transform.position, _end, angle);
         inAir = true; //set to false when it hits something (on collision enter)
         launch = false;
     }

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+//! AddItem() listens to OnInventoryChanged @ InventoryController
 public class UIInventoryManager : MonoBehaviour
 {
     public InventorySlot[] inventorySlots;
@@ -50,11 +51,8 @@ public class UIInventoryManager : MonoBehaviour
         {
             selectedItem = null;
         }
-
-        Debug.Log("selectedItem: " + selectedItem);
     }
 
-    //TODO listen to OnInventoryChanged @ InventoryController
 
     public bool TryUpdateItemInSlot(DraggableItem slot, KeyValuePair<Item, int> item)
     {
@@ -105,16 +103,18 @@ public class UIInventoryManager : MonoBehaviour
 
     private bool FindAndPopulateEmptySlot(KeyValuePair<Item, int> item)
     {
+        var success = false;
         foreach (var slot in inventorySlots)
         {
             if (slot.transform.childCount != 0) continue;
-            // find empty slot
-            // make child
+            // find empty slot, make child, refresh selectedSlot
             SpawnNewItem(item.Key, slot);
-            return true;
+            ChangeSelectedSlot(selectedSlot);
+            success = true;
+            break;
         }
 
-        return false;
+        return success;
     }
 
     private void SpawnNewItem(Item item, InventorySlot slot)

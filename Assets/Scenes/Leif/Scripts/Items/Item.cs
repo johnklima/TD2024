@@ -12,10 +12,13 @@ public class Item : MonoBehaviour, IInteractable
     [ReadOnly] public int id;
     [SerializeField] private ItemManager _itemManager;
     public bool isOneShot;
+    private SphereCollider _sphereCollider;
 
     private void Awake()
     {
         Register();
+        _sphereCollider = GetComponent<SphereCollider>();
+        _sphereCollider.isTrigger = true;
     }
 
     private void OnDisable()
@@ -29,7 +32,6 @@ public class Item : MonoBehaviour, IInteractable
         Handles.Label(transform.position + transform.up * 0.25f, $"{itemData.name}\n{itemData.itemType}");
     }
 #endif
-
 
     private void OnValidate()
     {
