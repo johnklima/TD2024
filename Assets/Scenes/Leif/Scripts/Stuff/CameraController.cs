@@ -55,13 +55,13 @@ public class CameraController : MonoBehaviour
         return Vector3.Distance(pointA, pointB) > interactDistanceThreshold;
     }
 
-    public void ToggleCursorLockMode()
-    {
-        if (Cursor.lockState == CursorLockMode.Locked)
-            Cursor.lockState = CursorLockMode.None;
-        else
-            Cursor.lockState = CursorLockMode.Locked;
-    }
+    // public void ToggleCursorLockMode()
+    // {
+    //     if (Cursor.lockState == CursorLockMode.Locked)
+    //         Cursor.lockState = CursorLockMode.None;
+    //     else
+    //         Cursor.lockState = CursorLockMode.Locked;
+    // }
 
     protected void InputHandler()
     {
@@ -71,7 +71,7 @@ public class CameraController : MonoBehaviour
         yRot += mouseX * sensX * MouseSensMultiplier;
         xRot -= mouseY * sensY * MouseSensMultiplier;
         xRot = Mathf.Clamp(xRot, clampRotation.xMin, clampRotation.xMax);
-        if (Input.GetKeyDown(KeyCode.Escape)) ToggleCursorLockMode();
+        // if (Input.GetKeyDown(KeyCode.Escape)) ToggleCursorLockMode();
         if (playerToControl)
         {
             var t = cameraToControl.transform;

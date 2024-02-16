@@ -9,11 +9,16 @@ public class Boids1 : MonoBehaviour
 
     [DoNotSerialize] public Vector3 velocity; //final velocity
 
+    private Vector3 _constrainPoint;
+
     private float avoidCount;
 
     // Start is called before the first frame update
     private void Start()
     {
+        if (boidsSettings.useConstrainPoint && boidsSettings.constrainPoint == null)
+            boidsSettings.constrainPoint = transform;
+
         var pos = new Vector3(Random.Range(-5f, 5), Random.Range(-5f, 5f), Random.Range(-5f, 5));
         var look = new Vector3(Random.Range(-1000f, 1000f), Random.Range(-1000f, 1000f), Random.Range(-1000f, 1000f));
         var speed = Random.Range(0f, 3f);
@@ -27,26 +32,29 @@ public class Boids1 : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        var target = boidsSettings.target;
-        if (boidsSettings.seekTarget && target != null)
+        var pos = transform.position;
+        if (boidsSettings.target != null && boidsSettings.seekTarget)
         {
+            var target = boidsSettings.target;
             Debug.Log("Attacking");
             //if not flocking, its going for a target, usually attacking
-            var newVelocity = target.position - transform.position;
+            var newVelocity = target.position - pos;
             var slerpVel = Vector3.Slerp(newVelocity, velocity, Time.deltaTime * boidsSettings.integrationRate);
             velocity = slerpVel.normalized;
             transform.position += velocity * (Time.deltaTime * boidsSettings.speed);
-            transform.LookAt(transform.position + velocity);
-            if (Vector3.Distance(transform.position, target.position) < 0.3f)
+            transform.LookAt(pos + velocity);
+            if (Vector3.Distance(pos, target.position) < 0.3f)
             {
                 //Attack successful, do damage, fly away
                 Debug.Log("Hit Target");
-                boidsSettings.seekTarget = true;
+                boidsSettings.seekTarget = false;
             }
         }
         else
         {
-            boidsSettings.constrainPoint = transform.parent.position; //flock follows player
+            _constrainPoint = boidsSettings.useConstrainPoint && boidsSettings.constrainPoint != null
+                ? boidsSettings.constrainPoint.position
+                : transform.parent.position; //flock follows player
             var newVelocity = new Vector3(0, 0, 0);
             // rule 1 all boids steer towards center of mass - cohesion
             newVelocity += cohesion() * boidsSettings.cohesionFactor;
@@ -59,13 +67,17 @@ public class Boids1 : MonoBehaviour
             var slerpVel = Vector3.Slerp(velocity, newVelocity, Time.deltaTime * boidsSettings.integrationRate);
             velocity = slerpVel.normalized;
             transform.position += velocity * (Time.deltaTime * boidsSettings.speed);
-            transform.LookAt(transform.position + velocity);
+            transform.LookAt(pos + velocity);
         }
     }
 
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(transform.position, .5f);
+        if (boidsSettings.target != null && boidsSettings.seekTarget)
+        {
+            var target = boidsSettings.target;
+        }
     }
 
     private Vector3 avoid()
@@ -79,7 +91,7 @@ public class Boids1 : MonoBehaviour
     {
         var steer = new Vector3(0, 0, 0);
 
-        steer += boidsSettings.constrainPoint - transform.position;
+        steer += _constrainPoint - transform.position;
 
         steer.Normalize();
 

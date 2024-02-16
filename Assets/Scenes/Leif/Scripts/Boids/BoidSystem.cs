@@ -6,14 +6,13 @@ public class BoidSystem : MonoBehaviour
     public int numberOfBoids;
     public GameObject prefab;
     public BoidsSettings boidsSettings;
-
     public GameObject[] boids;
 
     private void Start()
     {
         boids = new GameObject[numberOfBoids];
         for (var i = 0; i < numberOfBoids; i++)
-            boids[i] = CreateBoid();
+            boids[i] = CreateBoid(prefab);
     }
 
     private void Update()
@@ -22,22 +21,29 @@ public class BoidSystem : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawWireCube(transform.position, Vector3.one * 3);
+        if (boidsSettings.constrainPoint != null && boidsSettings.useConstrainPoint)
+            Gizmos.DrawWireCube(boidsSettings.constrainPoint.position, Vector3.one * 3);
+        else
+            Gizmos.DrawWireCube(transform.position, Vector3.one * 3);
+        Gizmos.color = Color.red;
+        if (boidsSettings.target != null)
+            Gizmos.DrawWireCube(boidsSettings.target.position, Vector3.one * 3);
     }
 
-    private GameObject CreateBoid()
+    private GameObject CreateBoid(GameObject prefab = null)
     {
         //TODO instantiate prefab
         var parent = transform;
-        var boidGo = new GameObject($"Boid_{parent.childCount}")
-        {
-            hideFlags = HideFlags.None,
-            transform =
-            {
-                localPosition = Vector3.zero,
-                parent = parent
-            }
-        };
+        GameObject boidGo;
+        if (prefab) boidGo = Instantiate(prefab);
+        else boidGo = new GameObject();
+
+        var prefabIndicator = prefab == null ? "" : $"_prefab({prefab.name})";
+        boidGo.name = $"Boid_{parent.childCount}{prefabIndicator}";
+        boidGo.transform.localPosition = Vector3.zero;
+        boidGo.transform.parent = parent;
+
+
         var boid = boidGo.AddComponent<Boids1>();
         boid.boidsSettings = boidsSettings;
 
@@ -65,11 +71,12 @@ public class BoidsSettings
     public float avoidFactor = 20.0f;
     public float collisionDistance = 6.0f;
     public float speed = 6.0f;
-    public Vector3 constrainPoint;
     public float integrationRate = 3.0f;
-
+    public LayerMask obstacleLayerMask;
 
     //states
-    public bool seekTarget = true;
+    public bool seekTarget;
     public Transform target;
+    public bool useConstrainPoint;
+    public Transform constrainPoint;
 }
