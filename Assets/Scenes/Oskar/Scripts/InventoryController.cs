@@ -28,7 +28,9 @@ public class InventoryController : MonoBehaviour
         Debug.Log("AddItem interactableItem: " + interactableItem);
         if (_inventory.ContainsKey(interactableItem))
         {
-            if (_inventory[interactableItem] < stackSize)
+            var stackable = interactableItem.itemData.stackable;
+            if ((stackable && _inventory[interactableItem] < stackSize) ||
+                (!stackable && _inventory[interactableItem] < 1))
                 _inventory[interactableItem]++;
         }
         else if (_inventory.Count < inventorySlots)
@@ -40,19 +42,13 @@ public class InventoryController : MonoBehaviour
         //Show UI/make sound to show that its full
     }
 
-    public void RemoveItem(Item interactableItem) // attaches to ThrowingHandler.OnThrowing()
+    public void RemoveItem(DraggableItem draggableItem) //! attaches to ThrowingHandler.OnThrowing()
     {
-        Debug.Log("RemoveItem interactableItem: " + interactableItem);
-        if (_inventory.ContainsKey(interactableItem))
-        {
-            if (_inventory[interactableItem] > 0)
-                _inventory[interactableItem]--;
-            if (_inventory[interactableItem] == 0)
-                //TODO: remove from hotBar
-                Debug.Log("TODO: remove from hotbar");
-        }
-
-        onInventoryChanged.Invoke(_inventory);
+        var item = draggableItem.item;
+        if (!_inventory.ContainsKey(item)) return;
+        if (_inventory[item] > 0) _inventory[item]--;
+        if (_inventory[item] == 0) _inventory.Remove(item);
         //Show UI/make sound to show that its full
+        onInventoryChanged.Invoke(_inventory);
     }
 }

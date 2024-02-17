@@ -14,7 +14,7 @@ public class PlayerHealthSystem : MonoBehaviour
 
     private int _currentHp; // leif edit  (made private)
 
-    private void Start()
+    private void Awake()
     {
         _currentHp = maxHp; // leif edit
     }
