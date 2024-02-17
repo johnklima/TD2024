@@ -5,8 +5,7 @@ using UnityEngine.InputSystem;
 public class PlayerInput : MonoBehaviour
 {
     public UnityEvent CancelCauldron;
-
-    //public TBD_CameraController cameraController;
+    
     private PlayerController _playerController;
     private InputActions _playerInput;
 

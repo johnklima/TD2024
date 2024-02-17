@@ -19,10 +19,7 @@ public class PlayerController : MonoBehaviour
     private bool _shouldRayCast = true;
 
     private IInteractable _targetedItem;
-    //TBD:
-    // Health interactions
-    // State changes for animations (walking/running/whatever)
-    // Jumping/Crouching movements
+    
 
     private CharacterController ctrl;
 
@@ -30,11 +27,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         ctrl = GetComponent<CharacterController>();
-
-        // Cursor.lockState = CursorLockMode.Locked;
-
-
-
+        
         CursorLockHandler.HideAndLockCursor();
     }
 
