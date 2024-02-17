@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 964482177778046108}
   - component: {fileID: -4982118243700742051}
   - component: {fileID: 3865386337837896963}
-  m_Layer: 0
+  m_Layer: 27
   m_Name: Item
-  m_TagString: Untagged
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -50,6 +50,7 @@ MonoBehaviour:
   itemData: {fileID: 11400000, guid: c27057f2ca560544fb94b9c70243d6ba, type: 2}
   id: 0
   _itemManager: {fileID: 0}
+  isOneShot: 0
 --- !u!135 &3865386337837896963
 SphereCollider:
   m_ObjectHideFlags: 0

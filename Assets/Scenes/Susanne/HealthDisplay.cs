@@ -8,6 +8,7 @@ public class HealthDisplay : MonoBehaviour
     public Sprite fullHeart;
 
     public Sprite nullHeart;
+    private bool _hasInit;
 
     // leif edit: we already have a health system, where playerHealth etc is calculated
     // this is only for displaying x hearts for n health;
@@ -20,21 +21,21 @@ public class HealthDisplay : MonoBehaviour
 
     #region obsolete /leif
 
-    private void Update()
-    {
-        // if (_playerHealth > _maxNumberOfHearts) //leif edit: not needed
-        // _playerHealth = _maxNumberOfHearts; //leif edit: not needed, calculated in PLayerHealthSystem
-        // moved to its own method
-        // for (var i = 0; i < hearts.Length; i++) // iterate image[]
-        //     if (i <= _playerHealth)
-        //         hearts[i].sprite = fullHeart;
-        //     else
-        //         hearts[i].sprite = nullHeart;
-        // if (i < _maxNumberOfHearts) // not needed, generating hearts at Start()
-        //     hearts[i].enabled = true;
-        // else
-        //     hearts[i].enabled = false;
-    }
+    // private void Update()
+    // {
+    // if (_playerHealth > _maxNumberOfHearts) //leif edit: not needed
+    // _playerHealth = _maxNumberOfHearts; //leif edit: not needed, calculated in PLayerHealthSystem
+    // moved to its own method
+    // for (var i = 0; i < hearts.Length; i++) // iterate image[]
+    //     if (i <= _playerHealth)
+    //         hearts[i].sprite = fullHeart;
+    //     else
+    //         hearts[i].sprite = nullHeart;
+    // if (i < _maxNumberOfHearts) // not needed, generating hearts at Start()
+    //     hearts[i].enabled = true;
+    // else
+    //     hearts[i].enabled = false;
+    // }
 
     #endregion
 
@@ -109,8 +110,7 @@ public class HealthDisplay : MonoBehaviour
         _playerHealthSystem = FindObjectOfType<PlayerHealthSystem>();
         if (_playerHealthSystem == null)
             throw new Exception("Make sure there is a <PlayerHealthSystem> in the scene");
-        // add listener to event on system
-        _playerHealthSystem.AddUpdateHealthDisplayListener(UpdateHealthDisplay);
+
         // get maxHp and set new array
         _maxNumberOfHearts = _playerHealthSystem.maxHp;
         _hearts = new Image[_maxNumberOfHearts];
@@ -118,6 +118,14 @@ public class HealthDisplay : MonoBehaviour
         for (var i = 0; i < _maxNumberOfHearts; i++) _hearts[i] = GenerateHeart();
         // get playerHealth to set correct start values
         _playerHealth = _playerHealthSystem.GetCurrentHp();
+        // add listener to event on system
+        _playerHealthSystem.AddUpdateHealthDisplayListener(UpdateHealthDisplay);
+    }
+
+    private void Update()
+    {
+        if (_hasInit) return;
+        _hasInit = true;
         UpdateHealthDisplay(_playerHealth);
     }
 

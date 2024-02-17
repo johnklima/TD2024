@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -21,7 +20,7 @@ public class ThrowingHandler : MonoBehaviour
     public float aimCoolDown;
     public LineRendererSettings lineRendererSettings;
 
-    public UnityEvent<Item> OnThrowing = new(); //! listener: InventoryController.RemoveItem 
+    public UnityEvent<DraggableItem> OnThrowing = new(); //! listener: InventoryController.RemoveItem 
 
     public float testAngle;
     private bool _aimPrevFram, _fire;
@@ -47,6 +46,8 @@ public class ThrowingHandler : MonoBehaviour
         _inventoryController = GetComponentInParent<InventoryController>();
         if (_inventoryController == null)
             throw new Exception("Make sure there is a <InventoryController> in the scene");
+        OnThrowing.AddListener(_inventoryController.RemoveItem);
+
         SetupLineRenderer();
         _canAim = true;
         if (Camera.main != null)
@@ -83,16 +84,13 @@ public class ThrowingHandler : MonoBehaviour
         {
             //do fire
             _fire = _aimPrevFram = false; // exit next frame
-            // make object
-            var newThrowable = Instantiate(selectedItem);
-            // move to hand pos
-            newThrowable.transform.position = transform.position;
-            // add john physics
-            var newCannon = newThrowable.AddComponent<CannonBall1>();
+            var newThrowable = Instantiate(selectedItem.item.gameObject); // make object
+            newThrowable.transform.position = transform.position; // move to hand pos
+            var newCannon = newThrowable.AddComponent<CannonBall1>(); // add john physics
             newCannon.Launch(_hit.point, testAngle); // launch
-            OnThrowing.Invoke(newThrowable); // TODO decrease UI
+            OnThrowing.Invoke(selectedItem); // update hotBar
             StartCoroutine(AimCoolDown()); // set cooldown
-            return;
+            Debug.Log("TODO get item to collide");
         }
 
         // do aim

@@ -7,7 +7,7 @@ public class InventoryDisplay : MonoBehaviour
 {
     public InventorySlot[] inventorySlots;
     public GameObject inventoryItemPrefab;
-    [HideInInspector] public Item selectedItem;
+    [HideInInspector] public DraggableItem selectedItem;
     private int selectedSlot = -1;
 
     public void Start()
@@ -43,14 +43,9 @@ public class InventoryDisplay : MonoBehaviour
         selectedSlot = newValue;
         var slotTransform = inventorySlots[newValue].transform;
         if (slotTransform.childCount > 0)
-        {
-            var draggable = slotTransform.GetComponentInChildren<DraggableItem>();
-            selectedItem = draggable.item;
-        }
+            selectedItem = slotTransform.GetComponentInChildren<DraggableItem>();
         else
-        {
             selectedItem = null;
-        }
     }
 
 

@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3705363476008726562}
+  - component: {fileID: 2681360515540344911}
   - component: {fileID: 952192589968979251}
   - component: {fileID: 4592355723542975746}
   - component: {fileID: 4287186231532579544}
-  - component: {fileID: 2681360515540344911}
   - component: {fileID: 1704573015677252821}
   m_Layer: 2
   m_Name: PLAYER
@@ -39,6 +39,32 @@ Transform:
   - {fileID: 6597138718609388379}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!143 &2681360515540344911
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3054184684363589145}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: -0.53, z: 0}
 --- !u!114 &952192589968979251
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -53,7 +79,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 5
   playerCamera: {fileID: 0}
-  interactableDistance: 5
+  interactableDistance: 10
   interactLayerMask:
     serializedVersion: 2
     m_Bits: 134217809
@@ -128,32 +154,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!143 &2681360515540344911
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3054184684363589145}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Height: 2
-  m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: -0.53, z: 0}
 --- !u!114 &1704573015677252821
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -325,21 +325,6 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2568513764120214443, guid: 0fe6a742fd836244eb55545b5ca1da98,
         type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 7.9630547
-      objectReference: {fileID: 0}
-    - target: {fileID: 2568513764120214443, guid: 0fe6a742fd836244eb55545b5ca1da98,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -3.4390364
-      objectReference: {fileID: 0}
-    - target: {fileID: 2568513764120214443, guid: 0fe6a742fd836244eb55545b5ca1da98,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 4.0519066
-      objectReference: {fileID: 0}
-    - target: {fileID: 2568513764120214443, guid: 0fe6a742fd836244eb55545b5ca1da98,
-        type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
@@ -376,7 +361,7 @@ PrefabInstance:
     - target: {fileID: 5281637325546295490, guid: 0fe6a742fd836244eb55545b5ca1da98,
         type: 3}
       propertyPath: m_Name
-      value: Throwing
+      value: Throwing (Place in hand bone)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
