@@ -1,8 +1,11 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class DemoScriptItemSpawn : MonoBehaviour
 {
-    public UIInventoryManager UIInventoryManager;
+    [FormerlySerializedAs("UIInventoryManager")]
+    public InventoryDisplay inventoryDisplay;
+
     public ItemUI[] itemsToPickUp;
 
     public void PickupItem(int id)

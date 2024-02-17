@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 
 [Serializable]
 public class LineRendererSettings
@@ -10,6 +11,8 @@ public class LineRendererSettings
     public Material lineRendererMaterial;
     public float sineModA = 1, sineModB = 1;
     public float pulseFreq = 1;
+    public Vector3 testStart = new(0, 10, 0);
+    public Vector3 testEnd = new(0, 10, 10);
 }
 
 [RequireComponent(typeof(LineRenderer))]
@@ -17,8 +20,9 @@ public class ThrowingHandler : MonoBehaviour
 {
     public float aimCoolDown;
     public LineRendererSettings lineRendererSettings;
-    public Vector3 start = new(0, 10, 0);
-    public Vector3 end = new(0, 10, 10);
+
+    public UnityEvent<Item> OnThrowing = new(); //! listener: InventoryController.RemoveItem 
+
     public float testAngle;
     private bool _aimPrevFram, _fire;
     private bool _canAim = true;
@@ -27,18 +31,22 @@ public class ThrowingHandler : MonoBehaviour
     private CannonBall1 _cannonBall;
 
     private RaycastHit _hit;
+    private InventoryController _inventoryController;
     private LineRenderer _lineRenderer;
     private Transform _mainCam;
     private PlayerController _playerController;
-    private UIInventoryManager _uIInventoryManager;
+    private InventoryDisplay _uIInventoryDisplay;
 
     private float offsetAlpha;
 
     private void Start()
     {
-        _uIInventoryManager = FindObjectOfType<UIInventoryManager>();
-        if (_uIInventoryManager == null) throw new Exception("Make sure there is a UIInventoryManager in the scene");
-        _playerController = GetComponent<PlayerController>();
+        _uIInventoryDisplay = FindObjectOfType<InventoryDisplay>();
+        if (_uIInventoryDisplay == null) throw new Exception("Make sure there is a <UIInventoryManager> in the scene");
+        _playerController = GetComponentInParent<PlayerController>();
+        _inventoryController = GetComponentInParent<InventoryController>();
+        if (_inventoryController == null)
+            throw new Exception("Make sure there is a <InventoryController> in the scene");
         SetupLineRenderer();
         _canAim = true;
         if (Camera.main != null)
@@ -48,7 +56,7 @@ public class ThrowingHandler : MonoBehaviour
 
     private void Update()
     {
-        var selectedItem = _uIInventoryManager.selectedItem;
+        var selectedItem = _uIInventoryDisplay.selectedItem;
         if (selectedItem == null) return;
         // if we dont have selected item, we have nothing to throw
         // else we do ray,
@@ -75,9 +83,6 @@ public class ThrowingHandler : MonoBehaviour
         {
             //do fire
             _fire = _aimPrevFram = false; // exit next frame
-
-            Debug.Log("Fire");
-
             // make object
             var newThrowable = Instantiate(selectedItem);
             // move to hand pos
@@ -85,6 +90,7 @@ public class ThrowingHandler : MonoBehaviour
             // add john physics
             var newCannon = newThrowable.AddComponent<CannonBall1>();
             newCannon.Launch(_hit.point, testAngle); // launch
+            OnThrowing.Invoke(newThrowable); // TODO decrease UI
             StartCoroutine(AimCoolDown()); // set cooldown
             return;
         }
@@ -117,7 +123,10 @@ public class ThrowingHandler : MonoBehaviour
         var res = _lineRenderer.positionCount;
         for (var i = 0; i < res; i++)
         {
-            var pos = Vector3.Lerp(start, end, i / (float)res);
+            var pos = Vector3.Lerp(
+                lineRendererSettings.testStart,
+                lineRendererSettings.testEnd,
+                i / (float)res);
             pos.y += Mathf.Sin(i * lineRendererSettings.sineModA) * lineRendererSettings.sineModB;
             _lineRenderer.SetPosition(i, pos);
         }
