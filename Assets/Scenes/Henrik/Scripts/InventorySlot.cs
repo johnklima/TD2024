@@ -31,4 +31,5 @@ public class InventorySlot : MonoBehaviour, IDropHandler
     {
         image.color = notSelectedColor;
     }
+
 }

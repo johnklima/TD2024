@@ -7,6 +7,7 @@ public class InventoryController : MonoBehaviour
     [SerializeField] private int inventorySlots = 9;
     [SerializeField] private int stackSize = 10;
 
+
     public UnityEvent<Dictionary<Item, int>> onInventoryChanged = new();
 
     private readonly Dictionary<Item, int> _inventory = new();
@@ -26,12 +27,14 @@ public class InventoryController : MonoBehaviour
     public void AddItem(Item interactableItem)
     {
         Debug.Log("AddItem interactableItem: " + interactableItem);
+
         if (_inventory.ContainsKey(interactableItem))
         {
             var stackable = interactableItem.itemData.stackable;
             if ((stackable && _inventory[interactableItem] < stackSize) ||
                 (!stackable && _inventory[interactableItem] < 1))
                 _inventory[interactableItem]++;
+
         }
         else if (_inventory.Count < inventorySlots)
         {
@@ -40,6 +43,7 @@ public class InventoryController : MonoBehaviour
 
         onInventoryChanged.Invoke(_inventory);
         //Show UI/make sound to show that its full
+
     }
 
     public void RemoveItem(DraggableItem draggableItem) //! attaches to ThrowingHandler.OnThrowing()

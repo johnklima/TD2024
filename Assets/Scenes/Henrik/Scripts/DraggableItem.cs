@@ -46,6 +46,8 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         if (image == null) throw new Exception("GameObject must have Image component!");
         // image.sprite = newItem.image;2
         image.sprite = newItem.itemData.uiSprite;
+
+
         RefreshCount();
     }
 
