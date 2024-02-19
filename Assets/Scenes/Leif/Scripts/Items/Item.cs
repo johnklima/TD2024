@@ -8,6 +8,7 @@ using UnityEditor;
 [RequireComponent(typeof(SphereCollider))]
 public class Item : MonoBehaviour, IInteractable
 {
+    //TODO get item to collide
     public BaseItem itemData;
     [ReadOnly] public int id;
     [SerializeField] private ItemManager _itemManager;

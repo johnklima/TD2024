@@ -85,6 +85,7 @@ public class ThrowingHandler : MonoBehaviour
             //do fire
             _fire = _aimPrevFram = false; // exit next frame
             var newThrowable = Instantiate(selectedItem.item.gameObject); // make object
+            newThrowable.SetActive(true);
             newThrowable.transform.position = transform.position; // move to hand pos
             var newCannon = newThrowable.AddComponent<CannonBall1>(); // add john physics
             newCannon.Launch(_hit.point, testAngle); // launch
