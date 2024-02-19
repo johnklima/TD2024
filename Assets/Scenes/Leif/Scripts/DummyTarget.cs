@@ -1,25 +1,31 @@
 using System.Collections;
 using UnityEngine;
 
-[RequireComponent(typeof(BoxCollider))]
+[RequireComponent(typeof(SphereCollider))]
+[RequireComponent(typeof(Rigidbody))]
 public class DummyTarget : MonoBehaviour
 {
-    public Vector3 size = Vector3.one;
-    private BoxCollider _boxCollider;
-
+    public float radius = .5f;
+    public Vector3 center;
+    private SphereCollider _boxCollider;
+    private Rigidbody _rigidbody;
     private bool gotHit;
 
     private void Start()
     {
-        _boxCollider = GetComponent<BoxCollider>();
+        _boxCollider = GetComponent<SphereCollider>();
         _boxCollider.isTrigger = true;
-        _boxCollider.size = size + Vector3.one * .1f;
+        _boxCollider.radius = radius;
+        _boxCollider.center = center;
+        _rigidbody = gameObject.GetComponent<Rigidbody>();
+        _rigidbody.useGravity = false;
+        _rigidbody.isKinematic = true;
     }
 
     private void OnDrawGizmos()
     {
         Gizmos.color = gotHit ? Color.red * .25f : Color.green * .25f;
-        Gizmos.DrawCube(transform.position, size + Vector3.one * .1f);
+        Gizmos.DrawSphere(transform.position + center, radius);
     }
 
     private void OnTriggerEnter(Collider other)

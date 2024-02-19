@@ -55,6 +55,7 @@ MonoBehaviour:
     pulseFreq: -2
     testStart: {x: 0, y: 10, z: 0}
     testEnd: {x: 0, y: 10, z: 10}
+    startPosOffset: {x: 0, y: 0, z: 0}
   OnThrowing:
     m_PersistentCalls:
       m_Calls: []

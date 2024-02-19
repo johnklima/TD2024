@@ -51,6 +51,22 @@ public class Item : MonoBehaviour, IInteractable
         gameObject.SetActive(!isOneShot);
     }
 
+    public GameObject GetActiveGameObject()
+    {
+        foreach (var itemManagerItem in _itemManager.items)
+            if (itemManagerItem.itemData == itemData)
+                return itemManagerItem.gameObject;
+        return null;
+    }
+
+    public Item GetActiveItemInstance()
+    {
+        foreach (var itemManagerItem in _itemManager.items)
+            if (itemManagerItem.itemData == itemData)
+                return itemManagerItem;
+        return null;
+    }
+
     private void Register()
     {
         if (!isActiveAndEnabled) return;

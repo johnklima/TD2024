@@ -116,7 +116,7 @@ public class InventoryDisplay : MonoBehaviour
             var result = TryUpdateDisplaySlot(draggableItem, item);
 
             if (!result)
-                msg = $"Failed to update: ${item.Key}! {stackable}";
+                msg = $"Failed to update: {item.Key}! {stackable}";
             Debug.Log(msg);
         }
 

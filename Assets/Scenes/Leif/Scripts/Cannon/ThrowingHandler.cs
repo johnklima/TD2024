@@ -10,8 +10,9 @@ public class LineRendererSettings
     public Material lineRendererMaterial;
     public float sineModA = 1, sineModB = 1;
     public float pulseFreq = 1;
-    public Vector3 testStart = new(0, 10, 0);
-    public Vector3 testEnd = new(0, 10, 10);
+    public Vector3 testStart = new(0, 0, 0);
+    public Vector3 testEnd = new(0, 0, 0);
+    public Vector3 startPosOffset = new(0, 0, 0);
 }
 
 [RequireComponent(typeof(LineRenderer))]
@@ -28,6 +29,7 @@ public class ThrowingHandler : MonoBehaviour
 
     //TODO reduce count in UI/inventories
     private CannonBall1 _cannonBall;
+    private Transform _doRayCam;
 
     private RaycastHit _hit;
     private InventoryController _inventoryController;
@@ -62,7 +64,7 @@ public class ThrowingHandler : MonoBehaviour
         // if we dont have selected item, we have nothing to throw
         // else we do ray,
         var didRayHit = DoRay(out _hit);
-
+        if (Input.GetMouseButtonUp(0)) Debug.Log("VAR");
         // check if player was holding mouse1 previous frame, and released this frame
         if ((_aimPrevFram && Input.GetMouseButtonUp(0)) || Input.GetKeyDown(KeyCode.Alpha2))
         {
@@ -82,16 +84,20 @@ public class ThrowingHandler : MonoBehaviour
 
         if (_fire)
         {
+            Debug.Log("fire");
             //do fire
             _fire = _aimPrevFram = false; // exit next frame
-            var newThrowable = Instantiate(selectedItem.item.gameObject); // make object
-            newThrowable.SetActive(true);
+            var newThrowable = Instantiate(selectedItem.item.GetActiveGameObject()); // make object
+            var i = newThrowable.GetComponent<Item>();
+            i.isOneShot = true; // thrown items can only be picked back up again
+            // item itself handles breaking on collision
+            newThrowable.SetActive(true); // make sure its active
             newThrowable.transform.position = transform.position; // move to hand pos
             var newCannon = newThrowable.AddComponent<CannonBall1>(); // add john physics
             newCannon.Launch(_hit.point, testAngle); // launch
             OnThrowing.Invoke(selectedItem); // update hotBar
             StartCoroutine(AimCoolDown()); // set cooldown
-            Debug.Log("TODO get item to collide");
+            Debug.Log("fire2");
         }
 
         // do aim
@@ -105,7 +111,7 @@ public class ThrowingHandler : MonoBehaviour
         for (var i = 0; i < res; i++)
             if (_hit.point != Vector3.zero)
             {
-                var tPos = transform.position;
+                var tPos = transform.position + lineRendererSettings.startPosOffset;
                 var pos = Vector3.Lerp(tPos, _hit.point, i / (float)res);
                 pos.y += Mathf.Sin(i * lineRendererSettings.sineModA) * lineRendererSettings.sineModB;
 
@@ -148,7 +154,11 @@ public class ThrowingHandler : MonoBehaviour
 
     private bool DoRay(out RaycastHit hit)
     {
-        var ray = new Ray(transform.position, Camera.main.transform.forward);
+        if (_doRayCam == null)
+            _doRayCam = Camera.main.transform;
+        if (_doRayCam == null)
+            throw new Exception("Cannot find Camera.Main, make sure there is always one active Camera.main");
+        var ray = new Ray(_doRayCam.position, _doRayCam.forward);
         return Physics.Raycast(ray, out hit, 1000);
     }
 }

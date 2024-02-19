@@ -13,12 +13,20 @@ public class HealingArea : MonoBehaviour
         //  leif edit: updated to use the correct one
         //PlayerHealth playerHealth = other.GetComponent<PlayerHealth>();
         var playerHealth = other.GetComponent<PlayerHealthSystem>();
-
         // Check if the playerHealth is not null
         if (playerHealth != null)
         {
+            if (!playerHealth.CanHeal()) // if we cant heal,
+            {
+                testingHealArea.MeshRenderer.material = testingHealArea.fail; // set color to red
+                Debug.Log("player cant heal");
+                return; // exit
+            }
+
+            Debug.Log("player can heal");
             // Call the Heal method on the playerHealth
             playerHealth.Heal(healAmount); //leif edit: added healAmount
+            testingHealArea.MeshRenderer.material = testingHealArea.healing; // green
             OnHealing.Invoke(); //leif edit: added event
         }
         else
@@ -26,9 +34,28 @@ public class HealingArea : MonoBehaviour
             Debug.LogError("PlayerHealth component not found on the player object.");
         }
     }
+
+
     // leif edit: my textEditor (IDE) formats the code automatically (sorry, not sorry :D )
 
     #region LEIF EDIT
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (!other.CompareTag("Player")) return; // leif edit: inverted if
+        testingHealArea.MeshRenderer.material = testingHealArea.standby;
+    }
+
+    [Serializable]
+    public class TestingHealArea
+    {
+        public Material standby;
+        public Material healing;
+        public Material fail;
+        public MeshRenderer MeshRenderer;
+    }
+
+    public TestingHealArea testingHealArea;
 
     public int healAmount = 1; //leif edit: added amount
     public float triggerSize = 2;

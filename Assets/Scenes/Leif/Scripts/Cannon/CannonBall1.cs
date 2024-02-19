@@ -16,11 +16,16 @@ public class CannonBall1 : MonoBehaviour
     public float launchAngle = 15;
 
     public BallGravity1 grav;
+
     private Vector3 _end;
+    // private Rigidbody _rigidbody;
 
     private void Awake()
     {
         grav = GetComponent<BallGravity1>();
+        // _rigidbody = gameObject.AddComponent<Rigidbody>();
+        // _rigidbody.useGravity = false;
+        // _rigidbody.isKinematic = true;
     }
 
     private void OnDrawGizmos()

@@ -28,13 +28,13 @@ public class InventoryController : MonoBehaviour
     {
         Debug.Log("AddItem interactableItem: " + interactableItem);
 
+        interactableItem = interactableItem.GetActiveItemInstance();
         if (_inventory.ContainsKey(interactableItem))
         {
             var stackable = interactableItem.itemData.stackable;
             if ((stackable && _inventory[interactableItem] < stackSize) ||
                 (!stackable && _inventory[interactableItem] < 1))
                 _inventory[interactableItem]++;
-
         }
         else if (_inventory.Count < inventorySlots)
         {
@@ -43,7 +43,6 @@ public class InventoryController : MonoBehaviour
 
         onInventoryChanged.Invoke(_inventory);
         //Show UI/make sound to show that its full
-
     }
 
     public void RemoveItem(DraggableItem draggableItem) //! attaches to ThrowingHandler.OnThrowing()
