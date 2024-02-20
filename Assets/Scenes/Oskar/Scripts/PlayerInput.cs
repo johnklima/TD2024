@@ -1,58 +1,71 @@
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class PlayerInput : MonoBehaviour
 {
-    public TBD_CameraController cameraController;
+    public UnityEvent CancelCauldron;
+    
     private PlayerController _playerController;
     private InputActions _playerInput;
+
 
     private void Awake()
     {
         _playerInput = new InputActions();
         _playerController = GetComponent<PlayerController>();
 
-        _playerInput.Interactions.Interact.performed += HandleInteract;
+        _playerInput.Player.Interact.performed += HandleInteract;
+        _playerInput.UI.Cancel.performed += HandleCancelUI;
     }
 
     private void Update()
     {
         //Read these values at every frame rather than reading it at button press.
-        HandleCameraMovement();
+        //HandleCameraMovement();
         HandleMovement();
     }
 
     private void OnEnable()
     {
-        _playerInput.Movement.Enable();
-        _playerInput.Interactions.Enable();
+        _playerInput.Player.Enable();
     }
 
     private void OnDisable()
     {
-        _playerInput.Movement.Disable();
-        _playerInput.Interactions.Disable();
+        _playerInput.Player.Disable();
     }
 
-    private void HandleCameraMovement()
+    public void EnablePlayerControls()
     {
-        if (cameraController == null) return;
-        //Takes the mouse delta and sends it to the camera controller that handles rotation
-        var mousePos = _playerInput.Movement.LookPos.ReadValue<Vector2>();
-        cameraController.RotateCamera(mousePos);
+        _playerInput.UI.Disable();
+        _playerInput.Player.Enable();
+        Debug.Log("Player controls enabled.");
     }
+
+    public void EnableUIControls()
+    {
+        _playerInput.Player.Disable();
+        _playerInput.UI.Enable();
+        Debug.Log("UI controls enabled.");
+    }
+
+    private void HandleCancelUI(InputAction.CallbackContext context)
+    {
+        CancelCauldron.Invoke();
+    }
+
 
     private void HandleMovement()
     {
         if (_playerController == null) return;
         //Takes the X and Y from the Vector2 and sends it to the player controller that handles player movement.
-        var moveDir = _playerInput.Movement.Move.ReadValue<Vector2>();
+        var moveDir = _playerInput.Player.Move.ReadValue<Vector2>();
         _playerController.Move(moveDir);
     }
 
     private void HandleInteract(InputAction.CallbackContext context)
     {
-        Debug.Log("pressed button");
         _playerController.Interact();
     }
 }

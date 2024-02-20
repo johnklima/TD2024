@@ -1,9 +1,16 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class InventorySlot : MonoBehaviour, IDropHandler
 {
-    public bool isCraftSlot;
+    public Image image;
+    public Color selectedColor, notSelectedColor;
+
+    public void Awake()
+    {
+        Deselect();
+    }
 
     public void OnDrop(PointerEventData eventData)
     {
@@ -12,10 +19,17 @@ public class InventorySlot : MonoBehaviour, IDropHandler
             var dropped = eventData.pointerDrag;
             var draggableItem = dropped.GetComponent<DraggableItem>();
             draggableItem.parentAfterDrag = transform;
-            if (isCraftSlot)
-            {
-                // check if recipe is good, behave accordingly
-            }
         }
     }
+
+    public void Select()
+    {
+        image.color = selectedColor;
+    }
+
+    public void Deselect()
+    {
+        image.color = notSelectedColor;
+    }
+
 }

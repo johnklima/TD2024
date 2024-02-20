@@ -10,9 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 964482177778046108}
   - component: {fileID: -4982118243700742051}
-  m_Layer: 0
+  - component: {fileID: 3865386337837896963}
+  m_Layer: 27
   m_Name: Item
-  m_TagString: Untagged
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -46,9 +47,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9b7dc7bf959424b9cbee2ffcb59ee3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemData: {fileID: 0}
-  itemManager: {fileID: 8783803660975953918, guid: b54fe1cd169ebb4478d74a6bf7e2d6cf,
-    type: 3}
+  itemData: {fileID: 11400000, guid: c27057f2ca560544fb94b9c70243d6ba, type: 2}
+  id: 0
+  _itemManager: {fileID: 0}
+  isOneShot: 0
+--- !u!135 &3865386337837896963
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4985043095849150158}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &634340343610268335
 PrefabInstance:
   m_ObjectHideFlags: 0
