@@ -32,6 +32,7 @@ public class WumpusAgent : MonoBehaviour
     void Start()
     {
 
+        //put the pip at my start location
         pip.position = world.GetCellPosition(row, col) + Vector3.up;
 
     }
