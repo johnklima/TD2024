@@ -3204,6 +3204,7 @@ GameObject:
   - component: {fileID: 896715098}
   - component: {fileID: 896715097}
   - component: {fileID: 896715096}
+  - component: {fileID: 896715100}
   m_Layer: 0
   m_Name: WumpusCell
   m_TagString: Untagged
@@ -3297,6 +3298,30 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &896715100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 896715095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d62af2241da294b489d300bfe26e5418, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cellContents: 0
+  col: 0
+  row: 0
+  exposed: 1
+  mats:
+  - {fileID: 2100000, guid: db642c1b16eb02248893c546650b299d, type: 2}
+  - {fileID: 2100000, guid: eb2fef95d63307b40b3e980e39a92e3e, type: 2}
+  - {fileID: 2100000, guid: f8ac85a7a6944d14db0879808644c711, type: 2}
+  - {fileID: 2100000, guid: 9ac4b356402c4634f9e80ea86ccceb69, type: 2}
+  - {fileID: 2100000, guid: 66a85d2f756d5ad49babf2194bbd189f, type: 2}
+  - {fileID: 2100000, guid: 956146ada15c73541ba757b432fd813b, type: 2}
+  - {fileID: 2100000, guid: f885cab76d633c348acdd7b421dc8fd7, type: 2}
 --- !u!1 &903846846
 GameObject:
   m_ObjectHideFlags: 0
