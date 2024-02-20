@@ -140,7 +140,7 @@ public class CA : MonoBehaviour
     private int decimal_to_binary(int n)
     {
         var binary = 0;
-        int remainder, i; //, flag = 1;
+        int remainder, i; 
         for (i = 1; n != 0; i = i * 10)
         {
             remainder = n % 2;
