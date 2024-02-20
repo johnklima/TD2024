@@ -54,9 +54,7 @@ public class GOL : MonoBehaviour
                     float y = hit.point.y;
                     float z = objs[row, col].transform.localPosition.z;
 
-                    objs[row, col].transform.localPosition.Set(x, y, z);             //this does absolutely nothing!!!!
-                    objs[row, col].transform.localPosition = new Vector3(x, y, z);   //this does
-
+                   
                 }
 
                 //init cells
