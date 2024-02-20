@@ -24,6 +24,8 @@ public class WumpusAgent : MonoBehaviour
     public int nextCol;
     public int nextRow;
 
+    public int iters = 0;  //iterations, public, just so I can kep an eye on it.
+
     public bool gameOver = false;
 
     // Start is called before the first frame update
@@ -50,8 +52,10 @@ public class WumpusAgent : MonoBehaviour
             //iterate one move/cycle
             Perceive();
             
-            Move(nextRow, nextCol);
+            //do the move 
+            Move();
 
+            //check my new cell
             Check();
         }
     }
@@ -170,9 +174,11 @@ public class WumpusAgent : MonoBehaviour
             }
         }
 
-        //final case, choose a random
-        int iters = 0;
-        while(iters < 128)
+        //final case, no prefered next tile, so choose a random
+        
+        iters = 0;                  //reset iters to keep track of the tight loop
+        
+        while(iters < 128)          //excluding a quantum singularity, I should hit it well under 128
         {
 
             iters++;
@@ -251,15 +257,15 @@ public class WumpusAgent : MonoBehaviour
         Debug.Log("QUANTUM SINGULARITY!!!");
        
     }
-    void Move(int _row, int _col)
+    void Move()
     {
         
         //set visited
         world.SetCellVisited(row, col);
         
         //based on perception, move one cell
-        row = _row;
-        col = _col;
+        row = nextRow;
+        col = nextCol;
 
         //move the pip
         pip.position = world.GetCellPosition(row, col) + Vector3.up;
