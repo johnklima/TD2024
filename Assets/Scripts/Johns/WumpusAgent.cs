@@ -183,9 +183,10 @@ public class WumpusAgent : MonoBehaviour
             {
                 //look up
 
-                if (topcellContent != WumpusWorld.WUMPUS &&
-                    topcellContent != WumpusWorld.PIT &&
-                    topcellContent != WumpusWorld.AGENT)
+                if (topcellContent != WumpusWorld.WUMPUS        &&
+                    topcellContent != WumpusWorld.PIT           &&
+                    topcellContent != WumpusWorld.AGENT         &&
+                    topcellContent != WumpusWorld.BAD_SUSHI      )
                 {
                     nextCol = col;
                     nextRow = topcell;
@@ -195,13 +196,15 @@ public class WumpusAgent : MonoBehaviour
 
 
             }
+
             if (rndcell == 1)
             {
                 //lookdown
 
-                if (bottomcellContent != WumpusWorld.WUMPUS &&
-                    bottomcellContent != WumpusWorld.PIT &&
-                    bottomcellContent != WumpusWorld.AGENT)
+                if (bottomcellContent != WumpusWorld.WUMPUS    &&
+                    bottomcellContent != WumpusWorld.PIT       &&
+                    bottomcellContent != WumpusWorld.AGENT     &&
+                    bottomcellContent != WumpusWorld.BAD_SUSHI  )
                 {
                     nextCol = col;
                     nextRow = bottomcell;
@@ -209,14 +212,16 @@ public class WumpusAgent : MonoBehaviour
                     return;
                 }
             }
+
             if (rndcell == 2)
             {
 
                 //look left
 
-                if (leftcellContent != WumpusWorld.WUMPUS &&
-                    leftcellContent != WumpusWorld.PIT &&
-                    leftcellContent != WumpusWorld.AGENT)
+                if (leftcellContent != WumpusWorld.WUMPUS       &&
+                    leftcellContent != WumpusWorld.PIT          &&
+                    leftcellContent != WumpusWorld.AGENT        &&
+                    leftcellContent != WumpusWorld.BAD_SUSHI    )
                 {
                     nextCol = leftcell;
                     nextRow = row;
@@ -229,9 +234,10 @@ public class WumpusAgent : MonoBehaviour
             {
                 //look right
 
-                if (rightcellContent != WumpusWorld.WUMPUS &&
-                    rightcellContent != WumpusWorld.PIT &&
-                    rightcellContent != WumpusWorld.AGENT)
+                if (rightcellContent != WumpusWorld.WUMPUS      &&
+                    rightcellContent != WumpusWorld.PIT         &&
+                    rightcellContent != WumpusWorld.AGENT       &&
+                    rightcellContent != WumpusWorld.BAD_SUSHI   )
                 {
                     nextCol = rightcell;
                     nextRow = row;

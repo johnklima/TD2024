@@ -10,6 +10,7 @@ public class WumpusWorld : MonoBehaviour
 
 
     //should do a typedef enum but rather I shall do it in simplest terms
+    public const int BAD_SUSHI = -1;
     public const int EMPTY = 0;
     public const int BREEZE = 1;
     public const int STENCH = 2;
