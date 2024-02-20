@@ -22,8 +22,7 @@ public class WumpusWorld : MonoBehaviour
     public GameObject baseobject;
     GameObject[,] objs = new GameObject[ROWS, COLS];
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         Build();
         StartGame();
@@ -33,6 +32,45 @@ public class WumpusWorld : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public int GetCellContent(int row, int col)
+    {
+        int content;
+
+
+        // sanity check!
+        if (row < 0)
+            return -1;
+        if (col < 0)
+            return -1;
+
+        if (row >= ROWS)
+            return -1;
+        if (col >= COLS )
+            return -1;
+
+
+        content = objs[row, col].GetComponent<WumpusData>().cellContents;
+
+        return content;
+
+    }
+    public Vector3 GetCellPosition(int row, int col) 
+    {
+        // sanity check!
+        if (row < 0)
+            return Vector3.zero;
+        if (col < 0)
+            return Vector3.zero;
+        if (row >= ROWS)
+            return Vector3.zero;
+        if (col >= COLS)
+            return Vector3.zero;
+
+        
+        return objs[row,col].transform.position;
+
     }
 
     void Build()
@@ -169,7 +207,7 @@ public class WumpusWorld : MonoBehaviour
 
 
         //if we want to debug
-        if (true)
+        if (false)
         {
             for (int row = 0; row < ROWS; row++)
             {
@@ -182,5 +220,14 @@ public class WumpusWorld : MonoBehaviour
 
         }
 
+    }
+
+    public void ExposeCell(int row, int col)
+    {
+        objs[row, col].GetComponent<WumpusData>().Expose(true);
+    }
+    public void SetCellVisited(int row, int col)
+    {
+        objs[row, col].GetComponent<WumpusData>().cellContents = AGENT;
     }
 }
