@@ -66,7 +66,6 @@ public class ThrowingHandler : MonoBehaviour
         // if we dont have selected item, we have nothing to throw
         // else we do ray,
         var didRayHit = DoRay(out _hit);
-        if (Input.GetMouseButtonUp(0)) Debug.Log("VAR");
         // check if player was holding mouse1 previous frame, and released this frame
         if ((_aimPrevFram && Input.GetMouseButtonUp(0)) || Input.GetKeyDown(KeyCode.Alpha2))
         {

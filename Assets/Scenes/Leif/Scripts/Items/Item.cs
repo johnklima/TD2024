@@ -19,7 +19,7 @@ public class Item : MonoBehaviour, IInteractable
     {
         Register();
         _sphereCollider = GetComponent<SphereCollider>();
-        _sphereCollider.isTrigger = true;
+        // _sphereCollider.isTrigger = true;
     }
 
     private void OnDisable()
