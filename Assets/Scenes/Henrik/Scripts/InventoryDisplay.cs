@@ -19,14 +19,14 @@ public class InventoryDisplay : MonoBehaviour
     {
         if (Input.GetAxis("Mouse ScrollWheel") > 0f) // forward
         {
-            var newSlot = selectedSlot + 1;
-            if (newSlot > inventorySlots.Length - 1) newSlot = 0;
+            var newSlot = selectedSlot - 1;
+            if (newSlot < 0) newSlot = 8;
             ChangeSelectedSlot(newSlot);
         }
         else if (Input.GetAxis("Mouse ScrollWheel") < 0f) // backwards
         {
-            var newSlot = selectedSlot - 1;
-            if (newSlot < 0) newSlot = 8;
+            var newSlot = selectedSlot + 1;
+            if (newSlot > inventorySlots.Length - 1) newSlot = 0;
             ChangeSelectedSlot(newSlot);
         }
     }

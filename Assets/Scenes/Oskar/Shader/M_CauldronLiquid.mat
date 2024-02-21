@@ -105,7 +105,7 @@ Material:
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _Speed: {r: 0, g: 0.2, b: 0, a: 0}
     - _Tiling: {r: 3, g: 3, b: 0, a: 0}
-    - _VoronoiColor: {r: 0.108985245, g: 0.3679245, b: 0.08156817, a: 1}
+    - _VoronoiColor: {r: 0.10898522, g: 0.36792448, b: 0.11372549, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &213524657172337502
 MonoBehaviour:
