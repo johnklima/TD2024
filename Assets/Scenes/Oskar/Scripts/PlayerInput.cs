@@ -4,8 +4,10 @@ using UnityEngine.InputSystem;
 
 public class PlayerInput : MonoBehaviour
 {
+    public static bool playerHasControl = true;
     public UnityEvent CancelCauldron;
-    
+    public UnityEvent fire;
+
     private PlayerController _playerController;
     private InputActions _playerInput;
 
@@ -17,6 +19,7 @@ public class PlayerInput : MonoBehaviour
 
         _playerInput.Player.Interact.performed += HandleInteract;
         _playerInput.UI.Cancel.performed += HandleCancelUI;
+        _playerInput.Player.Fire.performed += HandlePlayerFire;
     }
 
     private void Update()
@@ -34,12 +37,20 @@ public class PlayerInput : MonoBehaviour
     private void OnDisable()
     {
         _playerInput.Player.Disable();
+        CursorLockHandler.ShowAndUnlockCursor();
+    }
+
+    public void HandlePlayerFire(InputAction.CallbackContext context)
+    {
+        Debug.Log("player input: fire");
+        fire.Invoke();
     }
 
     public void EnablePlayerControls()
     {
         _playerInput.UI.Disable();
         _playerInput.Player.Enable();
+        playerHasControl = true;
         Debug.Log("Player controls enabled.");
     }
 
@@ -47,11 +58,13 @@ public class PlayerInput : MonoBehaviour
     {
         _playerInput.Player.Disable();
         _playerInput.UI.Enable();
+        playerHasControl = false;
         Debug.Log("UI controls enabled.");
     }
 
     private void HandleCancelUI(InputAction.CallbackContext context)
     {
+        Debug.Log("pressing escape on cauldron");
         CancelCauldron.Invoke();
     }
 

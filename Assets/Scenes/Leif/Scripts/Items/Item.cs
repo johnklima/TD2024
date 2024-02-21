@@ -56,6 +56,7 @@ public class Item : MonoBehaviour, IInteractable
         foreach (var itemManagerItem in _itemManager.items)
             if (itemManagerItem.itemData == itemData)
                 return itemManagerItem.gameObject;
+
         return null;
     }
 

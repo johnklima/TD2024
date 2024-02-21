@@ -38,7 +38,6 @@ public class CauldronController : MonoBehaviour, IInteractable
     public void CancelCauldronMode()
     {
         cauldronCamera.Priority = 5;
-
         cauldronUI.SetActive(false);
         onCauldronExit.Invoke();
     }

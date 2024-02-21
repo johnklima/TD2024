@@ -125,6 +125,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  fire:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &4287186231532579544
 MonoBehaviour:
   m_ObjectHideFlags: 0
