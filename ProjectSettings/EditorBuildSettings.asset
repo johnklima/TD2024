@@ -12,6 +12,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Maren&Suzzi/MarenSofie 1.unity
     guid: ac0f8bbe4ba98fe4ab98276ea4a11775
   - enabled: 1
-    path: Assets/Scenes/Leif/PROTOTYPE_DO_NOT_TOUCH.unity
+    path: Assets/Scenes/Leif/Scenes _old/PROTOTYPE_DO_NOT_TOUCH.unity
     guid: f948ca8f11f5f7b48aeb7d38ee2af672
   m_configObjects: {}
