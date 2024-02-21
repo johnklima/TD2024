@@ -1,0 +1,10 @@
+HealthDisplay: 
+	sprites: 
+		whole heart x1, 
+		empty heart x1
+
+Items: 
+	sprites: 
+		ingredients x6, 
+		potions x12
+

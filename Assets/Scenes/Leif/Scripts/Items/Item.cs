@@ -19,7 +19,7 @@ public class Item : MonoBehaviour, IInteractable
     {
         Register();
         _sphereCollider = GetComponent<SphereCollider>();
-        _sphereCollider.isTrigger = true;
+        // _sphereCollider.isTrigger = true;
     }
 
     private void OnDisable()
@@ -56,6 +56,7 @@ public class Item : MonoBehaviour, IInteractable
         foreach (var itemManagerItem in _itemManager.items)
             if (itemManagerItem.itemData == itemData)
                 return itemManagerItem.gameObject;
+
         return null;
     }
 

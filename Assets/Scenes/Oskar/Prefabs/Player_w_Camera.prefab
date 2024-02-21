@@ -1388,6 +1388,11 @@ PrefabInstance:
       propertyPath: CancelCauldron.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 5520799590618458307, guid: 6ee11c9ef2f615541a413ec5f45028c3,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c9429c265f508a04fa7ccbd9976a344f, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 9103539940211850088, guid: 6ee11c9ef2f615541a413ec5f45028c3, type: 3}

@@ -14,25 +14,20 @@ public class HealingArea : MonoBehaviour
         //PlayerHealth playerHealth = other.GetComponent<PlayerHealth>();
         var playerHealth = other.GetComponent<PlayerHealthSystem>();
         // Check if the playerHealth is not null
-        if (playerHealth != null)
+        if (playerHealth == null) throw new Exception("PlayerHealth component not found on the player object.");
+        if (!playerHealth.CanHeal()) // if we cant heal,
         {
-            if (!playerHealth.CanHeal()) // if we cant heal,
-            {
+            if (testingHealArea.isTesting)
                 testingHealArea.MeshRenderer.material = testingHealArea.fail; // set color to red
-                Debug.Log("player cant heal");
-                return; // exit
-            }
+            Debug.Log("player cant heal");
+            return; // exit
+        }
 
-            Debug.Log("player can heal");
-            // Call the Heal method on the playerHealth
-            playerHealth.Heal(healAmount); //leif edit: added healAmount
-            testingHealArea.MeshRenderer.material = testingHealArea.healing; // green
-            OnHealing.Invoke(); //leif edit: added event
-        }
-        else
-        {
-            Debug.LogError("PlayerHealth component not found on the player object.");
-        }
+        Debug.Log("player can heal");
+        // Call the Heal method on the playerHealth
+        playerHealth.Heal(healAmount); //leif edit: added healAmount
+        if (testingHealArea.isTesting) testingHealArea.MeshRenderer.material = testingHealArea.healing; // green
+        OnHealing.Invoke(); //leif edit: added event
     }
 
 
@@ -43,7 +38,7 @@ public class HealingArea : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         if (!other.CompareTag("Player")) return; // leif edit: inverted if
-        testingHealArea.MeshRenderer.material = testingHealArea.standby;
+        if (testingHealArea.isTesting) testingHealArea.MeshRenderer.material = testingHealArea.standby;
     }
 
     [Serializable]
@@ -53,6 +48,7 @@ public class HealingArea : MonoBehaviour
         public Material healing;
         public Material fail;
         public MeshRenderer MeshRenderer;
+        public bool isTesting;
     }
 
     public TestingHealArea testingHealArea;
@@ -64,11 +60,12 @@ public class HealingArea : MonoBehaviour
     public UnityEvent OnHealing;
 
     private Vector3 sizeV3 => new(triggerSize, triggerSize, triggerSize);
-    private BoxCollider _boxCollider;
 
     private void OnDrawGizmos()
     {
-        var pos = transform.position + offset;
+        if (!isActiveAndEnabled) return;
+        var pos = transform.GetChild(0).position + offset;
+
         switch (triggerShape)
         {
             case TriggerShape.Box:
@@ -82,15 +79,10 @@ public class HealingArea : MonoBehaviour
         }
     }
 
-    public enum TriggerShape
-    {
-        Box,
-        Sphere
-    }
 
     private void Start()
     {
-        var pos = transform.position + offset;
+        var pos = transform.GetChild(0).localPosition + offset;
 
         switch (triggerShape)
         {
@@ -119,6 +111,12 @@ public class HealingArea : MonoBehaviour
     {
         Debug.Log("Test on HealingArea successful");
     }
-
-    #endregion
 }
+
+public enum TriggerShape
+{
+    Box,
+    Sphere
+}
+
+#endregion

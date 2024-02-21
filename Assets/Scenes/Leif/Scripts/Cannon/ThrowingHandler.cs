@@ -59,12 +59,13 @@ public class ThrowingHandler : MonoBehaviour
 
     private void Update()
     {
+        if (!PlayerInput.playerHasControl) return;
+
         var selectedItem = _uIInventoryDisplay.selectedItem;
         if (selectedItem == null) return;
         // if we dont have selected item, we have nothing to throw
         // else we do ray,
         var didRayHit = DoRay(out _hit);
-        if (Input.GetMouseButtonUp(0)) Debug.Log("VAR");
         // check if player was holding mouse1 previous frame, and released this frame
         if ((_aimPrevFram && Input.GetMouseButtonUp(0)) || Input.GetKeyDown(KeyCode.Alpha2))
         {
@@ -87,7 +88,9 @@ public class ThrowingHandler : MonoBehaviour
             Debug.Log("fire");
             //do fire
             _fire = _aimPrevFram = false; // exit next frame
-            var newThrowable = Instantiate(selectedItem.item.GetActiveGameObject()); // make object
+            var throwable = selectedItem.item.GetActiveGameObject();
+            if (throwable == null) throw new Exception("Something wrong");
+            var newThrowable = Instantiate(throwable); // make object
             var i = newThrowable.GetComponent<Item>();
             i.isOneShot = true; // thrown items can only be picked back up again
             // item itself handles breaking on collision
