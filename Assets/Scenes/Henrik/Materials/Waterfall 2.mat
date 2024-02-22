@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Waterfall
+  m_Name: Waterfall 2
   m_Shader: {fileID: -6465566751694194690, guid: 010001eefc4f75640873342c992b29d5,
     type: 3}
   m_Parent: {fileID: 0}
@@ -103,7 +103,7 @@ Material:
     - _BaseColor: {r: 0, g: 0.21568628, b: 0.41568628, a: 1}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Speed: {r: 0, g: 1.52, b: 0, a: 0}
+    - _Speed: {r: 0, g: 2, b: 0, a: 0}
     - _Tiling: {r: 5, g: 1, b: 0, a: 0}
     - _VoronoiColor: {r: 0.45882353, g: 0.6745098, b: 1, a: 1}
   m_BuildTextureStacks: []
