@@ -62,7 +62,7 @@ public class CheatPanel : EditorWindow
         spwnPos = EditorGUI.Vector3Field(new Rect(
                 position.width / 2 - rPad / 2, currHeight + 5,
                 position.width / 2, 25),
-            "", spwnPos);
+            string.Empty, spwnPos);
         // spawn on spawnPos button
         if (GUI.Button(new Rect(lPad, currHeight,
                     position.width / 2 - rPad, 25),

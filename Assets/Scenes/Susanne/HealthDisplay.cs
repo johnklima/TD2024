@@ -69,6 +69,7 @@ public class HealthDisplay : MonoBehaviour
         newHeart.transform.parent = transform;
         var img = newHeart.AddComponent<Image>();
         img.sprite = fullHeart;
+        img.rectTransform.localScale = Vector3.one;
         return img;
     }
 

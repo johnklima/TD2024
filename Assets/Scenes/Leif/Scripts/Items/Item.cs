@@ -13,6 +13,7 @@ public class Item : MonoBehaviour, IInteractable
     [ReadOnly] public int id;
     [SerializeField] private ItemManager _itemManager;
     public bool isOneShot;
+    public Matches matches;
     private SphereCollider _sphereCollider;
 
     private void Awake()
@@ -51,22 +52,36 @@ public class Item : MonoBehaviour, IInteractable
         gameObject.SetActive(!isOneShot);
     }
 
-    public GameObject GetActiveGameObject()
+    public bool MatchesWith(Matches itemMatches)
     {
-        foreach (var itemManagerItem in _itemManager.items)
-            if (itemManagerItem.itemData == itemData)
-                return itemManagerItem.gameObject;
+        //var item1 = slotA.item;
+        //var item2 = slotB.item;
+        //var ingredient1 = item1.itemData.ingredient;
+        //var ingredient2 = item2.itemData.ingredient;  
+        // foreach potion
+        // if item1.item.itemData.ingredient == potion.itemData.ingredient1
+        // or if item1 == potion.itemData.ingredient2
+        // or if item2 == potion.itemData.ingredient1
+        // or if item2 == potion.itemData.ingredient2  
+        // if item1.MatchesWith(item2)
 
-        return null;
+        // if ()
+
+        return false;
     }
 
-    public Item GetActiveItemInstance()
-    {
-        foreach (var itemManagerItem in _itemManager.items)
-            if (itemManagerItem.itemData == itemData)
-                return itemManagerItem;
-        return null;
-    }
+    // public GameObject GetActiveGameObject()
+    // {
+    //     foreach (var itemManagerItem in _itemManager.inventoryController.objects)
+    //     {
+    //         var item = itemManagerItem.GetComponent<Item>();
+    //         if (item.itemData == itemData)
+    //             return itemManagerItem;
+    //     }
+    //
+    //     return null;
+    // }
+
 
     private void Register()
     {
@@ -98,4 +113,10 @@ public class Item : MonoBehaviour, IInteractable
         Handles.Label(transform.position + transform.up * 0.25f, $"{itemData.name}\n{itemData.itemType}");
     }
 #endif
+    //TODO MatchesWith()
+    [Serializable]
+    public class Matches
+    {
+        public bool blue, red, skull, sun, whirlpool, yellow;
+    }
 }

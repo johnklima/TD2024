@@ -96,13 +96,14 @@ public class InventoryDisplay : MonoBehaviour
         //foreach (var keyValuePair in inventory) Debug.Log($"{keyValuePair.Key}:{keyValuePair.Value}");
         foreach (var item in inventory)
         {
+            if (item.Value == 0) continue;
             // scan UI to find and update elements
+            // check if we have UI element for this item
             var draggableItem = FindDraggableItemInSlot(item);
             if (draggableItem == null)
             {
                 // if we dont find item, we need to make UI element
-                var success = FindAndPopulateEmptySlot(item);
-                if (success) continue; // then continue to next item;
+                if (FindAndPopulateEmptySlot(item)) continue; // then continue to next item;
                 throw new Exception("Inventory full??");
             }
 
@@ -112,10 +113,7 @@ public class InventoryDisplay : MonoBehaviour
                 ? "stackable, stack-size: " + draggableItem.count
                 : "un-stackable";
 
-
-            var result = TryUpdateDisplaySlot(draggableItem, item);
-
-            if (!result)
+            if (!TryUpdateDisplaySlot(draggableItem, item))
                 msg = $"Failed to update: {item.Key}! {stackable}";
             Debug.Log(msg);
         }
@@ -125,18 +123,16 @@ public class InventoryDisplay : MonoBehaviour
 
     private bool FindAndPopulateEmptySlot(KeyValuePair<Item, int> item)
     {
-        var success = false;
         foreach (var slot in inventorySlots)
         {
             if (slot.transform.childCount != 0) continue;
             // find empty slot, make child, refresh selectedSlot
             SpawnNewItem(item.Key, slot);
             ChangeSelectedSlot(selectedSlot);
-            success = true;
-            break;
+            return true;
         }
 
-        return success;
+        return false;
     }
 
     private void SpawnNewItem(Item item, InventorySlot slot)

@@ -33,21 +33,31 @@ public class ThrowingHandler : MonoBehaviour
 
     private RaycastHit _hit;
     private InventoryController _inventoryController;
+    private InventoryDisplay _inventoryDisplay;
+    private ItemManager _itemManager;
     private LineRenderer _lineRenderer;
     private Transform _mainCam;
-    private PlayerController _playerController;
-    private InventoryDisplay _uIInventoryDisplay;
 
-    private float offsetAlpha;
+
+    private float _offsetAlpha;
+    private PlayerController _playerController;
 
     private void Start()
     {
-        _uIInventoryDisplay = FindObjectOfType<InventoryDisplay>();
-        if (_uIInventoryDisplay == null) throw new Exception("Make sure there is a <UIInventoryManager> in the scene");
+        _inventoryDisplay = FindObjectOfType<InventoryDisplay>();
+        if (_inventoryDisplay == null) throw new Exception("Make sure there is a <InventoryDisplay> in the scene");
+
         _playerController = GetComponentInParent<PlayerController>();
+        if (_playerController == null)
+            throw new Exception("Make sure there is a <PlayerController> in the scene");
         _inventoryController = GetComponentInParent<InventoryController>();
         if (_inventoryController == null)
             throw new Exception("Make sure there is a <InventoryController> in the scene");
+
+        _itemManager = FindObjectOfType<ItemManager>();
+        if (_itemManager == null)
+            throw new Exception("Make sure there is a <ItemManager> in the scene");
+
         OnThrowing.AddListener(_inventoryController.RemoveItem);
 
         SetupLineRenderer();
@@ -61,7 +71,7 @@ public class ThrowingHandler : MonoBehaviour
     {
         if (!PlayerInput.playerHasControl) return;
 
-        var selectedItem = _uIInventoryDisplay.selectedItem;
+        var selectedItem = _inventoryDisplay.selectedItem;
         if (selectedItem == null) return;
         // if we dont have selected item, we have nothing to throw
         // else we do ray,
@@ -88,7 +98,7 @@ public class ThrowingHandler : MonoBehaviour
             Debug.Log("fire");
             //do fire
             _fire = _aimPrevFram = false; // exit next frame
-            var throwable = selectedItem.item.GetActiveGameObject();
+            var throwable = _itemManager.GetActiveGameObject(selectedItem.item);
             if (throwable == null) throw new Exception("Something wrong");
             var newThrowable = Instantiate(throwable); // make object
             var i = newThrowable.GetComponent<Item>();
@@ -107,9 +117,9 @@ public class ThrowingHandler : MonoBehaviour
         _lineRenderer.enabled = _aimPrevFram;
         if (!_aimPrevFram) return;
         var pulseFreq = lineRendererSettings.pulseFreq;
-        offsetAlpha += Time.deltaTime * pulseFreq;
-        if (offsetAlpha >= 100) offsetAlpha = 0;
-        _lineRenderer.sharedMaterial.mainTextureOffset = new Vector2(offsetAlpha, 0);
+        _offsetAlpha += Time.deltaTime * pulseFreq;
+        if (_offsetAlpha >= 100) _offsetAlpha = 0;
+        _lineRenderer.sharedMaterial.mainTextureOffset = new Vector2(_offsetAlpha, 0);
         var res = _lineRenderer.positionCount;
         for (var i = 0; i < res; i++)
             if (_hit.point != Vector3.zero)
