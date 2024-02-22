@@ -5,10 +5,10 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Maren&Suzzi/MarenSofie.unity
     guid: 1d4996ce3e1a56941bdcbfdbea2c464a
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Maren&Suzzi/MarenSofie 1.unity
     guid: ac0f8bbe4ba98fe4ab98276ea4a11775
   - enabled: 1
