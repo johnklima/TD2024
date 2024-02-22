@@ -43,6 +43,8 @@ public class InventoryDisplay : MonoBehaviour
 
     public void UpdateInventoryDisplay(Dictionary<Item, int> inventory)
     {
+        var msg = "<b><color=green>Updated:</color></b>: (highlight me for details)\n";
+        var failedMsg = "<b><color=red>Not updated: </color></b>\n";
         //foreach (var keyValuePair in inventory) Debug.Log($"{keyValuePair.Key}:{keyValuePair.Value}");
         foreach (var item in inventory)
         {
@@ -50,29 +52,29 @@ public class InventoryDisplay : MonoBehaviour
             // scan UI to find and update elements
             // check if we have UI element for this item
             var draggableItem = FindDraggableItemInSlot(item);
-
-            Debug.Log("draggableItem: " + draggableItem);
+            var stackable = item.Key.itemData.stackable
+                ? "stackable, stack-size: " + item.Value
+                : "un-stackable";
             if (item.Value > 0)
                 // if we actually have an item
                 if (draggableItem == null)
                     // if we dont have a slot
                 {
                     // if we dont find item, we need to make UI element
-                    if (FindAndPopulateEmptySlot(item)) continue; // then continue to next item;
-                    throw new Exception("Inventory full??");
+                    if (!FindAndPopulateEmptySlot(item)) throw new Exception("Inventory full??"); // did not make slot
+                    // successfully made slot
+                    msg += $"made {item.Key}, {stackable}\n";
+                    continue; // then continue to next item;
                 }
 
             // if we have UI version of item, try to update UI
-            var msg = $"Updated: ${item.Key}!";
-            var stackable = item.Key.itemData.stackable
-                ? "stackable, stack-size: " + item.Value
-                : "un-stackable";
-
             if (!TryUpdateDisplaySlot(draggableItem, item))
-                msg = $"Failed to update: {item.Key}! {stackable}";
-            Debug.Log(msg);
+                failedMsg += $"{item.Key}, {stackable}\n"; // if we fail to update
+            else
+                msg += $"updated {item.Key}, {stackable}\n";
         }
 
+        Debug.Log(msg + failedMsg);
         CleanUpInventory(inventory); // remove any unused images
     }
 
@@ -95,6 +97,10 @@ public class InventoryDisplay : MonoBehaviour
         {
             if (slot.transform.childCount != 0) continue;
             // find empty slot, make child, refresh selectedSlot
+            var stackable = item.Key.itemData.stackable
+                ? "stackable, stack-size: " + item.Value
+                : "un-stackable";
+            Debug.Log($"Spawned new item: {item.Key}! {stackable}");
             SpawnNewItem(item.Key, slot);
             ChangeSelectedSlot(selectedSlot);
             return true;
@@ -125,12 +131,11 @@ public class InventoryDisplay : MonoBehaviour
     public bool TryUpdateDisplaySlot(DraggableItem slot, KeyValuePair<Item, int> item)
     {
         if (slot == null) return false;
-        if (slot.item.itemData != item.Key.itemData) return false; // not correct item ?
-        if (slot.item.itemData.stackable && slot.count >= 10) return false; // stackable but full stack
-        if (slot.count >= 1) return false; // is not stackable and already have 1
-        if (slot.count == 0)
+        // if (slot.item.itemData != item.Key.itemData) return false; // not correct item ?
+        // if (slot.item.itemData.stackable && slot.count >= 10) return false; // stackable but full stack
+        // if (slot.count >= 1) return false; // is not stackable and already have 1
 
-            slot.count = item.Value; // update slot
+        slot.count = item.Value; // update slot
         slot.RefreshCount(); // update UI element
         return true;
     }

@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66177a382984bf74ca7139b3c82e1eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aimCoolDown: 1
+  aimCoolDown: 2
   lineRendererSettings:
     resolution: 20
     lineRendererMaterial: {fileID: 2100000, guid: c9429c265f508a04fa7ccbd9976a344f,

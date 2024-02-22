@@ -56,13 +56,10 @@ public class InventoryController : MonoBehaviour
                 (!stackable && _inventory[interactableItem] < 1))
             {
                 _inventory[interactableItem]++;
-                currNumUsedSlots++;
+                if (_inventory[interactableItem] == 1)
+                    currNumUsedSlots++;
             }
         }
-        // else if (_inventory.Count < maxInvSlots)
-        // {
-        //     _inventory[interactableItem] = 1;
-        // }
 
         onInventoryChanged.Invoke(_inventory);
         //Show UI/make sound to show that its full
@@ -75,8 +72,9 @@ public class InventoryController : MonoBehaviour
         if (!_inventory.ContainsKey(item)) throw new Exception("inventory does not contain: " + draggableItem.name);
         if (_inventory[item] > 0)
         {
-            _inventory[item]--;
-            currNumUsedSlots--;
+            _inventory[item] -= 1;
+            if (_inventory[item] == 0)
+                currNumUsedSlots -= 1;
         }
 
         //Show UI/make sound to show that its full

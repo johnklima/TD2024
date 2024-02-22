@@ -3,18 +3,6 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
-[Serializable]
-public class LineRendererSettings
-{
-    public int resolution = 10;
-    public Material lineRendererMaterial;
-    public float sineModA = 1, sineModB = 1;
-    public float pulseFreq = 1;
-    public Vector3 testStart = new(0, 0, 0);
-    public Vector3 testEnd = new(0, 0, 0);
-    public Vector3 startPosOffset = new(0, 0, 0);
-}
-
 [RequireComponent(typeof(LineRenderer))]
 public class ThrowingHandler : MonoBehaviour
 {
@@ -22,7 +10,7 @@ public class ThrowingHandler : MonoBehaviour
     public float aimCoolDown;
     public LineRendererSettings lineRendererSettings;
 
-    public UnityEvent<DraggableItem> OnThrowing = new(); //! listener: InventoryController.RemoveItem 
+    public UnityEvent<DraggableItem> OnThrowing = new(); //! autoListener: InventoryController.RemoveItem 
 
     public float testAngle;
 
@@ -41,17 +29,21 @@ public class ThrowingHandler : MonoBehaviour
     private ItemManager _itemManager;
     private LineRenderer _lineRenderer;
     private Transform _mainCam;
-
     private GameObject _newThrowable;
 
 
     private float _offsetAlpha;
     private PlayerController _playerController;
+    private PlayerInput _playerInput;
+    private IEnumerator coroutine;
 
     private void Start()
     {
         _inventoryDisplay = FindObjectOfType<InventoryDisplay>();
         if (_inventoryDisplay == null) throw new Exception("Make sure there is a <InventoryDisplay> in the scene");
+
+        _playerInput = FindObjectOfType<PlayerInput>();
+        if (_playerInput == null) throw new Exception("Make sure there is a <PlayerInput> in the scene");
 
         _playerController = GetComponentInParent<PlayerController>();
         if (_playerController == null)
@@ -89,15 +81,17 @@ public class ThrowingHandler : MonoBehaviour
         // else we do ray,
         var didRayHit = DoRay(out _hit);
         // check if player was holding mouse1 previous frame, and released this frame
-        if ((_aimPrevFram && Input.GetMouseButtonUp(0)) || Input.GetKeyDown(KeyCode.Alpha2))
+        if (_aimPrevFram && Input.GetMouseButtonUp(0))
         {
             //set fire to true, if we hit something with raycast
             _fire = didRayHit;
+            _playerInput.SetPlayerCanMoveState(false);
         }
         else if (_aimPrevFram && Input.GetMouseButton(1))
         {
             // cancel aim
             _aimPrevFram = false;
+            _playerInput.SetPlayerCanMoveState(true);
             StartCoroutine(AimCoolDown(aimCoolDown / 2f)); //todo
         }
 
@@ -107,9 +101,11 @@ public class ThrowingHandler : MonoBehaviour
 
         if (_fire)
         {
+            _fire = false;
             Debug.Log("fire");
             //do fire
             _animator.SetTrigger(ThrowAnimTrigger);
+
             ExecuteThrow(selectedItem);
         }
 
@@ -153,19 +149,20 @@ public class ThrowingHandler : MonoBehaviour
 
     private void ExecuteThrow(DraggableItem selectedItem)
     {
-        _canAim = _fire = _aimPrevFram = false; // exit next frame
+        _playerInput.DisablePlayerInputForDuration(aimCoolDown);
+        _canAim = _aimPrevFram = false; // exit next frame
+        StartCoroutine(AimCoolDown()); // set cooldown
         var throwable = _itemManager.GetActiveGameObject(selectedItem.item);
         if (throwable == null) throw new Exception("Something wrong");
         _newThrowable = Instantiate(throwable); // make object
-        var i = _newThrowable.GetComponent<Item>();
-        i.isOneShot = true; // thrown items can only be picked back up again
+        var item = _newThrowable.GetComponent<Item>();
+        item.isOneShot = true; // thrown items can only be picked back up again
         // item itself handles breaking on collision
         _newThrowable.SetActive(true); // make sure its active
         _newThrowable.transform.position = transform.position; // move to hand pos
         var newCannon = _newThrowable.AddComponent<CannonBall1>(); // add john physics
         StartCoroutine(LaunchDelayed(newCannon, _hit.point, testAngle)); // launch
         OnThrowing.Invoke(selectedItem); // update hotBar
-        StartCoroutine(AimCoolDown()); // set cooldown
     }
 
     private IEnumerator LaunchDelayed(CannonBall1 cannon, Vector3 target, float angle)

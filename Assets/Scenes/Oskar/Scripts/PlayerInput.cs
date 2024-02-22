@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -40,6 +41,25 @@ public class PlayerInput : MonoBehaviour
     {
         _playerInput.Player.Disable();
         CursorLockHandler.ShowAndUnlockCursor();
+    }
+
+
+    public void SetPlayerCanMoveState(bool enable)
+    {
+        if (enable) _playerInput.Player.Move.Enable();
+        else _playerInput.Player.Move.Disable();
+    }
+
+    public void DisablePlayerInputForDuration(float duration)
+    {
+        _playerInput.Player.Disable();
+        StartCoroutine(ReactivatePlayerInputDelayed(duration));
+    }
+
+    private IEnumerator ReactivatePlayerInputDelayed(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        _playerInput.Player.Enable();
     }
 
     public void HandlePlayerFire(InputAction.CallbackContext context)
