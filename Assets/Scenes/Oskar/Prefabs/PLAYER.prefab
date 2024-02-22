@@ -95,6 +95,7 @@ MonoBehaviour:
   movementSpeed: 5
   throwingRef: {fileID: 3559156749099833394}
   playerCamera: {fileID: 0}
+  canWalkWhileAiming: 1
   interactableDistance: 10
   interactLayerMask:
     serializedVersion: 2

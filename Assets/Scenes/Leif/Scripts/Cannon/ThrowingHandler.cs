@@ -127,10 +127,6 @@ public class ThrowingHandler : MonoBehaviour
                 var tPos = transform.position + lineRendererSettings.startPosOffset;
                 var pos = Vector3.Lerp(tPos, _hit.point, i / (float)res);
                 pos.y += Mathf.Sin(i * lineRendererSettings.sineModA) * lineRendererSettings.sineModB;
-
-                // var normalizedI = ExtensionMethods.Remap(i, 0, res, 0, 1);
-                // if (normalizedI > .5f) normalizedI = 1 - normalizedI;
-                // pos.y += Vector3.Distance(tPos, _hit.point) * normalizedI;
                 _lineRenderer.SetPosition(i, pos);
             }
     }

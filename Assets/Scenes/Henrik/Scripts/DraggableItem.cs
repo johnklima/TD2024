@@ -10,6 +10,7 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     [HideInInspector] public Item item;
     [HideInInspector] public int count = 1;
     [HideInInspector] public Transform parentAfterDrag;
+    [HideInInspector] public Transform prevParent;
     [Header("UI")] private Image image;
 
     public void Start()
@@ -20,7 +21,7 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     public void OnBeginDrag(PointerEventData eventData)
     {
         image.raycastTarget = false;
-        parentAfterDrag = transform.parent;
+        prevParent = parentAfterDrag = transform.parent;
         transform.SetParent(root);
     }
 
@@ -41,7 +42,7 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         if (image == null) image = GetComponent<Image>();
         if (image == null) throw new Exception("GameObject must have Image component!");
         image.sprite = newItem.itemData.uiSprite;
-        root = GetComponentInParent<InventoryDisplay>().transform;
+        root = GetComponentInParent<Canvas>().transform;
         RefreshCount();
     }
 

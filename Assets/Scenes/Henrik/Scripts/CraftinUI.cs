@@ -2,23 +2,25 @@ using UnityEngine;
 
 public class CraftinUI : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
+    public GameObject craftingSlot;
 
-    }
-    private void OnDisable()
+    private void Update()
     {
-        CursorLockHandler.HideAndLockCursor();
     }
 
     private void OnEnable()
     {
+        craftingSlot.SetActive(true);
         CursorLockHandler.ShowAndUnlockCursor();
     }
-    // Update is called once per frame
-    void Update()
-    {
 
+    private void OnDisable()
+    {
+        craftingSlot.SetActive(false);
+        CursorLockHandler.HideAndLockCursor();
+    }
+
+    public void OnMix()
+    {
     }
 }
