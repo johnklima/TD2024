@@ -23,6 +23,7 @@ public class CannonBall1 : MonoBehaviour
     private void Awake()
     {
         grav = GetComponent<BallGravity1>();
+        grav.enabled = false;
         // _rigidbody = gameObject.AddComponent<Rigidbody>();
         // _rigidbody.useGravity = false;
         // _rigidbody.isKinematic = true;

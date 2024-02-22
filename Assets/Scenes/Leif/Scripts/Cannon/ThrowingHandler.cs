@@ -18,13 +18,17 @@ public class LineRendererSettings
 [RequireComponent(typeof(LineRenderer))]
 public class ThrowingHandler : MonoBehaviour
 {
+    private static readonly int ThrowAnimTrigger = Animator.StringToHash("Throw");
     public float aimCoolDown;
     public LineRendererSettings lineRendererSettings;
 
     public UnityEvent<DraggableItem> OnThrowing = new(); //! listener: InventoryController.RemoveItem 
 
     public float testAngle;
+
+    public float throwDelay = 1f;
     private bool _aimPrevFram, _fire;
+    private Animator _animator;
     private bool _canAim = true;
 
     //TODO reduce count in UI/inventories
@@ -37,6 +41,8 @@ public class ThrowingHandler : MonoBehaviour
     private ItemManager _itemManager;
     private LineRenderer _lineRenderer;
     private Transform _mainCam;
+
+    private GameObject _newThrowable;
 
 
     private float _offsetAlpha;
@@ -60,6 +66,9 @@ public class ThrowingHandler : MonoBehaviour
 
         OnThrowing.AddListener(_inventoryController.RemoveItem);
 
+        _animator = GetComponentInParent<Animator>();
+
+
         SetupLineRenderer();
         _canAim = true;
         if (Camera.main != null)
@@ -69,6 +78,9 @@ public class ThrowingHandler : MonoBehaviour
 
     private void Update()
     {
+        if (_newThrowable != null) _newThrowable.transform.position = transform.position;
+
+
         if (!PlayerInput.playerHasControl) return;
 
         var selectedItem = _inventoryDisplay.selectedItem;
@@ -97,20 +109,8 @@ public class ThrowingHandler : MonoBehaviour
         {
             Debug.Log("fire");
             //do fire
-            _fire = _aimPrevFram = false; // exit next frame
-            var throwable = _itemManager.GetActiveGameObject(selectedItem.item);
-            if (throwable == null) throw new Exception("Something wrong");
-            var newThrowable = Instantiate(throwable); // make object
-            var i = newThrowable.GetComponent<Item>();
-            i.isOneShot = true; // thrown items can only be picked back up again
-            // item itself handles breaking on collision
-            newThrowable.SetActive(true); // make sure its active
-            newThrowable.transform.position = transform.position; // move to hand pos
-            var newCannon = newThrowable.AddComponent<CannonBall1>(); // add john physics
-            newCannon.Launch(_hit.point, testAngle); // launch
-            OnThrowing.Invoke(selectedItem); // update hotBar
-            StartCoroutine(AimCoolDown()); // set cooldown
-            Debug.Log("fire2");
+            _animator.SetTrigger(ThrowAnimTrigger);
+            ExecuteThrow(selectedItem);
         }
 
         // do aim
@@ -135,6 +135,7 @@ public class ThrowingHandler : MonoBehaviour
             }
     }
 
+
     private void OnValidate()
     {
         SetupLineRenderer();
@@ -150,6 +151,30 @@ public class ThrowingHandler : MonoBehaviour
         }
     }
 
+    private void ExecuteThrow(DraggableItem selectedItem)
+    {
+        _canAim = _fire = _aimPrevFram = false; // exit next frame
+        var throwable = _itemManager.GetActiveGameObject(selectedItem.item);
+        if (throwable == null) throw new Exception("Something wrong");
+        _newThrowable = Instantiate(throwable); // make object
+        var i = _newThrowable.GetComponent<Item>();
+        i.isOneShot = true; // thrown items can only be picked back up again
+        // item itself handles breaking on collision
+        _newThrowable.SetActive(true); // make sure its active
+        _newThrowable.transform.position = transform.position; // move to hand pos
+        var newCannon = _newThrowable.AddComponent<CannonBall1>(); // add john physics
+        StartCoroutine(LaunchDelayed(newCannon, _hit.point, testAngle)); // launch
+        OnThrowing.Invoke(selectedItem); // update hotBar
+        StartCoroutine(AimCoolDown()); // set cooldown
+    }
+
+    private IEnumerator LaunchDelayed(CannonBall1 cannon, Vector3 target, float angle)
+    {
+        yield return new WaitForSeconds(throwDelay);
+        _newThrowable = null;
+        cannon.Launch(target, angle); // launch
+    }
+
     private void SetupLineRenderer()
     {
         if (_lineRenderer == null) _lineRenderer = GetComponent<LineRenderer>();
@@ -162,6 +187,7 @@ public class ThrowingHandler : MonoBehaviour
     {
         if (t == 0) t = aimCoolDown;
         yield return new WaitForSeconds(t);
+        _animator.ResetTrigger(ThrowAnimTrigger);
         _canAim = true;
     }
 

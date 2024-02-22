@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2568513764120214443}
   - component: {fileID: 3759814117437878711}
   - component: {fileID: 3798046197949227059}
+  - component: {fileID: 5133729802702353124}
   m_Layer: 0
   m_Name: Throwing
   m_TagString: Untagged
@@ -26,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5281637325546295490}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0.10811656, y: 0.011284241, z: -0.9137258, w: -0.391521}
   m_LocalPosition: {x: 0.478, y: -0.57771057, z: 0.124}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -58,8 +59,21 @@ MonoBehaviour:
     startPosOffset: {x: 0, y: 0, z: 0}
   OnThrowing:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: InventoryController, Assembly-CSharp
+        m_MethodName: RemoveItem
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   testAngle: 0
+  throwDelay: 0.75
 --- !u!120 &3798046197949227059
 LineRenderer:
   serializedVersion: 2
@@ -200,3 +214,17 @@ LineRenderer:
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
+--- !u!114 &5133729802702353124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5281637325546295490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 614ed9ee644a70d40a8ece8b87b98f09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 0.05
+  isEnabled: 1

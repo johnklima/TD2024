@@ -80,9 +80,9 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!114 &4640114109035604910
 MonoBehaviour:
@@ -100,6 +100,10 @@ MonoBehaviour:
   center: {x: 0, y: 0.5, z: 0}
   isTrashCan: 0
   scaleSpeed: 1
+  onGotHit:
+    m_PersistentCalls:
+      m_Calls: []
+  gotHit: 0
 --- !u!114 &2545213814153122375
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -113,12 +117,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageAmount: 1
-  OnDamage:
+  onDamage:
     m_PersistentCalls:
       m_Calls: []
   triggerSize: 3
   offset: {x: 0, y: 1.5, z: 0}
   triggerShape: 0
+  dummyTarget: {fileID: 0}
 --- !u!1 &2145711425120481787
 GameObject:
   m_ObjectHideFlags: 0
@@ -199,9 +204,9 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!114 &324551009405046075
 MonoBehaviour:
@@ -219,6 +224,10 @@ MonoBehaviour:
   center: {x: 0, y: 0.5, z: 0}
   isTrashCan: 0
   scaleSpeed: 1
+  onGotHit:
+    m_PersistentCalls:
+      m_Calls: []
+  gotHit: 0
 --- !u!114 &9084551118006543222
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -232,12 +241,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageAmount: 1
-  OnDamage:
+  onDamage:
     m_PersistentCalls:
       m_Calls: []
   triggerSize: 3
   offset: {x: 0, y: 1.5, z: 0}
   triggerShape: 0
+  dummyTarget: {fileID: 0}
 --- !u!1 &2545300954206069728
 GameObject:
   m_ObjectHideFlags: 0
@@ -318,9 +328,9 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!114 &8518725304400628130
 MonoBehaviour:
@@ -338,6 +348,10 @@ MonoBehaviour:
   center: {x: 0, y: 0.5, z: 0}
   isTrashCan: 0
   scaleSpeed: 1
+  onGotHit:
+    m_PersistentCalls:
+      m_Calls: []
+  gotHit: 0
 --- !u!114 &8363773474028275963
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -351,12 +365,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageAmount: 1
-  OnDamage:
+  onDamage:
     m_PersistentCalls:
       m_Calls: []
   triggerSize: 3
   offset: {x: 0, y: 1.5, z: 0}
   triggerShape: 0
+  dummyTarget: {fileID: 0}
 --- !u!1 &2950637626556489977
 GameObject:
   m_ObjectHideFlags: 0
@@ -437,9 +452,9 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!114 &8062461090437126273
 MonoBehaviour:
@@ -457,6 +472,10 @@ MonoBehaviour:
   center: {x: 0, y: 0.5, z: 0}
   isTrashCan: 0
   scaleSpeed: 1
+  onGotHit:
+    m_PersistentCalls:
+      m_Calls: []
+  gotHit: 0
 --- !u!114 &4276650455135842527
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -470,12 +489,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageAmount: 1
-  OnDamage:
+  onDamage:
     m_PersistentCalls:
       m_Calls: []
   triggerSize: 3
   offset: {x: 0, y: 1.5, z: 0}
   triggerShape: 0
+  dummyTarget: {fileID: 0}
 --- !u!1 &3254147026331493319
 GameObject:
   m_ObjectHideFlags: 0
@@ -556,9 +576,9 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!114 &2074554458263509259
 MonoBehaviour:
@@ -576,6 +596,10 @@ MonoBehaviour:
   center: {x: 0, y: 0.5, z: 0}
   isTrashCan: 0
   scaleSpeed: 1
+  onGotHit:
+    m_PersistentCalls:
+      m_Calls: []
+  gotHit: 0
 --- !u!114 &4878995258034803325
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -589,12 +613,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageAmount: 1
-  OnDamage:
+  onDamage:
     m_PersistentCalls:
       m_Calls: []
   triggerSize: 3
   offset: {x: 0, y: 1.5, z: 0}
   triggerShape: 0
+  dummyTarget: {fileID: 0}
 --- !u!1 &3694176251041029256
 GameObject:
   m_ObjectHideFlags: 0
@@ -675,9 +700,9 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!114 &1775147529197390573
 MonoBehaviour:
@@ -695,6 +720,10 @@ MonoBehaviour:
   center: {x: 0, y: 0.5, z: 0}
   isTrashCan: 0
   scaleSpeed: 1
+  onGotHit:
+    m_PersistentCalls:
+      m_Calls: []
+  gotHit: 0
 --- !u!114 &8270984350422725443
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -708,12 +737,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageAmount: 1
-  OnDamage:
+  onDamage:
     m_PersistentCalls:
       m_Calls: []
   triggerSize: 3
   offset: {x: 0, y: 1.5, z: 0}
   triggerShape: 0
+  dummyTarget: {fileID: 0}
 --- !u!1 &5529690626420853937
 GameObject:
   m_ObjectHideFlags: 0
@@ -794,9 +824,9 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!114 &1246798195534480535
 MonoBehaviour:
@@ -814,6 +844,10 @@ MonoBehaviour:
   center: {x: 0, y: 0.5, z: 0}
   isTrashCan: 0
   scaleSpeed: 1
+  onGotHit:
+    m_PersistentCalls:
+      m_Calls: []
+  gotHit: 0
 --- !u!114 &2880226446764473067
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -827,12 +861,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageAmount: 1
-  OnDamage:
+  onDamage:
     m_PersistentCalls:
       m_Calls: []
   triggerSize: 3
   offset: {x: 0, y: 1.5, z: 0}
   triggerShape: 0
+  dummyTarget: {fileID: 0}
 --- !u!1 &6608050543640947687
 GameObject:
   m_ObjectHideFlags: 0
@@ -975,6 +1010,10 @@ MonoBehaviour:
   center: {x: 0, y: 0.5, z: 0}
   isTrashCan: 0
   scaleSpeed: 1
+  onGotHit:
+    m_PersistentCalls:
+      m_Calls: []
+  gotHit: 0
 --- !u!114 &3863831400215973693
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -988,12 +1027,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageAmount: 1
-  OnDamage:
+  onDamage:
     m_PersistentCalls:
       m_Calls: []
   triggerSize: 3
   offset: {x: 0, y: 1.5, z: 0}
   triggerShape: 0
+  dummyTarget: {fileID: 0}
 --- !u!1 &7574583613697004810
 GameObject:
   m_ObjectHideFlags: 0
@@ -1074,9 +1114,9 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!114 &3519556456409815900
 MonoBehaviour:
@@ -1094,6 +1134,10 @@ MonoBehaviour:
   center: {x: 0, y: 0.5, z: 0}
   isTrashCan: 0
   scaleSpeed: 1
+  onGotHit:
+    m_PersistentCalls:
+      m_Calls: []
+  gotHit: 0
 --- !u!114 &4246078522771830888
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1107,12 +1151,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageAmount: 1
-  OnDamage:
+  onDamage:
     m_PersistentCalls:
       m_Calls: []
   triggerSize: 3
   offset: {x: 0, y: 1.5, z: 0}
   triggerShape: 0
+  dummyTarget: {fileID: 0}
 --- !u!1 &8133481408317990736
 GameObject:
   m_ObjectHideFlags: 0
@@ -1193,9 +1238,9 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!114 &2769755608444554069
 MonoBehaviour:
@@ -1213,6 +1258,10 @@ MonoBehaviour:
   center: {x: 0, y: 0.5, z: 0}
   isTrashCan: 0
   scaleSpeed: 1
+  onGotHit:
+    m_PersistentCalls:
+      m_Calls: []
+  gotHit: 0
 --- !u!114 &6337007840631354675
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1226,12 +1275,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageAmount: 1
-  OnDamage:
+  onDamage:
     m_PersistentCalls:
       m_Calls: []
   triggerSize: 3
   offset: {x: 0, y: 1.5, z: 0}
   triggerShape: 0
+  dummyTarget: {fileID: 0}
 --- !u!1 &9025943418665165541
 GameObject:
   m_ObjectHideFlags: 0
@@ -1312,9 +1362,9 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!114 &2157340776316564114
 MonoBehaviour:
@@ -1332,6 +1382,10 @@ MonoBehaviour:
   center: {x: 0, y: 0.5, z: 0}
   isTrashCan: 0
   scaleSpeed: 1
+  onGotHit:
+    m_PersistentCalls:
+      m_Calls: []
+  gotHit: 0
 --- !u!114 &5040467220701410664
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1345,12 +1399,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageAmount: 1
-  OnDamage:
+  onDamage:
     m_PersistentCalls:
       m_Calls: []
   triggerSize: 3
   offset: {x: 0, y: 1.5, z: 0}
   triggerShape: 0
+  dummyTarget: {fileID: 0}
 --- !u!1001 &99942383118523449
 PrefabInstance:
   m_ObjectHideFlags: 0

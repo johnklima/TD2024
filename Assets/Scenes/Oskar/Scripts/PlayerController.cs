@@ -4,7 +4,7 @@ using UnityEngine.Events;
 public class PlayerController : MonoBehaviour
 {
     public float movementSpeed = 5f;
-
+    public GameObject throwingRef;
     public Transform playerCamera;
 
 
@@ -19,15 +19,14 @@ public class PlayerController : MonoBehaviour
     private bool _shouldRayCast = true;
 
     private IInteractable _targetedItem;
-    
+
 
     private CharacterController ctrl;
-
 
     private void Awake()
     {
         ctrl = GetComponent<CharacterController>();
-        
+
         CursorLockHandler.HideAndLockCursor();
     }
 
@@ -71,6 +70,11 @@ public class PlayerController : MonoBehaviour
                 hittingInteractable.Invoke();
             }
         }
+    }
+
+    private void OnValidate()
+    {
+        throwingRef = GetComponentInChildren<ThrowingHandler>().gameObject;
     }
 
     public void ToggleRayCasting()

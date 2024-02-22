@@ -1,10 +1,11 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class InventoryController : MonoBehaviour
 {
-    [SerializeField] private int inventorySlots = 9;
+    [SerializeField] private int maxInvSlots = 9, currNumUsedSlots;
     [SerializeField] private int stackSize = 10;
 
     public GameObject[] objects;
@@ -45,6 +46,7 @@ public class InventoryController : MonoBehaviour
     // listens to OnItemInteract @ ItemManager
     public void AddItem(Item interactableItem)
     {
+        if (currNumUsedSlots == maxInvSlots) return;
         Debug.Log("AddItem interactableItem: " + interactableItem);
         interactableItem = GetActiveItemInstance(interactableItem);
         if (_inventory.ContainsKey(interactableItem))
@@ -52,9 +54,12 @@ public class InventoryController : MonoBehaviour
             var stackable = interactableItem.itemData.stackable;
             if ((stackable && _inventory[interactableItem] < stackSize) ||
                 (!stackable && _inventory[interactableItem] < 1))
+            {
                 _inventory[interactableItem]++;
+                currNumUsedSlots++;
+            }
         }
-        // else if (_inventory.Count < inventorySlots)
+        // else if (_inventory.Count < maxInvSlots)
         // {
         //     _inventory[interactableItem] = 1;
         // }
@@ -65,9 +70,15 @@ public class InventoryController : MonoBehaviour
 
     public void RemoveItem(DraggableItem draggableItem) //! attaches to ThrowingHandler.OnThrowing()
     {
-        var item = draggableItem.item;
-        if (!_inventory.ContainsKey(item)) return;
-        if (_inventory[item] > 0) _inventory[item]--;
+        var item = GetActiveItemInstance(draggableItem.item);
+        Debug.Log("_inventory[item]: " + _inventory[item]);
+        if (!_inventory.ContainsKey(item)) throw new Exception("inventory does not contain: " + draggableItem.name);
+        if (_inventory[item] > 0)
+        {
+            _inventory[item]--;
+            currNumUsedSlots--;
+        }
+
         //Show UI/make sound to show that its full
         onInventoryChanged.Invoke(_inventory);
     }

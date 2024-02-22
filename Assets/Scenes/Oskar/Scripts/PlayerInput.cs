@@ -8,6 +8,8 @@ public class PlayerInput : MonoBehaviour
     public UnityEvent CancelCauldron;
     public UnityEvent fire;
 
+    public Vector2 moveDir;
+
     private PlayerController _playerController;
     private InputActions _playerInput;
 
@@ -73,7 +75,7 @@ public class PlayerInput : MonoBehaviour
     {
         if (_playerController == null) return;
         //Takes the X and Y from the Vector2 and sends it to the player controller that handles player movement.
-        var moveDir = _playerInput.Player.Move.ReadValue<Vector2>();
+        moveDir = _playerInput.Player.Move.ReadValue<Vector2>();
         _playerController.Move(moveDir);
     }
 
