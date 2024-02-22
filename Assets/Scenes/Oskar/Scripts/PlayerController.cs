@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
     public float movementSpeed = 5f;
     public GameObject throwingRef;
     public Transform playerCamera;
-
+    public bool canWalkWhileAiming = true;
 
     [Header("Interactable controls")] public float interactableDistance = 10f;
 
@@ -25,6 +25,9 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+        if (throwingRef == null)
+            throwingRef = GetComponentInChildren<ThrowingHandler>().gameObject;
+
         ctrl = GetComponent<CharacterController>();
 
         CursorLockHandler.HideAndLockCursor();
@@ -74,7 +77,8 @@ public class PlayerController : MonoBehaviour
 
     private void OnValidate()
     {
-        throwingRef = GetComponentInChildren<ThrowingHandler>().gameObject;
+        if (throwingRef == null)
+            throwingRef = GetComponentInChildren<ThrowingHandler>().gameObject;
     }
 
     public void ToggleRayCasting()

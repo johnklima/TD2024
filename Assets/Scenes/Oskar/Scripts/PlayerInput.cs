@@ -7,7 +7,6 @@ public class PlayerInput : MonoBehaviour
 {
     public static bool playerHasControl = true;
     public UnityEvent CancelCauldron;
-    public UnityEvent fire;
 
     public Vector2 moveDir;
 
@@ -22,7 +21,6 @@ public class PlayerInput : MonoBehaviour
 
         _playerInput.Player.Interact.performed += HandleInteract;
         _playerInput.UI.Cancel.performed += HandleCancelUI;
-        _playerInput.Player.Fire.performed += HandlePlayerFire;
     }
 
     private void Update()
@@ -46,8 +44,8 @@ public class PlayerInput : MonoBehaviour
 
     public void SetPlayerCanMoveState(bool enable)
     {
-        if (enable) _playerInput.Player.Move.Enable();
-        else _playerInput.Player.Move.Disable();
+        if (enable) _playerInput.Player.Enable();
+        else _playerInput.Player.Disable();
     }
 
     public void DisablePlayerInputForDuration(float duration)
@@ -58,14 +56,10 @@ public class PlayerInput : MonoBehaviour
 
     private IEnumerator ReactivatePlayerInputDelayed(float delay)
     {
+        Debug.Log("enabling2");
+
         yield return new WaitForSeconds(delay);
         _playerInput.Player.Enable();
-    }
-
-    public void HandlePlayerFire(InputAction.CallbackContext context)
-    {
-        Debug.Log("player input: fire");
-        fire.Invoke();
     }
 
     public void EnablePlayerControls()

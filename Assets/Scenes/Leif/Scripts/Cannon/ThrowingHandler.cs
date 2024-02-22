@@ -71,47 +71,51 @@ public class ThrowingHandler : MonoBehaviour
     private void Update()
     {
         if (_newThrowable != null) _newThrowable.transform.position = transform.position;
-
-
         if (!PlayerInput.playerHasControl) return;
-
         var selectedItem = _inventoryDisplay.selectedItem;
         if (selectedItem == null) return;
+
         // if we dont have selected item, we have nothing to throw
         // else we do ray,
         var didRayHit = DoRay(out _hit);
+        var canMoveAndAim = _playerController.canWalkWhileAiming;
         // check if player was holding mouse1 previous frame, and released this frame
-        if (_aimPrevFram && Input.GetMouseButtonUp(0))
+        if (_aimPrevFram && Input.GetMouseButtonUp(0)) //! order matters #1 
         {
             //set fire to true, if we hit something with raycast
             _fire = didRayHit;
-            _playerInput.SetPlayerCanMoveState(false);
         }
-        else if (_aimPrevFram && Input.GetMouseButton(1))
+        else if (_aimPrevFram && Input.GetMouseButton(1)) //! order matters #2
         {
-            // cancel aim
+            // player cancel aim
             _aimPrevFram = false;
-            _playerInput.SetPlayerCanMoveState(true);
-            StartCoroutine(AimCoolDown(aimCoolDown / 2f)); //todo
+            if (!canMoveAndAim)
+                _playerInput.SetPlayerCanMoveState(true);
+            StartCoroutine(AimCoolDown(aimCoolDown / 2f));
         }
 
         // if player is not in cooldown and presses mouse down this frame
-        if (_canAim && Input.GetMouseButtonDown(0))
-            _aimPrevFram = true;
-
-        if (_fire)
+        if (_canAim && Input.GetMouseButtonDown(0)) //! order matters #3
         {
-            _fire = false;
-            Debug.Log("fire");
-            //do fire
-            _animator.SetTrigger(ThrowAnimTrigger);
+            // player is aiming
+            _aimPrevFram = true;
+            if (!canMoveAndAim)
+                _playerInput.SetPlayerCanMoveState(false);
+        }
 
+        // if everything up to now says we can fire, set the wheels in motion!
+        if (_fire) //! order matters #4
+        {
+            //do fire
+            _fire = false;
+            _animator.SetTrigger(ThrowAnimTrigger);
             ExecuteThrow(selectedItem);
         }
 
-        // do aim
         _lineRenderer.enabled = _aimPrevFram;
-        if (!_aimPrevFram) return;
+
+        if (!_aimPrevFram) return; //! order matters #5
+        // do aim
         var pulseFreq = lineRendererSettings.pulseFreq;
         _offsetAlpha += Time.deltaTime * pulseFreq;
         if (_offsetAlpha >= 100) _offsetAlpha = 0;
