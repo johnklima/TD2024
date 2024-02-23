@@ -1,8 +1,7 @@
-using Scenes.Leif.Scripts;
 using UnityEditor;
 using UnityEngine;
 
-namespace Scenes.Leif.Editor
+namespace Scenes.Leif.Scripts.Editor
 {
     // [CustomEditor(typeof(MyCustomClass))]
 // public class MyCustomClassEditor : UnityEditor.Editor

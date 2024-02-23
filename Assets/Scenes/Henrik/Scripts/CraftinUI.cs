@@ -61,30 +61,22 @@ public class CraftinUI : MonoBehaviour
         if (iItem == null)
             throw new Exception("did not find matching item in inventoryController.objects for: " + draggableItem.name);
 
-        if (currentIngredients.Count < 2)
-        {
-            Debug.Log("Slotted first item: " + draggableItem.name);
-            currentIngredients.Add(iItem);
-        }
-
-        mixButton.interactable = currentIngredients.Count == 2;
+        Debug.Log("Slotted second item: " + draggableItem.name);
+        currentIngredients.Add(iItem);
+        mixButton.interactable = currentIngredients.Count == 2; //make mix button active if we have 2
         if (currentIngredients.Count < 2) // it was first item, find color and set shader
             SetCauldronSoupColor(ingredientObjectItem);
         if (currentIngredients.Count == 2)
         {
-            // we have 2 ingredients. make mix button active.
-            Debug.Log("Slotted second item: " + draggableItem.name);
-
-            //todo make button active
+            // we have 2 ingredients. 
             // check ingredients match
-
             var ingItem1 = currentIngredients[0];
             var ingItem2 = currentIngredients[1];
             ingredientsMatch = ingItem1.Match(ingItem2.ingredient);
 
             // empty list for next try
             prevIngredients = currentIngredients;
-            currentIngredients.Clear();
+            currentIngredients.Remove(currentIngredients[0]);
         }
 
         // we have gotten X items

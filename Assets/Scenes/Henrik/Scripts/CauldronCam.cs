@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CalduronCam : MonoBehaviour
+public class CauldronCam : MonoBehaviour
 {
     [Header("Grab A Reference Of DiaCamera")]
     public GameObject playerDiaCamOBJ;
