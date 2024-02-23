@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Scenes.Leif.Editor
 {
     // [CustomEditor(typeof(MyCustomClass))]
-// public class MyCustomClassEditor : Editor
+// public class MyCustomClassEditor : UnityEditor.Editor
 // {
 //     public override void OnInspectorGUI()
 //     {
@@ -15,6 +15,31 @@ namespace Scenes.Leif.Editor
 //         if (GUILayout.Button("Trigger 'Method()' on <_target>")) _target.Method();
 //     }
 // }
+//
+//
+    // [CustomEditor(typeof(PotionObjectItem))]
+    // public class PotionObjectItemEditor : UnityEditor.Editor
+    // {
+    //     public override void OnInspectorGUI()
+    //     {
+    //         var _target = target as PotionObjectItem;
+    //         if (_target == null) return;
+    //         DrawDefaultInspector();
+    //         if (GUILayout.Button("Trigger 'Method()' on <_target>")) _target.CopyData();
+    //     }
+    // }
+    //
+    // [CustomEditor(typeof(IngredientObjectItem))]
+    // public class IngredientObjectItemEditor : UnityEditor.Editor
+    // {
+    //     public override void OnInspectorGUI()
+    //     {
+    //         var _target = target as IngredientObjectItem;
+    //         if (_target == null) return;
+    //         DrawDefaultInspector();
+    //         if (GUILayout.Button("Trigger 'Method()' on <_target>")) _target.CopyData();
+    //     }
+    // }
 
     [CustomEditor(typeof(InventoryController))]
     public class InventoryControllerEditor : UnityEditor.Editor

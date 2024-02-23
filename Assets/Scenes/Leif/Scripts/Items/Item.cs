@@ -1,5 +1,6 @@
 ﻿using System;
 using Unity.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 #if UNITY_EDITOR
 using UnityEditor;
@@ -19,7 +20,7 @@ public class Item : MonoBehaviour, IInteractable
     {
         Register();
         _sphereCollider = GetComponent<SphereCollider>();
-        _sphereCollider.isTrigger = true;
+        // _sphereCollider.isTrigger = true;
     }
 
     private void OnDisable()
@@ -34,7 +35,7 @@ public class Item : MonoBehaviour, IInteractable
     }
 #endif
 
-    private void OnValidate()
+    protected virtual void OnValidate()
     {
         Register();
     }
@@ -51,21 +52,26 @@ public class Item : MonoBehaviour, IInteractable
         gameObject.SetActive(!isOneShot);
     }
 
-    public GameObject GetActiveGameObject()
+    public bool MatchesWith(Item checkItem)
     {
-        foreach (var itemManagerItem in _itemManager.items)
-            if (itemManagerItem.itemData == itemData)
-                return itemManagerItem.gameObject;
-        return null;
+        //? MatchesWith() (alternative)
+        // foreach potion
+        // A = potion.ingredient1 == slotA || slotB
+        // B =potion.ingredient2 == slotA || slotB
+        // if A + B: match!
+
+        // if we are not ingredient, we dont match nothing;
+        if (itemData.itemType != ItemType.Ingredient) return false;
+        // if item we wanna check is not ingredient....
+        if (checkItem.itemData.itemType != ItemType.Ingredient) return false;
+        // get thisIngredientItem
+        var thisIngredientItem = itemData.GameObject().GetComponent<IngredientItem>();
+        // get checkIngredientItem
+        var checkIngredientItem = checkItem.GetComponent<IngredientItem>();
+        // check if they match
+        return thisIngredientItem.Match(checkIngredientItem.ingredient);
     }
 
-    public Item GetActiveItemInstance()
-    {
-        foreach (var itemManagerItem in _itemManager.items)
-            if (itemManagerItem.itemData == itemData)
-                return itemManagerItem;
-        return null;
-    }
 
     private void Register()
     {

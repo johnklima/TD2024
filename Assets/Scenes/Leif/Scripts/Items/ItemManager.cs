@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.Events;
 
 public class ItemManager : MonoBehaviour
@@ -7,13 +8,17 @@ public class ItemManager : MonoBehaviour
 
     // public UnityEvent<BaseItem> onItemInteract;
     public UnityEvent<Item> onItemInteract;
+    public InventoryController inventoryController;
 
     public bool showItemGizmos;
 
     private void Awake()
     {
         RegisterItems();
+        inventoryController = FindObjectOfType<InventoryController>();
+        if (inventoryController == null) throw new Exception("No inventoryController found");
     }
+
 
 #if UNITY_EDITOR
     private void OnDrawGizmos()
@@ -26,6 +31,18 @@ public class ItemManager : MonoBehaviour
     private void OnValidate()
     {
         RegisterItems();
+    }
+
+    public GameObject GetActiveGameObject(Item checkItem)
+    {
+        foreach (var invItem in inventoryController.objects)
+        {
+            var item = invItem.GetComponent<Item>();
+            if (item.itemData == checkItem.itemData)
+                return invItem;
+        }
+
+        return null;
     }
 
 

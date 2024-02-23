@@ -19,27 +19,6 @@ public class HealthDisplay : MonoBehaviour
     private int _playerHealth;
     private PlayerHealthSystem _playerHealthSystem; // leif edit
 
-    #region obsolete /leif
-
-    // private void Update()
-    // {
-    // if (_playerHealth > _maxNumberOfHearts) //leif edit: not needed
-    // _playerHealth = _maxNumberOfHearts; //leif edit: not needed, calculated in PLayerHealthSystem
-    // moved to its own method
-    // for (var i = 0; i < hearts.Length; i++) // iterate image[]
-    //     if (i <= _playerHealth)
-    //         hearts[i].sprite = fullHeart;
-    //     else
-    //         hearts[i].sprite = nullHeart;
-    // if (i < _maxNumberOfHearts) // not needed, generating hearts at Start()
-    //     hearts[i].enabled = true;
-    // else
-    //     hearts[i].enabled = false;
-    // }
-
-    #endregion
-
-
     #region LEIF TESTS
 
     [Serializable]
@@ -90,6 +69,7 @@ public class HealthDisplay : MonoBehaviour
         newHeart.transform.parent = transform;
         var img = newHeart.AddComponent<Image>();
         img.sprite = fullHeart;
+        img.rectTransform.localScale = Vector3.one;
         return img;
     }
 
