@@ -1091,11 +1091,6 @@ PrefabInstance:
       propertyPath: m_VersionIndex
       value: 2161
       objectReference: {fileID: 0}
-    - target: {fileID: 1619833123312940673, guid: 8b4f9ffdb830a9242a61600254282513,
-        type: 3}
-      propertyPath: cauldronCamera
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 1821943784937116411, guid: 8b4f9ffdb830a9242a61600254282513,
         type: 3}
       propertyPath: m_VersionIndex

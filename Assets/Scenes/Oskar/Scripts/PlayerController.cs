@@ -4,9 +4,9 @@ using UnityEngine.Events;
 public class PlayerController : MonoBehaviour
 {
     public float movementSpeed = 5f;
-
+    public GameObject throwingRef;
     public Transform playerCamera;
-
+    public bool canWalkWhileAiming = true;
 
     [Header("Interactable controls")] public float interactableDistance = 10f;
 
@@ -19,15 +19,17 @@ public class PlayerController : MonoBehaviour
     private bool _shouldRayCast = true;
 
     private IInteractable _targetedItem;
-    
+
 
     private CharacterController ctrl;
 
-
     private void Awake()
     {
+        if (throwingRef == null)
+            throwingRef = GetComponentInChildren<ThrowingHandler>().gameObject;
+
         ctrl = GetComponent<CharacterController>();
-        
+
         CursorLockHandler.HideAndLockCursor();
     }
 
@@ -71,6 +73,12 @@ public class PlayerController : MonoBehaviour
                 hittingInteractable.Invoke();
             }
         }
+    }
+
+    private void OnValidate()
+    {
+        if (throwingRef == null)
+            throwingRef = GetComponentInChildren<ThrowingHandler>().gameObject;
     }
 
     public void ToggleRayCasting()

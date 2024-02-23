@@ -22,6 +22,10 @@ public class Dnafmg : MonoBehaviour, IInteractable
 
     private LineRenderer _lineRenderer;
     private float _sinModY;
+    private SphereCollider _sphereCollider;
+
+    private Vector3 cc = Vector3.down;
+    private float ccs;
 
     private void Start()
     {
@@ -37,9 +41,29 @@ public class Dnafmg : MonoBehaviour, IInteractable
         AnimateLineRenderer();
     }
 
+    private void OnDrawGizmos()
+    {
+        if (cc != Vector3.down)
+            Gizmos.DrawWireSphere(transform.position + cc, ccs);
+
+        if (lineBottom != null && lineTop != null)
+        {
+            var x = Vector3.forward * 0.05f;
+            var top = lineTop.position;
+            var bot = lineBottom.position;
+            Gizmos.DrawWireSphere(bot + x, .05f);
+            Gizmos.DrawWireSphere(top + x, .05f);
+            Gizmos.DrawLine(bot, top);
+        }
+    }
+
     private void OnValidate()
     {
         SetupLineRenderer();
+        if (_sphereCollider == null)
+            _sphereCollider = GetComponent<SphereCollider>();
+        cc = _sphereCollider.center;
+        ccs = _sphereCollider.radius;
     }
 
     public void Interact()
@@ -50,6 +74,11 @@ public class Dnafmg : MonoBehaviour, IInteractable
     public void Interact(LeifPlayerController lPC)
     {
         onInteract.Invoke();
+    }
+
+    public void TestOnInteract()
+    {
+        Debug.Log("Interacted with DNAFMG");
     }
 
     private void WobblePole()
@@ -106,8 +135,10 @@ public class Dnafmg : MonoBehaviour, IInteractable
 
     private void AnimateLineRenderer()
     {
-        _lineRenderer.SetPosition(0, lineTop.position);
-        _lineRenderer.SetPosition(1, lineBottom.position);
+        var topPos = lineTop.position;
+        _lineRenderer.SetPosition(0, topPos);
+        var botPos = lineBottom.position;
+        _lineRenderer.SetPosition(1, botPos);
     }
 
     private void Animate()

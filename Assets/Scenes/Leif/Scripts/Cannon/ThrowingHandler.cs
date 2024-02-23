@@ -3,28 +3,20 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
-[Serializable]
-public class LineRendererSettings
-{
-    public int resolution = 10;
-    public Material lineRendererMaterial;
-    public float sineModA = 1, sineModB = 1;
-    public float pulseFreq = 1;
-    public Vector3 testStart = new(0, 0, 0);
-    public Vector3 testEnd = new(0, 0, 0);
-    public Vector3 startPosOffset = new(0, 0, 0);
-}
-
 [RequireComponent(typeof(LineRenderer))]
 public class ThrowingHandler : MonoBehaviour
 {
+    private static readonly int ThrowAnimTrigger = Animator.StringToHash("Throw");
     public float aimCoolDown;
     public LineRendererSettings lineRendererSettings;
 
-    public UnityEvent<DraggableItem> OnThrowing = new(); //! listener: InventoryController.RemoveItem 
+    public UnityEvent<DraggableItem> OnThrowing = new(); //! autoListener: InventoryController.RemoveItem 
 
     public float testAngle;
+
+    public float throwDelay = 1f;
     private bool _aimPrevFram, _fire;
+    private Animator _animator;
     private bool _canAim = true;
 
     //TODO reduce count in UI/inventories
@@ -37,15 +29,21 @@ public class ThrowingHandler : MonoBehaviour
     private ItemManager _itemManager;
     private LineRenderer _lineRenderer;
     private Transform _mainCam;
+    private GameObject _newThrowable;
 
 
     private float _offsetAlpha;
     private PlayerController _playerController;
+    private PlayerInput _playerInput;
+    private IEnumerator coroutine;
 
     private void Start()
     {
         _inventoryDisplay = FindObjectOfType<InventoryDisplay>();
         if (_inventoryDisplay == null) throw new Exception("Make sure there is a <InventoryDisplay> in the scene");
+
+        _playerInput = FindObjectOfType<PlayerInput>();
+        if (_playerInput == null) throw new Exception("Make sure there is a <PlayerInput> in the scene");
 
         _playerController = GetComponentInParent<PlayerController>();
         if (_playerController == null)
@@ -60,6 +58,9 @@ public class ThrowingHandler : MonoBehaviour
 
         OnThrowing.AddListener(_inventoryController.RemoveItem);
 
+        _animator = GetComponentInParent<Animator>();
+
+
         SetupLineRenderer();
         _canAim = true;
         if (Camera.main != null)
@@ -69,53 +70,52 @@ public class ThrowingHandler : MonoBehaviour
 
     private void Update()
     {
+        if (_newThrowable != null) _newThrowable.transform.position = transform.position;
         if (!PlayerInput.playerHasControl) return;
-
         var selectedItem = _inventoryDisplay.selectedItem;
         if (selectedItem == null) return;
+
         // if we dont have selected item, we have nothing to throw
         // else we do ray,
         var didRayHit = DoRay(out _hit);
+        var canMoveAndAim = _playerController.canWalkWhileAiming;
         // check if player was holding mouse1 previous frame, and released this frame
-        if ((_aimPrevFram && Input.GetMouseButtonUp(0)) || Input.GetKeyDown(KeyCode.Alpha2))
+        if (_aimPrevFram && Input.GetMouseButtonUp(0)) //! order matters #1 
         {
             //set fire to true, if we hit something with raycast
             _fire = didRayHit;
         }
-        else if (_aimPrevFram && Input.GetMouseButton(1))
+        else if (_aimPrevFram && Input.GetMouseButton(1)) //! order matters #2
         {
-            // cancel aim
+            // player cancel aim
             _aimPrevFram = false;
-            StartCoroutine(AimCoolDown(aimCoolDown / 2f)); //todo
+            if (!canMoveAndAim)
+                _playerInput.SetPlayerCanMoveState(true);
+            StartCoroutine(AimCoolDown(aimCoolDown / 2f));
         }
 
         // if player is not in cooldown and presses mouse down this frame
-        if (_canAim && Input.GetMouseButtonDown(0))
-            _aimPrevFram = true;
-
-        if (_fire)
+        if (_canAim && Input.GetMouseButtonDown(0)) //! order matters #3
         {
-            Debug.Log("fire");
-            //do fire
-            _fire = _aimPrevFram = false; // exit next frame
-            var throwable = _itemManager.GetActiveGameObject(selectedItem.item);
-            if (throwable == null) throw new Exception("Something wrong");
-            var newThrowable = Instantiate(throwable); // make object
-            var i = newThrowable.GetComponent<Item>();
-            i.isOneShot = true; // thrown items can only be picked back up again
-            // item itself handles breaking on collision
-            newThrowable.SetActive(true); // make sure its active
-            newThrowable.transform.position = transform.position; // move to hand pos
-            var newCannon = newThrowable.AddComponent<CannonBall1>(); // add john physics
-            newCannon.Launch(_hit.point, testAngle); // launch
-            OnThrowing.Invoke(selectedItem); // update hotBar
-            StartCoroutine(AimCoolDown()); // set cooldown
-            Debug.Log("fire2");
+            // player is aiming
+            _aimPrevFram = true;
+            if (!canMoveAndAim)
+                _playerInput.SetPlayerCanMoveState(false);
         }
 
-        // do aim
+        // if everything up to now says we can fire, set the wheels in motion!
+        if (_fire) //! order matters #4
+        {
+            //do fire
+            _fire = false;
+            _animator.SetTrigger(ThrowAnimTrigger);
+            ExecuteThrow(selectedItem);
+        }
+
         _lineRenderer.enabled = _aimPrevFram;
-        if (!_aimPrevFram) return;
+
+        if (!_aimPrevFram) return; //! order matters #5
+        // do aim
         var pulseFreq = lineRendererSettings.pulseFreq;
         _offsetAlpha += Time.deltaTime * pulseFreq;
         if (_offsetAlpha >= 100) _offsetAlpha = 0;
@@ -127,13 +127,10 @@ public class ThrowingHandler : MonoBehaviour
                 var tPos = transform.position + lineRendererSettings.startPosOffset;
                 var pos = Vector3.Lerp(tPos, _hit.point, i / (float)res);
                 pos.y += Mathf.Sin(i * lineRendererSettings.sineModA) * lineRendererSettings.sineModB;
-
-                // var normalizedI = ExtensionMethods.Remap(i, 0, res, 0, 1);
-                // if (normalizedI > .5f) normalizedI = 1 - normalizedI;
-                // pos.y += Vector3.Distance(tPos, _hit.point) * normalizedI;
                 _lineRenderer.SetPosition(i, pos);
             }
     }
+
 
     private void OnValidate()
     {
@@ -150,6 +147,32 @@ public class ThrowingHandler : MonoBehaviour
         }
     }
 
+    private void ExecuteThrow(DraggableItem selectedItem)
+    {
+        _playerInput.DisablePlayerInputForDuration(aimCoolDown);
+        _canAim = _aimPrevFram = false; // exit next frame
+        StartCoroutine(AimCoolDown()); // set cooldown
+        var throwable = _itemManager.GetActiveGameObject(selectedItem.item);
+        if (throwable == null) throw new Exception("Something wrong");
+        _newThrowable = Instantiate(throwable); // make object
+        //TODO CHANGE THING
+        var item = _newThrowable.GetComponent<Item>();
+        item.isOneShot = true; // thrown items can only be picked back up again
+        // item itself handles breaking on collision
+        _newThrowable.SetActive(true); // make sure its active
+        _newThrowable.transform.position = transform.position; // move to hand pos
+        var newCannon = _newThrowable.AddComponent<CannonBall1>(); // add john physics
+        StartCoroutine(LaunchDelayed(newCannon, _hit.point, testAngle)); // launch
+        OnThrowing.Invoke(selectedItem); // update hotBar
+    }
+
+    private IEnumerator LaunchDelayed(CannonBall1 cannon, Vector3 target, float angle)
+    {
+        yield return new WaitForSeconds(throwDelay);
+        _newThrowable = null;
+        cannon.Launch(target, angle); // launch
+    }
+
     private void SetupLineRenderer()
     {
         if (_lineRenderer == null) _lineRenderer = GetComponent<LineRenderer>();
@@ -162,6 +185,7 @@ public class ThrowingHandler : MonoBehaviour
     {
         if (t == 0) t = aimCoolDown;
         yield return new WaitForSeconds(t);
+        _animator.ResetTrigger(ThrowAnimTrigger);
         _canAim = true;
     }
 

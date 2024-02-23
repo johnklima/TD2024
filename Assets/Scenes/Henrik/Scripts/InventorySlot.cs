@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -6,9 +7,18 @@ public class InventorySlot : MonoBehaviour, IDropHandler
 {
     public Image image;
     public Color selectedColor, notSelectedColor;
+    public bool isCraftSlot;
+    private CraftinUI _craftinUI;
+    private InventoryController _inventoryController;
 
     public void Awake()
     {
+        _inventoryController = FindObjectOfType<InventoryController>();
+        if (_inventoryController == null) throw new Exception("Make sure there is an InventoryController in the scene");
+
+        if (isCraftSlot)
+            _craftinUI = FindObjectOfType<CraftinUI>();
+
         Deselect();
     }
 
@@ -19,6 +29,11 @@ public class InventorySlot : MonoBehaviour, IDropHandler
             var dropped = eventData.pointerDrag;
             var draggableItem = dropped.GetComponent<DraggableItem>();
             draggableItem.parentAfterDrag = transform;
+            // when item is dropped here,
+
+            if (isCraftSlot)
+                // if we are a crafting slot and have more than 1 item,
+                _craftinUI.OnCraftingSlotDrop(draggableItem);
         }
     }
 
@@ -31,5 +46,4 @@ public class InventorySlot : MonoBehaviour, IDropHandler
     {
         image.color = notSelectedColor;
     }
-
 }

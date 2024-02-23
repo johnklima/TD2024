@@ -16,3 +16,4 @@ MonoBehaviour:
   itemType: 0
   stackable: 1
   ingredient: 0
+  matches: 01000000030000000400000005000000

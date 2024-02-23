@@ -1,10 +1,11 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class InventoryController : MonoBehaviour
 {
-    [SerializeField] private int inventorySlots = 9;
+    [SerializeField] private int maxInvSlots = 9, currNumUsedSlots;
     [SerializeField] private int stackSize = 10;
 
     public GameObject[] objects;
@@ -35,16 +36,33 @@ public class InventoryController : MonoBehaviour
 
     public Item GetActiveItemInstance(Item interactableItem)
     {
-        foreach (var itemManagerItem in objects)
-            if (itemManagerItem.TryGetComponent<Item>(out var item))
+        foreach (var _item in objects)
+            if (_item.TryGetComponent<Item>(out var item))
                 if (item.itemData == interactableItem.itemData)
                     return item;
+        return null;
+    }
+
+    public Item GetPotionFromIngredients(Ingredient a, Ingredient b)
+    {
+        foreach (var _item in objects)
+            if (_item.TryGetComponent<Item>(out var item))
+            {
+                if (item.itemData.itemType == ItemType.Ingredient) continue;
+                var potion = item.GetComponent<PotionObjectItem>();
+                var i1 = potion.itemData2.ingredient1;
+                var i2 = potion.itemData2.ingredient2;
+                if ((i1 == a && i2 == b) || (i1 == b && i2 == a))
+                    return item;
+            }
+
         return null;
     }
 
     // listens to OnItemInteract @ ItemManager
     public void AddItem(Item interactableItem)
     {
+        if (currNumUsedSlots == maxInvSlots) return;
         Debug.Log("AddItem interactableItem: " + interactableItem);
         interactableItem = GetActiveItemInstance(interactableItem);
         if (_inventory.ContainsKey(interactableItem))
@@ -52,12 +70,12 @@ public class InventoryController : MonoBehaviour
             var stackable = interactableItem.itemData.stackable;
             if ((stackable && _inventory[interactableItem] < stackSize) ||
                 (!stackable && _inventory[interactableItem] < 1))
+            {
                 _inventory[interactableItem]++;
+                if (_inventory[interactableItem] == 1)
+                    currNumUsedSlots++;
+            }
         }
-        // else if (_inventory.Count < inventorySlots)
-        // {
-        //     _inventory[interactableItem] = 1;
-        // }
 
         onInventoryChanged.Invoke(_inventory);
         //Show UI/make sound to show that its full
@@ -65,9 +83,16 @@ public class InventoryController : MonoBehaviour
 
     public void RemoveItem(DraggableItem draggableItem) //! attaches to ThrowingHandler.OnThrowing()
     {
-        var item = draggableItem.item;
-        if (!_inventory.ContainsKey(item)) return;
-        if (_inventory[item] > 0) _inventory[item]--;
+        var item = GetActiveItemInstance(draggableItem.item);
+        Debug.Log("RemoveItem interactableItem: " + item);
+        if (!_inventory.ContainsKey(item)) throw new Exception("inventory does not contain: " + draggableItem.name);
+        if (_inventory[item] > 0)
+        {
+            _inventory[item] -= 1;
+            if (_inventory[item] == 0)
+                currNumUsedSlots -= 1;
+        }
+
         //Show UI/make sound to show that its full
         onInventoryChanged.Invoke(_inventory);
     }
