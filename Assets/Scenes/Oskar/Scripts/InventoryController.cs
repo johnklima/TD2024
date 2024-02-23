@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -43,6 +44,21 @@ public class InventoryController : MonoBehaviour
         return null;
     }
 
+    public Item GetPotionFromIngredients(Ingredient a, Ingredient b)
+    {
+        foreach (var itemManagerItem in objects)
+            if (itemManagerItem.TryGetComponent<Item>(out var item))
+            {
+                if (item.itemData.itemType == ItemType.Ingredient) continue;
+                var potion = item.itemData.GetComponent<PotionItem>();
+                if ((potion.ingredient1 == a && potion.ingredient2 == b) ||
+                    (potion.ingredient1 == b && potion.ingredient2 == a))
+                    return item;
+            }
+
+        return null;
+    }
+
     // listens to OnItemInteract @ ItemManager
     public void AddItem(Item interactableItem)
     {
@@ -68,6 +84,7 @@ public class InventoryController : MonoBehaviour
     public void RemoveItem(DraggableItem draggableItem) //! attaches to ThrowingHandler.OnThrowing()
     {
         var item = GetActiveItemInstance(draggableItem.item);
+        Debug.Log("AddItem interactableItem: " + item);
         if (!_inventory.ContainsKey(item)) throw new Exception("inventory does not contain: " + draggableItem.name);
         if (_inventory[item] > 0)
         {

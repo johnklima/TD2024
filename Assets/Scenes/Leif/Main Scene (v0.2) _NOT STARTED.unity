@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 1851.4973, g: 1791.7678, b: 1971.9182, a: 1}
+  m_IndirectSpecularColor: {r: 1851.4973, g: 1791.7678, b: 1971.9573, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -827,6 +827,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3448555093069274237, guid: 8dabed5200d356d4b8f6eaf3413e1a42,
     type: 3}
   m_PrefabInstance: {fileID: 2396302489089981416}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &351997916 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3208430556447496266, guid: f888c2123fed2ec4a8a88252b8366cd0,
+    type: 3}
+  m_PrefabInstance: {fileID: 1435168988}
   m_PrefabAsset: {fileID: 0}
 --- !u!43 &353850524
 Mesh:
@@ -3296,7 +3302,7 @@ PrefabInstance:
     - target: {fileID: 709182577542470264, guid: f888c2123fed2ec4a8a88252b8366cd0,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4259624196898430443, guid: f888c2123fed2ec4a8a88252b8366cd0,
         type: 3}
@@ -3403,6 +3409,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: HUD
       objectReference: {fileID: 0}
+    - target: {fileID: 8207393679574388659, guid: f888c2123fed2ec4a8a88252b8366cd0,
+        type: 3}
+      propertyPath: craftingSlot
+      value: 
+      objectReference: {fileID: 351997916}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:

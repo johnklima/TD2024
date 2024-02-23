@@ -34,6 +34,8 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     {
         image.raycastTarget = true;
         transform.SetParent(parentAfterDrag);
+
+        //TODO if count == 0 destroy self
     }
 
     public void InitialiseItem(Item newItem)
