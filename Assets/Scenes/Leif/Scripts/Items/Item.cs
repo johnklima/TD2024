@@ -37,7 +37,6 @@ public class Item : MonoBehaviour, IInteractable
 
     protected virtual void OnValidate()
     {
-        Debug.Log("validate on base");
         Register();
     }
 

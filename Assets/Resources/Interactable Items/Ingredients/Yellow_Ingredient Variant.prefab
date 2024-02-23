@@ -173,3 +173,5 @@ MonoBehaviour:
   _itemManager: {fileID: 0}
   isOneShot: 0
   itemData2: {fileID: 11400000, guid: d4518c9e63dae8946873215a15064e84, type: 2}
+  color1: {r: 1, g: 0.7137255, b: 0, a: 1}
+  color2: {r: 0.59748423, g: 0.42805335, b: 0.0056365505, a: 0}
