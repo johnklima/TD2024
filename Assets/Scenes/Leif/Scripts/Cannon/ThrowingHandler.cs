@@ -155,6 +155,7 @@ public class ThrowingHandler : MonoBehaviour
         var throwable = _itemManager.GetActiveGameObject(selectedItem.item);
         if (throwable == null) throw new Exception("Something wrong");
         _newThrowable = Instantiate(throwable); // make object
+        //TODO CHANGE THING
         var item = _newThrowable.GetComponent<Item>();
         item.isOneShot = true; // thrown items can only be picked back up again
         // item itself handles breaking on collision

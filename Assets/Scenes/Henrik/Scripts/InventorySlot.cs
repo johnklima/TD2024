@@ -1,5 +1,4 @@
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -33,12 +32,8 @@ public class InventorySlot : MonoBehaviour, IDropHandler
             // when item is dropped here,
 
             if (isCraftSlot)
-            {
                 // if we are a crafting slot and have more than 1 item,
                 _craftinUI.OnCraftingSlotDrop(draggableItem);
-                _inventoryController.RemoveItem(draggableItem);
-                Destroy(draggableItem.GameObject());
-            }
         }
     }
 

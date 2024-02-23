@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -26,6 +25,9 @@ public class CraftinUI : MonoBehaviour
     {
         if (_inventoryController == null)
             _inventoryController = FindObjectOfType<InventoryController>();
+
+        currentIngredients = new List<IngredientItem>();
+
         mixButton.interactable = false;
         craftingSlot.SetActive(true);
         CursorLockHandler.ShowAndUnlockCursor();
@@ -37,17 +39,20 @@ public class CraftinUI : MonoBehaviour
         CursorLockHandler.HideAndLockCursor();
     }
 
-    public void OnCraftingSlotDrop(DraggableItem uiItem)
+    public void OnCraftingSlotDrop(DraggableItem draggableItem)
     {
-        var iItem = uiItem.item.itemData.GameObject().GetComponent<IngredientItem>();
+        var item = _inventoryController.GetActiveItemInstance(draggableItem.item);
+        var ingredientObjectItem = item.gameObject.GetComponent<IngredientObjectItem>();
+        var iItem = ingredientObjectItem.itemData2;
+        if (iItem == null)
+            throw new Exception("did not find matching item in inventoryController.objects for: " + draggableItem.name);
+
         if (currentIngredients.Count < 2)
             currentIngredients.Add(iItem);
-
+        mixButton.interactable = currentIngredients.Count == 2;
         if (currentIngredients.Count == 2)
         {
             // we have 2 ingredients. make mix button active.
-            mixButton.interactable = true;
-
 
             //todo make button active
             // check ingredients match
@@ -60,7 +65,10 @@ public class CraftinUI : MonoBehaviour
             prevIngredients = currentIngredients;
             currentIngredients.Clear();
         }
+
         // we have gotten X items
+        Destroy(draggableItem.gameObject);
+        _inventoryController.RemoveItem(draggableItem);
     }
 
     private void PotionFactory(Ingredient iItem1, Ingredient iItem2)
@@ -74,6 +82,8 @@ public class CraftinUI : MonoBehaviour
 
     public void OnMix()
     {
+        mixButton.interactable = false;
+
         if (ingredientsMatch)
         {
             Debug.Log(" make potion"); // make potion

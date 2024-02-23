@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -37,8 +36,8 @@ public class InventoryController : MonoBehaviour
 
     public Item GetActiveItemInstance(Item interactableItem)
     {
-        foreach (var itemManagerItem in objects)
-            if (itemManagerItem.TryGetComponent<Item>(out var item))
+        foreach (var _item in objects)
+            if (_item.TryGetComponent<Item>(out var item))
                 if (item.itemData == interactableItem.itemData)
                     return item;
         return null;
@@ -46,13 +45,14 @@ public class InventoryController : MonoBehaviour
 
     public Item GetPotionFromIngredients(Ingredient a, Ingredient b)
     {
-        foreach (var itemManagerItem in objects)
-            if (itemManagerItem.TryGetComponent<Item>(out var item))
+        foreach (var _item in objects)
+            if (_item.TryGetComponent<Item>(out var item))
             {
                 if (item.itemData.itemType == ItemType.Ingredient) continue;
-                var potion = item.itemData.GetComponent<PotionItem>();
-                if ((potion.ingredient1 == a && potion.ingredient2 == b) ||
-                    (potion.ingredient1 == b && potion.ingredient2 == a))
+                var potion = item.GetComponent<PotionObjectItem>();
+                var i1 = potion.itemData2.ingredient1;
+                var i2 = potion.itemData2.ingredient2;
+                if ((i1 == a && i2 == b) || (i1 == b && i2 == a))
                     return item;
             }
 

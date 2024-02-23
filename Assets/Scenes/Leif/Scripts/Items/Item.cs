@@ -35,8 +35,9 @@ public class Item : MonoBehaviour, IInteractable
     }
 #endif
 
-    private void OnValidate()
+    protected virtual void OnValidate()
     {
+        Debug.Log("validate on base");
         Register();
     }
 
