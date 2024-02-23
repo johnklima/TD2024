@@ -19,7 +19,7 @@ public class FishBoids1 : MonoBehaviour
         if (boidsSettings.useConstrainPoint && boidsSettings.constrainPoint == null)
             boidsSettings.constrainPoint = transform;
 
-        var pos = new Vector3(Random.Range(-5f, 5), Random.Range(-1f, 1f), Random.Range(-5f, 5));
+        var pos = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), Random.Range(-1f, 1f));
         var look = new Vector3(Random.Range(-1000f, 1000f), Random.Range(-1000f, 1000f), Random.Range(-1000f, 1000f));
         var speed = Random.Range(0f, 3f);
 
