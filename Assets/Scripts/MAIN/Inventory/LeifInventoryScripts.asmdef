@@ -1,0 +1,16 @@
+{
+    "name": "LeifInventoryScripts",
+    "rootNamespace": "",
+    "references": [
+        "GUID:6f526f5a1eeadab4e84990e38694bf97"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

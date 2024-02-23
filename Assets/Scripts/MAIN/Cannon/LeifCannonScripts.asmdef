@@ -1,0 +1,16 @@
+{
+    "name": "LeifCannonScripts",
+    "rootNamespace": "",
+    "references": [
+        "GUID:131635aa59ee07a42b8d6c13b2a1b4ec"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

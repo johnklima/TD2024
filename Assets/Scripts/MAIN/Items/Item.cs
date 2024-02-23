@@ -46,11 +46,6 @@ public class Item : MonoBehaviour, IInteractable
         gameObject.SetActive(!isOneShot);
     }
 
-    public void Interact(LeifPlayerController lPC)
-    {
-        _itemManager.onItemInteract?.Invoke(this);
-        gameObject.SetActive(!isOneShot);
-    }
 
     public bool MatchesWith(Item checkItem)
     {

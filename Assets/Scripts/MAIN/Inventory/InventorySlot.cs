@@ -31,9 +31,17 @@ public class InventorySlot : MonoBehaviour, IDropHandler
             draggableItem.parentAfterDrag = transform;
             // when item is dropped here,
 
-            if (isCraftSlot)
-                // if we are a crafting slot and have more than 1 item,
-                _craftinUI.OnCraftingSlotDrop(draggableItem);
+            if (!isCraftSlot) return;
+            // if we are a crafting slot 
+            if (draggableItem.item.itemData.itemType == ItemType.Potion)
+            {
+                // if a potion get put in craft slot, return it to hotBar
+                draggableItem.parentAfterDrag = draggableItem.prevParent;
+                return;
+                // else inform craftingUI
+            }
+
+            _craftinUI.OnCraftingSlotDrop(draggableItem);
         }
     }
 

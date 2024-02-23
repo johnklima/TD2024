@@ -1,13 +1,11 @@
-using System;
 using System.Collections.Generic;
-using Scenes.Leif.Scripts;
 using UnityEngine;
 
 [ExecuteAlways]
 public class Voxel : MonoBehaviour
 {
-    public Action<Int3> voxelStateChange, voxelStateDestroy;
-    public Int3 coordinates;
+    // public Action<Int3> voxelStateChange, voxelStateDestroy;
+    // public Int3 coordinates;
     public bool isSolid;
     public bool isVisible;
     public float noise;
@@ -15,7 +13,7 @@ public class Voxel : MonoBehaviour
 
     private void OnEnable()
     {
-        voxelStateChange?.Invoke(coordinates);
+        // voxelStateChange?.Invoke(coordinates);
     }
 
     private void OnDisable()
@@ -31,7 +29,7 @@ public class Voxel : MonoBehaviour
     private void DestroyThisBlock()
     {
         RemoveFromNeighbours();
-        voxelStateDestroy?.Invoke(coordinates);
+        // voxelStateDestroy?.Invoke(coordinates);
     }
 
     public void Interact()
@@ -46,9 +44,9 @@ public class Voxel : MonoBehaviour
         foreach (var neighbour in neighbours) neighbour.neighbours.Remove(this);
     }
 
-    public void RegisterEvents(Action<Int3> voxelStateChangeAction, Action<Int3> voxelStateDestroyAction)
-    {
-        voxelStateChange = voxelStateChangeAction;
-        voxelStateDestroy = voxelStateDestroyAction;
-    }
+    // public void RegisterEvents(Action<Int3> voxelStateChangeAction, Action<Int3> voxelStateDestroyAction)
+    // {
+    //     voxelStateChange = voxelStateChangeAction;
+    //     voxelStateDestroy = voxelStateDestroyAction;
+    // }
 }

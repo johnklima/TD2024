@@ -1,0 +1,39 @@
+{
+    "name": "LeifScripts",
+    "rootNamespace": "",
+    "references": [
+        "GUID:6f526f5a1eeadab4e84990e38694bf97",
+        "GUID:152684aa8a7da4a41a3433d136eb05fa",
+        "GUID:23fa31ae997039446b718437f5ae0c8f",
+        "GUID:c9edeefe270522c41a5558506c24b653",
+        "GUID:d79053f44804bea448145258f1a5b1f0",
+        "GUID:7d78d15cb4e20fe4ebd3807b487d07ac"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [
+        "Android",
+        "Editor",
+        "EmbeddedLinux",
+        "GameCoreScarlett",
+        "GameCoreXboxOne",
+        "iOS",
+        "LinuxStandalone64",
+        "CloudRendering",
+        "macOSStandalone",
+        "PS4",
+        "PS5",
+        "QNX",
+        "Stadia",
+        "Switch",
+        "tvOS",
+        "VisionOS",
+        "XboxOne"
+    ],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

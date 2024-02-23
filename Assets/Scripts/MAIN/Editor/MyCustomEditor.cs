@@ -1,4 +1,3 @@
-using UnityEditor;
 using UnityEngine;
 
 namespace Scenes.Leif.Scripts.Editor
@@ -80,15 +79,15 @@ namespace Scenes.Leif.Scripts.Editor
     }
 
 
-    [CustomEditor(typeof(MapGenerator))]
-    public class MapGeneratorEditor : UnityEditor.Editor
-    {
-        public override void OnInspectorGUI()
-        {
-            var _target = target as MapGenerator;
-            if (_target == null) return;
-            DrawDefaultInspector();
-            if (GUILayout.Button("ReGenerate")) _target.ReGenerate();
-        }
-    }
+    // [CustomEditor(typeof(MapGenerator))]
+    // public class MapGeneratorEditor : UnityEditor.Editor
+    // {
+    //     public override void OnInspectorGUI()
+    //     {
+    //         var _target = target as MapGenerator;
+    //         if (_target == null) return;
+    //         DrawDefaultInspector();
+    //         if (GUILayout.Button("ReGenerate")) _target.ReGenerate();
+    //     }
+    // }
 }
