@@ -69,6 +69,9 @@ public class FishBoids1 : MonoBehaviour
             transform.position += velocity * (Time.deltaTime * boidsSettings.speed);
             transform.LookAt(pos + velocity);
         }
+        var _pos = transform.position;
+        _pos.y = 0;
+        transform.position = _pos;
     }
 
     private void OnDrawGizmos()
