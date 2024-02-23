@@ -12,8 +12,7 @@ namespace Scenes.Leif.Scripts
     public class MapData
     {
         [Range(1, 1000)] public float heightMultiplier = 100;
-
-        // public INT3 mapSize = new(10, 10, 10);
+        public INT3 mapSize = new(10, 10, 10);
         [Range(0, 5)] public float gridScale = 1;
         public NoiseData noiseData = new();
     }
