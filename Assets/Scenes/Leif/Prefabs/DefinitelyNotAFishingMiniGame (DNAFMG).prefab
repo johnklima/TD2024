@@ -227,7 +227,7 @@ Transform:
   m_GameObject: {fileID: 3699204087287106128}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -11.99, y: 0.319, z: -7.8}
+  m_LocalPosition: {x: -1.101, y: -9.545, z: -16.684}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -254,13 +254,25 @@ MonoBehaviour:
   speed: 1
   lineTop: {fileID: 6321406266286423385}
   lineBottom: {fileID: 336010525198831012}
-  lineWidth: 0.005
+  lineWidth: 0.01
   lineRendererMat: {fileID: 2100000, guid: 659e3d919356c5f48b23b7027eab638f, type: 2}
   armatureRoot: {fileID: 8988663915831697137}
   segments: []
   onInteract:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6365071484449472218}
+        m_TargetAssemblyTypeName: Dnafmg, Assembly-CSharp
+        m_MethodName: TestOnInteract
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!135 &5274987019114295125
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -280,8 +292,8 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 2
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 1
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &5502244640937181402
 GameObject:
   m_ObjectHideFlags: 0
@@ -504,8 +516,8 @@ LineRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Positions:
-  - {x: -12.001888, y: 1.6741872, z: -6.1006575}
-  - {x: -11.995407, y: -0.25, z: -6.085453}
+  - {x: -1.1129999, y: -6.8267536, z: -13.565314}
+  - {x: -1.1064073, y: -10.114, z: -14.969453}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -514,7 +526,7 @@ LineRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.005
+        value: 0.01
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -523,7 +535,7 @@ LineRenderer:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1
-        value: 0.005
+        value: 0.01
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -898,23 +910,33 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 6e97fe983c4702746b9deb8f96958cc6,
         type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6e97fe983c4702746b9deb8f96958cc6,
+        type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.66216
+      value: 1.32432
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6e97fe983c4702746b9deb8f96958cc6,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6e97fe983c4702746b9deb8f96958cc6,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.011888504
+      value: -0.012
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6e97fe983c4702746b9deb8f96958cc6,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.005436003
+      value: -0.003
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6e97fe983c4702746b9deb8f96958cc6,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.252
+      value: 0.224
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6e97fe983c4702746b9deb8f96958cc6,
         type: 3}

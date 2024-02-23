@@ -1,3 +1,6 @@
+//TODO crafting/recipes
+
+
 HealthDisplay: 
 	sprites: 
 		whole heart x1, 
