@@ -10,6 +10,22 @@ public enum Ingredient
     Whirlpool
 }
 
+public enum Potion
+{
+    RedSkull,
+    RedSun,
+    RedWhirlpool,
+    RedRed,
+    YellowSkull,
+    YellowSun,
+    YellowWhirlpool,
+    YellowYellow,
+    BlueSkull,
+    BlueSun,
+    BlueWhirlpool,
+    BlueBlue
+}
+
 public enum ItemType
 {
     Ingredient,
