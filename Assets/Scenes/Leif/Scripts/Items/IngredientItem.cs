@@ -8,7 +8,6 @@ public class IngredientItem : BaseItem
     public Ingredient ingredient;
     [SerializeField] private Ingredient[] matches = new Ingredient[6];
 
-
     public bool Match(Ingredient a)
     {
         if (matches.Length == 0)
