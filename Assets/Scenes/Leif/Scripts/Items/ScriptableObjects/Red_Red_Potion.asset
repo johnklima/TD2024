@@ -15,7 +15,6 @@ MonoBehaviour:
   uiSprite: {fileID: 21300000, guid: 7a62c16cf1c67754481d980b72b3f1cf, type: 3}
   itemType: 1
   stackable: 0
+  potion: 3
   ingredient1: 0
   ingredient2: 0
-  prefab: {fileID: 0}
-  material: {fileID: 0}

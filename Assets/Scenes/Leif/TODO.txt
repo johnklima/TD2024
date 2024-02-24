@@ -14,4 +14,3 @@ Items:
 
 GOL - treeGenerator
 
-item.onImpact event

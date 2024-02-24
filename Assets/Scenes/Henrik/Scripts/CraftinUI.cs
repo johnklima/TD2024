@@ -9,17 +9,18 @@ public class CraftinUI : MonoBehaviour
     public Button mixButton;
 
     [SerializeField] private MeshRenderer cauldronSoupRenderer;
-    private InventoryController _inventoryController;
-    private Material cauldronSoupMaterial;
-    private List<IngredientItem> currentIngredients = new(), prevIngredients = new();
+    private Material _cauldronSoupMaterial;
+    private List<IngredientItem> _currentIngredients = new();
 
-    private bool ingredientsMatch;
+    private bool _ingredientsMatch;
+    private InventoryController _inventoryController;
+    private IngredientItem[] _prevIngredients = new IngredientItem[2];
 
     private void Awake()
     {
         if (cauldronSoupRenderer == null)
             throw new Exception("Make sure there is an MeshRenderer set on cauldronSoupRenderer");
-        cauldronSoupMaterial = cauldronSoupRenderer.sharedMaterial;
+        _cauldronSoupMaterial = cauldronSoupRenderer.sharedMaterial;
 
         _inventoryController = FindObjectOfType<InventoryController>();
         if (_inventoryController == null) throw new Exception("Make sure there is an InventoryController in the scene");
@@ -33,7 +34,7 @@ public class CraftinUI : MonoBehaviour
         if (_inventoryController == null)
             _inventoryController = FindObjectOfType<InventoryController>();
 
-        currentIngredients = new List<IngredientItem>();
+        _currentIngredients = new List<IngredientItem>();
 
         mixButton.interactable = false;
         craftingSlot.SetActive(true);
@@ -43,14 +44,15 @@ public class CraftinUI : MonoBehaviour
     private void OnDisable()
     {
         craftingSlot.SetActive(false);
+        _currentIngredients.Clear();
         CursorLockHandler.HideAndLockCursor();
     }
 
     private void SetCauldronSoupColor(IngredientObjectItem item)
     {
         Debug.Log("Setting soup color: " + item.color1);
-        cauldronSoupMaterial.SetColor("_BaseColor", item.color1);
-        cauldronSoupMaterial.SetColor("_VoronoyColor", item.color2);
+        _cauldronSoupMaterial.SetColor("_BaseColor", item.color1);
+        _cauldronSoupMaterial.SetColor("_VoronoyColor", item.color2);
     }
 
     public void OnCraftingSlotDrop(DraggableItem draggableItem)
@@ -62,21 +64,21 @@ public class CraftinUI : MonoBehaviour
             throw new Exception("did not find matching item in inventoryController.objects for: " + draggableItem.name);
 
         Debug.Log("Slotted second item: " + draggableItem.name);
-        currentIngredients.Add(iItem);
-        mixButton.interactable = currentIngredients.Count == 2; //make mix button active if we have 2
-        if (currentIngredients.Count < 2) // it was first item, find color and set shader
+        _currentIngredients.Add(iItem);
+        mixButton.interactable = _currentIngredients.Count == 2; //make mix button active if we have 2
+        if (_currentIngredients.Count < 2) // it was first item, find color and set shader
             SetCauldronSoupColor(ingredientObjectItem);
-        if (currentIngredients.Count == 2)
+        if (_currentIngredients.Count == 2)
         {
             // we have 2 ingredients. 
             // check ingredients match
-            var ingItem1 = currentIngredients[0];
-            var ingItem2 = currentIngredients[1];
-            ingredientsMatch = ingItem1.Match(ingItem2.ingredient);
-
+            var ingItem1 = _currentIngredients[0];
+            var ingItem2 = _currentIngredients[1];
+            _ingredientsMatch = ingItem1.Match(ingItem2.ingredient);
+            Debug.Log("slotted item 2, match: " + _ingredientsMatch);
             // empty list for next try
-            prevIngredients = currentIngredients;
-            currentIngredients.Remove(currentIngredients[0]);
+            _prevIngredients = _currentIngredients.ToArray();
+            _currentIngredients.Remove(_currentIngredients[0]);
         }
 
         // we have gotten X items
@@ -97,22 +99,10 @@ public class CraftinUI : MonoBehaviour
     public void OnMix()
     {
         mixButton.interactable = false;
-
-        if (ingredientsMatch)
-        {
-            Debug.Log(" make potion //TODO TODO TESTING"); // make potion
-            Debug.Log(" prevIngredients[0]: " + prevIngredients[0]); // make potion
-            Debug.Log(" prevIngredients[1]: " + prevIngredients[1]); // make potion
-            Debug.Log(" ingredient[0]: " + prevIngredients[0].ingredient); // make potion
-            Debug.Log(" ingredient[1]: " + prevIngredients[1].ingredient); // make potion
-            Debug.Log("<color=red><size=20>CLICK ME; READ ME</size></color>"); // make potion
-            //TODO you are trying to figure out why you got a ArgumentOutOfRangeException on next line
-            // you tried initializing prevIngredients, but not tested.
-            PotionFactory(prevIngredients[0].ingredient, prevIngredients[1].ingredient);
-        }
+        Debug.Log("onMix ingredientsMatch: " + _ingredientsMatch);
+        if (_ingredientsMatch)
+            PotionFactory(_prevIngredients[0].ingredient, _prevIngredients[1].ingredient);
         else
-        {
             Debug.Log(" make poof"); // make poof
-        }
     }
 }

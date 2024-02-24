@@ -101,7 +101,7 @@ public class InventoryDisplay : MonoBehaviour
                 ? "stackable, stack-size: " + item.Value
                 : "un-stackable";
             Debug.Log($"Spawned new item: {item.Key}! {stackable}");
-            SpawnNewItem(item.Key, slot);
+            SpawnNewItem(item, slot);
             ChangeSelectedSlot(selectedSlot);
             return true;
         }
@@ -109,11 +109,11 @@ public class InventoryDisplay : MonoBehaviour
         return false;
     }
 
-    private void SpawnNewItem(Item item, InventorySlot slot)
+    private void SpawnNewItem(KeyValuePair<Item, int> item, InventorySlot slot)
     {
         var newItemGo = Instantiate(inventoryItemPrefab, slot.transform);
         var inventoryItem = newItemGo.GetComponent<DraggableItem>();
-        inventoryItem.InitialiseItem(item);
+        inventoryItem.InitialiseItem(item.Key, item.Value);
     }
 
     private void ChangeSelectedSlot(int newValue)

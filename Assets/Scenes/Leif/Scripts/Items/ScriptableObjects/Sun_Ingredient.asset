@@ -15,5 +15,5 @@ MonoBehaviour:
   uiSprite: {fileID: 21300000, guid: 556d4e8b6ec28344a8b5e4ad93a24ed6, type: 3}
   itemType: 0
   stackable: 1
-  ingredient: 0
+  ingredient: 4
   matches: 000000000100000002000000

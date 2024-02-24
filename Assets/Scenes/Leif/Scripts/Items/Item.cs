@@ -11,7 +11,7 @@ public class Item : MonoBehaviour, IInteractable
     //TODO get item to collide
     public BaseItem itemData;
     [SerializeField] private ItemManager _itemManager;
-    public bool isOneShot;
+    public bool isInteractionOneShot;
     public UnityEvent<Collision, Item> onCollision;
 
 
@@ -32,8 +32,10 @@ public class Item : MonoBehaviour, IInteractable
 
     private void OnCollisionEnter(Collision other)
     {
+        var isPLayer = other.gameObject.CompareTag("Player");
+        if (isPLayer) return;
+        if (!isInteractionOneShot) return;
         onCollision.Invoke(other, this);
-        Debug.Log($"{gameObject.name} hit: {other.gameObject.name}");
         Destroy(gameObject);
     }
 
@@ -46,13 +48,13 @@ public class Item : MonoBehaviour, IInteractable
     public void Interact()
     {
         _itemManager.onItemInteract?.Invoke(this);
-        gameObject.SetActive(!isOneShot);
+        gameObject.SetActive(!isInteractionOneShot);
     }
 
     public void Interact(LeifPlayerController lPC)
     {
         _itemManager.onItemInteract?.Invoke(this);
-        gameObject.SetActive(!isOneShot);
+        gameObject.SetActive(!isInteractionOneShot);
     }
 
     private void Register()

@@ -15,7 +15,7 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
     public void Start()
     {
-        InitialiseItem(item);
+        InitialiseItem(item, count);
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -34,16 +34,15 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     {
         image.raycastTarget = true;
         transform.SetParent(parentAfterDrag);
-
-        //TODO if count == 0 destroy self
     }
 
-    public void InitialiseItem(Item newItem)
+    public void InitialiseItem(Item newItem, int count)
     {
         item = newItem;
         if (image == null) image = GetComponent<Image>();
         if (image == null) throw new Exception("GameObject must have Image component!");
-        image.sprite = newItem.itemData.uiSprite;
+        image.sprite = item.itemData.uiSprite;
+        this.count = count;
         root = GetComponentInParent<Canvas>().transform;
         RefreshCount();
     }

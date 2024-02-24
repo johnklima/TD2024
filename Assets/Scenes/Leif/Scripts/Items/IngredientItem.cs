@@ -13,6 +13,8 @@ public class IngredientItem : BaseItem
     {
         if (matches.Length == 0)
             throw new Exception("No matches set for Ingredient: " + name);
+        Debug.Log("matches: " + matches);
+        Debug.Log("Ingredient a: " + a);
         return matches.Contains(a);
     }
 }
