@@ -50,7 +50,6 @@ public class CraftinUI : MonoBehaviour
 
     private void SetCauldronSoupColor(IngredientObjectItem item)
     {
-        Debug.Log("Setting soup color: " + item.color1);
         _cauldronSoupMaterial.SetColor("_BaseColor", item.color1);
         _cauldronSoupMaterial.SetColor("_VoronoyColor", item.color2);
     }
@@ -63,7 +62,7 @@ public class CraftinUI : MonoBehaviour
         if (iItem == null)
             throw new Exception("did not find matching item in inventoryController.objects for: " + draggableItem.name);
 
-        Debug.Log("Slotted second item: " + draggableItem.name);
+        Debug.Log("Slotted item: " + draggableItem);
         _currentIngredients.Add(iItem);
         mixButton.interactable = _currentIngredients.Count == 2; //make mix button active if we have 2
         if (_currentIngredients.Count < 2) // it was first item, find color and set shader
@@ -82,7 +81,6 @@ public class CraftinUI : MonoBehaviour
         }
 
         // we have gotten X items
-        Debug.Log("Removing UI element, updating inventory");
         Destroy(draggableItem.gameObject);
         _inventoryController.RemoveItem(draggableItem);
     }
