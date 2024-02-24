@@ -8,6 +8,7 @@ using UnityEngine;
 // thread
 // number of segments, siblings, transforms
 
+
 [Serializable]
 public class IK2Settings
 {

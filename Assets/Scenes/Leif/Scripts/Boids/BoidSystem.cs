@@ -21,7 +21,13 @@ public class BoidSystem : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawWireCube(transform.position, Vector3.one * 3);
+        if (boidsSettings.constrainPoint != null && boidsSettings.useConstrainPoint)
+            Gizmos.DrawWireCube(boidsSettings.constrainPoint.position, Vector3.one * 3);
+        else
+            Gizmos.DrawWireCube(transform.position, Vector3.one * 3);
+        Gizmos.color = Color.red;
+        if (boidsSettings.target != null)
+            Gizmos.DrawWireCube(boidsSettings.target.position, Vector3.one * 3);
     }
 
     private GameObject CreateBoid(GameObject prefab = null)
@@ -69,7 +75,8 @@ public class BoidsSettings
     public LayerMask obstacleLayerMask;
 
     //states
-    public bool seekTarget = true;
+    public bool seekTarget;
     public Transform target;
+    public bool useConstrainPoint;
     public Transform constrainPoint;
 }

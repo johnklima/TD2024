@@ -6,14 +6,11 @@ using UnityEngine.UI;
 public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     public Text countText;
-
-    [HideInInspector] public BaseItem item;
-
-    // [HideInInspector] public ItemUI item;
+    public Transform root;
+    [HideInInspector] public Item item;
     [HideInInspector] public int count = 1;
     [HideInInspector] public Transform parentAfterDrag;
-
-
+    [HideInInspector] public Transform prevParent;
     [Header("UI")] private Image image;
 
     public void Start()
@@ -24,8 +21,8 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     public void OnBeginDrag(PointerEventData eventData)
     {
         image.raycastTarget = false;
-        parentAfterDrag = transform.parent;
-        transform.SetParent(transform.root);
+        prevParent = parentAfterDrag = transform.parent;
+        transform.SetParent(root);
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -37,15 +34,17 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     {
         image.raycastTarget = true;
         transform.SetParent(parentAfterDrag);
+
+        //TODO if count == 0 destroy self
     }
 
-    public void InitialiseItem(BaseItem newItem)
+    public void InitialiseItem(Item newItem)
     {
         item = newItem;
         if (image == null) image = GetComponent<Image>();
         if (image == null) throw new Exception("GameObject must have Image component!");
-        // image.sprite = newItem.image;2
-        image.sprite = newItem.uiSprite;
+        image.sprite = newItem.itemData.uiSprite;
+        root = GetComponentInParent<Canvas>().transform;
         RefreshCount();
     }
 

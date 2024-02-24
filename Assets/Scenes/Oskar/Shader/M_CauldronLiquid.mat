@@ -54,11 +54,12 @@ Material:
     - _CullMode: 2
     - _CullModeForward: 2
     - _DepthOffsetEnable: 0
+    - _Displacement_Intensity: 0.2
     - _DoubleSidedEnable: 0
     - _DoubleSidedGIMode: 0
     - _DoubleSidedNormalMode: 2
     - _DstBlend: 0
-    - _Emission_Intensity: 50000
+    - _Emission_Intensity: 10000
     - _EnableBlendModePreserveSpecularLighting: 0
     - _EnableFogOnTransparent: 1
     - _ExcludeFromTUAndAA: 0
@@ -90,20 +91,21 @@ Material:
     - _TransparentWritingMotionVec: 0
     - _TransparentZWrite: 0
     - _UseShadowThreshold: 0
-    - _VoronoiOffset: 1
+    - _VoronoiDensity: 0.5
+    - _VoronoiOffset: 3
     - _VoronoiPower: 2
-    - _VoronoiScale: 5
+    - _VoronoiScale: 0.5
     - _ZTestDepthEqualForOpaque: 3
     - _ZTestGBuffer: 4
     - _ZTestTransparent: 4
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 0.5764706, g: 0.082352936, b: 0.15833458, a: 1}
+    - _BaseColor: {r: 0.27044016, g: 0.27044016, b: 0.27044016, a: 0}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _Speed: {r: 0, g: 0.2, b: 0, a: 0}
-    - _Tiling: {r: 1, g: 1, b: 0, a: 0}
-    - _VoronoiColor: {r: 0.5, g: 0.17048645, b: 0, a: 1}
+    - _Tiling: {r: 3, g: 3, b: 0, a: 0}
+    - _VoronoiColor: {r: 0.04025364, g: 1, b: 0, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &213524657172337502
 MonoBehaviour:
