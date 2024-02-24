@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.Rendering.DebugUI.Table;
+
 
 public class BoxMatrix : MonoBehaviour
 {
@@ -11,7 +9,7 @@ public class BoxMatrix : MonoBehaviour
     const int H = 16;
 
     //allocate
-    public GameObject[,,] MatrixObjs = new GameObject[W,D,H];
+    public GameObject[,,] MatrixObjs = new GameObject[W, D, H];
 
     //clone
     public GameObject baseObject;
@@ -21,22 +19,22 @@ public class BoxMatrix : MonoBehaviour
     void Start()
     {
         //assuming a unit object (box) with a scalar, otherwise need object dimensions
-        float spaceW = baseObject.transform.localScale.x; 
+        float spaceW = baseObject.transform.localScale.x;
         float spaceD = baseObject.transform.localScale.z;
         float spaceH = baseObject.transform.localScale.y;
 
-        for (int w = 0; w < W; w++) 
+        for (int w = 0; w < W; w++)
         {
             for (int d = 0; d < D; d++)
             {
                 for (int h = 0; h < H; h++)
                 {
-                    MatrixObjs[w,d,h] = GameObject.Instantiate(baseObject,transform); //child of this             
+                    MatrixObjs[w, d, h] = GameObject.Instantiate(baseObject, transform); //child of this             
 
                     Vector3 pos = new Vector3(w * spaceW, h * spaceH, d * spaceD);  //place it
 
                     MatrixObjs[w, d, h].transform.localPosition = pos;              //
-                    
+
                     MatrixObjs[w, d, h].SetActive(true);                            // baseObject is deactivated in editor
 
                 }
