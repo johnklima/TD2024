@@ -1,7 +1,6 @@
 ﻿using System;
-using Unity.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -11,9 +10,12 @@ public class Item : MonoBehaviour, IInteractable
 {
     //TODO get item to collide
     public BaseItem itemData;
-    [ReadOnly] public int id;
     [SerializeField] private ItemManager _itemManager;
     public bool isOneShot;
+    public UnityEvent<Collision, Item> onCollision;
+
+
+    [HideInInspector] public int id;
     private SphereCollider _sphereCollider;
 
     private void Awake()
@@ -28,12 +30,13 @@ public class Item : MonoBehaviour, IInteractable
         Register();
     }
 
-#if UNITY_EDITOR
-    private void OnDrawGizmosSelected()
+    private void OnCollisionEnter(Collision other)
     {
-        Handles.Label(transform.position + transform.up * 0.25f, $"{itemData.name}\n{itemData.itemType}");
+        onCollision.Invoke(other, this);
+        Debug.Log($"{gameObject.name} hit: {other.gameObject.name}");
+        Destroy(gameObject);
     }
-#endif
+
 
     protected virtual void OnValidate()
     {
@@ -51,27 +54,6 @@ public class Item : MonoBehaviour, IInteractable
         _itemManager.onItemInteract?.Invoke(this);
         gameObject.SetActive(!isOneShot);
     }
-
-    public bool MatchesWith(Item checkItem)
-    {
-        //? MatchesWith() (alternative)
-        // foreach potion
-        // A = potion.ingredient1 == slotA || slotB
-        // B =potion.ingredient2 == slotA || slotB
-        // if A + B: match!
-
-        // if we are not ingredient, we dont match nothing;
-        if (itemData.itemType != ItemType.Ingredient) return false;
-        // if item we wanna check is not ingredient....
-        if (checkItem.itemData.itemType != ItemType.Ingredient) return false;
-        // get thisIngredientItem
-        var thisIngredientItem = itemData.GameObject().GetComponent<IngredientItem>();
-        // get checkIngredientItem
-        var checkIngredientItem = checkItem.GetComponent<IngredientItem>();
-        // check if they match
-        return thisIngredientItem.Match(checkIngredientItem.ingredient);
-    }
-
 
     private void Register()
     {
@@ -96,8 +78,22 @@ public class Item : MonoBehaviour, IInteractable
         }
     }
 
+    public void TestOnCollision()
+    {
+        Debug.Log("TestOnCollision: non-dynamic");
+    }
+
+    public void TestOnCollision(Collision other, Item item)
+    {
+        Debug.Log($"TestOnCollision: dynamic: {item.name} hit: {other.gameObject.name}");
+    }
 
 #if UNITY_EDITOR
+    private void OnDrawGizmosSelected()
+    {
+        Handles.Label(transform.position + transform.up * 0.25f, $"{itemData.name}\n{itemData.itemType}");
+    }
+
     public void ShowGizmos()
     {
         Handles.Label(transform.position + transform.up * 0.25f, $"{itemData.name}\n{itemData.itemType}");

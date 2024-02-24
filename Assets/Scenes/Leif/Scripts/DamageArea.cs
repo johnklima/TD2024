@@ -5,7 +5,7 @@ using UnityEngine.Events;
 public class DamageArea : MonoBehaviour
 {
     public int damageAmount = 1;
-    public UnityEvent onDamage;
+    public UnityEvent onDamagingPlayer;
     public float triggerSize = 2;
     public Vector3 offset;
     public TriggerShape triggerShape;
@@ -67,7 +67,7 @@ public class DamageArea : MonoBehaviour
         if (playerHealth == null) throw new Exception("PlayerHealth component not found on the player object.");
         Debug.Log("player took damage");
         playerHealth.TakeDamage(damageAmount);
-        onDamage.Invoke();
+        onDamagingPlayer.Invoke();
     }
 
     private void DisableDamageArea()

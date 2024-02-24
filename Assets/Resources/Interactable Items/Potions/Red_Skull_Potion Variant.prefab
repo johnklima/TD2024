@@ -174,7 +174,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemData: {fileID: 11400000, guid: 793974b4c46367e4e90f754b3a50d396, type: 2}
-  id: 0
   _itemManager: {fileID: 0}
   isOneShot: 0
+  onCollision:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4569069683967314848}
+        m_TargetAssemblyTypeName: Item, Assembly-CSharp
+        m_MethodName: TestOnCollision
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  id: 0
   itemData2: {fileID: 11400000, guid: 793974b4c46367e4e90f754b3a50d396, type: 2}

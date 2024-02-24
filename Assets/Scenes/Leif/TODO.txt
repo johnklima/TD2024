@@ -10,9 +10,8 @@ Items:
 		potions x12
 
 
-make plants recognize potion
-plants have "correct" potion
 
-GOL
+
+GOL - treeGenerator
 
 item.onImpact event
