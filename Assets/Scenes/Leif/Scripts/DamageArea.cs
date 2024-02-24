@@ -16,7 +16,7 @@ public class DamageArea : MonoBehaviour
     private void Start()
     {
         dummyTarget = GetComponent<DummyTarget>();
-        dummyTarget.onGotHit.AddListener(DisableDamageArea);
+        dummyTarget.onGotDestroyed.AddListener(DisableDamageArea);
         switch (triggerShape)
         {
             case TriggerShape.Box:

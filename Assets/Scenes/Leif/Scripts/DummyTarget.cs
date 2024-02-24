@@ -53,7 +53,6 @@ public class DummyTarget : MonoBehaviour
             transform.localScale = Vector3.one * (_lerpAlpha <= 0 ? 0 : _lerpAlpha);
             if (_lerpAlpha > 0)
                 return;
-            // StartCoroutine(ResetGotHit());
             enabled = false;
         }
     }
@@ -87,10 +86,19 @@ public class DummyTarget : MonoBehaviour
         }
     }
 
-
     private void OnDrawGizmos()
     {
         Gizmos.color = gotHit ? Color.red * .25f : Color.blue * .25f;
         Gizmos.DrawSphere(transform.position + center, radius);
+    }
+
+    public void TestOnGotDestroyed()
+    {
+        Debug.Log("TestOnGotDestroyed");
+    }
+
+    public void TestOnGotHit()
+    {
+        Debug.Log("TestOnGotHit");
     }
 }
