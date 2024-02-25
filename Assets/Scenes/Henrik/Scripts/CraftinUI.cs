@@ -62,7 +62,6 @@ public class CraftinUI : MonoBehaviour
         if (iItem == null)
             throw new Exception("did not find matching item in inventoryController.objects for: " + draggableItem.name);
 
-        Debug.Log("Slotted item: " + draggableItem);
         _currentIngredients.Add(iItem);
         mixButton.interactable = _currentIngredients.Count == 2; //make mix button active if we have 2
         if (_currentIngredients.Count < 2) // it was first item, find color and set shader
@@ -74,7 +73,7 @@ public class CraftinUI : MonoBehaviour
             var ingItem1 = _currentIngredients[0];
             var ingItem2 = _currentIngredients[1];
             _ingredientsMatch = ingItem1.Match(ingItem2.ingredient);
-            Debug.Log("slotted item 2, match: " + _ingredientsMatch);
+            // yellow does not match ....
             // empty list for next try
             _prevIngredients = _currentIngredients.ToArray();
             _currentIngredients.Remove(_currentIngredients[0]);
@@ -87,7 +86,6 @@ public class CraftinUI : MonoBehaviour
 
     private void PotionFactory(Ingredient iItem1, Ingredient iItem2)
     {
-        Debug.Log(" making potion"); // making potion
         var potionItem = _inventoryController.GetPotionFromIngredients(iItem1, iItem2);
         if (potionItem == null) return;
         _inventoryController.AddItem(potionItem);
@@ -97,7 +95,6 @@ public class CraftinUI : MonoBehaviour
     public void OnMix()
     {
         mixButton.interactable = false;
-        Debug.Log("onMix ingredientsMatch: " + _ingredientsMatch);
         if (_ingredientsMatch)
             PotionFactory(_prevIngredients[0].ingredient, _prevIngredients[1].ingredient);
         else
