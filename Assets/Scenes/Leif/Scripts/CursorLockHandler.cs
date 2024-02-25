@@ -7,6 +7,19 @@ public static class CursorLockHandler
         return Cursor.lockState;
     }
 
+    public static void ToggleState()
+    {
+        switch (Cursor.lockState)
+        {
+            case CursorLockMode.Locked:
+                ShowAndUnlockCursor();
+                break;
+            case CursorLockMode.None:
+                HideAndLockCursor();
+                break;
+        }
+    }
+
 
     public static void LockCursor()
     {

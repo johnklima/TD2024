@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 1836.0764, g: 1762.2053, b: 1911.762, a: 1}
+  m_IndirectSpecularColor: {r: 1858.2717, g: 1810.5178, b: 2017.0393, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3280,6 +3280,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1027887618447937564, guid: f888c2123fed2ec4a8a88252b8366cd0,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1027887618447937564, guid: f888c2123fed2ec4a8a88252b8366cd0,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 145143530}
+    - target: {fileID: 1027887618447937564, guid: f888c2123fed2ec4a8a88252b8366cd0,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CancelCauldronMode
+      objectReference: {fileID: 0}
+    - target: {fileID: 1027887618447937564, guid: f888c2123fed2ec4a8a88252b8366cd0,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: CauldronController, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 1060771649111471648, guid: f888c2123fed2ec4a8a88252b8366cd0,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -3399,6 +3419,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: HUD
+      objectReference: {fileID: 0}
+    - target: {fileID: 5140029691610647984, guid: f888c2123fed2ec4a8a88252b8366cd0,
+        type: 3}
+      propertyPath: m_Name
+      value: Close
+      objectReference: {fileID: 0}
+    - target: {fileID: 6640473086584126986, guid: f888c2123fed2ec4a8a88252b8366cd0,
+        type: 3}
+      propertyPath: m_text
+      value: Close
       objectReference: {fileID: 0}
     - target: {fileID: 7592259317667105532, guid: f888c2123fed2ec4a8a88252b8366cd0,
         type: 3}

@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     public Transform playerCamera;
     public bool canWalkWhileAiming = true;
 
+
     [Header("Interactable controls")] public float interactableDistance = 10f;
 
     public LayerMask interactLayerMask;
@@ -78,7 +79,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnValidate()
     {
-        if (throwingRef == null)
+        if (throwingRef == null && isActiveAndEnabled)
             throwingRef = GetComponentInChildren<ThrowingHandler>().gameObject;
     }
 

@@ -8,6 +8,8 @@ using UnityEditor;
 public class DeathScreen : MonoBehaviour
 {
     public float respawnDelay = 5f;
+    public GameObject HUD_UI;
+    public GameObject PauseMenu_UI;
 
     private void Start()
     {
@@ -19,6 +21,8 @@ public class DeathScreen : MonoBehaviour
 
     private void OnEnable()
     {
+        PauseMenu_UI.SetActive(false);
+        HUD_UI.SetActive(false);
         CursorLockHandler.ShowAndUnlockCursor();
     }
 
