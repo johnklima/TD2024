@@ -91,7 +91,6 @@ public class CraftinUI : MonoBehaviour
         _inventoryController.AddItem(potionItem);
     }
 
-
     public void OnMix()
     {
         mixButton.interactable = false;

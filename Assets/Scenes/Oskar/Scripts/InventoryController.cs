@@ -63,7 +63,6 @@ public class InventoryController : MonoBehaviour
     public void AddItem(Item interactableItem)
     {
         if (currNumUsedSlots == maxInvSlots) return;
-        Debug.Log("AddItem interactableItem: " + interactableItem);
         interactableItem = GetActiveItemInstance(interactableItem);
         if (_inventory.ContainsKey(interactableItem))
         {

@@ -56,8 +56,6 @@ public class PlayerInput : MonoBehaviour
 
     private IEnumerator ReactivatePlayerInputDelayed(float delay)
     {
-        Debug.Log("enabling2");
-
         yield return new WaitForSeconds(delay);
         _playerInput.Player.Enable();
     }
@@ -80,7 +78,6 @@ public class PlayerInput : MonoBehaviour
 
     private void HandleCancelUI(InputAction.CallbackContext context)
     {
-        Debug.Log("pressing escape on cauldron");
         CancelCauldron.Invoke();
     }
 

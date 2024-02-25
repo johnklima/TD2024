@@ -195,15 +195,11 @@ namespace Scenes.Leif.Scripts.Editor
             // add item
             var invController = FindObjectOfType<InventoryController>();
             if (invController == null)
-            {
-                Debug.LogError("No InventoryController to spawn items in");
-                return;
-            }
+                throw new Exception("No InventoryController to spawn items in");
 
             var prefabs = Resources.LoadAll<GameObject>("Interactable Items/Ingredients")
                 .Concat(Resources.LoadAll<GameObject>("Interactable Items/Potions")).ToArray();
             invController.AddItem(prefabs[index].GetComponent<Item>());
-            Debug.Log($"Added {prefabs[index].name} to inventory");
         }
 
         private void SpawnInWorld(Vector3 pos)
