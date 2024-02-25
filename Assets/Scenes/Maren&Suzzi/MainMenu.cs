@@ -1,12 +1,20 @@
 using System.Collections;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 public class MainMenu : MonoBehaviour
 {
     public GameObject InstructionPanel;
     public GameObject Creditspanel;
+    public Scene scene;
+
+    private void Start()
+    {
+        SceneManager.LoadScene(scene.ToString(), LoadSceneMode.Additive);
+    }
 
     public void StartGame()
     {
@@ -20,7 +28,6 @@ public class MainMenu : MonoBehaviour
 
     public void OnCredits()
     {
-
         Debug.Log("hei");
     }
 

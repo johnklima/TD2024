@@ -42,7 +42,7 @@ public class PlayerInput : MonoBehaviour
     }
 
 
-    public void SetPlayerCanMoveState(bool enable)
+    public void SetPlayerInputState(bool enable)
     {
         if (enable) _playerInput.Player.Enable();
         else _playerInput.Player.Disable();

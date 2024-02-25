@@ -90,7 +90,7 @@ public class ThrowingHandler : MonoBehaviour
             // player cancel aim
             _aimPrevFram = false;
             if (!canMoveAndAim)
-                _playerInput.SetPlayerCanMoveState(true);
+                _playerInput.SetPlayerInputState(true);
             StartCoroutine(AimCoolDown(aimCoolDown / 2f));
         }
 
@@ -100,7 +100,7 @@ public class ThrowingHandler : MonoBehaviour
             // player is aiming
             _aimPrevFram = true;
             if (!canMoveAndAim)
-                _playerInput.SetPlayerCanMoveState(false);
+                _playerInput.SetPlayerInputState(false);
         }
 
         // if everything up to now says we can fire, set the wheels in motion!
