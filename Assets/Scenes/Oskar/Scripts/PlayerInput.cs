@@ -24,7 +24,8 @@ public class PlayerInput : MonoBehaviour
         if (_pauseMenu == null) throw new Exception("Make sure there is a <PauseMenu> in the scene!");
 
         _playerInput.Player.Interact.performed += HandleInteract;
-        _playerInput.UI.Cancel.performed += HandleCancelUI;
+        // _playerInput.UI.Cancel.performed += HandleCancelUI;
+        _playerInput.Player.Cancel.performed += HandleCancelUI;
     }
 
     private void Update()

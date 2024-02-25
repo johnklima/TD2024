@@ -22,6 +22,7 @@ public class PauseMenu : MonoBehaviour
         PauseMenu_UI.SetActive(true);
         HUD_UI.SetActive(false);
         CursorLockHandler.ShowAndUnlockCursor();
+        Time.timeScale = 0;
     }
 
     public void ClosePauseMenu()
@@ -31,6 +32,7 @@ public class PauseMenu : MonoBehaviour
         CursorLockHandler.HideAndLockCursor();
         PauseMenu_UI.SetActive(false);
         HUD_UI.SetActive(true);
+        Time.timeScale = 1;
     }
 
     public void TogglePauseMenu()
@@ -40,6 +42,7 @@ public class PauseMenu : MonoBehaviour
         CursorLockHandler.ToggleState();
         HUD_UI.SetActive(!HUD_UI.activeSelf);
         PauseMenu_UI.SetActive(!PauseMenu_UI.activeSelf);
+        Time.timeScale = Time.timeScale == 0 ? 1 : 0;
     }
 
 
