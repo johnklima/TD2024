@@ -40,21 +40,21 @@ public class ThrowingHandler : MonoBehaviour
     private void Start()
     {
         _inventoryDisplay = FindObjectOfType<InventoryDisplay>();
-        if (_inventoryDisplay == null) throw new Exception("Make sure there is a <InventoryDisplay> in the scene");
+        if (_inventoryDisplay == null) ThrowError("Make sure there is a <InventoryDisplay> in the scene");
 
         _playerInput = FindObjectOfType<PlayerInput>();
-        if (_playerInput == null) throw new Exception("Make sure there is a <PlayerInput> in the scene");
+        if (_playerInput == null) ThrowError("Make sure there is a <PlayerInput> in the scene");
 
         _playerController = GetComponentInParent<PlayerController>();
         if (_playerController == null)
-            throw new Exception("Make sure there is a <PlayerController> in the scene");
+            ThrowError("Make sure there is a <PlayerController> in the scene");
         _inventoryController = GetComponentInParent<InventoryController>();
         if (_inventoryController == null)
-            throw new Exception("Make sure there is a <InventoryController> in the scene");
+            ThrowError("Make sure there is a <InventoryController> in the scene");
 
         _itemManager = FindObjectOfType<ItemManager>();
         if (_itemManager == null)
-            throw new Exception("Make sure there is a <ItemManager> in the scene");
+            ThrowError("Make sure there is a <ItemManager> in the scene");
 
         OnThrowing.AddListener(_inventoryController.RemoveItem);
 
@@ -65,7 +65,7 @@ public class ThrowingHandler : MonoBehaviour
         _canAim = true;
         if (Camera.main != null)
             _mainCam = Camera.main.transform;
-        else throw new Exception("No camera set as MainCamera");
+        else ThrowError("No camera set as MainCamera");
     }
 
     private void Update()
@@ -147,13 +147,20 @@ public class ThrowingHandler : MonoBehaviour
         }
     }
 
+    private void ThrowError(string e)
+    {
+        Debug.LogError("Disabling: " + name);
+        enabled = false;
+        throw new Exception(e);
+    }
+
     private void ExecuteThrow(DraggableItem selectedItem)
     {
         _playerInput.DisablePlayerInputForDuration(aimCoolDown);
         _canAim = _aimPrevFram = false; // exit next frame
         StartCoroutine(AimCoolDown()); // set cooldown
         var throwable = _itemManager.GetActiveGameObject(selectedItem.item);
-        if (throwable == null) throw new Exception("Something wrong");
+        if (throwable == null) ThrowError("Something wrong");
         _newThrowable = Instantiate(throwable); // make object
         //TODO CHANGE THING
         var item = _newThrowable.GetComponent<Item>();
@@ -194,7 +201,7 @@ public class ThrowingHandler : MonoBehaviour
         if (_doRayCam == null)
             _doRayCam = Camera.main.transform;
         if (_doRayCam == null)
-            throw new Exception("Cannot find Camera.Main, make sure there is always one active Camera.main");
+            ThrowError("Cannot find Camera.Main, make sure there is always one active Camera.main");
         var ray = new Ray(_doRayCam.position, _doRayCam.forward);
         return Physics.Raycast(ray, out hit, 1000);
     }

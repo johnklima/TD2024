@@ -28,6 +28,7 @@ public class PlayerController : MonoBehaviour
         if (throwingRef == null)
             throwingRef = GetComponentInChildren<ThrowingHandler>().gameObject;
 
+
         ctrl = GetComponent<CharacterController>();
 
         CursorLockHandler.HideAndLockCursor();
