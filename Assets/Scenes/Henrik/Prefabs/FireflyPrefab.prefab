@@ -172,7 +172,7 @@ MonoBehaviour:
     obstacleLayerMask:
       serializedVersion: 2
       m_Bits: 4294967295
-    yConstrainDistance: 1
+    yConstrainDistance: 3
     seekTarget: 0
     target: {fileID: 0}
     useConstrainPoint: 1
@@ -180,17 +180,7 @@ MonoBehaviour:
     onHitTarget:
       m_PersistentCalls:
         m_Calls: []
-  numberOfBoids: 100
+  numberOfBoids: 20
   useObstacleAvoid: 0
   prefab: {fileID: 1574273739349351814}
-  boids:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  boids: []

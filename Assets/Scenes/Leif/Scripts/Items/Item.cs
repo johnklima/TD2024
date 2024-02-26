@@ -80,15 +80,6 @@ public class Item : MonoBehaviour, IInteractable
         }
     }
 
-    public void TestOnCollision()
-    {
-        Debug.Log("TestOnCollision: non-dynamic");
-    }
-
-    public void TestOnCollision(Collision other, Item item)
-    {
-        Debug.Log($"TestOnCollision: dynamic: {item.name} hit: {other.gameObject.name}");
-    }
 
 #if UNITY_EDITOR
     private void OnDrawGizmosSelected()

@@ -39,6 +39,14 @@ ItemManager:
 OnItemInteract->PLAYER InventoryController.AddItem(item)
 
 
+Prefab:
+// needs their meshes replaced with correct meshes
+- Potion(PLACEHOLDER)
+- Ingredient(PLACEHOLDER)  
+all the ingredient variants and potion variants have OnCollision event
+SFX can be added here (glass breaking or w/e)
+
+
 
 HealthDisplay: 
 	sprites: 

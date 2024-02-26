@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class CraftinUI : MonoBehaviour
@@ -9,6 +10,8 @@ public class CraftinUI : MonoBehaviour
     public Button mixButton;
 
     [SerializeField] private MeshRenderer cauldronSoupRenderer;
+
+    public UnityEvent onSuccessfulMix, onUnsuccessfulMix;
     private Material _cauldronSoupMaterial;
     private List<IngredientItem> _currentIngredients = new();
 
@@ -57,26 +60,29 @@ public class CraftinUI : MonoBehaviour
     public void OnCraftingSlotDrop(DraggableItem draggableItem)
     {
         var item = _inventoryController.GetActiveItemInstance(draggableItem.item);
-        var ingredientObjectItem = item.gameObject.GetComponent<IngredientObjectItem>();
-        var iItem = ingredientObjectItem.itemData2;
-        if (iItem == null)
-            throw new Exception("did not find matching item in inventoryController.objects for: " + draggableItem.name);
-
-        _currentIngredients.Add(iItem);
-        mixButton.interactable = _currentIngredients.Count == 2; //make mix button active if we have 2
-        if (_currentIngredients.Count < 2) // it was first item, find color and set shader
-            SetCauldronSoupColor(ingredientObjectItem);
-        if (_currentIngredients.Count == 2)
+        if (item.gameObject.TryGetComponent(out IngredientObjectItem ingredientObjectItem))
         {
-            // we have 2 ingredients. 
-            // check ingredients match
-            var ingItem1 = _currentIngredients[0];
-            var ingItem2 = _currentIngredients[1];
-            _ingredientsMatch = ingItem1.Match(ingItem2.ingredient);
-            // yellow does not match ....
-            // empty list for next try
-            _prevIngredients = _currentIngredients.ToArray();
-            _currentIngredients.Remove(_currentIngredients[0]);
+            var iItem = ingredientObjectItem.itemData2;
+            if (iItem == null)
+                throw new Exception("did not find matching item in inventoryController.objects for: " +
+                                    draggableItem.name);
+
+            _currentIngredients.Add(iItem);
+            mixButton.interactable = _currentIngredients.Count == 2; //make mix button active if we have 2
+            if (_currentIngredients.Count < 2) // it was first item, find color and set shader
+                SetCauldronSoupColor(ingredientObjectItem);
+            if (_currentIngredients.Count == 2)
+            {
+                // we have 2 ingredients. 
+                // check ingredients match
+                var ingItem1 = _currentIngredients[0];
+                var ingItem2 = _currentIngredients[1];
+                _ingredientsMatch = ingItem1.Match(ingItem2.ingredient);
+                // yellow does not match ....
+                // empty list for next try
+                _prevIngredients = _currentIngredients.ToArray();
+                _currentIngredients.Remove(_currentIngredients[0]);
+            }
         }
 
         // we have gotten X items
@@ -95,8 +101,14 @@ public class CraftinUI : MonoBehaviour
     {
         mixButton.interactable = false;
         if (_ingredientsMatch)
+        {
             PotionFactory(_prevIngredients[0].ingredient, _prevIngredients[1].ingredient);
+            onSuccessfulMix.Invoke();
+        }
         else
+        {
             Debug.Log(" make poof"); // make poof
+            onUnsuccessfulMix.Invoke();
+        }
     }
 }

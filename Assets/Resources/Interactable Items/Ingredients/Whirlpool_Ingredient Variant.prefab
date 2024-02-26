@@ -194,5 +194,5 @@ MonoBehaviour:
         m_CallState: 2
   id: 0
   itemData2: {fileID: 11400000, guid: ebe2b9a78fd50a04683da052eeb668c8, type: 2}
-  color1: {r: 0.54088044, g: 0.54088044, b: 0.54088044, a: 0}
-  color2: {r: 0, g: 0, b: 0, a: 0}
+  color1: {r: 0, g: 0.66166043, b: 1, a: 0}
+  color2: {r: 1, g: 1, b: 1, a: 0}

@@ -83,7 +83,6 @@ public class InventoryController : MonoBehaviour
     public void RemoveItem(DraggableItem draggableItem) //! attaches to ThrowingHandler.OnThrowing()
     {
         var item = GetActiveItemInstance(draggableItem.item);
-        Debug.Log("RemoveItem interactableItem: " + item);
         if (!_inventory.ContainsKey(item)) throw new Exception("inventory does not contain: " + draggableItem.name);
         if (_inventory[item] > 0)
         {
