@@ -12,6 +12,7 @@ public class Boids1 : MonoBehaviour
     private Vector3 _constrainPoint;
 
     private float avoidCount;
+    private Boids1[] boids;
 
     // Start is called before the first frame update
     private void Start()
@@ -27,6 +28,7 @@ public class Boids1 : MonoBehaviour
         transform.localPosition = pos;
         transform.LookAt(look);
         velocity = (look - pos) * speed;
+        boids = transform.parent.GetComponentsInChildren<Boids1>();
     }
 
     // Update is called once per frame
@@ -155,10 +157,11 @@ public class Boids1 : MonoBehaviour
         var steer = new Vector3(0, 0, 0);
         var sibs = 0;
 
-        foreach (Transform boid in transform.parent)
-            if (boid != transform)
+
+        foreach (var boid in boids)
+            if (boid != this)
             {
-                steer += boid.GetComponent<Boids1>().velocity;
+                steer += boid.velocity;
                 sibs++;
             }
 

@@ -89,7 +89,7 @@ public class CraftinUI : MonoBehaviour
         // we have gotten X items
         Destroy(draggableItem.gameObject);
         if (isIngredient) _inventoryController.RemoveItem(draggableItem);
-        _inventoryController.RefreshUIInventory();
+        else _inventoryController.RefreshUIInventory();
     }
 
     private void PotionFactory(Ingredient iItem1, Ingredient iItem2)
@@ -109,7 +109,6 @@ public class CraftinUI : MonoBehaviour
         }
         else
         {
-            Debug.Log(" make poof"); // make poof
             onUnsuccessfulMix.Invoke();
         }
     }

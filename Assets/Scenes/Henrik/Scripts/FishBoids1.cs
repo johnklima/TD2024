@@ -13,6 +13,8 @@ public class FishBoids1 : MonoBehaviour
 
     private float avoidCount;
 
+    private FishBoids1[] fishBoids;
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -27,6 +29,7 @@ public class FishBoids1 : MonoBehaviour
         transform.localPosition = pos;
         transform.LookAt(look);
         velocity = (look - pos) * speed;
+        fishBoids = transform.parent.GetComponentsInChildren<FishBoids1>();
     }
 
     // Update is called once per frame
@@ -156,10 +159,11 @@ public class FishBoids1 : MonoBehaviour
         var steer = new Vector3(0, 0, 0);
         var sibs = 0;
 
-        foreach (Transform boid in transform.parent)
-            if (boid != transform)
+
+        foreach (var boid in fishBoids)
+            if (boid != this)
             {
-                steer += boid.GetComponent<FishBoids1>().velocity;
+                steer += boid.velocity;
                 sibs++;
             }
 
