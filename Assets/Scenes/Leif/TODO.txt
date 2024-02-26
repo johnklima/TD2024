@@ -3,7 +3,8 @@ Things that need attention from others:
 World>Enemies>Target 01 - 11:
     -DummyTarget.cs>"Required Potion" needs to be set
     -Curse-o-meter needs to be added
-    -Mesh inside needs replacing with correct
+    -Mesh inside needs replacing with correct plants
+        - !dont adjust the <Target_ 0X> itself, adjust the mesh inside!
     -DamageArea.cs>TriggerSize and offset needs to be looked at
     Events available:
     DummyTarget.cs:
@@ -24,15 +25,12 @@ CharacterController.cs:
 
 
 HUD:
-CraftingUI:
-Mix button > OnClick event > S/VFX
-Close button > OnClick event > S/VFX
-
-Inventory:
+InventoryDisplay:
 // when starting/stopping dragging hotBar item
-OnStartDrag event > S/VFX
-OnEndDrag event > S/VFX
+OnStartDrag event > SFX
+OnEndDrag event > SFX
 
+HUD>HUD.cs > OnUiButtonClicked > SFX
 
 
 

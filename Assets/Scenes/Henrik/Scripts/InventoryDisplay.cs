@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 //! AddItem() listens to OnInventoryChanged @ InventoryController
 public class InventoryDisplay : MonoBehaviour
@@ -8,9 +9,10 @@ public class InventoryDisplay : MonoBehaviour
     public InventorySlot[] inventorySlots;
     public GameObject inventoryItemPrefab;
     [HideInInspector] public DraggableItem selectedItem;
+
+    public UnityEvent onStartDrag, onEndDrag;
     private InventoryController _inventoryController;
     private int selectedSlot = -1;
-
 
     public void Start()
     {
@@ -105,7 +107,7 @@ public class InventoryDisplay : MonoBehaviour
     {
         var newItemGo = Instantiate(inventoryItemPrefab, slot.transform);
         var inventoryItem = newItemGo.GetComponent<DraggableItem>();
-        inventoryItem.InitialiseItem(item.Key, item.Value);
+        inventoryItem.InitialiseItem(item.Key, item.Value, this);
     }
 
     private void ChangeSelectedSlot(int newValue)

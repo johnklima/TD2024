@@ -1,7 +1,6 @@
 using System;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Serialization;
 
 [RequireComponent(typeof(SphereCollider))]
 // [RequireComponent(typeof(Rigidbody))]
@@ -14,15 +13,14 @@ public class DummyTarget : MonoBehaviour
 
     public Vector3 center;
 
-    [Header("event settings")] [FormerlySerializedAs("isTrashCan")]
-    public bool despawnOnHit;
+    [Header("event settings")] public float scaleSpeed = 1;
 
-    public float scaleSpeed = 1;
     public int damageAmount = 1;
     public UnityEvent onGotHit = new();
     public UnityEvent onGotDestroyed = new();
 
     [HideInInspector] public bool gotHit;
+    private BoxCollider _boxCollider;
     private float _lerpAlpha = 1;
     private PlayerHealthSystem _playerHealthSystem;
     private Rigidbody _rigidbody;
@@ -34,6 +32,10 @@ public class DummyTarget : MonoBehaviour
         _playerHealthSystem = FindObjectOfType<PlayerHealthSystem>();
         if (_playerHealthSystem == null) throw new Exception("Make sure there is a <PlayerHealthSystem> in the scene");
 
+        _boxCollider = GetComponent<BoxCollider>();
+        if (_boxCollider == null) _boxCollider = gameObject.AddComponent<BoxCollider>();
+        _boxCollider.center = new Vector3(0, 1, 0);
+        _boxCollider.size = new Vector3(1, 4, 4);
 
         _sphereCollider = GetComponent<SphereCollider>();
         // _sphereCollider.isTrigger = true;
@@ -46,7 +48,7 @@ public class DummyTarget : MonoBehaviour
 
     private void Update()
     {
-        if (gotHit && !despawnOnHit)
+        if (gotHit)
         {
             if (_lerpAlpha > 0)
                 _lerpAlpha -= Time.deltaTime * scaleSpeed;
@@ -75,6 +77,7 @@ public class DummyTarget : MonoBehaviour
             // correct potion
             onGotDestroyed.Invoke();
             _sphereCollider.enabled = false;
+            _boxCollider.enabled = false;
             gotHit = true; // turn on "animation"
         }
         else

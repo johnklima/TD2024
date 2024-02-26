@@ -152,6 +152,12 @@ MonoBehaviour:
   inventoryItemPrefab: {fileID: 6746024429524954849, guid: 6b974de1f58fbab4c95c7de63631d2cf,
     type: 3}
   selectedItem: {fileID: 0}
+  onStartDrag:
+    m_PersistentCalls:
+      m_Calls: []
+  onEndDrag:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &3487215032655772532
 GameObject:
   m_ObjectHideFlags: 0
@@ -301,6 +307,7 @@ GameObject:
   - component: {fileID: 4495426668859241382}
   - component: {fileID: 8928772656532404672}
   - component: {fileID: 8325570006117818027}
+  - component: {fileID: 7039811243438976878}
   m_Layer: 0
   m_Name: HUD
   m_TagString: Untagged
@@ -413,6 +420,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7894dc1dcb42b64997f8bbc30fc60d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7039811243438976878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4303049439730214980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23a37532b288ea745860da7a501e09a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnUiButtonClicked:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &4725234793062724623
 GameObject:
   m_ObjectHideFlags: 0

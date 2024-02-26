@@ -71,7 +71,7 @@ public class Boids1 : MonoBehaviour
         }
     }
 
-    private void OnDrawGizmos()
+    private void OnDrawGizmosSelected()
     {
         Gizmos.DrawWireSphere(transform.position, .5f);
         if (boidsSettings.target != null && boidsSettings.seekTarget)
