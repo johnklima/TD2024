@@ -51,7 +51,6 @@ public class AntFarm : MonoBehaviour
     private void Start()
     {
         GenerateGameObjects();
-        Debug.Log("Start Farm");
     }
 
     private void Update()
@@ -159,13 +158,11 @@ public class AntFarm : MonoBehaviour
 
     private void UpdateCellLoop()
     {
-        Debug.Log("Update Farm");
         generation++;
         if (QueenAnts.Count > 0)
             for (var i = 0; i < QueenAnts.Count; i++)
             {
                 var q = QueenAnts[i];
-                Debug.Log(q);
                 q.UpdateQueen(this);
             }
     }

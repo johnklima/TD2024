@@ -23,7 +23,6 @@ public class Ant
 
     private void Move(AntFarm antFarm)
     {
-        Debug.Log("Ant Moved");
         currentCell.OnExit();
         var randomDirection = AntFarm.GetRandomDirection();
         var nextPos = pos + randomDirection;
@@ -68,7 +67,6 @@ public class QueenAnt
 
     public void SpawnAnt(AntFarmCell cell)
     {
-        Debug.Log("Queen Spawned new Ant");
         ants.Add(new Ant(cell));
     }
 }

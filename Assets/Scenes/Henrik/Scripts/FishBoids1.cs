@@ -78,7 +78,7 @@ public class FishBoids1 : MonoBehaviour
         transform.position = _pos;
     }
 
-    private void OnDrawGizmos()
+    private void OnDrawGizmosSelected()
     {
         Gizmos.DrawWireSphere(transform.position, .5f);
         if (boidsSettings.target != null && boidsSettings.seekTarget)

@@ -14,9 +14,13 @@ public class DeathScreen : MonoBehaviour
     private void Start()
     {
         // if object is active when scene loads, deactivate object
-        gameObject.SetActive(false);
         // hide and lock cursor
         CursorLockHandler.HideAndLockCursor();
+    }
+
+    private void Update()
+    {
+        CursorLockHandler.ShowAndUnlockCursor();
     }
 
     private void OnEnable()

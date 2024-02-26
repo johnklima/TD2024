@@ -4,9 +4,10 @@ using UnityEngine.Events;
 
 public class BoidSystem : MonoBehaviour
 {
-    public int numberOfBoids;
-    public GameObject prefab;
     public BoidsSettings boidsSettings;
+    public int numberOfBoids;
+    public bool useObstacleAvoid = true;
+    public GameObject prefab;
     public GameObject[] boids;
 
     private void Start()
@@ -15,6 +16,7 @@ public class BoidSystem : MonoBehaviour
         for (var i = 0; i < numberOfBoids; i++)
             boids[i] = CreateBoid(prefab);
     }
+
 
     private void Update()
     {
@@ -43,21 +45,21 @@ public class BoidSystem : MonoBehaviour
         boidGo.name = $"Boid_{parent.childCount}{prefabIndicator}";
         boidGo.transform.localPosition = Vector3.zero;
         boidGo.transform.parent = parent;
-
+        boidGo.SetActive(true);
 
         var boid = boidGo.AddComponent<Boids1>();
         boid.boidsSettings = boidsSettings;
-
-        new GameObject(
-            $"ObstacleAvoid_{parent.childCount}",
-            typeof(BoidObstacleAvoid1)
-        )
-        {
-            transform =
+        if (useObstacleAvoid)
+            new GameObject(
+                $"ObstacleAvoid_{parent.childCount}",
+                typeof(BoidObstacleAvoid1)
+            )
             {
-                parent = boidGo.transform
-            }
-        };
+                transform =
+                {
+                    parent = boidGo.transform
+                }
+            };
         return boidGo;
     }
 }

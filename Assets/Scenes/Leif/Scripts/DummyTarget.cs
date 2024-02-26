@@ -20,7 +20,6 @@ public class DummyTarget : MonoBehaviour
     public UnityEvent onGotDestroyed = new();
 
     [HideInInspector] public bool gotHit;
-    private BoxCollider _boxCollider;
     private float _lerpAlpha = 1;
     private PlayerHealthSystem _playerHealthSystem;
     private Rigidbody _rigidbody;
@@ -32,10 +31,6 @@ public class DummyTarget : MonoBehaviour
         _playerHealthSystem = FindObjectOfType<PlayerHealthSystem>();
         if (_playerHealthSystem == null) throw new Exception("Make sure there is a <PlayerHealthSystem> in the scene");
 
-        _boxCollider = GetComponent<BoxCollider>();
-        if (_boxCollider == null) _boxCollider = gameObject.AddComponent<BoxCollider>();
-        _boxCollider.center = new Vector3(0, 1, 0);
-        _boxCollider.size = new Vector3(1, 4, 4);
 
         _sphereCollider = GetComponent<SphereCollider>();
         // _sphereCollider.isTrigger = true;
@@ -77,7 +72,6 @@ public class DummyTarget : MonoBehaviour
             // correct potion
             onGotDestroyed.Invoke();
             _sphereCollider.enabled = false;
-            _boxCollider.enabled = false;
             gotHit = true; // turn on "animation"
         }
         else

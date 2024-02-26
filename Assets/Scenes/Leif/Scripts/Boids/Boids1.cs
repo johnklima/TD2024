@@ -69,6 +69,12 @@ public class Boids1 : MonoBehaviour
             transform.position += velocity * (Time.deltaTime * boidsSettings.speed);
             transform.LookAt(pos + velocity);
         }
+
+        var _pos = transform.position;
+        var distFromParentY = boidsSettings.yConstrainDistance;
+        var parentY = transform.parent.position.y;
+        _pos.y = Mathf.Clamp(_pos.y, parentY - distFromParentY, parentY + distFromParentY);
+        transform.position = _pos;
     }
 
     private void OnDrawGizmosSelected()

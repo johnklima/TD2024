@@ -160,8 +160,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a54a78a301960a489143bf8c4a6e453, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberOfBoids: 100
-  prefab: {fileID: 1574273739349351814}
   boidsSettings:
     cohesionFactor: 0.04
     separationFactor: 6
@@ -182,6 +180,9 @@ MonoBehaviour:
     onHitTarget:
       m_PersistentCalls:
         m_Calls: []
+  numberOfBoids: 100
+  useObstacleAvoid: 0
+  prefab: {fileID: 1574273739349351814}
   boids:
   - {fileID: 0}
   - {fileID: 0}
