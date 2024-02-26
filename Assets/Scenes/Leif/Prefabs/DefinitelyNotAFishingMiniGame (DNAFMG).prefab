@@ -211,7 +211,7 @@ GameObject:
   - component: {fileID: 1079026636750698766}
   - component: {fileID: 6365071484449472218}
   - component: {fileID: 5274987019114295125}
-  m_Layer: 0
+  m_Layer: 27
   m_Name: DefinitelyNotAFishingMiniGame (DNAFMG)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
