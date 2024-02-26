@@ -80,6 +80,11 @@ public class InventoryController : MonoBehaviour
         //Show UI/make sound to show that its full
     }
 
+    public void RefreshUIInventory()
+    {
+        onInventoryChanged.Invoke(_inventory);
+    }
+
     public void RemoveItem(DraggableItem draggableItem) //! attaches to ThrowingHandler.OnThrowing()
     {
         var item = GetActiveItemInstance(draggableItem.item);

@@ -60,7 +60,8 @@ public class CraftinUI : MonoBehaviour
     public void OnCraftingSlotDrop(DraggableItem draggableItem)
     {
         var item = _inventoryController.GetActiveItemInstance(draggableItem.item);
-        if (item.gameObject.TryGetComponent(out IngredientObjectItem ingredientObjectItem))
+        var isIngredient = item.gameObject.TryGetComponent(out IngredientObjectItem ingredientObjectItem);
+        if (isIngredient)
         {
             var iItem = ingredientObjectItem.itemData2;
             if (iItem == null)
@@ -87,7 +88,8 @@ public class CraftinUI : MonoBehaviour
 
         // we have gotten X items
         Destroy(draggableItem.gameObject);
-        _inventoryController.RemoveItem(draggableItem);
+        if (isIngredient) _inventoryController.RemoveItem(draggableItem);
+        _inventoryController.RefreshUIInventory();
     }
 
     private void PotionFactory(Ingredient iItem1, Ingredient iItem2)
