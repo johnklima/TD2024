@@ -42,7 +42,7 @@ public class DamageArea : MonoBehaviour
         }
     }
 
-    private void OnDrawGizmos()
+    private void OnDrawGizmosSelected()
     {
         if (!isActiveAndEnabled) return;
         var pos = transform.position + offset;

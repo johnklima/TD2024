@@ -121,7 +121,7 @@ MonoBehaviour:
     integrationRate: 1.14
     obstacleLayerMask:
       serializedVersion: 2
-      m_Bits: 4294967295
+      m_Bits: 0
     seekTarget: 0
     target: {fileID: 8630237152411480974}
     useConstrainPoint: 1

@@ -37,8 +37,14 @@ public class ThrowingHandler : MonoBehaviour
     private PlayerInput _playerInput;
     private IEnumerator coroutine;
 
+    private bool isLoadedAdditively;
+
     private void Start()
     {
+        var mainMenu = FindObjectOfType<MainMenu>();
+        if (mainMenu != null) isLoadedAdditively = true;
+        if (isLoadedAdditively) return;
+
         _inventoryDisplay = FindObjectOfType<InventoryDisplay>();
         if (_inventoryDisplay == null) ThrowError("Make sure there is a <InventoryDisplay> in the scene");
 
@@ -70,6 +76,7 @@ public class ThrowingHandler : MonoBehaviour
 
     private void Update()
     {
+        if (isLoadedAdditively) return;
         if (_newThrowable != null) _newThrowable.transform.position = transform.position;
         if (!PlayerInput.playerHasControl) return;
         var selectedItem = _inventoryDisplay.selectedItem;
@@ -134,6 +141,8 @@ public class ThrowingHandler : MonoBehaviour
 
     private void OnValidate()
     {
+        if (isLoadedAdditively) return;
+
         SetupLineRenderer();
         var res = _lineRenderer.positionCount;
         for (var i = 0; i < res; i++)
@@ -149,7 +158,7 @@ public class ThrowingHandler : MonoBehaviour
 
     private void ThrowError(string e)
     {
-        Debug.LogError("Disabling: " + name);
+        Debug.Log("Disabling: " + name);
         enabled = false;
         throw new Exception(e);
     }

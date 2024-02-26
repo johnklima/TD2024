@@ -44,7 +44,6 @@ GameObject:
   - component: {fileID: 7438189658443076753}
   - component: {fileID: 1836458951530995691}
   - component: {fileID: 1411609955489651321}
-  - component: {fileID: 8941521082943199842}
   m_Layer: 0
   m_Name: Firefly
   m_TagString: Untagged
@@ -61,7 +60,7 @@ Transform:
   m_GameObject: {fileID: 1574273739349351814}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.9656849, y: -4.66124, z: 3.4288874}
+  m_LocalPosition: {x: 2.2256851, y: -4.35124, z: 3.5188875}
   m_LocalScale: {x: 0.02, y: 0.02, z: 0.02}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -117,27 +116,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &8941521082943199842
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1574273739349351814}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3615097679064954903
 GameObject:
   m_ObjectHideFlags: 0
@@ -196,10 +174,14 @@ MonoBehaviour:
     obstacleLayerMask:
       serializedVersion: 2
       m_Bits: 4294967295
+    yConstrainDistance: 1
     seekTarget: 0
     target: {fileID: 0}
     useConstrainPoint: 1
     constrainPoint: {fileID: 7438189658443076753}
+    onHitTarget:
+      m_PersistentCalls:
+        m_Calls: []
   boids:
   - {fileID: 0}
   - {fileID: 0}

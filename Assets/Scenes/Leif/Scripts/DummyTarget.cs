@@ -86,7 +86,7 @@ public class DummyTarget : MonoBehaviour
         }
     }
 
-    private void OnDrawGizmos()
+    private void OnDrawGizmosSelected()
     {
         Gizmos.color = gotHit ? Color.red * .25f : Color.blue * .25f;
         Gizmos.DrawSphere(transform.position + center, radius);

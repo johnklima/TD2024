@@ -17,7 +17,7 @@ public class FishBoids1 : MonoBehaviour
     private void Start()
     {
         if (boidsSettings.useConstrainPoint && boidsSettings.constrainPoint == null)
-            boidsSettings.constrainPoint = transform;
+            boidsSettings.constrainPoint = transform.parent;
 
         var pos = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), Random.Range(-1f, 1f));
         var look = new Vector3(Random.Range(-1000f, 1000f), Random.Range(-1000f, 1000f), Random.Range(-1000f, 1000f));
@@ -48,6 +48,7 @@ public class FishBoids1 : MonoBehaviour
                 //Attack successful, do damage, fly away
                 Debug.Log("Hit Target");
                 boidsSettings.seekTarget = false;
+                boidsSettings.onHitTarget.Invoke();
             }
         }
         else
@@ -69,8 +70,11 @@ public class FishBoids1 : MonoBehaviour
             transform.position += velocity * (Time.deltaTime * boidsSettings.speed);
             transform.LookAt(pos + velocity);
         }
+
         var _pos = transform.position;
-        _pos.y = 0;
+        var distFromParentY = boidsSettings.yConstrainDistance;
+        var parentY = transform.parent.position.y;
+        _pos.y = Mathf.Clamp(_pos.y, parentY - distFromParentY, parentY + distFromParentY);
         transform.position = _pos;
     }
 

@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class BoidSystem : MonoBehaviour
 {
@@ -19,7 +20,7 @@ public class BoidSystem : MonoBehaviour
     {
     }
 
-    private void OnDrawGizmos()
+    private void OnDrawGizmosSelected()
     {
         if (boidsSettings.constrainPoint != null && boidsSettings.useConstrainPoint)
             Gizmos.DrawWireCube(boidsSettings.constrainPoint.position, Vector3.one * 3);
@@ -73,10 +74,16 @@ public class BoidsSettings
     public float speed = 6.0f;
     public float integrationRate = 3.0f;
     public LayerMask obstacleLayerMask;
+    public float yConstrainDistance = 1;
+
 
     //states
     public bool seekTarget;
     public Transform target;
     public bool useConstrainPoint;
     public Transform constrainPoint;
+
+
+    //event
+    public UnityEvent onHitTarget = new();
 }
