@@ -35,7 +35,7 @@ public class BoxMatrix : MonoBehaviour
 
                     Vector3 pos = new Vector3(w * spaceW, h * spaceH, d * spaceD);  //place it
 
-                    MatrixObjs[w, d, h].transform.localPosition = pos;              //
+                    MatrixObjs[w, d, h].transform.localPosition = pos;              //LOCAL
                     
                     MatrixObjs[w, d, h].SetActive(true);                            // baseObject is deactivated in editor
 
