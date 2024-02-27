@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 //! AddItem() listens to OnInventoryChanged @ InventoryController
 public class InventoryDisplay : MonoBehaviour
@@ -8,9 +9,10 @@ public class InventoryDisplay : MonoBehaviour
     public InventorySlot[] inventorySlots;
     public GameObject inventoryItemPrefab;
     [HideInInspector] public DraggableItem selectedItem;
+
+    public UnityEvent onStartDrag, onEndDrag;
     private InventoryController _inventoryController;
     private int selectedSlot = -1;
-
 
     public void Start()
     {
@@ -43,8 +45,6 @@ public class InventoryDisplay : MonoBehaviour
 
     public void UpdateInventoryDisplay(Dictionary<Item, int> inventory)
     {
-        var msg = "<b><color=green>Updated:</color></b>: (highlight me for details)\n";
-        var failedMsg = "<b><color=red>Not updated: </color></b>\n";
         //foreach (var keyValuePair in inventory) Debug.Log($"{keyValuePair.Key}:{keyValuePair.Value}");
         foreach (var item in inventory)
         {
@@ -63,18 +63,13 @@ public class InventoryDisplay : MonoBehaviour
                     // if we dont find item, we need to make UI element
                     if (!FindAndPopulateEmptySlot(item)) throw new Exception("Inventory full??"); // did not make slot
                     // successfully made slot
-                    msg += $"made {item.Key}, {stackable}\n";
                     continue; // then continue to next item;
                 }
 
             // if we have UI version of item, try to update UI
-            if (!TryUpdateDisplaySlot(draggableItem, item))
-                failedMsg += $"{item.Key}, {stackable}\n"; // if we fail to update
-            else
-                msg += $"updated {item.Key}, {stackable}\n";
+            TryUpdateDisplaySlot(draggableItem, item);
         }
 
-        Debug.Log(msg + failedMsg);
         CleanUpInventory(inventory); // remove any unused images
     }
 
@@ -100,8 +95,7 @@ public class InventoryDisplay : MonoBehaviour
             var stackable = item.Key.itemData.stackable
                 ? "stackable, stack-size: " + item.Value
                 : "un-stackable";
-            Debug.Log($"Spawned new item: {item.Key}! {stackable}");
-            SpawnNewItem(item.Key, slot);
+            SpawnNewItem(item, slot);
             ChangeSelectedSlot(selectedSlot);
             return true;
         }
@@ -109,11 +103,11 @@ public class InventoryDisplay : MonoBehaviour
         return false;
     }
 
-    private void SpawnNewItem(Item item, InventorySlot slot)
+    private void SpawnNewItem(KeyValuePair<Item, int> item, InventorySlot slot)
     {
         var newItemGo = Instantiate(inventoryItemPrefab, slot.transform);
         var inventoryItem = newItemGo.GetComponent<DraggableItem>();
-        inventoryItem.InitialiseItem(item);
+        inventoryItem.InitialiseItem(item.Key, item.Value, this);
     }
 
     private void ChangeSelectedSlot(int newValue)

@@ -13,11 +13,13 @@ public class FishBoids1 : MonoBehaviour
 
     private float avoidCount;
 
+    private FishBoids1[] fishBoids;
+
     // Start is called before the first frame update
     private void Start()
     {
         if (boidsSettings.useConstrainPoint && boidsSettings.constrainPoint == null)
-            boidsSettings.constrainPoint = transform;
+            boidsSettings.constrainPoint = transform.parent;
 
         var pos = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), Random.Range(-1f, 1f));
         var look = new Vector3(Random.Range(-1000f, 1000f), Random.Range(-1000f, 1000f), Random.Range(-1000f, 1000f));
@@ -27,6 +29,7 @@ public class FishBoids1 : MonoBehaviour
         transform.localPosition = pos;
         transform.LookAt(look);
         velocity = (look - pos) * speed;
+        fishBoids = transform.parent.GetComponentsInChildren<FishBoids1>();
     }
 
     // Update is called once per frame
@@ -48,6 +51,7 @@ public class FishBoids1 : MonoBehaviour
                 //Attack successful, do damage, fly away
                 Debug.Log("Hit Target");
                 boidsSettings.seekTarget = false;
+                boidsSettings.onHitTarget.Invoke();
             }
         }
         else
@@ -69,12 +73,15 @@ public class FishBoids1 : MonoBehaviour
             transform.position += velocity * (Time.deltaTime * boidsSettings.speed);
             transform.LookAt(pos + velocity);
         }
+
         var _pos = transform.position;
-        _pos.y = 0;
+        var distFromParentY = boidsSettings.yConstrainDistance;
+        var parentY = transform.parent.position.y;
+        _pos.y = Mathf.Clamp(_pos.y, parentY - distFromParentY, parentY + distFromParentY);
         transform.position = _pos;
     }
 
-    private void OnDrawGizmos()
+    private void OnDrawGizmosSelected()
     {
         Gizmos.DrawWireSphere(transform.position, .5f);
         if (boidsSettings.target != null && boidsSettings.seekTarget)
@@ -152,10 +159,11 @@ public class FishBoids1 : MonoBehaviour
         var steer = new Vector3(0, 0, 0);
         var sibs = 0;
 
-        foreach (Transform boid in transform.parent)
-            if (boid != transform)
+
+        foreach (var boid in fishBoids)
+            if (boid != this)
             {
-                steer += boid.GetComponent<FishBoids1>().velocity;
+                steer += boid.velocity;
                 sibs++;
             }
 

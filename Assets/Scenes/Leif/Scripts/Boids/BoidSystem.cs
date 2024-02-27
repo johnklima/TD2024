@@ -1,11 +1,13 @@
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class BoidSystem : MonoBehaviour
 {
-    public int numberOfBoids;
-    public GameObject prefab;
     public BoidsSettings boidsSettings;
+    public int numberOfBoids;
+    public bool useObstacleAvoid = true;
+    public GameObject prefab;
     public GameObject[] boids;
 
     private void Start()
@@ -15,11 +17,12 @@ public class BoidSystem : MonoBehaviour
             boids[i] = CreateBoid(prefab);
     }
 
+
     private void Update()
     {
     }
 
-    private void OnDrawGizmos()
+    private void OnDrawGizmosSelected()
     {
         if (boidsSettings.constrainPoint != null && boidsSettings.useConstrainPoint)
             Gizmos.DrawWireCube(boidsSettings.constrainPoint.position, Vector3.one * 3);
@@ -42,21 +45,21 @@ public class BoidSystem : MonoBehaviour
         boidGo.name = $"Boid_{parent.childCount}{prefabIndicator}";
         boidGo.transform.localPosition = Vector3.zero;
         boidGo.transform.parent = parent;
-
+        boidGo.SetActive(true);
 
         var boid = boidGo.AddComponent<Boids1>();
         boid.boidsSettings = boidsSettings;
-
-        new GameObject(
-            $"ObstacleAvoid_{parent.childCount}",
-            typeof(BoidObstacleAvoid1)
-        )
-        {
-            transform =
+        if (useObstacleAvoid)
+            new GameObject(
+                $"ObstacleAvoid_{parent.childCount}",
+                typeof(BoidObstacleAvoid1)
+            )
             {
-                parent = boidGo.transform
-            }
-        };
+                transform =
+                {
+                    parent = boidGo.transform
+                }
+            };
         return boidGo;
     }
 }
@@ -73,10 +76,16 @@ public class BoidsSettings
     public float speed = 6.0f;
     public float integrationRate = 3.0f;
     public LayerMask obstacleLayerMask;
+    public float yConstrainDistance = 1;
+
 
     //states
     public bool seekTarget;
     public Transform target;
     public bool useConstrainPoint;
     public Transform constrainPoint;
+
+
+    //event
+    public UnityEvent onHitTarget = new();
 }

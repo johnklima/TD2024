@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -12,14 +13,28 @@ public class FakeLoading : MonoBehaviour
     private string dots = ".";
 
     private float lerp;
+    private MainMenu mainMenu;
 
     private void Start()
     {
         _text = GetComponent<TMP_Text>();
+
+
+        // we have been loaded additively, disable this cam
+        Debug.Log("Loaded additively, loading screen");
+        // StartCoroutine(WaitForFakeLoading());
     }
 
     private void Update()
     {
+        if (mainMenu == null)
+        {
+            mainMenu = FindObjectOfType<MainMenu>();
+            mainMenu.doneLoading.AddListener(OnDoneLoading);
+            Debug.LogError("Main Menu found!!!!");
+            return;
+        }
+
         lerp += Time.deltaTime * loadingSpeed;
         if (lerp >= 1)
         {
@@ -33,7 +48,17 @@ public class FakeLoading : MonoBehaviour
 
 
         _text.text = loadingText + dots;
+    }
 
-        if (count == 10) SceneManager.LoadScene(2);
+    private void OnDoneLoading()
+    {
+        Debug.Log("OnDoneLoading loadingScene next scene");
+        SceneManager.LoadScene(2);
+    }
+
+    private IEnumerator WaitForFakeLoading()
+    {
+        yield return new WaitForSeconds(mainMenu.loadingScreenDuration);
+        SceneManager.LoadScene(2);
     }
 }

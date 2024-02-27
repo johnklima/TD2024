@@ -102,6 +102,7 @@ public class HealthDisplay : MonoBehaviour
         _playerHealthSystem.AddUpdateHealthDisplayListener(UpdateHealthDisplay);
     }
 
+
     private void Update()
     {
         if (_hasInit) return;

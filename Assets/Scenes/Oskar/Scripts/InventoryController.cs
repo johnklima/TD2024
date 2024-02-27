@@ -63,7 +63,6 @@ public class InventoryController : MonoBehaviour
     public void AddItem(Item interactableItem)
     {
         if (currNumUsedSlots == maxInvSlots) return;
-        Debug.Log("AddItem interactableItem: " + interactableItem);
         interactableItem = GetActiveItemInstance(interactableItem);
         if (_inventory.ContainsKey(interactableItem))
         {
@@ -81,10 +80,14 @@ public class InventoryController : MonoBehaviour
         //Show UI/make sound to show that its full
     }
 
+    public void RefreshUIInventory()
+    {
+        onInventoryChanged.Invoke(_inventory);
+    }
+
     public void RemoveItem(DraggableItem draggableItem) //! attaches to ThrowingHandler.OnThrowing()
     {
         var item = GetActiveItemInstance(draggableItem.item);
-        Debug.Log("RemoveItem interactableItem: " + item);
         if (!_inventory.ContainsKey(item)) throw new Exception("inventory does not contain: " + draggableItem.name);
         if (_inventory[item] > 0)
         {

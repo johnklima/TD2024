@@ -1,4 +1,51 @@
-//TODO crafting/recipes
+
+Things that need attention from others:
+World>Enemies>Target 01 - 11:
+    -DummyTarget.cs>"Required Potion" needs to be set
+    -Curse-o-meter needs to be added
+    -Mesh inside needs replacing with correct plants
+        - dont adjust the <Target_ 0X> objects, adjust the mesh inside!
+    -DamageArea.cs>TriggerSize and offset needs to be looked at
+    Events available:
+    DummyTarget.cs:
+        -OnGotHit // when target get hit by item (regardless of what type)
+        -OnGotDestroyed // when target get hit by <Required Potion>
+    DamageArea.cs:
+        -OnDamagingPlayer // when player enters the damage area (red box when selecting <Target_ 0X> in unity)
+
+Player:
+CharacterController.cs:
+-MovementSpeed and/or (movement animation) needs adjusting
+- PlayerController HittingInteractable->CrossHairController.ToggleCrosshair
+- PlayerInput OnEscapePressed: Empty
+- InventoryController.cs OnInventoryChanged->InventoryDisplay.UpdateInventoryDisplay
+- PlayerHealthSystem.cs Die->
+    ->DeathScreen.GameObject.SetActive(true)
+    ->PlayerInput.SetPlayerInputState(false)
+
+
+HUD:
+InventoryDisplay:
+// when starting/stopping dragging hotBar item
+OnStartDrag event > SFX
+OnEndDrag event > SFX
+
+HUD>HUD.cs > OnUiButtonClicked > SFX
+
+World>Terrain>
+- Fishes> the fishBoidSystems might need adjustment (amount for performance)
+- FireflyPrefab> FireFlies boid settings might need adjustment (amount for performance)
+ItemManager:
+OnItemInteract->PLAYER InventoryController.AddItem(item)
+
+
+Prefab:
+// needs their meshes replaced with correct meshes
+- Potion(PLACEHOLDER)
+- Ingredient(PLACEHOLDER)  
+all the ingredient variants and potion variants have OnCollision event
+SFX can be added here (glass breaking or w/e)
+
 
 
 HealthDisplay: 
@@ -10,4 +57,9 @@ Items:
 	sprites: 
 		ingredients x6, 
 		potions x12
+
+
+
+
+GOL - treeGenerator
 

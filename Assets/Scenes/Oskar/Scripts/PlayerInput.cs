@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
@@ -6,10 +7,10 @@ using UnityEngine.InputSystem;
 public class PlayerInput : MonoBehaviour
 {
     public static bool playerHasControl = true;
-    public UnityEvent CancelCauldron;
+    public UnityEvent onEscapePressed;
 
     public Vector2 moveDir;
-
+    private PauseMenu _pauseMenu;
     private PlayerController _playerController;
     private InputActions _playerInput;
 
@@ -19,8 +20,12 @@ public class PlayerInput : MonoBehaviour
         _playerInput = new InputActions();
         _playerController = GetComponent<PlayerController>();
 
+        _pauseMenu = FindObjectOfType<PauseMenu>();
+        if (_pauseMenu == null) throw new Exception("Make sure there is a <PauseMenu> in the scene!");
+
         _playerInput.Player.Interact.performed += HandleInteract;
-        _playerInput.UI.Cancel.performed += HandleCancelUI;
+        // _playerInput.UI.Cancel.performed += HandleCancelUI;
+        _playerInput.Player.Cancel.performed += HandleCancelUI;
     }
 
     private void Update()
@@ -42,7 +47,7 @@ public class PlayerInput : MonoBehaviour
     }
 
 
-    public void SetPlayerCanMoveState(bool enable)
+    public void SetPlayerInputState(bool enable)
     {
         if (enable) _playerInput.Player.Enable();
         else _playerInput.Player.Disable();
@@ -56,8 +61,6 @@ public class PlayerInput : MonoBehaviour
 
     private IEnumerator ReactivatePlayerInputDelayed(float delay)
     {
-        Debug.Log("enabling2");
-
         yield return new WaitForSeconds(delay);
         _playerInput.Player.Enable();
     }
@@ -80,8 +83,11 @@ public class PlayerInput : MonoBehaviour
 
     private void HandleCancelUI(InputAction.CallbackContext context)
     {
-        Debug.Log("pressing escape on cauldron");
-        CancelCauldron.Invoke();
+        // CancelCauldron.Invoke();
+        // cauldron has own button now
+        _pauseMenu.TogglePauseMenu();
+        onEscapePressed.Invoke();
+        // Escape pressed, show pause menu
     }
 
 

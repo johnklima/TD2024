@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class FishBoidSystem : MonoBehaviour
@@ -19,7 +18,7 @@ public class FishBoidSystem : MonoBehaviour
     {
     }
 
-    private void OnDrawGizmos()
+    private void OnDrawGizmosSelected()
     {
         if (boidsSettings.constrainPoint != null && boidsSettings.useConstrainPoint)
             Gizmos.DrawWireCube(boidsSettings.constrainPoint.position, Vector3.one * 3);
@@ -28,6 +27,17 @@ public class FishBoidSystem : MonoBehaviour
         Gizmos.color = Color.red;
         if (boidsSettings.target != null)
             Gizmos.DrawWireCube(boidsSettings.target.position, Vector3.one * 3);
+    }
+
+    public void FishAttack()
+    {
+        if (boidsSettings.target != null) boidsSettings.seekTarget = true;
+        Debug.Log("FishAttack!");
+    }
+
+    public void TestFishAttack()
+    {
+        Debug.Log("TestFishAttack Success!");
     }
 
     private GameObject CreateBoid(GameObject prefab = null)
@@ -59,24 +69,4 @@ public class FishBoidSystem : MonoBehaviour
         };
         return boidGo;
     }
-}
-
-[Serializable]
-public class FishBoidsSettings
-{
-    public float cohesionFactor = 0.2f;
-    public float separationFactor = 6.0f;
-    public float alignFactor = 1.0f;
-    public float constrainFactor = 2.0f;
-    public float avoidFactor = 20.0f;
-    public float collisionDistance = 6.0f;
-    public float speed = 6.0f;
-    public float integrationRate = 3.0f;
-    public LayerMask obstacleLayerMask;
-
-    //states
-    public bool seekTarget;
-    public Transform target;
-    public bool useConstrainPoint;
-    public Transform constrainPoint;
 }

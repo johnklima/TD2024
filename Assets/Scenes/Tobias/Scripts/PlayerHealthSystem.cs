@@ -19,6 +19,7 @@ public class PlayerHealthSystem : MonoBehaviour
         _currentHp = maxHp; // leif edit
     }
 
+
     public void AddUpdateHealthDisplayListener(UnityAction<int> action)
     {
         _updateHealthDisplay.AddListener(action);
