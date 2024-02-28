@@ -7,7 +7,7 @@ public class PlayerHealthSystem : MonoBehaviour
 
     public int maxHp = 5; // leif edit (made public, set in editor on PLAYER)
     public int testAmount = 1; //leif edit;
-    public UnityEvent Die = new();
+    public UnityEvent Die = new(), onHeal = new(), onDamage = new();
 
     private readonly UnityEvent<int>
         _updateHealthDisplay = new(); // added int to event, made private (dont need public)

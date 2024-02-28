@@ -167,6 +167,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -4982118243700742051, guid: 1b3edf62bf7e4974680c4fede5f1bbec, type: 3}
+    - {fileID: 4422313994965288362, guid: 1b3edf62bf7e4974680c4fede5f1bbec, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -199,11 +200,10 @@ MonoBehaviour:
   onCollision:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: -7555711507326582733, guid: b9741994ac176fc4484f60ec18c8479b,
-          type: 3}
-        m_TargetAssemblyTypeName: Item, Assembly-CSharp
-        m_MethodName: TestOnCollision
-        m_Mode: 0
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+        m_MethodName: Play
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

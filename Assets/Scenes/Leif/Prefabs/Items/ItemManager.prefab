@@ -78,4 +78,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  inventoryController: {fileID: 0}
+  itemBreakAudioClip: {fileID: 8300000, guid: 4841454c423231e41bbe13b683bb3f6c, type: 3}
+  itemHealAudioClip: {fileID: 8300000, guid: f0614d10f1ce97c4eaf69442d69ff0fc, type: 3}
   showItemGizmos: 0

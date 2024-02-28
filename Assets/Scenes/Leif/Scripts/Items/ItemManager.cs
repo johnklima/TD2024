@@ -10,13 +10,25 @@ public class ItemManager : MonoBehaviour
     public UnityEvent<Item> onItemInteract;
     public InventoryController inventoryController;
 
+    public AudioClip itemBreakAudioClip, itemHealAudioClip;
     public bool showItemGizmos;
+    private AudioSource _audioSource;
 
     private void Awake()
     {
         RegisterItems();
         inventoryController = FindObjectOfType<InventoryController>();
         if (inventoryController == null) throw new Exception("No inventoryController found");
+
+
+        _audioSource = GetComponent<AudioSource>();
+        if (_audioSource == null) _audioSource = gameObject.AddComponent<AudioSource>();
+        _audioSource.playOnAwake = false;
+
+
+        if (itemBreakAudioClip == null ||
+            itemHealAudioClip == null)
+            throw new Exception("No audio clip for items");
     }
 
 
@@ -55,7 +67,21 @@ public class ItemManager : MonoBehaviour
     {
         if (!isActiveAndEnabled) return;
         items = FindObjectsByType<Item>(FindObjectsSortMode.None);
-        for (var i = 0; i < items.Length; i++) items[i].id = i;
+        for (var i = 0; i < items.Length; i++)
+        {
+            items[i].id = i;
+            items[i].onCollision.AddListener(PlayItemSound);
+        }
+    }
+
+    private void PlayItemSound(Collision arg0, Item arg1)
+    {
+        //itemHealAudioClip itemBreakAudioClip
+        if (arg0.gameObject.CompareTag("Enemies"))
+            _audioSource.clip = itemHealAudioClip;
+        else
+            _audioSource.clip = itemBreakAudioClip;
+        _audioSource.Play();
     }
 
 

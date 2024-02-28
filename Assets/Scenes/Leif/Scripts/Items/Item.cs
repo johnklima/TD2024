@@ -36,7 +36,9 @@ public class Item : MonoBehaviour, IInteractable
         if (isPLayer) return;
         if (!isInteractionOneShot) return;
         onCollision.Invoke(other, this);
-        Destroy(gameObject);
+        transform.GetChild(0).gameObject.SetActive(false);
+        transform.GetChild(1).gameObject.SetActive(false);
+        Destroy(gameObject, 1f);
     }
 
 

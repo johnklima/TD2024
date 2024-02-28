@@ -1,6 +1,7 @@
 
 Things that need attention from others:
 Audio:
+CauldronGroup>FirePit_Mesh>AudioSource needs tweaking (volume/distance etc)
 
 World>Enemies>Target 01 - 11:
     -DummyTarget.cs>"Required Potion" needs to be set
