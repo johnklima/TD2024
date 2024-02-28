@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 1704573015677252821}
   - component: {fileID: 6413200106624353035}
   - component: {fileID: 2094801102527506362}
-  m_Layer: 2
+  m_Layer: 10
   m_Name: PLAYER
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -217,11 +217,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b45fdb117feceab4595c977d10e2c153, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathAudioClip: {fileID: 0}
-  healAudioClip: {fileID: 0}
-  walkAudioClip: {fileID: 0}
-  walkIndoorAudioClip: {fileID: 0}
-  painAudioClips: []
+  deathAudioClip: {fileID: 8300000, guid: 9ed495208f5270f4aae39b3d286e09b0, type: 3}
+  healAudioClip: {fileID: 8300000, guid: 693285dfb904afb4e9ea7bedbed1de1e, type: 3}
+  walkAudioClip: {fileID: 8300000, guid: 2f1c4aad3d2cc494a9264e0e89cc8b35, type: 3}
+  walkIndoorAudioClip: {fileID: 8300000, guid: 5838e7ea60cca0b459ea358f91292d60, type: 3}
+  painAudioClips:
+  - {fileID: 8300000, guid: e0dc9611ad032074d90dda3b1db8c1f5, type: 3}
+  - {fileID: 8300000, guid: 2d298662fafa7724c8fbb4f93982c333, type: 3}
 --- !u!82 &2094801102527506362
 AudioSource:
   m_ObjectHideFlags: 0

@@ -52,7 +52,7 @@ public class PlayerHealthSystem : MonoBehaviour
         _currentHp -= damage;
         //Just some paranoia
         if (_currentHp < 0) _currentHp = 0;
-
+        onDamage.Invoke();
         _updateHealthDisplay.Invoke(_currentHp);
         if (_currentHp <= 0) Die.Invoke();
     }
@@ -60,6 +60,7 @@ public class PlayerHealthSystem : MonoBehaviour
     public void Heal(int healAmount)
     {
         _currentHp += healAmount;
+        onHeal.Invoke();
         if (_currentHp > maxHp) _currentHp = maxHp;
         _updateHealthDisplay.Invoke(_currentHp);
     }

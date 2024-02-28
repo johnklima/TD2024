@@ -62,6 +62,8 @@ public class DamageArea : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("player in damage area" + other.name);
+
         if (!other.CompareTag("Player")) return;
         var playerHealth = other.GetComponent<PlayerHealthSystem>();
         if (playerHealth == null) throw new Exception("PlayerHealth component not found on the player object.");
