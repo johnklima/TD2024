@@ -7,8 +7,11 @@ using UnityEditor;
 public class PauseMenu : MonoBehaviour
 {
     public GameObject HUD_UI;
-
     public GameObject PauseMenu_UI;
+    public GameObject instructions;
+    public GameObject credits;
+
+    public bool isPaused;
 
     private void Start()
     {
@@ -21,6 +24,8 @@ public class PauseMenu : MonoBehaviour
         // enable PauseMenu_UI
         PauseMenu_UI.SetActive(true);
         HUD_UI.SetActive(false);
+        instructions.SetActive(false);
+        credits.SetActive(false);
         CursorLockHandler.ShowAndUnlockCursor();
         Time.timeScale = 0;
     }
@@ -30,6 +35,8 @@ public class PauseMenu : MonoBehaviour
         // lock cursor
         // disable PauseMenu_UI
         CursorLockHandler.HideAndLockCursor();
+        instructions.SetActive(false);
+        credits.SetActive(false);
         PauseMenu_UI.SetActive(false);
         HUD_UI.SetActive(true);
         Time.timeScale = 1;
@@ -37,12 +44,22 @@ public class PauseMenu : MonoBehaviour
 
     public void TogglePauseMenu()
     {
-        // lock cursor
-        // disable PauseMenu_UI
-        CursorLockHandler.ToggleState();
-        HUD_UI.SetActive(!HUD_UI.activeSelf);
-        PauseMenu_UI.SetActive(!PauseMenu_UI.activeSelf);
-        Time.timeScale = Time.timeScale == 0 ? 1 : 0;
+        // if input ESC
+        //if credit or instr are open we are paused still
+
+        if (credits.activeSelf || instructions.activeSelf)
+            isPaused = true;
+        else
+            isPaused = !isPaused;
+
+        // when pressing ESCAPE
+        if (isPaused) CursorLockHandler.ShowAndUnlockCursor();
+        else CursorLockHandler.HideAndLockCursor();
+        Time.timeScale = isPaused ? 0 : 1;
+        PauseMenu_UI.SetActive(isPaused);
+        HUD_UI.SetActive(!isPaused); // toggle hud
+        instructions.SetActive(false); // make sure instructions are off
+        credits.SetActive(false); // make sure credits are off
     }
 
 
