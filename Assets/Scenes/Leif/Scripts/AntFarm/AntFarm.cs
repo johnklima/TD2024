@@ -53,6 +53,7 @@ public class AntFarm : MonoBehaviour
         GenerateGameObjects();
     }
 
+
     private void Update()
     {
         timeAlpha += Time.deltaTime;

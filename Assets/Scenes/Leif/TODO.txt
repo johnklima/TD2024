@@ -46,7 +46,9 @@ Prefab:
 all the ingredient variants and potion variants have OnCollision event
 SFX can be added here (glass breaking or w/e)
 
-
+Healing area:
+heal amount
+is one shot?
 
 HealthDisplay: 
 	sprites: 
