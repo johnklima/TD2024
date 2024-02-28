@@ -30,8 +30,8 @@ public class AmbianceMusicHandler : MonoBehaviour
         nextClip = clips[Random.Range(0, clips.Length)];
         _audioSource.clip = nextClip;
         currentClip = nextClip;
-        Debug.Log($"Playing next music clip: {nextClip.name}, duration: {nextClip.length}");
-        timeForNextClip = nextClip.length;
+        Debug.Log($"Playing next music clip: {nextClip.name}, duration: {(int)nextClip.length}");
+        timeForNextClip = (int)nextClip.length - 3;
         _audioSource.Play();
     }
 
