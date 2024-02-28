@@ -86,6 +86,7 @@ public class PlayerInput : MonoBehaviour
         // CancelCauldron.Invoke();
         // cauldron has own button now
         _pauseMenu.TogglePauseMenu();
+
         onEscapePressed.Invoke();
         // Escape pressed, show pause menu
     }

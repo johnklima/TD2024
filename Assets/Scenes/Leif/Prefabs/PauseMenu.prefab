@@ -509,8 +509,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HUD_UI: {fileID: 0}
   PauseMenu_UI: {fileID: 3851904069815136900}
-  instructions: {fileID: 0}
-  credits: {fileID: 0}
+  instructions: {fileID: 4715326438668829376}
+  credits: {fileID: 2383599361605053540}
   isPaused: 0
 --- !u!1 &1297690071724306656
 GameObject:
@@ -3181,6 +3181,11 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1310354046087662485, guid: c61e94ed510599c4c8b5fef6b9d23e79,
+        type: 3}
+      propertyPath: m_HorizontalScrollbar
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 1720372347539105431, guid: c61e94ed510599c4c8b5fef6b9d23e79,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -3371,6 +3376,16 @@ PrefabInstance:
       propertyPath: m_AnchorMin.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4106962550106840900, guid: c61e94ed510599c4c8b5fef6b9d23e79,
+        type: 3}
+      propertyPath: m_Size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4106962550106840900, guid: c61e94ed510599c4c8b5fef6b9d23e79,
+        type: 3}
+      propertyPath: m_Value
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4779414796881351587, guid: c61e94ed510599c4c8b5fef6b9d23e79,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -3479,7 +3494,7 @@ PrefabInstance:
     - target: {fileID: 6057023546127284421, guid: c61e94ed510599c4c8b5fef6b9d23e79,
         type: 3}
       propertyPath: m_Size
-      value: 1
+      value: 0.999237
       objectReference: {fileID: 0}
     - target: {fileID: 6057023546127284421, guid: c61e94ed510599c4c8b5fef6b9d23e79,
         type: 3}
@@ -3564,12 +3579,17 @@ PrefabInstance:
     - target: {fileID: 7721972134048833183, guid: c61e94ed510599c4c8b5fef6b9d23e79,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7721972134048833183, guid: c61e94ed510599c4c8b5fef6b9d23e79,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: -17
+      objectReference: {fileID: 0}
+    - target: {fileID: 8259843343594068042, guid: c61e94ed510599c4c8b5fef6b9d23e79,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.00048828125
       objectReference: {fileID: 0}
     - target: {fileID: 8437315039099669587, guid: c61e94ed510599c4c8b5fef6b9d23e79,
         type: 3}
@@ -3607,7 +3627,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 1339375366794190005, guid: c61e94ed510599c4c8b5fef6b9d23e79, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c61e94ed510599c4c8b5fef6b9d23e79, type: 3}
@@ -3737,7 +3758,8 @@ PrefabInstance:
       value: CreditsPanel (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 4535568352487743182, guid: 395abdaf42de71647921f8d7752bf30e, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 395abdaf42de71647921f8d7752bf30e, type: 3}
