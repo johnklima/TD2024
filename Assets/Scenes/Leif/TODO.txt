@@ -1,7 +1,14 @@
 
 Things that need attention from others:
 Audio:
-CauldronGroup>FirePit_Mesh>AudioSource needs tweaking (volume/distance etc)
+- CauldronGroup>FirePit_Mesh>AudioSource 
+    - needs tweaking (volume/distance etc)
+- Enemies>Target 1-11>AudioSource  
+    - needs tweaking (volume/distance etc)
+- Items (Resources/Interactable Items/ (all ingredient>AudioSource  and potions>AudioSource )) 
+    - needs tweaking (volume/distance etc)
+
+
 
 World>Enemies>Target 01 - 11:
     -DummyTarget.cs>"Required Potion" needs to be set
@@ -53,6 +60,7 @@ Healing area:
 heal amount
 is one shot?
 
+TODO:
 HealthDisplay: 
 	sprites: 
 		whole heart x1, 
@@ -63,8 +71,4 @@ Items:
 		ingredients x6, 
 		potions x12
 
-
-
-
-GOL - treeGenerator
-
+AntFarm, texture/planes animation instead of cubes
