@@ -28,7 +28,8 @@ public class Ant
         var nextPos = pos + randomDirection;
         if (nextPos.x >= antFarm.farmSize.x - 1 ||
             nextPos.y >= antFarm.farmSize.y - 1)
-            Move(antFarm);
+            nextPos.Clamp(Vector2Int.zero, antFarm.farmSize);
+        Move(antFarm);
         prevCell = currentCell;
         pos = nextPos;
         currentCell = antFarm.GetCell(nextPos);
