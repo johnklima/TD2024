@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 1837.7073, g: 1765.8049, b: 1919.3948, a: 1}
+  m_IndirectSpecularColor: {r: 1836.0393, g: 1762.1858, b: 1911.7659, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3453,6 +3453,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 891399540949238756, guid: b50507ec727fcef4995e7088ffdf5b87,
         type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.34914517
+      objectReference: {fileID: 0}
+    - target: {fileID: 891399540949238756, guid: b50507ec727fcef4995e7088ffdf5b87,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.27232718
+      objectReference: {fileID: 0}
+    - target: {fileID: 891399540949238756, guid: b50507ec727fcef4995e7088ffdf5b87,
+        type: 3}
       propertyPath: m_LocalRotation.y
       value: -0.000000023413806
       objectReference: {fileID: 0}
@@ -3508,6 +3518,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1820475581683794651, guid: b50507ec727fcef4995e7088ffdf5b87,
         type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.34914517
+      objectReference: {fileID: 0}
+    - target: {fileID: 1820475581683794651, guid: b50507ec727fcef4995e7088ffdf5b87,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.2897841
+      objectReference: {fileID: 0}
+    - target: {fileID: 1820475581683794651, guid: b50507ec727fcef4995e7088ffdf5b87,
+        type: 3}
       propertyPath: m_LocalRotation.y
       value: 0.000000016468084
       objectReference: {fileID: 0}
@@ -3525,6 +3545,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.31058884
+      objectReference: {fileID: 0}
+    - target: {fileID: 3022538341080620463, guid: b50507ec727fcef4995e7088ffdf5b87,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.34914517
+      objectReference: {fileID: 0}
+    - target: {fileID: 3022538341080620463, guid: b50507ec727fcef4995e7088ffdf5b87,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.25482655
       objectReference: {fileID: 0}
     - target: {fileID: 3022538341080620463, guid: b50507ec727fcef4995e7088ffdf5b87,
         type: 3}
@@ -5036,6 +5066,21 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1377556836}
+    - target: {fileID: 449423106114220131, guid: 40e00d7fdb717f047af4c7a45b8ff1b9,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.81861794
+      objectReference: {fileID: 0}
+    - target: {fileID: 449423106114220131, guid: 40e00d7fdb717f047af4c7a45b8ff1b9,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.5743385
+      objectReference: {fileID: 0}
+    - target: {fileID: 449423106114220131, guid: 40e00d7fdb717f047af4c7a45b8ff1b9,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 70.107
+      objectReference: {fileID: 0}
     - target: {fileID: 696675421137935372, guid: 40e00d7fdb717f047af4c7a45b8ff1b9,
         type: 3}
       propertyPath: m_Mesh
@@ -5245,6 +5290,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_ExcludeLayers.m_Bits
       value: 134217732
+      objectReference: {fileID: 0}
+    - target: {fileID: 4680426812495815737, guid: 40e00d7fdb717f047af4c7a45b8ff1b9,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.4254632
+      objectReference: {fileID: 0}
+    - target: {fileID: 4680426812495815737, guid: 40e00d7fdb717f047af4c7a45b8ff1b9,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.9049758
+      objectReference: {fileID: 0}
+    - target: {fileID: 4680426812495815737, guid: 40e00d7fdb717f047af4c7a45b8ff1b9,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -129.64
       objectReference: {fileID: 0}
     - target: {fileID: 4761900240447517157, guid: 40e00d7fdb717f047af4c7a45b8ff1b9,
         type: 3}
@@ -5586,6 +5646,11 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 592357431}
+    - target: {fileID: 8958373810315989568, guid: 40e00d7fdb717f047af4c7a45b8ff1b9,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -90
+      objectReference: {fileID: 0}
     - target: {fileID: 8991184048113741917, guid: 40e00d7fdb717f047af4c7a45b8ff1b9,
         type: 3}
       propertyPath: onGotDestroyed.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
