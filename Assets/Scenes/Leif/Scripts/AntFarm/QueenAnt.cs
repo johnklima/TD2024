@@ -1,13 +1,14 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 [Serializable]
 public class QueenAnt
 {
     public List<Ant> ants;
-    public AntFarmCell currentCell;
     public Vector2Int pos;
+    public AntFarmCell currentCell;
 
 
     public QueenAnt(AntFarmCell cell)
@@ -22,7 +23,13 @@ public class QueenAnt
         var shouldSpawnAnt = antFarm.generation % antFarm.spawnAntFreq == 0;
         if (shouldSpawnAnt)
         {
-            var spawnPos = pos + AntFarm.GetRandomDirection();
+            var spawnPos = pos;
+            if (ants.Count > 0)
+            {
+                var ant = ants[Random.Range(0, ants.Count)];
+                spawnPos = ant.pos + ant.GetRandomDirection();
+            }
+
             var c = antFarm.GetCell(spawnPos);
             SpawnAnt(c);
         }

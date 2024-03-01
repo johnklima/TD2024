@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.Collections;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 public enum AntFarmCellState
 {
@@ -18,7 +17,7 @@ public class AntFarm : MonoBehaviour
 {
     //TODO if hit edge, backtrack
     //TODO history(10)
-    public static float scale = 0.005f;
+    private static readonly float scale = 0.005f;
 
     [Header("General")] public bool gizmo;
 
@@ -33,33 +32,29 @@ public class AntFarm : MonoBehaviour
 
     public int antMoveFreq = 2;
     public int spawnAntFreq = 10; // higher is less frequent
-    [SerializeField] private List<QueenAnt> QueenAnts;
-    public Texture2D _texture2D;
-    public FarmColors farmColors;
+    [SerializeField] private List<QueenAnt> queenAnts;
+
+    [Header("Colors")] public FarmColors farmColors;
+
     public MeshRenderer meshRenderer;
     public Material material;
 
-    private AntFarmCell[,] AntFarmCells;
+    private AntFarmCell[,] _antFarmCells;
+    private float _timeAlpha;
+    private Texture2D texture2D;
 
-
-    private float timeAlpha;
-
-    public static Vector3 scaleV3 => Vector3.one * scale;
+    private static Vector3 scaleV3 => Vector3.one * scale;
 
     private void Start()
     {
-        var tex = GenerateFarm();
-        tex = ApplyColorToTexture(tex);
-        material.mainTexture = tex;
-        meshRenderer.sharedMaterial = material;
+        GenerateFarm();
     }
-
 
     private void Update()
     {
-        timeAlpha += Time.deltaTime;
-        if (timeAlpha < updateInterval) return;
-        timeAlpha = 0;
+        _timeAlpha += Time.deltaTime;
+        if (_timeAlpha < updateInterval) return;
+        _timeAlpha = 0;
         UpdateCellLoop();
     }
 
@@ -92,30 +87,26 @@ public class AntFarm : MonoBehaviour
         foreach (var q in queenAntPositions)
             q.Clamp(Vector2Int.zero, farmSize);
         UpdateFarmColors();
+        InitializeTexture();
     }
 
-    private void UpdateFarmColors()
+    private void UpdateCellLoop()
     {
-        farmColors.ant.UpdateStruct();
-        farmColors.queenAnt.UpdateStruct();
-        farmColors.empty.UpdateStruct();
-        for (var i = 0; i < farmColors.dirt.Length; i++)
-            farmColors.dirt[i].UpdateStruct();
+        generation++;
+        if (queenAnts.Count > 0)
+            for (var i = 0; i < queenAnts.Count; i++)
+            {
+                var q = queenAnts[i];
+                q.UpdateQueen(this);
+                UpdateTexture();
+            }
     }
 
-    private Texture2D InitializeTexture()
+    private void UpdateTexture()
     {
-        var h = farmSize.y;
-        var w = farmSize.x;
-        if (_texture2D == null) _texture2D = new Texture2D(w, h, TextureFormat.ARGB32, false);
-        if (_texture2D.width != w || _texture2D.height != h)
-            _texture2D.Reinitialize(w, h);
-        return _texture2D;
-    }
-
-    private FarmColor GetColorForIndex(Vector2Int index)
-    {
-        return AntFarmCells[index.x, index.y].currentColor;
+        texture2D = ApplyColorToTexture(texture2D);
+        material.mainTexture = texture2D;
+        meshRenderer.sharedMaterial = material;
     }
 
     public Texture2D ApplyColorToTexture(Texture2D tex)
@@ -141,41 +132,24 @@ public class AntFarm : MonoBehaviour
             currentPix += 4;
         }
 
-        var asd = tex.GetPixelData<byte>(0);
-        Debug.Log(asd.Length);
-        Debug.Log(data.Length);
-
         tex.SetPixelData(data, 0);
         tex.Apply();
         return tex;
-    }
 
-    public static Vector2Int GetRandomDirection()
-    {
-        var rand = Random.Range(0, 1f);
-        return rand switch
+        FarmColor GetColorForIndex(Vector2Int index)
         {
-            <= .25f => Vector2Int.up,
-            (> .25f and <= .5f) => Vector2Int.down,
-            (> .5f and <= .75f) => Vector2Int.left,
-            (> .75f and <= 1f) => Vector2Int.right,
-            _ => throw new ArgumentOutOfRangeException(nameof(rand), rand, null)
-        };
-    }
-
-    public AntFarmCell GetCell(Vector2Int i)
-    {
-        return AntFarmCells[i.x, i.y];
+            return _antFarmCells[index.x, index.y].currentColor;
+        }
     }
 
 
-    private Texture2D GenerateFarm()
+    private void GenerateFarm()
     {
-        var tex = InitializeTexture();
+        InitializeTexture();
         // texture is created and initialized
-        AntFarmCells = new AntFarmCell[farmSize.x, farmSize.y];
+        _antFarmCells = new AntFarmCell[farmSize.x, farmSize.y];
         // cells array created
-        QueenAnts = new List<QueenAnt>();
+        queenAnts = new List<QueenAnt>();
         // queen list created
         for (var y = 0; y < farmSize.y; y++)
         for (var x = 0; x < farmSize.x; x++)
@@ -186,12 +160,23 @@ public class AntFarm : MonoBehaviour
             // instantiate a cell (base color)
             var nextCell = new AntFarmCell(this, startState, index);
             if (startState == AntFarmCellState.QueenAnt)
-                QueenAnts.Add(new QueenAnt(nextCell));
+                queenAnts.Add(new QueenAnt(nextCell));
 
-            AntFarmCells[x, y] = nextCell;
+            _antFarmCells[x, y] = nextCell;
         }
+    }
 
-        return tex;
+    private void InitializeTexture()
+    {
+        var h = farmSize.y;
+        var w = farmSize.x;
+        if (texture2D == null)
+            texture2D = new Texture2D(w, h, TextureFormat.RGBA32, false)
+            {
+                name = "proc gen tex"
+            };
+        if (texture2D.width != w || texture2D.height != h)
+            texture2D.Reinitialize(w, h);
     }
 
     private AntFarmCellState GetStartState(Vector2Int index)
@@ -201,15 +186,19 @@ public class AntFarm : MonoBehaviour
         return AntFarmCellState.Full;
     }
 
-    private void UpdateCellLoop()
+
+    public AntFarmCell GetCell(Vector2Int i)
     {
-        generation++;
-        if (QueenAnts.Count > 0)
-            for (var i = 0; i < QueenAnts.Count; i++)
-            {
-                var q = QueenAnts[i];
-                q.UpdateQueen(this);
-            }
+        return _antFarmCells[i.x, i.y];
+    }
+
+    private void UpdateFarmColors()
+    {
+        farmColors.ant.UpdateStruct();
+        farmColors.queenAnt.UpdateStruct();
+        farmColors.empty.UpdateStruct();
+        for (var i = 0; i < farmColors.dirt.Length; i++)
+            farmColors.dirt[i].UpdateStruct();
     }
 
     [Serializable]
@@ -232,14 +221,6 @@ public class AntFarm : MonoBehaviour
 
         [ReadOnly] public Color32 color;
 
-        public FarmColor(int r, int g, int b, int a)
-        {
-            this.r = r;
-            this.g = g;
-            this.b = b;
-            this.a = a;
-            color = new Color32((byte)r, (byte)g, (byte)b, (byte)a);
-        }
 
         public Color32 ToColor32()
         {

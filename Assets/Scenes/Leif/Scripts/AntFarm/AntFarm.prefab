@@ -170,18 +170,18 @@ MonoBehaviour:
       r: 0
       g: 0
       b: 0
-      a: 0
+      a: 255
       color:
         serializedVersion: 2
-        rgba: 0
+        rgba: 4278190080
     queenAnt:
       r: 0
       g: 0
       b: 0
-      a: 0
+      a: 255
       color:
         serializedVersion: 2
-        rgba: 0
+        rgba: 4278190080
     empty:
       r: 0
       g: 0
@@ -190,7 +190,35 @@ MonoBehaviour:
       color:
         serializedVersion: 2
         rgba: 0
-    dirt: []
+    dirt:
+    - r: 75
+      g: 49
+      b: 20
+      a: 255
+      color:
+        serializedVersion: 2
+        rgba: 4279513419
+    - r: 99
+      g: 39
+      b: 0
+      a: 255
+      color:
+        serializedVersion: 2
+        rgba: 4278200163
+    - r: 128
+      g: 64
+      b: 0
+      a: 255
+      color:
+        serializedVersion: 2
+        rgba: 4278206592
+    - r: 142
+      g: 52
+      b: 19
+      a: 255
+      color:
+        serializedVersion: 2
+        rgba: 4279448718
   meshRenderer: {fileID: 461476076425355831}
   material: {fileID: 2100000, guid: 5cf3d8c6c00dcad42a1445c9969fcd2d, type: 2}
 --- !u!114 &4708907855676514258
