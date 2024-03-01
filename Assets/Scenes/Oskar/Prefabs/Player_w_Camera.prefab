@@ -1266,6 +1266,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3043011466545767515, guid: 24d090227f4b4104799c7fada7709c5e,
         type: 3}
+      propertyPath: inventoryController
+      value: 
+      objectReference: {fileID: 754854275893163958}
+    - target: {fileID: 3043011466545767515, guid: 24d090227f4b4104799c7fada7709c5e,
+        type: 3}
       propertyPath: items.Array.data[0]
       value: 
       objectReference: {fileID: 0}

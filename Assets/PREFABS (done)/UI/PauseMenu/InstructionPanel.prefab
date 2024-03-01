@@ -1656,7 +1656,7 @@ GameObject:
   - component: {fileID: 4987513746954102617}
   - component: {fileID: 6831447706353245037}
   m_Layer: 5
-  m_Name: InstructionPanel (1)
+  m_Name: InstructionPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

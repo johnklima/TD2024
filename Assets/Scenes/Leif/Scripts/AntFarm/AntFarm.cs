@@ -15,35 +15,27 @@ public enum AntFarmCellState
 
 public class AntFarm : MonoBehaviour
 {
-    //TODO if hit edge, backtrack
-    //TODO history(10)
-    private static readonly float scale = 0.005f;
-
-    [Header("General")] public bool gizmo;
-
-    public Transform cellParent;
-    public Vector2Int farmSize = new(116, 70);
+    [Header("General")] public Vector2Int farmSize = new(116, 70);
 
     [Header("Update")] public float updateInterval = 1;
-
-    public int generation;
+    [ReadOnly] public int generation;
 
     [Header("Ants")] public Vector2Int[] queenAntPositions = { new(10, 10) };
 
     public int antMoveFreq = 2;
     public int spawnAntFreq = 10; // higher is less frequent
-    [SerializeField] private List<QueenAnt> queenAnts;
 
     [Header("Colors")] public FarmColors farmColors;
 
-    public MeshRenderer meshRenderer;
+    [Header("Texture settings")] public MeshRenderer meshRenderer;
+
     public Material material;
 
     private AntFarmCell[,] _antFarmCells;
     private float _timeAlpha;
+    private List<QueenAnt> queenAnts;
     private Texture2D texture2D;
 
-    private static Vector3 scaleV3 => Vector3.one * scale;
 
     private void Start()
     {
@@ -58,34 +50,11 @@ public class AntFarm : MonoBehaviour
         UpdateCellLoop();
     }
 
-    private void OnDrawGizmos()
-    {
-        if (Application.isPlaying || !gizmo) return;
-        for (var y = 0; y < farmSize.y; y++)
-        for (var x = 0; x < farmSize.x; x++)
-        {
-            var pos = cellParent.position + new Vector3(x * scale + scale / 2f, y * scale + scale / 2f, 0);
-            foreach (var q in queenAntPositions)
-                if (q.x == x && q.y == y)
-                {
-                    Gizmos.color = Color.green;
-                    Gizmos.DrawCube(pos, scaleV3);
-                    break;
-                }
-
-            Gizmos.color = Color.white;
-            Gizmos.DrawWireCube(pos, scaleV3);
-        }
-
-        Gizmos.color = Color.red;
-        var pos_ = new Vector3(scale / 2f, scale / 2f, 0);
-        Gizmos.DrawWireCube(cellParent.position + pos_, scaleV3);
-    }
 
     private void OnValidate()
     {
-        foreach (var q in queenAntPositions)
-            q.Clamp(Vector2Int.zero, farmSize);
+        for (var i = 0; i < queenAntPositions.Length; i++)
+            queenAntPositions[i].Clamp(Vector2Int.zero, farmSize - Vector2Int.one);
         UpdateFarmColors();
         InitializeTexture();
     }
@@ -93,13 +62,10 @@ public class AntFarm : MonoBehaviour
     private void UpdateCellLoop()
     {
         generation++;
-        if (queenAnts.Count > 0)
-            for (var i = 0; i < queenAnts.Count; i++)
-            {
-                var q = queenAnts[i];
-                q.UpdateQueen(this);
-                UpdateTexture();
-            }
+        if (queenAnts.Count <= 0) return;
+        for (var i = 0; i < queenAnts.Count; i++)
+            queenAnts[i].UpdateQueen(this);
+        UpdateTexture();
     }
 
     private void UpdateTexture()
@@ -109,7 +75,7 @@ public class AntFarm : MonoBehaviour
         meshRenderer.sharedMaterial = material;
     }
 
-    public Texture2D ApplyColorToTexture(Texture2D tex)
+    private Texture2D ApplyColorToTexture(Texture2D tex)
     {
         if (meshRenderer == null) throw new Exception("make sure meshRenderer is set");
         if (material == null) throw new Exception("make sure material is set");
@@ -117,7 +83,6 @@ public class AntFarm : MonoBehaviour
         var height = tex.height;
 
         var data = new byte[width * height * 4];
-
 
         var currentPix = 0;
         for (var y = 0; y < height; y++)
@@ -189,7 +154,9 @@ public class AntFarm : MonoBehaviour
 
     public AntFarmCell GetCell(Vector2Int i)
     {
-        return _antFarmCells[i.x, i.y];
+        var x = Math.Clamp(i.x, 0, _antFarmCells.GetLength(0) - 1);
+        var y = Math.Clamp(i.y, 0, _antFarmCells.GetLength(1) - 1);
+        return _antFarmCells[x, y];
     }
 
     private void UpdateFarmColors()
@@ -210,7 +177,6 @@ public class AntFarm : MonoBehaviour
         public FarmColor[] dirt;
     }
 
-    //
     [Serializable]
     public struct FarmColor
     {

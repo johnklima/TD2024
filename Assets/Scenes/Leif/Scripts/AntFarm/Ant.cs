@@ -15,6 +15,8 @@ public class Ant
 
     public Vector2Int pos;
 
+    private int curAttempt, maxAttempt = 10;
+
     public AntFarmCell currentCell, prevCell;
 
     private Vector2Int prevDir;
@@ -34,9 +36,13 @@ public class Ant
 
     public Vector2Int GetRandomDirection()
     {
+        curAttempt++;
         var rand = Random.Range(0, _directions.Length);
-        if (_directions[rand] == prevDir) return GetRandomDirection();
+        if (_directions[rand] == prevDir)
+            if (curAttempt < maxAttempt)
+                return GetRandomDirection();
 
+        curAttempt = 0;
         return _directions[rand];
     }
 
@@ -50,7 +56,6 @@ public class Ant
         // check if outside of texture 
 
         nextPos.Clamp(Vector2Int.zero, antFarm.farmSize - Vector2Int.one);
-        Move(antFarm, true);
 
 
         prevDir = randomDirection;
