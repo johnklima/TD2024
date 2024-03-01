@@ -35,7 +35,7 @@ public class HUD : MonoBehaviour
         OnUiButtonClicked.Invoke();
     }
 
-    private void PlaySound(AudioClip clip)
+    public void PlaySound(AudioClip clip)
     {
         if (clip == null) throw new Exception(clip + " clip not found");
         _audioSource.clip = clip;

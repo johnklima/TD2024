@@ -34,7 +34,9 @@ CharacterController.cs:
 - PlayerController HittingInteractable->CrossHairController.ToggleCrosshair
 - PlayerInput OnEscapePressed: Empty
 - (required events)
-    - InventoryController.cs OnInventoryChanged->InventoryDisplay.UpdateInventoryDisplay
+    - InventoryController.cs 
+        OnInventoryChanged->InventoryDisplay.UpdateInventoryDisplay
+        OnInventoryChanged->HUD.PlaySound(MenuClick (asset))
     - PlayerHealthSystem.cs Die->
     ->DeathScreen.GameObject.SetActive(true)
     ->PlayerInput.SetPlayerInputState(false)

@@ -10,6 +10,7 @@ public class InventoryDisplay : MonoBehaviour
     public GameObject inventoryItemPrefab;
     [HideInInspector] public DraggableItem selectedItem;
     public UnityEvent onStartDrag, onEndDrag;
+
     private HUD _hud;
     private InventoryController _inventoryController;
     private int selectedSlot = -1;
@@ -38,8 +39,6 @@ public class InventoryDisplay : MonoBehaviour
             if (newSlot > inventorySlots.Length - 1) newSlot = 0;
             ChangeSelectedSlot(newSlot);
         }
-
-        PlayDragSound();
     }
 
 
@@ -118,6 +117,7 @@ public class InventoryDisplay : MonoBehaviour
 
     private void ChangeSelectedSlot(int newValue)
     {
+        PlayDragSound();
         if (selectedSlot >= 0) inventorySlots[selectedSlot].Deselect();
         inventorySlots[newValue].Select();
         selectedSlot = newValue;
@@ -155,17 +155,17 @@ public class InventoryDisplay : MonoBehaviour
 
     public void OnEndDrag()
     {
-        PlayDragSound();
+        // PlayDragSound();
         onEndDrag.Invoke();
     }
 
     public void OnStartDrag()
     {
-        PlayDragSound();
+        // PlayDragSound();
         onStartDrag.Invoke();
     }
 
-    private void PlayDragSound()
+    public void PlayDragSound()
     {
         _hud.ItemDragged();
     }
