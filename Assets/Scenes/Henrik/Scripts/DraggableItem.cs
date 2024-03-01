@@ -25,7 +25,7 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         image.raycastTarget = false;
         prevParent = parentAfterDrag = transform.parent;
         transform.SetParent(root);
-        _inventoryDisplay.onStartDrag.Invoke();
+        _inventoryDisplay.OnStartDrag();
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -37,7 +37,7 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     {
         image.raycastTarget = true;
         transform.SetParent(parentAfterDrag);
-        _inventoryDisplay.onEndDrag.Invoke();
+        _inventoryDisplay.OnEndDrag();
     }
 
     public void InitialiseItem(Item newItem, int count, InventoryDisplay inventoryDisplay = null)
