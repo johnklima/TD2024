@@ -441,6 +441,11 @@ MonoBehaviour:
   OnUiButtonClicked:
     m_PersistentCalls:
       m_Calls: []
+  volume: 0.5
+  buttonPressAudioClip: {fileID: 8300000, guid: a5529b03fdec5774bbc05264c37ecf7a,
+    type: 3}
+  hotBarItemDragAudioClip: {fileID: 8300000, guid: 8c3aa8a8a5dceaf44980e0d4d7aae1ba,
+    type: 3}
 --- !u!1 &4725234793062724623
 GameObject:
   m_ObjectHideFlags: 0
