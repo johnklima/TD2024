@@ -153,6 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   requiredPotion: 0
+  requiredPotions: 
   radius: 1
   center: {x: 0, y: 0.5, z: 0}
   scaleSpeed: 1
@@ -395,6 +396,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   requiredPotion: 0
+  requiredPotions: 
   radius: 1
   center: {x: 0, y: 0.5, z: 0}
   scaleSpeed: 1
@@ -637,6 +639,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   requiredPotion: 0
+  requiredPotions: 
   radius: 1
   center: {x: 0, y: 0.5, z: 0}
   scaleSpeed: 1
@@ -932,6 +935,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   requiredPotion: 4
+  requiredPotions: 
   radius: 1
   center: {x: 0, y: 0.5, z: 0}
   scaleSpeed: 1
@@ -1174,6 +1178,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   requiredPotion: 0
+  requiredPotions: 
   radius: 1
   center: {x: 0, y: 0.5, z: 0}
   scaleSpeed: 1
@@ -1468,7 +1473,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06057507cc2a81347bc3fdad538caf0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  requiredPotion: 0
+  requiredPotion: 7
+  requiredPotions: 
   radius: 1
   center: {x: 0, y: 0.5, z: 0}
   scaleSpeed: 1
@@ -1923,6 +1929,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   requiredPotion: 11
+  requiredPotions: 
   radius: 1
   center: {x: 0, y: 0.5, z: 0}
   scaleSpeed: 1
@@ -2366,6 +2373,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   requiredPotion: 0
+  requiredPotions: 
   radius: 1
   center: {x: 0, y: 0.5, z: 0}
   scaleSpeed: 1
@@ -2608,6 +2616,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   requiredPotion: 0
+  requiredPotions: 
   radius: 1
   center: {x: 0, y: 0.5, z: 0}
   scaleSpeed: 1
@@ -2903,6 +2912,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   requiredPotion: 0
+  requiredPotions: 
   radius: 1
   center: {x: 0, y: 0.5, z: 0}
   scaleSpeed: 1
@@ -3145,6 +3155,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   requiredPotion: 0
+  requiredPotions: 
   radius: 1
   center: {x: 0, y: 0.5, z: 0}
   scaleSpeed: 1
