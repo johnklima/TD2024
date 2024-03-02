@@ -8,7 +8,6 @@ using UnityEngine.Events;
 public class DummyTarget : MonoBehaviour
 {
     public Potion requiredPotion;
-    public Potion[] requiredPotions;
 
 
     [Header("hit box settings")] public float radius = .5f;
