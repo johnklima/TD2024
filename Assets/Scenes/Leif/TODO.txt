@@ -9,14 +9,10 @@ Audio (only):
     ButtonPressAudioClip -> QA confirm if ok
     HotBarItemDragAudioClip -> QA confirm if ok
     
-    
-HUD>HUD.cs > OnUiButtonClicked > SFX
-
 World>House>AntFarm>FarmColors -> (dirt) needs to be adjusted 
 
 World>Enemies>Target 01 - 11:
     -DummyTarget.cs>"Required Potion" needs to be set
-    -Curse-o-meter needs to be added
     -Mesh inside needs replacing with correct plants
         - dont adjust the <Target_ 0X> objects, adjust the mesh inside!
     -DamageArea.cs>TriggerSize and offset needs to be looked at
@@ -31,9 +27,9 @@ World>Enemies>Target 01 - 11:
 Player:
 CharacterController.cs:
 - MovementSpeed and/or (movement animation) needs adjusting
-- PlayerController HittingInteractable->CrossHairController.ToggleCrosshair
 - PlayerInput OnEscapePressed: Empty
 - (required events)
+    - PlayerController HittingInteractable->CrossHairController.ToggleCrosshair
     - InventoryController.cs 
         OnInventoryChanged->InventoryDisplay.UpdateInventoryDisplay
         OnInventoryChanged->HUD.PlaySound(MenuClick (asset))
