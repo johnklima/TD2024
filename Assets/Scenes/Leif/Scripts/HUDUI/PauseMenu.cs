@@ -49,6 +49,13 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1;
     }
 
+    public void OpenGameOverScreen()
+    {
+        OpenPauseMenu();
+
+        credits.SetActive(true);
+    }
+
     public void TogglePauseMenu()
     {
         // if input ESC
