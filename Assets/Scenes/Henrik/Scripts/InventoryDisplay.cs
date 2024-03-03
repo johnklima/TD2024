@@ -13,6 +13,8 @@ public class InventoryDisplay : MonoBehaviour
 
     private HUD _hud;
     private InventoryController _inventoryController;
+
+    private bool isFirst = true;
     private int selectedSlot = -1;
 
     public void Start()
@@ -167,6 +169,12 @@ public class InventoryDisplay : MonoBehaviour
 
     public void PlayDragSound()
     {
+        if (isFirst)
+        {
+            isFirst = false;
+            return;
+        }
+
         _hud.ItemDragged();
     }
 }
