@@ -433,7 +433,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: RETRY
+  m_text: Retry
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7c786ef44fdf9344897d932d73bcc99d, type: 2}
   m_sharedMaterial: {fileID: 7574592074264659557, guid: 7c786ef44fdf9344897d932d73bcc99d,
@@ -688,6 +688,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   respawnDelay: 5
+  HUD_UI: {fileID: 0}
+  PauseMenu_UI: {fileID: 0}
 --- !u!1 &7195186270622903930
 GameObject:
   m_ObjectHideFlags: 0
@@ -888,7 +890,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: EXIT
+  m_text: Exit Game
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7c786ef44fdf9344897d932d73bcc99d, type: 2}
   m_sharedMaterial: {fileID: 7574592074264659557, guid: 7c786ef44fdf9344897d932d73bcc99d,

@@ -1496,11 +1496,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4259624196898430443}
     m_Modifications:
-    - target: {fileID: 349651744576928127, guid: ef6319c55ec60964abbbe9521f365098,
-        type: 3}
-      propertyPath: m_Color.a
-      value: 0.37254903
-      objectReference: {fileID: 0}
     - target: {fileID: 564079767685030986, guid: ef6319c55ec60964abbbe9521f365098,
         type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1520,16 +1515,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1990105063277140128, guid: ef6319c55ec60964abbbe9521f365098,
-        type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1990105063277140128, guid: ef6319c55ec60964abbbe9521f365098,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -540
       objectReference: {fileID: 0}
     - target: {fileID: 3458010260267875724, guid: ef6319c55ec60964abbbe9521f365098,
         type: 3}

@@ -10,4 +10,9 @@ public class GameOverArea : MonoBehaviour
         if (!other.CompareTag("Player")) return;
         OnGameOverEnter.Invoke();
     }
+
+    public void TestOnGameOverEnter()
+    {
+        OnGameOverEnter.Invoke();
+    }
 }

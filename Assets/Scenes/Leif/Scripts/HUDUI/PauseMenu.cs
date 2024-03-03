@@ -53,6 +53,9 @@ public class PauseMenu : MonoBehaviour
     {
         OpenPauseMenu();
         credits.SetActive(true);
+        PauseMenu_UI.SetActive(false);
+        credits.transform.GetChild(1).gameObject.SetActive(false);
+        credits.transform.GetChild(2).gameObject.SetActive(true);
     }
 
     public void TogglePauseMenu()

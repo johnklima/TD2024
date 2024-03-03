@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -70,7 +69,6 @@ public class AutoScrollCredits : MonoBehaviour
             {
                 doScroll = false;
                 StopCoroutine(AutoScroll());
-                throw new Exception("crazy while");
             }
         }
     }
