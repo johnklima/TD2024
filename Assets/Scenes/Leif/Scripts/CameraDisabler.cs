@@ -15,6 +15,8 @@ public class CameraDisabler : MonoBehaviour
             }
 
             cam.enabled = false;
+            if (cam.TryGetComponent(out AudioListener al))
+                al.enabled = false;
         }
     }
 

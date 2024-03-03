@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -20,11 +21,12 @@ public class DummyTarget : MonoBehaviour
     public UnityEvent onGotDestroyed = new();
 
     [HideInInspector] public bool gotHit;
+
+    [DoNotSerialize] public UnityEvent onValidate;
     private float _lerpAlpha = 1;
     private PlayerHealthSystem _playerHealthSystem;
     private Rigidbody _rigidbody;
     private SphereCollider _sphereCollider;
-
 
     private void Start()
     {
@@ -83,10 +85,16 @@ public class DummyTarget : MonoBehaviour
         }
     }
 
+
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = gotHit ? Color.red * .25f : Color.blue * .25f;
         Gizmos.DrawSphere(transform.position + center, radius);
+    }
+
+    private void OnValidate()
+    {
+        onValidate.Invoke();
     }
 
     public void TestOnGotDestroyed()

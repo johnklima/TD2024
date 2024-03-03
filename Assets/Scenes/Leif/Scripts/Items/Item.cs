@@ -18,6 +18,8 @@ public class Item : MonoBehaviour, IInteractable
     [HideInInspector] public int id;
     private SphereCollider _sphereCollider;
 
+    private bool hasCollided;
+
     private void Awake()
     {
         Register();
@@ -35,10 +37,13 @@ public class Item : MonoBehaviour, IInteractable
         var isPLayer = other.gameObject.CompareTag("Player");
         if (isPLayer) return;
         if (!isInteractionOneShot) return;
+        if (hasCollided) return;
+        hasCollided = true;
         onCollision.Invoke(other, this);
-        Destroy(gameObject);
+        transform.GetChild(0).gameObject.SetActive(false);
+        transform.GetChild(1).gameObject.SetActive(false);
+        Destroy(gameObject, 1f);
     }
-
 
     protected virtual void OnValidate()
     {

@@ -146,8 +146,11 @@ namespace Scenes.Leif.Scripts.Editor
         {
             if (TriedWhileNotPlayMode()) return;
             var pHs = FindObjectOfType<PlayerHealthSystem>();
-            if (pHs == null) throw new Exception("Make sure there is a <PlayerHealthSystem> component in the scene");
-            Debug.Log("Performed Test on: <PlayerHealthSystem.TakeDamage()> with a value of 1");
+            if (pHs == null)
+                throw new Exception(
+                    "<color=red>CHEAT-PANEL:<color> Make sure there is a <PlayerHealthSystem> component in the scene");
+            Debug.LogWarning(
+                "<color=red>CHEAT-PANEL:<color> Performed Test on: <PlayerHealthSystem.TakeDamage()> with a value of 1");
             pHs.TakeDamage(1);
         }
 
@@ -155,8 +158,11 @@ namespace Scenes.Leif.Scripts.Editor
         {
             if (TriedWhileNotPlayMode()) return;
             var pHs = FindObjectOfType<PlayerHealthSystem>();
-            if (pHs == null) throw new Exception("Make sure there is a <PlayerHealthSystem> component in the scene");
-            Debug.Log("Performed Test on: <PlayerHealthSystem.Heal()> with a value of 1");
+            if (pHs == null)
+                throw new Exception(
+                    "<color=red>CHEAT-PANEL:<color> Make sure there is a <PlayerHealthSystem> component in the scene");
+            Debug.Log(
+                "<color=red>CHEAT-PANEL:<color> Performed Test on: <PlayerHealthSystem.Heal()> with a value of 1");
             pHs.Heal(1);
         }
 
@@ -168,8 +174,8 @@ namespace Scenes.Leif.Scripts.Editor
 
             if (h == null || pHs == null)
                 throw new Exception(
-                    "Make sure there is a <HealthDisplay> & <PlayerHealthSystem> component in the scene");
-            Debug.Log("Performed Test on: <HealthDisplay.AddHeart()>");
+                    "<color=red>CHEAT-PANEL:<color> Make sure there is a <HealthDisplay> & <PlayerHealthSystem> component in the scene");
+            Debug.Log("<color=red>CHEAT-PANEL:<color> Performed Test on: <HealthDisplay.AddHeart()>");
             h.TestAddHeart();
         }
 
@@ -177,15 +183,17 @@ namespace Scenes.Leif.Scripts.Editor
         {
             if (TriedWhileNotPlayMode()) return;
             var h = FindObjectOfType<HealthDisplay>();
-            if (h == null) throw new Exception("Make sure there is a <HealthDisplay> component in the scene");
-            Debug.Log("Performed Test on: <HealthDisplay.RemoveHeart()>");
+            if (h == null)
+                throw new Exception(
+                    "<color=red>CHEAT-PANEL:<color> Make sure there is a <HealthDisplay> component in the scene");
+            Debug.Log("<color=red>CHEAT-PANEL:<color> Performed Test on: <HealthDisplay.RemoveHeart()>");
             h.TestRemoveHeart();
         }
 
         private bool TriedWhileNotPlayMode()
         {
             if (Application.isPlaying) return false;
-            Debug.LogError("Can only spawn during RunTime");
+            Debug.LogError("<color=red>CHEAT-PANEL:<color> Can only spawn during RunTime");
             return true;
         }
 
@@ -195,7 +203,7 @@ namespace Scenes.Leif.Scripts.Editor
             // add item
             var invController = FindObjectOfType<InventoryController>();
             if (invController == null)
-                throw new Exception("No InventoryController to spawn items in");
+                throw new Exception("<color=red>CHEAT-PANEL:<color> No InventoryController to spawn items in");
 
             var prefabs = Resources.LoadAll<GameObject>("Interactable Items/Ingredients")
                 .Concat(Resources.LoadAll<GameObject>("Interactable Items/Potions")).ToArray();
@@ -208,7 +216,7 @@ namespace Scenes.Leif.Scripts.Editor
             var prefabs = Resources.LoadAll<GameObject>("Interactable Items/Ingredients")
                 .Concat(Resources.LoadAll<GameObject>("Interactable Items/Potions")).ToArray();
             Instantiate(prefabs[index], pos, quaternion.identity);
-            Debug.Log($"Spawned {prefabs[index].name} @ {pos}");
+            Debug.Log($"<color=red>CHEAT-PANEL:<color> Spawned {prefabs[index].name} @ {pos}");
         }
 
 

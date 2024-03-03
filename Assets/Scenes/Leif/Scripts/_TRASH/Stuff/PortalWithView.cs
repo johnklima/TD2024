@@ -47,7 +47,7 @@ public class PortalWithView : MonoBehaviour
         if (mainCam != null)
             _mainCamTransform = mainCam.transform;
 
-        if (!playerTransform)
+        if (!playerTransform && isActiveAndEnabled)
             playerTransform = FindObjectOfType<LeifPlayerController>().transform;
         SetupChildrenComponents();
     }

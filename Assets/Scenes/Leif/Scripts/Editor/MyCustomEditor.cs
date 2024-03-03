@@ -40,6 +40,19 @@ namespace Scenes.Leif.Scripts.Editor
     //     }
     // }
 
+
+    [CustomEditor(typeof(AmbianceMusicHandler))]
+    public class AmbianceMusicHandlerEditor : UnityEditor.Editor
+    {
+        public override void OnInspectorGUI()
+        {
+            var _target = target as AmbianceMusicHandler;
+            if (_target == null) return;
+            DrawDefaultInspector();
+            if (GUILayout.Button("NextClip()")) _target.NextClip();
+        }
+    }
+
     [CustomEditor(typeof(InventoryController))]
     public class InventoryControllerEditor : UnityEditor.Editor
     {

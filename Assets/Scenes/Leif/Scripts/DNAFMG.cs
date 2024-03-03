@@ -143,11 +143,13 @@ public class Dnafmg : MonoBehaviour, IInteractable
 
     private void Animate()
     {
-        if (_flip)
-            _sinModY -= Time.deltaTime * speed;
-        else
-            _sinModY += Time.deltaTime * speed;
-        if (_sinModY is < 0 or > 1) _flip = !_flip;
+        const float margin = 0.1f;
+        var mod = _flip ? Time.deltaTime : -Time.deltaTime;
+        _sinModY += mod * speed;
+
+        if (_sinModY is <= 1 and >= 0) return;
+        _sinModY = Mathf.Clamp01(_sinModY);
+        _flip = !_flip;
     }
 
     public class PoleSegment : MonoBehaviour

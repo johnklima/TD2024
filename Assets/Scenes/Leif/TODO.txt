@@ -1,5 +1,19 @@
 
 Things that need attention from others:
+Audio (only):
+- CauldronGroup>FirePit_Mesh>AudioSource 
+    - needs tweaking (volume/distance etc)
+- Items (Resources/Interactable Items/ (all ingredient>AudioSource  and potions>AudioSource )) 
+    - needs tweaking (volume/distance etc)
+- HUD:
+    ButtonPressAudioClip -> QA confirm if ok
+    HotBarItemDragAudioClip -> QA confirm if ok
+    
+    
+HUD>HUD.cs > OnUiButtonClicked > SFX
+
+World>House>AntFarm>FarmColors -> (dirt) needs to be adjusted 
+
 World>Enemies>Target 01 - 11:
     -DummyTarget.cs>"Required Potion" needs to be set
     -Curse-o-meter needs to be added
@@ -12,25 +26,22 @@ World>Enemies>Target 01 - 11:
         -OnGotDestroyed // when target get hit by <Required Potion>
     DamageArea.cs:
         -OnDamagingPlayer // when player enters the damage area (red box when selecting <Target_ 0X> in unity)
-
+    AudioSource:
+    - needs tweaking (volume/distance etc)
 Player:
 CharacterController.cs:
--MovementSpeed and/or (movement animation) needs adjusting
+- MovementSpeed and/or (movement animation) needs adjusting
 - PlayerController HittingInteractable->CrossHairController.ToggleCrosshair
 - PlayerInput OnEscapePressed: Empty
-- InventoryController.cs OnInventoryChanged->InventoryDisplay.UpdateInventoryDisplay
-- PlayerHealthSystem.cs Die->
+- (required events)
+    - InventoryController.cs 
+        OnInventoryChanged->InventoryDisplay.UpdateInventoryDisplay
+        OnInventoryChanged->HUD.PlaySound(MenuClick (asset))
+    - PlayerHealthSystem.cs Die->
     ->DeathScreen.GameObject.SetActive(true)
     ->PlayerInput.SetPlayerInputState(false)
 
 
-HUD:
-InventoryDisplay:
-// when starting/stopping dragging hotBar item
-OnStartDrag event > SFX
-OnEndDrag event > SFX
-
-HUD>HUD.cs > OnUiButtonClicked > SFX
 
 World>Terrain>
 - Fishes> the fishBoidSystems might need adjustment (amount for performance)
@@ -46,8 +57,11 @@ Prefab:
 all the ingredient variants and potion variants have OnCollision event
 SFX can be added here (glass breaking or w/e)
 
+Healing area:
+heal amount
+is one shot?
 
-
+TODO:
 HealthDisplay: 
 	sprites: 
 		whole heart x1, 
@@ -57,9 +71,4 @@ Items:
 	sprites: 
 		ingredients x6, 
 		potions x12
-
-
-
-
-GOL - treeGenerator
 
