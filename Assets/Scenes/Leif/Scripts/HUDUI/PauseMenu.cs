@@ -52,7 +52,6 @@ public class PauseMenu : MonoBehaviour
     public void OpenGameOverScreen()
     {
         OpenPauseMenu();
-
         credits.SetActive(true);
     }
 
