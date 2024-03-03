@@ -1,5 +1,4 @@
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -8,7 +7,6 @@ using UnityEngine.Events;
 public class DummyTarget : MonoBehaviour
 {
     public Potion requiredPotion;
-
 
     [Header("hit box settings")] public float radius = .5f;
 
@@ -22,7 +20,7 @@ public class DummyTarget : MonoBehaviour
 
     [HideInInspector] public bool gotHit;
 
-    [DoNotSerialize] public UnityEvent onValidate;
+    private CurseOMeter _curseOMeter;
     private float _lerpAlpha = 1;
     private PlayerHealthSystem _playerHealthSystem;
     private Rigidbody _rigidbody;
@@ -35,9 +33,15 @@ public class DummyTarget : MonoBehaviour
 
 
         _sphereCollider = GetComponent<SphereCollider>();
-        // _sphereCollider.isTrigger = true;
         _sphereCollider.radius = radius;
         _sphereCollider.center = center;
+
+
+        if (_curseOMeter == null) _curseOMeter = GetComponentInChildren<CurseOMeter>();
+        _curseOMeter.DummyTarget = this;
+        onGotDestroyed.AddListener(() => { _curseOMeter.transform.parent = null; });
+
+        // _sphereCollider.isTrigger = true;
         // _rigidbody = gameObject.GetComponent<Rigidbody>();
         // _rigidbody.useGravity = false;
         // _rigidbody.isKinematic = true;
@@ -94,7 +98,8 @@ public class DummyTarget : MonoBehaviour
 
     private void OnValidate()
     {
-        onValidate.Invoke();
+        if (_curseOMeter == null) _curseOMeter = GetComponentInChildren<CurseOMeter>();
+        _curseOMeter.OnValidated();
     }
 
     public void TestOnGotDestroyed()

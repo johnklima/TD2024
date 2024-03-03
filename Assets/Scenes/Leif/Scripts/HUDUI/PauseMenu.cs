@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using Cinemachine;
 using UnityEngine;
 #if UNITY_EDITOR
 using UnityEditor;
@@ -10,11 +12,14 @@ public class PauseMenu : MonoBehaviour
     public GameObject PauseMenu_UI;
     public GameObject instructions;
     public GameObject credits;
-
     public bool isPaused;
+    private CinemachineBrain _playerCam;
 
     private void Start()
     {
+        _playerCam = FindObjectOfType<CinemachineBrain>();
+        if (_playerCam == null)
+            throw new Exception("Did not find <CinemachineBrain>, make sure there is one in the scene");
         PauseMenu_UI.SetActive(false);
     }
 
@@ -26,6 +31,7 @@ public class PauseMenu : MonoBehaviour
         HUD_UI.SetActive(false);
         instructions.SetActive(false);
         credits.SetActive(false);
+        _playerCam.enabled = false;
         CursorLockHandler.ShowAndUnlockCursor();
         Time.timeScale = 0;
     }
@@ -38,6 +44,7 @@ public class PauseMenu : MonoBehaviour
         instructions.SetActive(false);
         credits.SetActive(false);
         PauseMenu_UI.SetActive(false);
+        _playerCam.enabled = true;
         HUD_UI.SetActive(true);
         Time.timeScale = 1;
     }
@@ -56,6 +63,7 @@ public class PauseMenu : MonoBehaviour
         if (isPaused) CursorLockHandler.ShowAndUnlockCursor();
         else CursorLockHandler.HideAndLockCursor();
         Time.timeScale = isPaused ? 0 : 1;
+        _playerCam.enabled = !isPaused;
         PauseMenu_UI.SetActive(isPaused);
         HUD_UI.SetActive(!isPaused); // toggle hud
         instructions.SetActive(false); // make sure instructions are off

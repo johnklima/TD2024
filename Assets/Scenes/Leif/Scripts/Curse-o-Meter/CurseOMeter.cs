@@ -6,38 +6,42 @@ using UnityEngine;
 public class CurseOMeter : MonoBehaviour
 {
     public Sprite[] sprites;
+    public Sprite doneSprite;
     [ReadOnly] [SerializeField] private Potion _requiredPotion;
 
-    private DummyTarget _dummyTarget;
     private SpriteRenderer _spriteRenderer;
+    private SpriteRenderer _spriteRendererDone;
 
     private Dictionary<string, Sprite> _sprites;
+
+    public DummyTarget DummyTarget { get; set; }
 
     private void Start()
     {
         Initialize();
     }
 
-    private void Update()
-    {
-    }
-
-    private void OnValidate()
+    public void OnValidated()
     {
         Initialize();
     }
 
     private void Initialize()
     {
-        if (_spriteRenderer == null)
-            _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-        if (_dummyTarget != null)
+        if (_spriteRenderer == null || _spriteRendererDone == null)
         {
-            _dummyTarget = GetComponentInParent<DummyTarget>();
-            _dummyTarget.onValidate.RemoveListener(OnValidate);
-            _dummyTarget.onValidate.AddListener(OnValidate);
-            _requiredPotion = _dummyTarget.requiredPotion;
+            var asd = GetComponentsInChildren<SpriteRenderer>();
+            for (var i = 0; i < asd.Length; i++)
+                if (asd[i].name.Contains("DONE"))
+                    _spriteRendererDone = asd[i];
+                else
+                    _spriteRenderer = asd[i];
         }
+
+        if (DummyTarget == null) DummyTarget = GetComponentInParent<DummyTarget>();
+        if (DummyTarget == null) DummyTarget = GetComponentInParent<DummyTarget>();
+        if (DummyTarget != null)
+            _requiredPotion = DummyTarget.requiredPotion;
 
         if (sprites.Length > 0)
             MakeSpriteDictionary();
