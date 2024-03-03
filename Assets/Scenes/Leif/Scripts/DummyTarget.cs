@@ -39,7 +39,7 @@ public class DummyTarget : MonoBehaviour
 
         if (_curseOMeter == null) _curseOMeter = GetComponentInChildren<CurseOMeter>();
         _curseOMeter.DummyTarget = this;
-        onGotDestroyed.AddListener(() => { _curseOMeter.transform.parent = null; });
+        onGotDestroyed.AddListener(() => { _curseOMeter.PlantDestroyed(); });
 
         // _sphereCollider.isTrigger = true;
         // _rigidbody = gameObject.GetComponent<Rigidbody>();

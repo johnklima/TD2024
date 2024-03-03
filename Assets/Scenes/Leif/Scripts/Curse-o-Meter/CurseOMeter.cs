@@ -8,9 +8,8 @@ public class CurseOMeter : MonoBehaviour
     public Sprite[] sprites;
     public Sprite doneSprite;
     [ReadOnly] [SerializeField] private Potion _requiredPotion;
-
+    public GameObject doneSpriteObject;
     private SpriteRenderer _spriteRenderer;
-    private SpriteRenderer _spriteRendererDone;
 
     private Dictionary<string, Sprite> _sprites;
 
@@ -28,15 +27,8 @@ public class CurseOMeter : MonoBehaviour
 
     private void Initialize()
     {
-        if (_spriteRenderer == null || _spriteRendererDone == null)
-        {
-            var asd = GetComponentsInChildren<SpriteRenderer>();
-            for (var i = 0; i < asd.Length; i++)
-                if (asd[i].name.Contains("DONE"))
-                    _spriteRendererDone = asd[i];
-                else
-                    _spriteRenderer = asd[i];
-        }
+        if (_spriteRenderer == null)
+            _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
 
         if (DummyTarget == null) DummyTarget = GetComponentInParent<DummyTarget>();
         if (DummyTarget == null) DummyTarget = GetComponentInParent<DummyTarget>();
@@ -48,6 +40,9 @@ public class CurseOMeter : MonoBehaviour
 
         if (sprites.Length > 0 && _spriteRenderer != null)
             _spriteRenderer.sprite = GetSpriteForPotion(_requiredPotion);
+
+        if (doneSpriteObject == null) throw new Exception("need sprite obj");
+        doneSpriteObject.SetActive(false);
     }
 
 
@@ -81,5 +76,11 @@ public class CurseOMeter : MonoBehaviour
         if (_sprites.TryGetValue(spriteName, out var sprite))
             return sprite;
         throw new Exception("No sprite found for :" + spriteName);
+    }
+
+    public void PlantDestroyed()
+    {
+        transform.parent = null;
+        doneSpriteObject.SetActive(true);
     }
 }
