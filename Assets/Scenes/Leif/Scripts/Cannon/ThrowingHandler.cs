@@ -176,6 +176,7 @@ public class ThrowingHandler : MonoBehaviour
         //TODO CHANGE THING
         var item = _newThrowable.GetComponent<Item>();
         item.isInteractionOneShot = true; // thrown items can only be picked back up again
+        item.rigidbody.isKinematic = false;
         // item itself handles breaking on collision
         _newThrowable.SetActive(true); // make sure its active
         _newThrowable.transform.position = transform.position; // move to hand pos
