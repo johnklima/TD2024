@@ -15,6 +15,8 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     private InventoryDisplay _inventoryDisplay;
     [Header("UI")] private Image image;
 
+    private Image symbolImage;
+
     public void Start()
     {
         InitialiseItem(item, count);
@@ -48,6 +50,18 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         if (image == null) image = GetComponent<Image>();
         if (image == null) throw new Exception("GameObject must have Image component!");
         image.sprite = item.itemData.uiSprite;
+
+        if (newItem.itemData.itemType == ItemType.Potion)
+        {
+            var potion = newItem.gameObject.GetComponent<PotionObjectItem>();
+            // if potion get symbol
+            if (symbolImage == null) symbolImage = GetComponentInChildren<Image>();
+            if (symbolImage == null) throw new Exception("GameObject must have Image component!");
+            // set symbol
+            symbolImage.sprite = potion.itemData2.uiSpriteSymbol;
+            symbolImage.enabled = true;
+        }
+
         this.count = count;
         root = GetComponentInParent<Canvas>().transform;
         RefreshCount();
