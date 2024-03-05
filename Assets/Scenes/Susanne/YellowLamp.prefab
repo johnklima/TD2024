@@ -4924,6 +4924,7 @@ GameObject:
   - component: {fileID: 2449388647013645385}
   - component: {fileID: 1634727100266604451}
   - component: {fileID: 4243599070525687039}
+  - component: {fileID: 78657936827627112}
   m_Layer: 0
   m_Name: YellowLamp
   m_TagString: Untagged
@@ -4998,3 +4999,25 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &78657936827627112
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8447543973327609683}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 6692657846491608073, guid: 28ce442e69aa76e40b0ab8129c75cf04, type: 3}
