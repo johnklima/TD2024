@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ca073cdd68f4f7cbf1ec94b1253b7d5, type: 3}
   m_Name: Yellow_Sun_Potion
   m_EditorClassIdentifier: 
-  uiSprite: {fileID: 21300000, guid: c7b99fe1044c89340b3d6d0ed974e9cc, type: 3}
+  uiSprite: {fileID: 21300000, guid: 9c31725201fced7488f144c54b5a1fc5, type: 3}
   itemType: 1
   stackable: 0
-  potion: 5
+  uiSpriteSymbol: {fileID: 21300000, guid: 10ede3fbf2f59044db855001c72f284a, type: 3}
+  potion: 0
   ingredient1: 1
-  ingredient2: 4
+  ingredient2: 0

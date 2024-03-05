@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e19b28aaa164c5995dd0d661d30c10e, type: 3}
   m_Name: Skull_Ingredient
   m_EditorClassIdentifier: 
-  uiSprite: {fileID: 21300000, guid: 24623f838dba2a340add4d2fdef09ac6, type: 3}
+  uiSprite: {fileID: 21300000, guid: 5422c76f5560a1441b34fb19abd5d4da, type: 3}
   itemType: 0
   stackable: 1
   ingredient: 3

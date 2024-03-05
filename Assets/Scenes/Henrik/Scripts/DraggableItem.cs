@@ -12,10 +12,10 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     [HideInInspector] public Transform parentAfterDrag;
     [HideInInspector] public Transform prevParent;
 
+    public Image symbolImage;
+
     private InventoryDisplay _inventoryDisplay;
     [Header("UI")] private Image image;
-
-    private Image symbolImage;
 
     public void Start()
     {
@@ -55,11 +55,11 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         {
             var potion = newItem.gameObject.GetComponent<PotionObjectItem>();
             // if potion get symbol
-            if (symbolImage == null) symbolImage = GetComponentInChildren<Image>();
             if (symbolImage == null) throw new Exception("GameObject must have Image component!");
             // set symbol
             symbolImage.sprite = potion.itemData2.uiSpriteSymbol;
             symbolImage.enabled = true;
+            symbolImage.gameObject.SetActive(true);
         }
 
         this.count = count;
