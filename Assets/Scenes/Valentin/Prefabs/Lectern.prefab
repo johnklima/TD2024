@@ -245,6 +245,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: LecternCombined (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5c9523421108fe244a2644910fe4d80b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5431214310461853155, guid: 5c9523421108fe244a2644910fe4d80b,
         type: 3}
       propertyPath: m_Materials.Array.data[0]

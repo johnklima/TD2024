@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 14.05254, g: 6.9143457, b: 2.4713595, a: 1}
+  m_IndirectSpecularColor: {r: 13.9893265, g: 6.890792, b: 2.4630492, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4171,7 +4171,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1062929793
 Transform:
   m_ObjectHideFlags: 0
@@ -9138,7 +9138,7 @@ PrefabInstance:
     - target: {fileID: 36650033688024139, guid: 8dabed5200d356d4b8f6eaf3413e1a42,
         type: 3}
       propertyPath: id
-      value: 17
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 36650033688024139, guid: 8dabed5200d356d4b8f6eaf3413e1a42,
         type: 3}
@@ -9153,7 +9153,7 @@ PrefabInstance:
     - target: {fileID: 245418536259089186, guid: 8dabed5200d356d4b8f6eaf3413e1a42,
         type: 3}
       propertyPath: id
-      value: 13
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 245418536259089186, guid: 8dabed5200d356d4b8f6eaf3413e1a42,
         type: 3}
@@ -9248,7 +9248,7 @@ PrefabInstance:
     - target: {fileID: 1092542710105694065, guid: 8dabed5200d356d4b8f6eaf3413e1a42,
         type: 3}
       propertyPath: id
-      value: 10
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1092542710105694065, guid: 8dabed5200d356d4b8f6eaf3413e1a42,
         type: 3}
@@ -9278,7 +9278,7 @@ PrefabInstance:
     - target: {fileID: 1249390382688940263, guid: 8dabed5200d356d4b8f6eaf3413e1a42,
         type: 3}
       propertyPath: id
-      value: 8
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1249390382688940263, guid: 8dabed5200d356d4b8f6eaf3413e1a42,
         type: 3}
@@ -9348,7 +9348,7 @@ PrefabInstance:
     - target: {fileID: 2130488179927656960, guid: 8dabed5200d356d4b8f6eaf3413e1a42,
         type: 3}
       propertyPath: id
-      value: 3
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 2130488179927656960, guid: 8dabed5200d356d4b8f6eaf3413e1a42,
         type: 3}
@@ -9623,7 +9623,7 @@ PrefabInstance:
     - target: {fileID: 4979302254110712790, guid: 8dabed5200d356d4b8f6eaf3413e1a42,
         type: 3}
       propertyPath: id
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4979302254110712790, guid: 8dabed5200d356d4b8f6eaf3413e1a42,
         type: 3}
@@ -9673,7 +9673,7 @@ PrefabInstance:
     - target: {fileID: 5441086593864912992, guid: 8dabed5200d356d4b8f6eaf3413e1a42,
         type: 3}
       propertyPath: id
-      value: 2
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 5441086593864912992, guid: 8dabed5200d356d4b8f6eaf3413e1a42,
         type: 3}
@@ -9793,7 +9793,7 @@ PrefabInstance:
     - target: {fileID: 7143108156986929296, guid: 8dabed5200d356d4b8f6eaf3413e1a42,
         type: 3}
       propertyPath: id
-      value: 1
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7143108156986929296, guid: 8dabed5200d356d4b8f6eaf3413e1a42,
         type: 3}
@@ -9843,7 +9843,7 @@ PrefabInstance:
     - target: {fileID: 7831768181488532148, guid: 8dabed5200d356d4b8f6eaf3413e1a42,
         type: 3}
       propertyPath: id
-      value: 11
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 7831768181488532148, guid: 8dabed5200d356d4b8f6eaf3413e1a42,
         type: 3}
@@ -9878,7 +9878,7 @@ PrefabInstance:
     - target: {fileID: 8388666156648892082, guid: 8dabed5200d356d4b8f6eaf3413e1a42,
         type: 3}
       propertyPath: id
-      value: 12
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8388666156648892082, guid: 8dabed5200d356d4b8f6eaf3413e1a42,
         type: 3}
@@ -9933,7 +9933,7 @@ PrefabInstance:
     - target: {fileID: 9110699599688718590, guid: 8dabed5200d356d4b8f6eaf3413e1a42,
         type: 3}
       propertyPath: id
-      value: 7
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 9110699599688718590, guid: 8dabed5200d356d4b8f6eaf3413e1a42,
         type: 3}
@@ -9948,7 +9948,7 @@ PrefabInstance:
     - target: {fileID: 9223294854412221194, guid: 8dabed5200d356d4b8f6eaf3413e1a42,
         type: 3}
       propertyPath: id
-      value: 16
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 9223294854412221194, guid: 8dabed5200d356d4b8f6eaf3413e1a42,
         type: 3}
