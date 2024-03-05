@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ca073cdd68f4f7cbf1ec94b1253b7d5, type: 3}
   m_Name: Blue_Whirlpool_Potion
   m_EditorClassIdentifier: 
-  uiSprite: {fileID: 21300000, guid: 19f2e0335d7932341bfc9dc9b180ec78, type: 3}
+  uiSprite: {fileID: 21300000, guid: f0857b5d5cd7f854290173a5a7ef9894, type: 3}
   itemType: 1
   stackable: 0
-  potion: 10
+  uiSpriteSymbol: {fileID: 21300000, guid: 4775009ddb0c1d54cb1f9fb7b450adc4, type: 3}
+  potion: 0
   ingredient1: 2
   ingredient2: 5

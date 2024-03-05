@@ -131,9 +131,11 @@ public class ThrowingHandler : MonoBehaviour
         for (var i = 0; i < res; i++)
             if (_hit.point != Vector3.zero)
             {
-                var tPos = transform.position + lineRendererSettings.startPosOffset;
-                var pos = Vector3.Lerp(tPos, _hit.point, i / (float)res);
-                pos.y += Mathf.Sin(i * lineRendererSettings.sineModA) * lineRendererSettings.sineModB;
+                var pos = transform.position;
+                var dst = Vector3.Distance(pos, _hit.point);
+                pos += lineRendererSettings.startPosOffset;
+                pos = Vector3.Lerp(pos, _hit.point, i / (float)res);
+                pos.y += Mathf.Sin(i * lineRendererSettings.sineModA) * (dst * lineRendererSettings.sineModB);
                 _lineRenderer.SetPosition(i, pos);
             }
     }
@@ -174,6 +176,7 @@ public class ThrowingHandler : MonoBehaviour
         //TODO CHANGE THING
         var item = _newThrowable.GetComponent<Item>();
         item.isInteractionOneShot = true; // thrown items can only be picked back up again
+        item.rigidbody.isKinematic = false;
         // item itself handles breaking on collision
         _newThrowable.SetActive(true); // make sure its active
         _newThrowable.transform.position = transform.position; // move to hand pos

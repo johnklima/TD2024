@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: b45fdb117feceab4595c977d10e2c153
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - deathAudioClip: {fileID: 8300000, guid: 9ed495208f5270f4aae39b3d286e09b0, type: 3}
+  - healAudioClip: {fileID: 8300000, guid: 693285dfb904afb4e9ea7bedbed1de1e, type: 3}
+  - walkAudioClip: {instanceID: 0}
+  - walkIndoorAudioClip: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

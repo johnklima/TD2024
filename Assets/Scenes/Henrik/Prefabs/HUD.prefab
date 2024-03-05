@@ -54,6 +54,12 @@ MonoBehaviour:
   craftingSlot: {fileID: 3208430556447496266}
   mixButton: {fileID: 3697497234295517421}
   cauldronSoupRenderer: {fileID: 0}
+  onSuccessfulMix:
+    m_PersistentCalls:
+      m_Calls: []
+  onUnsuccessfulMix:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &8557116438206177924
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -435,6 +441,11 @@ MonoBehaviour:
   OnUiButtonClicked:
     m_PersistentCalls:
       m_Calls: []
+  volume: 0.5
+  buttonPressAudioClip: {fileID: 8300000, guid: a5529b03fdec5774bbc05264c37ecf7a,
+    type: 3}
+  hotBarItemDragAudioClip: {fileID: 8300000, guid: 8c3aa8a8a5dceaf44980e0d4d7aae1ba,
+    type: 3}
 --- !u!1 &4725234793062724623
 GameObject:
   m_ObjectHideFlags: 0
@@ -502,7 +513,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 6de65d7ea9202af488342e0e67a319b9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 161d2dcd2fa1cc841aaa0f505e63605e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -541,11 +552,11 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 21300000, guid: a7ff9ec5533910a41bf7af3be440e914,
+    m_HighlightedSprite: {fileID: 21300000, guid: 89eb7ad707f97564dbbaf0313375c95a,
       type: 3}
-    m_PressedSprite: {fileID: 21300000, guid: 1cc16b7b47afc0748a9f65686798a930, type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: 89eb7ad707f97564dbbaf0313375c95a, type: 3}
     m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 21300000, guid: 7d7901bdf05c7b14fbcdf063f874de13, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -624,7 +635,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 6de65d7ea9202af488342e0e67a319b9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 161d2dcd2fa1cc841aaa0f505e63605e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -663,11 +674,11 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 21300000, guid: a7ff9ec5533910a41bf7af3be440e914,
+    m_HighlightedSprite: {fileID: 21300000, guid: 89eb7ad707f97564dbbaf0313375c95a,
       type: 3}
-    m_PressedSprite: {fileID: 21300000, guid: 1cc16b7b47afc0748a9f65686798a930, type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: 89eb7ad707f97564dbbaf0313375c95a, type: 3}
     m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 21300000, guid: 7d7901bdf05c7b14fbcdf063f874de13, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -1485,11 +1496,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4259624196898430443}
     m_Modifications:
-    - target: {fileID: 349651744576928127, guid: ef6319c55ec60964abbbe9521f365098,
-        type: 3}
-      propertyPath: m_Color.a
-      value: 0.37254903
-      objectReference: {fileID: 0}
     - target: {fileID: 564079767685030986, guid: ef6319c55ec60964abbbe9521f365098,
         type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1509,16 +1515,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1990105063277140128, guid: ef6319c55ec60964abbbe9521f365098,
-        type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1990105063277140128, guid: ef6319c55ec60964abbbe9521f365098,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -540
       objectReference: {fileID: 0}
     - target: {fileID: 3458010260267875724, guid: ef6319c55ec60964abbbe9521f365098,
         type: 3}

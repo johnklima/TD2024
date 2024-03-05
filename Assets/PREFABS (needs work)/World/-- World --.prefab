@@ -597,6 +597,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ShrubsDecor
       objectReference: {fileID: 0}
+    - target: {fileID: 5546476092053015595, guid: b78e949f53a7e804fb885586bf8b3d5b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7617206999565482417, guid: b78e949f53a7e804fb885586bf8b3d5b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -849,6 +854,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_VersionIndex
       value: 6081
+      objectReference: {fileID: 0}
+    - target: {fileID: 2651934460201978683, guid: 8b4f9ffdb830a9242a61600254282513,
+        type: 3}
+      propertyPath: _texture2D
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3846115911103894795, guid: 8b4f9ffdb830a9242a61600254282513,
         type: 3}

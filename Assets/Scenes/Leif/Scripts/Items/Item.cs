@@ -14,15 +14,20 @@ public class Item : MonoBehaviour, IInteractable
     public bool isInteractionOneShot;
     public UnityEvent<Collision, Item> onCollision;
 
-
     [HideInInspector] public int id;
     private SphereCollider _sphereCollider;
+
+    private bool hasCollided;
+    public Rigidbody rigidbody { get; private set; }
 
     private void Awake()
     {
         Register();
         _sphereCollider = GetComponent<SphereCollider>();
         // _sphereCollider.isTrigger = true;
+        rigidbody = GetComponent<Rigidbody>();
+        if (rigidbody == null) throw new Exception("no _rigidbody on item");
+        rigidbody.isKinematic = !isInteractionOneShot;
     }
 
     private void OnDisable()
@@ -35,10 +40,13 @@ public class Item : MonoBehaviour, IInteractable
         var isPLayer = other.gameObject.CompareTag("Player");
         if (isPLayer) return;
         if (!isInteractionOneShot) return;
+        if (hasCollided) return;
+        hasCollided = true;
         onCollision.Invoke(other, this);
-        Destroy(gameObject);
+        transform.GetChild(0).gameObject.SetActive(false);
+        transform.GetChild(1).gameObject.SetActive(false);
+        Destroy(gameObject, 1f);
     }
-
 
     protected virtual void OnValidate()
     {

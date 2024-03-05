@@ -1,12 +1,15 @@
+using System;
 using System.Collections;
 using Cinemachine;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
+
 
 public class MainMenu : MonoBehaviour
 {
@@ -16,8 +19,10 @@ public class MainMenu : MonoBehaviour
     public float loadingScreenDuration = 10;
     public UnityEvent doneLoading = new();
     public Canvas canvas;
+    public AudioClip uiButtonClickSound;
 
     public bool doLerp;
+    private AudioSource _audioSource;
 
     private float floatAlpha = -.25f;
 
@@ -41,6 +46,7 @@ public class MainMenu : MonoBehaviour
 
         var tmpTexts = FindObjectsOfType<TextMeshProUGUI>(true);
         foreach (var tmpText in tmpTexts) tmpText.font = font;
+        SetupAllButtonClickSound();
     }
 
     private void Update()
@@ -60,6 +66,20 @@ public class MainMenu : MonoBehaviour
 
         doneLoading.Invoke();
         doLerp = false;
+    }
+
+    private void SetupAllButtonClickSound()
+    {
+        if (uiButtonClickSound == null) throw new Exception("No audio sound setup for UI buttons");
+        var audioSource = FindObjectOfType<AudioSource>();
+        _audioSource = audioSource.gameObject.AddComponent<AudioSource>();
+        _audioSource.playOnAwake = false;
+        _audioSource.clip = uiButtonClickSound;
+        _audioSource.volume = audioSource.volume;
+
+
+        var buttons = GetComponentsInChildren<Button>(true);
+        foreach (var button in buttons) button.onClick.AddListener(_audioSource.Play);
     }
 
     private void SetupTargetCam()
@@ -87,15 +107,6 @@ public class MainMenu : MonoBehaviour
         CursorLockHandler.HideAndLockCursor();
     }
 
-    public void OnInstructions()
-    {
-        Debug.Log("heihei");
-    }
-
-    public void OnCredits()
-    {
-        Debug.Log("hei");
-    }
 
     public void ExitGame()
     {

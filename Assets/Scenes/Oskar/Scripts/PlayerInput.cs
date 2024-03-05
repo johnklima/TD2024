@@ -10,9 +10,12 @@ public class PlayerInput : MonoBehaviour
     public UnityEvent onEscapePressed;
 
     public Vector2 moveDir;
+    public float minVelForWalkAnim = 0.1f;
     private PauseMenu _pauseMenu;
     private PlayerController _playerController;
     private InputActions _playerInput;
+
+    public bool IsWalking => moveDir.magnitude > minVelForWalkAnim;
 
 
     private void Awake()
@@ -86,6 +89,7 @@ public class PlayerInput : MonoBehaviour
         // CancelCauldron.Invoke();
         // cauldron has own button now
         _pauseMenu.TogglePauseMenu();
+
         onEscapePressed.Invoke();
         // Escape pressed, show pause menu
     }

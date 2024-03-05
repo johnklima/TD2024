@@ -1,7 +1,6 @@
 using Unity.VisualScripting;
 using UnityEngine;
 
-[RequireComponent(typeof(SphereCollider))]
 public class Boids1 : MonoBehaviour
 {
     public BoidsSettings boidsSettings;

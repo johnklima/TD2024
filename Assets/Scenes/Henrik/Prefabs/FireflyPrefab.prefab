@@ -161,18 +161,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boidsSettings:
-    cohesionFactor: 0.04
-    separationFactor: 6
-    alignFactor: 1
-    constrainFactor: 2
-    avoidFactor: 29.1
-    collisionDistance: 6.71
+    cohesionFactor: 8.5
+    separationFactor: 25
+    alignFactor: 0.87
+    constrainFactor: 2.59
+    avoidFactor: 3.66
+    collisionDistance: 4.7
     speed: 3
-    integrationRate: 3
+    integrationRate: 13
     obstacleLayerMask:
       serializedVersion: 2
       m_Bits: 4294967295
-    yConstrainDistance: 3
+    yConstrainDistance: 5
     seekTarget: 0
     target: {fileID: 0}
     useConstrainPoint: 1
@@ -183,4 +183,24 @@ MonoBehaviour:
   numberOfBoids: 20
   useObstacleAvoid: 0
   prefab: {fileID: 1574273739349351814}
-  boids: []
+  boids:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}

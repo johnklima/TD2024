@@ -12,6 +12,8 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     [HideInInspector] public Transform parentAfterDrag;
     [HideInInspector] public Transform prevParent;
 
+    public Image symbolImage;
+
     private InventoryDisplay _inventoryDisplay;
     [Header("UI")] private Image image;
 
@@ -25,7 +27,7 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         image.raycastTarget = false;
         prevParent = parentAfterDrag = transform.parent;
         transform.SetParent(root);
-        _inventoryDisplay.onStartDrag.Invoke();
+        _inventoryDisplay.OnStartDrag();
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -37,7 +39,7 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     {
         image.raycastTarget = true;
         transform.SetParent(parentAfterDrag);
-        _inventoryDisplay.onEndDrag.Invoke();
+        _inventoryDisplay.OnEndDrag();
     }
 
     public void InitialiseItem(Item newItem, int count, InventoryDisplay inventoryDisplay = null)
@@ -48,6 +50,18 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         if (image == null) image = GetComponent<Image>();
         if (image == null) throw new Exception("GameObject must have Image component!");
         image.sprite = item.itemData.uiSprite;
+
+        if (newItem.itemData.itemType == ItemType.Potion)
+        {
+            var potion = newItem.gameObject.GetComponent<PotionObjectItem>();
+            // if potion get symbol
+            if (symbolImage == null) throw new Exception("GameObject must have Image component!");
+            // set symbol
+            symbolImage.sprite = potion.itemData2.uiSpriteSymbol;
+            symbolImage.enabled = true;
+            symbolImage.gameObject.SetActive(true);
+        }
+
         this.count = count;
         root = GetComponentInParent<Canvas>().transform;
         RefreshCount();

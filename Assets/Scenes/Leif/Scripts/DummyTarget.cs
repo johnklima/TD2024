@@ -8,7 +8,6 @@ public class DummyTarget : MonoBehaviour
 {
     public Potion requiredPotion;
 
-
     [Header("hit box settings")] public float radius = .5f;
 
     public Vector3 center;
@@ -20,11 +19,12 @@ public class DummyTarget : MonoBehaviour
     public UnityEvent onGotDestroyed = new();
 
     [HideInInspector] public bool gotHit;
+
+    private CurseOMeter _curseOMeter;
     private float _lerpAlpha = 1;
     private PlayerHealthSystem _playerHealthSystem;
     private Rigidbody _rigidbody;
     private SphereCollider _sphereCollider;
-
 
     private void Start()
     {
@@ -33,9 +33,15 @@ public class DummyTarget : MonoBehaviour
 
 
         _sphereCollider = GetComponent<SphereCollider>();
-        // _sphereCollider.isTrigger = true;
         _sphereCollider.radius = radius;
         _sphereCollider.center = center;
+
+
+        if (_curseOMeter == null) _curseOMeter = GetComponentInChildren<CurseOMeter>();
+        _curseOMeter.DummyTarget = this;
+        onGotDestroyed.AddListener(() => { _curseOMeter.PlantDestroyed(); });
+
+        // _sphereCollider.isTrigger = true;
         // _rigidbody = gameObject.GetComponent<Rigidbody>();
         // _rigidbody.useGravity = false;
         // _rigidbody.isKinematic = true;
@@ -83,10 +89,17 @@ public class DummyTarget : MonoBehaviour
         }
     }
 
+
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = gotHit ? Color.red * .25f : Color.blue * .25f;
         Gizmos.DrawSphere(transform.position + center, radius);
+    }
+
+    private void OnValidate()
+    {
+        if (_curseOMeter == null) _curseOMeter = GetComponentInChildren<CurseOMeter>();
+        _curseOMeter.OnValidated();
     }
 
     public void TestOnGotDestroyed()
