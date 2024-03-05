@@ -29,7 +29,6 @@ public class InventoryDisplay : MonoBehaviour
 
     public void Update()
     {
-        Debug.Log(Input.GetAxis("Mouse ScrollWheel"));
         if (Input.GetAxis("Mouse ScrollWheel") > 0f) // forward
         {
             if (selectedSlot > 0)
