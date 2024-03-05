@@ -702,7 +702,7 @@ MonoBehaviour:
     m_Value: 0
   earthCurvature:
     m_OverrideState: 1
-    m_Value: 0.175
+    m_Value: 0.8
   cloudTiling:
     m_OverrideState: 1
     m_Value: {x: 1, y: 1}
@@ -888,7 +888,7 @@ MonoBehaviour:
     m_Value: 0.5
   densityMultiplier:
     m_OverrideState: 1
-    m_Value: 0.5
+    m_Value: 0.822
   shapeFactor:
     m_OverrideState: 1
     m_Value: 0.95
@@ -900,7 +900,7 @@ MonoBehaviour:
     m_Value: {x: 0, y: 0, z: 0}
   erosionFactor:
     m_OverrideState: 1
-    m_Value: 0.8
+    m_Value: 0.876
   erosionScale:
     m_OverrideState: 1
     m_Value: 107
@@ -909,7 +909,7 @@ MonoBehaviour:
     m_Value: 1
   ambientLightProbeDimmer:
     m_OverrideState: 1
-    m_Value: 0.333
+    m_Value: 0.341
   sunLightDimmer:
     m_OverrideState: 1
     m_Value: 1
