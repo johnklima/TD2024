@@ -962,7 +962,7 @@ MonoBehaviour:
     m_Value: 0
   shadowResolution:
     m_OverrideState: 1
-    m_Value: 256
+    m_Value: 128
   shadowPlaneHeightOffset:
     m_OverrideState: 1
     m_Value: 0
