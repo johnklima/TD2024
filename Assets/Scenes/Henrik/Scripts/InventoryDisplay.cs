@@ -128,7 +128,7 @@ public class InventoryDisplay : MonoBehaviour
         var maxSlotIndex = 8;
         var clampedSlot = Mathf.Clamp(selectedSlot, 0, maxSlotIndex);
         inventorySlots[clampedSlot].Deselect();
-        selectedSlot = Mathf.Clamp(newValue, 0, maxSlotIndex);
+        selectedSlot = Mathf.Clamp(selectedSlot + newValue, 0, maxSlotIndex);
         inventorySlots[selectedSlot].Select();
         var slotTransform = inventorySlots[selectedSlot].transform;
         if (slotTransform.childCount > 0)
