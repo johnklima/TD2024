@@ -73,6 +73,10 @@ public class DummyTarget : MonoBehaviour
 
         // check if its a potion and that its the correct potion
         var isPotionItem = collisionObject.TryGetComponent(out PotionObjectItem potionItem);
+        Debug.Log("isPotionItem" + isPotionItem);
+        Debug.Log("requiredPotion" + requiredPotion);
+        Debug.Log("potionItem.itemData2.potion" + potionItem.itemData2.potion);
+
         if (isPotionItem && requiredPotion == potionItem.itemData2.potion)
         {
             // correct potion

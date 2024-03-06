@@ -16,6 +16,6 @@ MonoBehaviour:
   itemType: 1
   stackable: 0
   uiSpriteSymbol: {fileID: 21300000, guid: 5422c76f5560a1441b34fb19abd5d4da, type: 3}
-  potion: 0
+  potion: 4
   ingredient1: 1
   ingredient2: 3
