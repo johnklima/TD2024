@@ -3033,8 +3033,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6365071484449472218, guid: 59ac8e44a55148248b749bfd0cd17519,
         type: 3}
-      propertyPath: onInteract.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      propertyPath: fishAudioSource
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6365071484449472218, guid: 59ac8e44a55148248b749bfd0cd17519,
         type: 3}

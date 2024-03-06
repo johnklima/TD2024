@@ -79,6 +79,7 @@ public class CraftinUI : MonoBehaviour
                 var ingItem1 = _currentIngredients[0];
                 var ingItem2 = _currentIngredients[1];
                 _ingredientsMatch = ingItem1.Match(ingItem2.ingredient);
+                Debug.Log("has 2 items, match: " + _ingredientsMatch);
                 // yellow does not match ....
                 // empty list for next try
                 _prevIngredients = _currentIngredients.ToArray();
@@ -94,6 +95,7 @@ public class CraftinUI : MonoBehaviour
 
     private void PotionFactory(Ingredient iItem1, Ingredient iItem2)
     {
+        Debug.Log("add item");
         var potionItem = _inventoryController.GetPotionFromIngredients(iItem1, iItem2);
         if (potionItem == null) return;
         _inventoryController.AddItem(potionItem);
@@ -101,6 +103,7 @@ public class CraftinUI : MonoBehaviour
 
     public void OnMix()
     {
+        Debug.Log("test" + _ingredientsMatch);
         mixButton.interactable = false;
         if (_ingredientsMatch)
         {

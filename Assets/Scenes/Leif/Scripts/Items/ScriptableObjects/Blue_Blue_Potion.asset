@@ -18,4 +18,4 @@ MonoBehaviour:
   uiSpriteSymbol: {fileID: 21300000, guid: f0857b5d5cd7f854290173a5a7ef9894, type: 3}
   potion: 0
   ingredient1: 2
-  ingredient2: 0
+  ingredient2: 2

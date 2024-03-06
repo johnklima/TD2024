@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -17,8 +18,11 @@ public class Dnafmg : MonoBehaviour, IInteractable
     public PoleSegment[] segments;
 
     public UnityEvent onInteract;
-    private bool _flip;
 
+
+    public AudioSource fishAudioSource;
+    public AudioClip fishClipReel, fishClipSplash;
+    private bool _flip;
 
     private LineRenderer _lineRenderer;
     private float _sinModY;
@@ -74,6 +78,22 @@ public class Dnafmg : MonoBehaviour, IInteractable
     public void Interact(LeifPlayerController lPC)
     {
         onInteract.Invoke();
+    }
+
+    public void PlayFishSounds()
+    {
+        StartCoroutine(PlayFishSoundsCoroutine());
+    }
+
+    private IEnumerator PlayFishSoundsCoroutine()
+    {
+        StopCoroutine(PlayFishSoundsCoroutine());
+        fishAudioSource.clip = fishClipReel;
+        fishAudioSource.Play();
+        var dur = fishClipReel.length;
+        yield return new WaitForSeconds(dur);
+        fishAudioSource.clip = fishClipSplash;
+        fishAudioSource.Play();
     }
 
     public void TestOnInteract()

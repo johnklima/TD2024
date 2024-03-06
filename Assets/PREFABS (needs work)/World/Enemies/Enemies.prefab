@@ -153,7 +153,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   requiredPotion: 0
-  requiredPotions: 
   radius: 1
   center: {x: 0, y: 0.5, z: 0}
   scaleSpeed: 1
@@ -177,9 +176,6 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   gotHit: 0
-  onValidate:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &2545213814153122375
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -396,7 +392,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   requiredPotion: 0
-  requiredPotions: 
   radius: 1
   center: {x: 0, y: 0.5, z: 0}
   scaleSpeed: 1
@@ -420,9 +415,6 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   gotHit: 0
-  onValidate:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &9084551118006543222
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -639,7 +631,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   requiredPotion: 0
-  requiredPotions: 
   radius: 1
   center: {x: 0, y: 0.5, z: 0}
   scaleSpeed: 1
@@ -663,9 +654,6 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   gotHit: 0
-  onValidate:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &8363773474028275963
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -935,7 +923,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   requiredPotion: 4
-  requiredPotions: 
   radius: 1
   center: {x: 0, y: 0.5, z: 0}
   scaleSpeed: 1
@@ -959,9 +946,6 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   gotHit: 0
-  onValidate:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &4276650455135842527
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1178,7 +1162,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   requiredPotion: 0
-  requiredPotions: 
   radius: 1
   center: {x: 0, y: 0.5, z: 0}
   scaleSpeed: 1
@@ -1202,9 +1185,6 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   gotHit: 0
-  onValidate:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &4878995258034803325
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1474,7 +1454,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   requiredPotion: 7
-  requiredPotions: 
   radius: 1
   center: {x: 0, y: 0.5, z: 0}
   scaleSpeed: 1
@@ -1498,9 +1477,6 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   gotHit: 0
-  onValidate:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &8270984350422725443
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1929,7 +1905,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   requiredPotion: 11
-  requiredPotions: 
   radius: 1
   center: {x: 0, y: 0.5, z: 0}
   scaleSpeed: 1
@@ -1953,9 +1928,6 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   gotHit: 0
-  onValidate:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &2880226446764473067
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2373,7 +2345,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   requiredPotion: 0
-  requiredPotions: 
   radius: 1
   center: {x: 0, y: 0.5, z: 0}
   scaleSpeed: 1
@@ -2397,9 +2368,6 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   gotHit: 0
-  onValidate:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &3863831400215973693
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2616,7 +2584,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   requiredPotion: 0
-  requiredPotions: 
   radius: 1
   center: {x: 0, y: 0.5, z: 0}
   scaleSpeed: 1
@@ -2640,9 +2607,6 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   gotHit: 0
-  onValidate:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &4246078522771830888
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2912,7 +2876,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   requiredPotion: 0
-  requiredPotions: 
   radius: 1
   center: {x: 0, y: 0.5, z: 0}
   scaleSpeed: 1
@@ -2936,9 +2899,6 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   gotHit: 0
-  onValidate:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &6337007840631354675
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3155,7 +3115,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   requiredPotion: 0
-  requiredPotions: 
   radius: 1
   center: {x: 0, y: 0.5, z: 0}
   scaleSpeed: 1
@@ -3179,9 +3138,6 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   gotHit: 0
-  onValidate:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &5040467220701410664
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3465,6 +3421,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6107206075176820537, guid: b6e042d0b30f5454fbb91e18af552738,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 1e0ff93e293e3a94ca6f749fb4c9ed8a,
+        type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3643,6 +3605,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6107206075176820537, guid: b6e042d0b30f5454fbb91e18af552738,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 1e0ff93e293e3a94ca6f749fb4c9ed8a,
+        type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3717,6 +3685,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6107206075176820537, guid: b6e042d0b30f5454fbb91e18af552738,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 1e0ff93e293e3a94ca6f749fb4c9ed8a,
+        type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3791,6 +3765,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6107206075176820537, guid: b6e042d0b30f5454fbb91e18af552738,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 1e0ff93e293e3a94ca6f749fb4c9ed8a,
+        type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4449,6 +4429,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6107206075176820537, guid: b6e042d0b30f5454fbb91e18af552738,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 1e0ff93e293e3a94ca6f749fb4c9ed8a,
+        type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4627,6 +4613,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6107206075176820537, guid: b6e042d0b30f5454fbb91e18af552738,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 1e0ff93e293e3a94ca6f749fb4c9ed8a,
+        type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4909,6 +4901,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6107206075176820537, guid: b6e042d0b30f5454fbb91e18af552738,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 1e0ff93e293e3a94ca6f749fb4c9ed8a,
+        type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4983,6 +4981,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6107206075176820537, guid: b6e042d0b30f5454fbb91e18af552738,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 1e0ff93e293e3a94ca6f749fb4c9ed8a,
+        type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5057,6 +5061,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6107206075176820537, guid: b6e042d0b30f5454fbb91e18af552738,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 1e0ff93e293e3a94ca6f749fb4c9ed8a,
+        type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5131,6 +5141,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6107206075176820537, guid: b6e042d0b30f5454fbb91e18af552738,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 1e0ff93e293e3a94ca6f749fb4c9ed8a,
+        type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5205,6 +5221,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6107206075176820537, guid: b6e042d0b30f5454fbb91e18af552738,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 1e0ff93e293e3a94ca6f749fb4c9ed8a,
+        type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
