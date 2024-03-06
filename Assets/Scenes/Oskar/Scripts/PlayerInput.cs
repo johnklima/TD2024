@@ -11,12 +11,13 @@ public class PlayerInput : MonoBehaviour
 
     public Vector2 moveDir;
     public float minVelForWalkAnim = 0.1f;
+
+    private InventoryDisplay _inventoryDisplay;
     private PauseMenu _pauseMenu;
     private PlayerController _playerController;
     private InputActions _playerInput;
 
     public bool IsWalking => moveDir.magnitude > minVelForWalkAnim;
-
 
     private void Awake()
     {
@@ -29,6 +30,11 @@ public class PlayerInput : MonoBehaviour
         _playerInput.Player.Interact.performed += HandleInteract;
         // _playerInput.UI.Cancel.performed += HandleCancelUI;
         _playerInput.Player.Cancel.performed += HandleCancelUI;
+
+
+        // InventoryDisplay
+        _inventoryDisplay = FindObjectOfType<InventoryDisplay>();
+        _playerInput.Player.Hotbar.performed += ChangeSelectedSlot;
     }
 
     private void Update()
@@ -47,6 +53,21 @@ public class PlayerInput : MonoBehaviour
     {
         _playerInput.Player.Disable();
         CursorLockHandler.ShowAndUnlockCursor();
+    }
+
+    public void ChangeSelectedSlot(InputAction.CallbackContext context)
+    {
+        var isInt = int.TryParse(context.ReadValueAsObject().ToString(), out var val);
+        if (isInt)
+        {
+            if (val > 0)
+                _inventoryDisplay.ChangeSelectedSlot(1);
+            if (val < 0)
+                _inventoryDisplay.ChangeSelectedSlot(-1);
+        }
+
+        // NextHotBarItem()
+        // PreviousHotBarItem() 
     }
 
 

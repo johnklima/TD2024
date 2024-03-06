@@ -30,21 +30,27 @@ public class InventoryDisplay : MonoBehaviour
     public void Update()
     {
         if (Input.GetAxis("Mouse ScrollWheel") > 0f) // forward
-        {
-            if (selectedSlot > 0)
-                ChangeSelectedSlot(selectedSlot - 1);
-        }
+            PreviousHotBarItem();
         else if (Input.GetAxis("Mouse ScrollWheel") < 0f) // backwards
-        {
-            if (selectedSlot < 8)
-                ChangeSelectedSlot(selectedSlot + 1);
-        }
+            NextHotBarItem();
     }
 
 
     private void OnValidate()
     {
         inventorySlots = GetComponentsInChildren<InventorySlot>();
+    }
+
+    public void NextHotBarItem()
+    {
+        if (selectedSlot < 8)
+            ChangeSelectedSlot(selectedSlot + 1);
+    }
+
+    public void PreviousHotBarItem()
+    {
+        if (selectedSlot > 0)
+            ChangeSelectedSlot(selectedSlot - 1);
     }
 
 
@@ -115,13 +121,16 @@ public class InventoryDisplay : MonoBehaviour
         inventoryItem.InitialiseItem(item.Key, item.Value, this);
     }
 
-    private void ChangeSelectedSlot(int newValue)
+
+    public void ChangeSelectedSlot(int newValue)
     {
         PlayDragSound();
-        if (selectedSlot >= 0) inventorySlots[selectedSlot].Deselect();
-        inventorySlots[newValue].Select();
-        selectedSlot = newValue;
-        var slotTransform = inventorySlots[newValue].transform;
+        var maxSlotIndex = 8;
+        var clampedSlot = Mathf.Clamp(selectedSlot, 0, maxSlotIndex);
+        inventorySlots[clampedSlot].Deselect();
+        selectedSlot = Mathf.Clamp(newValue, 0, maxSlotIndex);
+        inventorySlots[selectedSlot].Select();
+        var slotTransform = inventorySlots[selectedSlot].transform;
         if (slotTransform.childCount > 0)
             selectedItem = slotTransform.GetComponentInChildren<DraggableItem>();
         else
