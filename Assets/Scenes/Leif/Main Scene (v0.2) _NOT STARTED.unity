@@ -3212,7 +3212,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: fcd9cde41acd99149a43c20f9c8bc420,
+      objectReference: {fileID: 21300000, guid: 1e0ff93e293e3a94ca6f749fb4c9ed8a,
         type: 3}
     - target: {fileID: 323027062250315767, guid: 40e00d7fdb717f047af4c7a45b8ff1b9,
         type: 3}
@@ -3319,6 +3319,12 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 2094708657}
+    - target: {fileID: 1193487489713476312, guid: 40e00d7fdb717f047af4c7a45b8ff1b9,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 1e0ff93e293e3a94ca6f749fb4c9ed8a,
+        type: 3}
     - target: {fileID: 1276663988423318117, guid: 40e00d7fdb717f047af4c7a45b8ff1b9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3473,7 +3479,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: e162f6c90866fac42960f9dc8c185c78,
+      objectReference: {fileID: 21300000, guid: c7b99fe1044c89340b3d6d0ed974e9cc,
         type: 3}
     - target: {fileID: 2399435013533979100, guid: 40e00d7fdb717f047af4c7a45b8ff1b9,
         type: 3}
@@ -3524,7 +3530,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: c7b99fe1044c89340b3d6d0ed974e9cc,
+      objectReference: {fileID: 21300000, guid: e162f6c90866fac42960f9dc8c185c78,
         type: 3}
     - target: {fileID: 3026432470274535418, guid: 40e00d7fdb717f047af4c7a45b8ff1b9,
         type: 3}
@@ -4165,8 +4171,14 @@ PrefabInstance:
     - target: {fileID: 6809736441203311108, guid: 40e00d7fdb717f047af4c7a45b8ff1b9,
         type: 3}
       propertyPath: _requiredPotion
-      value: 0
+      value: 11
       objectReference: {fileID: 0}
+    - target: {fileID: 6823524012907249676, guid: 40e00d7fdb717f047af4c7a45b8ff1b9,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 1e0ff93e293e3a94ca6f749fb4c9ed8a,
+        type: 3}
     - target: {fileID: 7056730094875954135, guid: 40e00d7fdb717f047af4c7a45b8ff1b9,
         type: 3}
       propertyPath: triggerSize
@@ -4232,6 +4244,12 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1875652619}
+    - target: {fileID: 7502628683723618866, guid: 40e00d7fdb717f047af4c7a45b8ff1b9,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 1e0ff93e293e3a94ca6f749fb4c9ed8a,
+        type: 3}
     - target: {fileID: 7503985486437321735, guid: 40e00d7fdb717f047af4c7a45b8ff1b9,
         type: 3}
       propertyPath: m_Enabled
@@ -4327,6 +4345,12 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1082540320}
+    - target: {fileID: 7966558858894103120, guid: 40e00d7fdb717f047af4c7a45b8ff1b9,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 1e0ff93e293e3a94ca6f749fb4c9ed8a,
+        type: 3}
     - target: {fileID: 8139141588202343922, guid: 40e00d7fdb717f047af4c7a45b8ff1b9,
         type: 3}
       propertyPath: m_Mesh
@@ -4403,11 +4427,29 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1386173828}
+    - target: {fileID: 8487882412943467025, guid: 40e00d7fdb717f047af4c7a45b8ff1b9,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 1e0ff93e293e3a94ca6f749fb4c9ed8a,
+        type: 3}
+    - target: {fileID: 8495103821417178891, guid: 40e00d7fdb717f047af4c7a45b8ff1b9,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 1e0ff93e293e3a94ca6f749fb4c9ed8a,
+        type: 3}
     - target: {fileID: 8505031684063901022, guid: 40e00d7fdb717f047af4c7a45b8ff1b9,
         type: 3}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1377556836}
+    - target: {fileID: 8534487872971532691, guid: 40e00d7fdb717f047af4c7a45b8ff1b9,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 1e0ff93e293e3a94ca6f749fb4c9ed8a,
+        type: 3}
     - target: {fileID: 8574216209738213138, guid: 40e00d7fdb717f047af4c7a45b8ff1b9,
         type: 3}
       propertyPath: m_Mesh
