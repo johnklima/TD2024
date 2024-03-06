@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 14.016237, g: 6.9015455, b: 2.4670165, a: 1}
+  m_IndirectSpecularColor: {r: 14.01623, g: 6.9015455, b: 2.4670165, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -798,6 +798,12 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &222316149 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3085003383845084084, guid: 70318710a8eea9c4c8fd417a8f877889,
+    type: 3}
+  m_PrefabInstance: {fileID: 1420872282}
+  m_PrefabAsset: {fileID: 0}
 --- !u!64 &224099544
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1924,6 +1930,54 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &376506370
+GameObject:
+  m_ObjectHideFlags: 19
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 376506372}
+  - component: {fileID: 376506371}
+  m_Layer: 0
+  m_Name: SceneIDMap
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &376506371
+MonoBehaviour:
+  m_ObjectHideFlags: 19
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 376506370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 378295897}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Entries:
+  - id: 0
+    category: 0
+    gameObject: {fileID: 222316149}
+--- !u!4 &376506372
+Transform:
+  m_ObjectHideFlags: 19
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 376506370}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &378056951
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1966,6 +2020,21 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!115 &378295897
+MonoScript:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  serializedVersion: 7
+  m_DefaultReferences: {}
+  m_Icon: {fileID: 0}
+  m_Type: 0
+  m_ExecutionOrder: 0
+  m_ClassName: SceneObjectIDMapSceneAsset
+  m_Namespace: UnityEngine.Rendering.HighDefinition
+  m_AssemblyName: Unity.RenderPipelines.HighDefinition.Runtime
 --- !u!1001 &415647880
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6704,6 +6773,36 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5865089830282757499, guid: 70318710a8eea9c4c8fd417a8f877889,
+        type: 3}
+      propertyPath: parameters.distanceFadeStart
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7400595378897271449, guid: 70318710a8eea9c4c8fd417a8f877889,
+        type: 3}
+      propertyPath: m_ShadowResolution.m_Level
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7425300390123855518, guid: 70318710a8eea9c4c8fd417a8f877889,
+        type: 3}
+      propertyPath: m_ShadowResolution.m_Level
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7606435591499087975, guid: 70318710a8eea9c4c8fd417a8f877889,
+        type: 3}
+      propertyPath: m_BakedTexture
+      value: 
+      objectReference: {fileID: 8900000, guid: 42f9ddbdf29f9554e88b804afd0853a3, type: 3}
+    - target: {fileID: 7759412749603892011, guid: 70318710a8eea9c4c8fd417a8f877889,
+        type: 3}
+      propertyPath: m_ShadowResolution.m_Level
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8326720595445549029, guid: 70318710a8eea9c4c8fd417a8f877889,
+        type: 3}
+      propertyPath: m_ShadowResolution.m_Level
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9005140025599313290, guid: 70318710a8eea9c4c8fd417a8f877889,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -12875,3 +12974,4 @@ SceneRoots:
   - {fileID: 1062929793}
   - {fileID: 196824673}
   - {fileID: 1420872282}
+  - {fileID: 376506372}
