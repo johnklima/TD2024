@@ -299,7 +299,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  fishAudioSource: {fileID: 0}
+  fishAudioSource: {fileID: 2387128846024731058}
   fishClipReel: {fileID: 8300000, guid: aa1d58c13c1d7064caf7f8da7af36c0c, type: 3}
   fishClipSplash: {fileID: 8300000, guid: 4199d8f16d07cbb4aba2e25e5d189648, type: 3}
 --- !u!135 &5274987019114295125
