@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 14.000956, g: 6.8918524, b: 2.4626153, a: 1}
+  m_IndirectSpecularColor: {r: 14.0041065, g: 6.8918905, b: 2.4623206, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6388,6 +6388,56 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1589316582651004554, guid: 70318710a8eea9c4c8fd417a8f877889,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.4863
+      objectReference: {fileID: 0}
+    - target: {fileID: 1589316582651004554, guid: 70318710a8eea9c4c8fd417a8f877889,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1589316582651004554, guid: 70318710a8eea9c4c8fd417a8f877889,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -11.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3925671242512856885, guid: 70318710a8eea9c4c8fd417a8f877889,
+        type: 3}
+      propertyPath: parameters.size.x
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 3925671242512856885, guid: 70318710a8eea9c4c8fd417a8f877889,
+        type: 3}
+      propertyPath: parameters.size.y
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3925671242512856885, guid: 70318710a8eea9c4c8fd417a8f877889,
+        type: 3}
+      propertyPath: parameters.size.z
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 3925671242512856885, guid: 70318710a8eea9c4c8fd417a8f877889,
+        type: 3}
+      propertyPath: parameters.m_EditorNegativeFade.x
+      value: 0.0013333332
+      objectReference: {fileID: 0}
+    - target: {fileID: 3925671242512856885, guid: 70318710a8eea9c4c8fd417a8f877889,
+        type: 3}
+      propertyPath: parameters.m_EditorNegativeFade.z
+      value: 0.0025
+      objectReference: {fileID: 0}
+    - target: {fileID: 3925671242512856885, guid: 70318710a8eea9c4c8fd417a8f877889,
+        type: 3}
+      propertyPath: parameters.m_EditorPositiveFade.x
+      value: 0.0013333332
+      objectReference: {fileID: 0}
+    - target: {fileID: 3925671242512856885, guid: 70318710a8eea9c4c8fd417a8f877889,
+        type: 3}
+      propertyPath: parameters.m_EditorPositiveFade.z
+      value: 0.0025
+      objectReference: {fileID: 0}
     - target: {fileID: 9005140025599313290, guid: 70318710a8eea9c4c8fd417a8f877889,
         type: 3}
       propertyPath: m_LocalPosition.x
