@@ -27,13 +27,13 @@ public class InventoryDisplay : MonoBehaviour
         ChangeSelectedSlot(0);
     }
 
-    public void Update()
-    {
-        if (Input.GetAxis("Mouse ScrollWheel") > 0f) // forward
-            PreviousHotBarItem();
-        else if (Input.GetAxis("Mouse ScrollWheel") < 0f) // backwards
-            NextHotBarItem();
-    }
+    // public void Update()
+    // {
+    //     if (Input.GetAxis("Mouse ScrollWheel") > 0f) // forward
+    //         PreviousHotBarItem();
+    //     else if (Input.GetAxis("Mouse ScrollWheel") < 0f) // backwards
+    //         NextHotBarItem();
+    // }
 
 
     private void OnValidate()
@@ -41,17 +41,17 @@ public class InventoryDisplay : MonoBehaviour
         inventorySlots = GetComponentsInChildren<InventorySlot>();
     }
 
-    public void NextHotBarItem()
-    {
-        if (selectedSlot < 8)
-            ChangeSelectedSlot(selectedSlot + 1);
-    }
-
-    public void PreviousHotBarItem()
-    {
-        if (selectedSlot > 0)
-            ChangeSelectedSlot(selectedSlot - 1);
-    }
+    // public void NextHotBarItem()
+    // {
+    //     if (selectedSlot < 8)
+    //         ChangeSelectedSlot(selectedSlot + 1);
+    // }
+    //
+    // public void PreviousHotBarItem()
+    // {
+    //     if (selectedSlot > 0)
+    //         ChangeSelectedSlot(selectedSlot - 1);
+    // }
 
 
     public void UpdateInventoryDisplay(Dictionary<Item, int> inventory)
