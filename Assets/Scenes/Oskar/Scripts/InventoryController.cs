@@ -53,7 +53,6 @@ public class InventoryController : MonoBehaviour
                 var i1 = potion.itemData2.ingredient1;
                 var i2 = potion.itemData2.ingredient2;
                 Debug.Log($"i1: {i1} - i2: {i2}");
-                Debug.Log($"i1: {i1} - i2: {i2}");
                 Debug.Log($"(i1 == a && i2 == b: {i1 == a && i2 == b}");
                 Debug.Log($"(i1 == b && i2 == a): {i1 == b && i2 == a}");
                 if ((i1 == a && i2 == b) || (i1 == b && i2 == a))

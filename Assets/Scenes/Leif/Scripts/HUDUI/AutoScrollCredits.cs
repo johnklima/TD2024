@@ -30,7 +30,7 @@ public class AutoScrollCredits : MonoBehaviour
 
     private void OnDisable()
     {
-        StartScroll();
+        StopScroll();
     }
 
     public void StartScroll()
